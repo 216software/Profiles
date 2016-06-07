@@ -1,0 +1,16 @@
+++++
+Todo
+++++
+
+
+Write docs
+----------
+
+Take what's in the wiki and put it into the docs folder
+for new box set up -- currently setting up on local box
+but we'll have to set up on amazon box as well, where
+it might come in more handy...
+
+
+
+.. vim:set syntax=rst:

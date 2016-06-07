@@ -1,0 +1,17 @@
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+I manually ran these commands but they're in communityprofiles/bootstrap_app.sh
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Sync Db
+-------
+
+We should be in folder communityprofiles::
+
+    python manage.py syncdb --settings local_settings
+
+If it blows up, make sure you have a secret key in local_settings.py::
+
+    SECRET_KEY = 'anybitoftextherewilldo'
+
+
+.. vim:set syntax=rst:

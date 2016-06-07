@@ -1,7 +1,11 @@
 #!/bin/bash
 
-dropdb $1
-createdb -T template_postgis $1
+
+#Make sure user is super on database
+#alter user communityprofiles with superuser;
+
+dropdb $1 -U communityprofiles -h localhost
+createdb -T template_postgis $1 -U communityprofiles -h localhost
 
 python manage.py syncdb
 

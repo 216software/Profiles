@@ -6,7 +6,7 @@ South==0.8.4
 Whoosh==2.5.3
 amqplib==1.0.2
 beautifulsoup4==4.1.3
-distribute==0.6.34
+distribute>=0.6.34
 django-admin-jqueryui==1.8.22
 django-admin-sortable==1.6.3
 django-appconf==0.6
@@ -34,13 +34,13 @@ psycopg2==2.4.1
 pycrypto==2.6
 -e git://github.com/asmedrano/pylmth.git#egg=pylmth
 pyparsing==1.5.5
-pysqlite==2.6.3
+#pysqlite==2.6.3
 python-dateutil==2.1
 python-ptrace==0.6.5
 prettytable==0.7.2
 redis==2.8.0
 requests==2.0.1
-six==1.3.0
+six==1.10.0
 sorl-thumbnail==11.05.2
 ssh==1.7.14
 uuid==1.30
