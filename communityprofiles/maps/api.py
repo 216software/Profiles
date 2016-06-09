@@ -2,7 +2,9 @@ from tastypie.resources import Resource, ModelResource
 from tastypie import fields, utils
 from tastypie.cache import SimpleCache
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned, ValidationError
-from django.conf.urls.defaults import *
+#from django.conf.urls.defaults import *
+from django.conf.urls import patterns, url, include
+
 from maps.models import *
 from profiles.models import GeoRecord, GeoLevel, Time, Indicator, Denominator, FlatValue
 from django.contrib.gis.geos import Point

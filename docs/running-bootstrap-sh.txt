@@ -14,4 +14,29 @@ If it blows up, make sure you have a secret key in local_settings.py::
     SECRET_KEY = 'anybitoftextherewilldo'
 
 
+Running the app
+---------------
+
+Once everything has been installed, run a django app like this::
+
+    python manage.py runserver
+
+We'll also have to start the API application, which is located in /bin.
+
+Update the settings document with our local DB server credentials (and
+Redis server credentials). Also, what port we want to run it on..
+8080 should be fin.
+
+Then run like this::
+
+./profiles_api  settings.json :8080
+
+
+Now, we should be able to hit 'http://localhost:8000/' in our browser, and see the
+django app.
+
+If there are errors, then time to get debugging!
+
+
+
 .. vim:set syntax=rst:

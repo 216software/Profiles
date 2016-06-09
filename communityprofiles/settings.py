@@ -10,7 +10,7 @@ TEMPLATE_DEBUG = DEBUG
 BETA = False
 
 ADMINS = (
-    # ('Your Name', 'your_email@domain.com'),
+     ('216 Software', 'info@216software.com'),
 )
 
 MANAGERS = ADMINS

@@ -1,4 +1,6 @@
-from django.conf.urls.defaults import *
+#from django.conf.urls.defaults import *
+from django.conf.urls import patterns, url, include
+
 from tastypie.resources import Resource, ModelResource
 from tastypie.exceptions import NotFound, BadRequest, InvalidFilterError, HydrationError, InvalidSortError, ImmediateHttpResponse
 from tastypie import fields

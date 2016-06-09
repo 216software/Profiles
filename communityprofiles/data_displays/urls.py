@@ -1,5 +1,6 @@
 
-from django.conf.urls.defaults import *
+#from django.conf.urls.defaults import *
+from django.conf.urls import patterns, url, include
 from django.shortcuts import render_to_response
 
 

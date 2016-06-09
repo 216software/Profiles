@@ -23,7 +23,7 @@ django-picklefield==0.1.9
 django-registration==0.8
 #-e git://github.com/ProvidencePlan/DjangoSays.git@5ab1c173faf9c7f232604470966dec41b613796a#egg=django_says-master
 django-storages==1.1.5
-django-tastypie==0.9.14
+django-tastypie==0.10.0
 django-templatetag-sugar==0.1
 geopy==0.95.1
 #-e git+git@github.com:coleifer/huey.git#egg=huey
