@@ -1,1 +1,42 @@
-[{"pk": 1, "model": "profiles.time", "fields": {"sort": "2000.0", "name": "2000"}}, {"pk": 2, "model": "profiles.time", "fields": {"sort": "2010.0", "name": "2010"}}, {"pk": 4, "model": "profiles.time", "fields": {"sort": "2004.0", "name": "2004-2006"}}, {"pk": 5, "model": "profiles.time", "fields": {"sort": "2007.0", "name": "2007-2009"}}, {"pk": 6, "model": "profiles.time", "fields": {"sort": "2010.1", "name": "2006 - 2010"}}]
+[
+    {
+        "fields": {
+            "name": "2000",
+            "sort": "2000.0"
+        },
+        "model": "profiles.time",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "name": "2010",
+            "sort": "2010.0"
+        },
+        "model": "profiles.time",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "name": "2004-2006",
+            "sort": "2004.0"
+        },
+        "model": "profiles.time",
+        "pk": 4
+    },
+    {
+        "fields": {
+            "name": "2007-2009",
+            "sort": "2007.0"
+        },
+        "model": "profiles.time",
+        "pk": 5
+    },
+    {
+        "fields": {
+            "name": "2006 - 2010",
+            "sort": "2010.1"
+        },
+        "model": "profiles.time",
+        "pk": 6
+    }
+]

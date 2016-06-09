@@ -11,6 +11,12 @@ for new box set up -- currently setting up on local box
 but we'll have to set up on amazon box as well, where
 it might come in more handy...
 
+NEXT
+----
+
+Get python manage.py syncdb to work correctly. Database peer
+authentication fails
+
 
 
 .. vim:set syntax=rst:

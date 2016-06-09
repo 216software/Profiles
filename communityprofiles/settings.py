@@ -1,5 +1,7 @@
 import os
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
+
+from settings import *
 from profiles.utils import ProfilesHuey
 from census.tools.geography import get_sum_lev_names
 
@@ -126,7 +128,7 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     'django.contrib.staticfiles',
     'django.contrib.flatpages',
-    'django.contrib.markup',
+#    'django.contrib.markup',
     'adminsortable',
     'haystack',
     'census',

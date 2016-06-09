@@ -1,0 +1,13 @@
++++++
+Notes
++++++
+
+
+Some notes
+----------
+
+-   Indicators erro on setting level -- sub table indicator_levels: --
+    commented out the levels line -- see previous version in github for
+    levels in fixtures for indicators
+
+.. vim:set syntax=rst:

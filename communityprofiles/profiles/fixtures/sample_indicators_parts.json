@@ -1,1 +1,25 @@
-[{"pk": 1, "model": "profiles.indicatorpart", "fields": {"formula": "P001001", "indicator": 1, "data_source": 7, "data": "", "time": 1}}, {"pk": 2, "model": "profiles.indicatorpart", "fields": {"formula": "P0010001", "indicator": 1, "data_source": 9, "data": "", "time": 2}}]
+[
+    {
+        "fields": {
+            "data_source": 7,
+            "formula": "P001001",
+            "indicator": 1,
+            "time": 1
+        },
+        "model": "profiles.indicatorpart",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "data_source": 9,
+            "formula": "P0010001",
+            "indicator": 1,
+            "time": 2
+        },
+        "model": "profiles.indicatorpart",
+        "pk": 2
+    }
+]
+
+
+
