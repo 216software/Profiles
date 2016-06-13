@@ -1,4 +1,5 @@
-{% extends 'base.html' %}{% load profiles_tags %}{% load thumbnail %}{% load markup %}
+{% extends 'base.html' %}{% load profiles_tags %}{% load thumbnail %}
+{% load markdown_deux_tags %}
 {% block head %}
 <script type="text/javascript" charset="utf-8">
 var INIT_RECORD = {name:'{{geo_record.name}}', slug:'{{geo_record.slug}}'};
@@ -16,10 +17,10 @@ var INIT_LEVEL = {name:'{{geo_record.level.name}}', slug:'{{geo_record.level.slu
 		<div class="col-md-12 column">
 		{% for topic in topics %}
 		   {% if forloop.last %}
-		
+
 		   <hr style="margin:10px; padding-bottom:40px; border:0; border-top:10px dotted #408BCA; type: circle;" />
-		
-           {% endif %}		
+
+           {% endif %}
 			<h3 class="text-center topic-header">
 				{{topic.title}}
 			</h3>
@@ -58,7 +59,7 @@ var INIT_LEVEL = {name:'{{geo_record.level.name}}', slug:'{{geo_record.level.slu
 					</p>
 				</div>
 				{% endfor %}
-				
+
 		    </div>
 	    {% endfor %}
 		</div>
@@ -82,7 +83,7 @@ var INIT_LEVEL = {name:'{{geo_record.level.name}}', slug:'{{geo_record.level.slu
 		        </div>
 		        <div class="col-md-4 column">
 			        <h5 class="footer-head">Subscribe to our E-News:</h5>
-                    <p class="footer-text"> 
+                    <p class="footer-text">
 						<input type="email"/> <br><br> <input type="email" /> <br> <br>
 						<img src="{{ STATIC_URL }}images/facebook_icon.png" height="20px"/>
 						<img src="{{ STATIC_URL }}images/twitter-icon.png" height="20px"/>

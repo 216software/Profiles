@@ -43,7 +43,7 @@ def group_filter(group, level):
        for i in [list[i] for i in order]:
            if i.published == True:
               result.append(i)
-       
+
        return result #[list[i] for i in order]
     except:
        result = []
@@ -658,7 +658,7 @@ def logo_icon():
 
 @register.simple_tag
 def style_css():
-    try:    
+    try:
        return settings.STYLE
     except AttributeError:
        return "css/profiles.css"
@@ -676,5 +676,9 @@ def search_groupId(group_id):
 @register.simple_tag
 def get_setting(name):
     from profiles.models import Setting
+
+    # TODO remove this -- only here to get us rolling
+    return 'rob@216software.com'
+
     return Setting.objects.get(name=name).value
 

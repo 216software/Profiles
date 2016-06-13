@@ -3,7 +3,7 @@
         "DB_PORT" : "5432",
         "DB_NAME" : "communityprofiles",
         "DB_USER" : "communityprofiles",
-        "DB_PASS" : "",
+        "DB_PASS" : "pr0f1l3s",
         "REDIS_CONN" : "localhost:6379",
         "REDIS_HASH_PREFIX" :"pitts:",
         "CACHE_EXPIRE" : 18000

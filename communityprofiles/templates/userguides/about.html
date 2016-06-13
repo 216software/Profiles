@@ -1,19 +1,22 @@
-{% extends 'userguides/base.html' %}{% load profiles_tags %}{% load thumbnail %}{% load markup %}
+{% extends 'userguides/base.html' %}
+{% load profiles_tags %}
+{% load thumbnail %}
+{% load markdown_deux_tags %}
 
 {% block content %}
 
 
 	<div class="row clearfix">
 		{% if topics %}<div class="col-md-12 column">{% else %}<div class="col-md-12 column" style ="padding-top:550px">{% endif %}
-                
+
 		{% for topic in topics %}
 		   {% if forloop.last %}
 
                    <div class="hr-line"><br></div>
 		   {%comment%}<hr style="margin:10px; padding-bottom:40px; border:0; border-top:10px dotted #408BCA; type: circle;" />{% endcomment %}
-		
+
                    {% endif %}
-                   
+
                    {% if forloop.first %} <div class="backgroundimage" >{% endif %}
 			<h3 class="text-center" style="padding-top:100px; padding-bottom:50px">
 				{{topic.title|markdown}}
@@ -24,7 +27,7 @@
 			</div>
                         {% else %} {{topic.description|markdown}}
                         {% endif %}
-                   
+
 			<div class="row clearfix topic-footer">
 			    {% for post in topic.get_Post %}
 				<div class="col-md-3 column">
@@ -57,7 +60,7 @@
 					</p>
 				</div>
 				{% endfor %}
-		    </div>		
+		    </div>
 		{% if forloop.first %}</div>{% endif %}
 	    {% endfor %}
 		</div>

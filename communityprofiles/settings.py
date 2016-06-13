@@ -145,6 +145,7 @@ INSTALLED_APPS = (
     'south',
     'lilbox',
     'userguides',
+    'markdown_deux', # Required for Knowledgebase item formatting
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (

@@ -16,6 +16,7 @@ django-haystack==2.1.0
 django-indexer==0.3.0
 django-kombu==0.9.4
 django-localflavor==1.0.0
+django-markdown-deux==1.0.5
 -e git://github.com/asmedrano/django-lilbox.git#egg=django_lilbox
 django-paging==0.2.4
 django-picklefield==0.1.9
