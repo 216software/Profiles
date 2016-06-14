@@ -1,0 +1,55 @@
+++++++++++++++++++++++++++++++++++
+Adding Geographies and Shape files
+++++++++++++++++++++++++++++++++++
+
+source we'll work off of:
+https://github.com/ProvidencePlan/Profiles/wiki/Geographies-in-Profiles
+
+
+-   Figured out why maps aren't appearing: GO /shp (shape) runs
+    the following query::
+
+
+    WITH targ_levs AS (
+        SELECT maps_polygonmapfeature.id as geom_id,
+        maps_polygonmapfeature.geo_key,
+        ST_SimplifyPreserveTopology(maps_polygonmapfeature.geom, 0.001) AS geom,
+        profiles_georecord.id as id, profiles_georecord.slug,
+        profiles_georecord.name as label
+
+        FROM maps_polygonmapfeature,
+
+        profiles_georecord
+
+        "+ where_clause +
+        "maps_polygonmapfeature.geo_key=profiles_georecord.geo_id), targ_geom
+
+        AS (
+            SELECT id, geo_key, ST_SimplifyPreserveTopology(geom, 0.001) AS
+            geom FROM maps_polygonmapfeature WHERE id IN (" + cleaned_geoms + ")
+            FROM targ_levs, targ_geom WHERE ST_Area(ST_Intersection(targ_levs.geom,
+            targ_geom.geom)) > ST_Area(targ_geom.geom)/2 ORDER BY
+            targ_levs.geo_key"
+    }
+
+Therefore, we need to get some map data in our database...
+
+
+What does /geos=1 give back?
+
+Uses this lookup::
+    SELECT profiles_georecord.id, profiles_georecord.geo_id,
+    profiles_georecord.slug, profiles_georecord.name FROM
+    profiles_geolevel FULL JOIN profiles_georecord ON
+    profiles_georecord.level_id = profiles_geolevel.id WHERE
+    profiles_geolevel.slug=1
+
+
+If that table is empty, then obviously there's nothing to look up.
+So we've gotta figure out how to get some shp files.
+
+
+
+
+
+.. vim:set syntax=rst:
