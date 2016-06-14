@@ -4,26 +4,26 @@
 <!--[if IE 8 ]>    <html class="ie8" ng-app="profiles"> <![endif]-->
 <!--[if IE 9 ]>    <html class="ie9" ng-app="profiles"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html class="" ng-app="profiles"> <!--<![endif]-->
-	<head > 
-		<meta charset="utf-8"> 
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<head >
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-        <title>{% block title %}{{BANNER_TEXT}}{% endblock %}</title> 
-		<meta name="description" content=""> 
-		<meta name="author" content=""> 
+        <title>{% block title %}{{BANNER_TEXT}}{% endblock %}</title>
+		<meta name="description" content="">
+		<meta name="author" content="">
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-		<link rel="shortcut icon" href="/favicon.ico"> 
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
                 {% comment %}<style>@font-face { font-family: helvetica; src: url('{{STATIC_URL}}fonts/HelveticaNeueLTStd-MdCn.otf'); } </style>{% endcomment %}
  		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/bootstrap.min.css">
  		<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}{% style_css %}">
         {%block head%}
         {%endblock head%}
 
-	</head> 
-	 
-	<body> 
+	</head>
+
+	<body>
 		<!--[if lt IE 9]>
 		<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p> <![endif]-->
    <!-- start remove beta tag -->
@@ -44,8 +44,8 @@
         </div>
         <div class="container hidden-print collapse navbar-collapse" id="tour-search">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/">{%comment%}{{BANNER_TEXT}}{%endcomment%}<img src="{{STATIC_URL}}{% logo_icon %}" class="log"></a>
-                    
+                <a class="navbar-brand" href="/">{%comment%}{{BANNER_TEXT}}{%endcomment%}
+                   <img src="{{STATIC_URL}}images/pittslogo.png" class="log" /></a>
             </div>
             <form class="navbar-form navbar-right search-form" role="search" action="/search/" method="get">
                 <ul class="nav navbar-nav navbar-left about-faq"><li><a href="javascript:void(0)" onclick="tour();" style="color: #fff; font-size: small;padding-top:7px;" id="tour"class="ng-hide">Take A Tour</a></li></ul>
@@ -70,7 +70,7 @@
         </div>
         {% endif %}
     </nav>
-  <div class="container"> 
+  <div class="container">
 
 
         {% block content %}{% endblock %}
@@ -85,7 +85,7 @@
               <div class="modal-body">
                   <iframe src="" width="100%" height="100%"></iframe>
               </div>
-              
+
               <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
               </div>
@@ -112,30 +112,22 @@
 
 	    <footer class="row">
             {% lilbox 'footer' %}
-		</footer> 
+		</footer>
 
     </div><!-- end container-->
 
-	<script> 
-		var _gaq = [['_setAccount', '{% google_analytics %}'], ['_trackPageview']];
-		(function(d, t) {
-			var g = d.createElement(t),
-			s = d.getElementsByTagName(t)[0];
-			g.async = true;
-			g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			s.parentNode.insertBefore(g, s);
-		})(document, 'script');
+	<script>
 
 		//PP.Settings.baseURL = "http://{{request.META.HTTP_HOST}}";
 
 	</script>
-   <script src="{{STATIC_URL}}js/jquery.min.js"></script>   
-   <script src="{{ STATIC_URL }}js/libs/angular.min.js"></script>
-   <script src="{{ STATIC_URL }}js/libs/angular-sanitize.min.js"></script>
+   <script src="{{STATIC_URL}}js/jquery.min.js"></script>
+   <script src="{{ STATIC_URL }}js/libs/angular.js"></script>
+   <script src="{{ STATIC_URL }}js/libs/angular-sanitize.js"></script>
    <script src="{{ STATIC_URL }}js/libs/ngStorage.min.js"></script>
    <script src="{{ STATIC_URL }}js/libs/bootstrap.min.js"></script>
    <script src="{{ STATIC_URL }}js/libs/bootbox.js"></script>
-   <script src="{{ STATIC_URL }}js/pp.js"></script>   
+   <script src="{{ STATIC_URL }}js/pp.js"></script>
    <script src = "{{STATIC_URL}}js/app.js"></script>
    <script src = "{{STATIC_URL}}js/ui.js"></script>
 
@@ -181,19 +173,19 @@
 </div>
 
    {% endblock extrafooter %}
-   
+
    {{SENTRY_JS|safe}}
 
-   <!-- 
+   <!--
     <script>FEEDBACK_FORM_URL="http://feedback.provplan.org"</script>
     <script src="http://feedback.provplan.org/static/js/embedFeedback.js"></script>-->
  <script type="text/javascript">
-   $(document).ready(function(){   
+   $(document).ready(function(){
             $("#form").submit(function(e){
                 $.ajax({
                     url: "/about/stay_in_touch",
                     type: "POST",
-                    data: {csrfmiddlewaretoken: "{{ csrf_token }}",   // < here 
+                    data: {csrfmiddlewaretoken: "{{ csrf_token }}",   // < here
                            state:"inactive",
                            first_name: $('form.contact').serializeArray()[0]['value'],
                            last_name: $('form.contact').serializeArray()[1]['value'],
@@ -212,11 +204,11 @@
                     },
                     error: function(data){
                         console.log(data);
-                    } 
+                    }
                 });
             });
-    }); 
- </script>   
- 
-	</body> 
+    });
+ </script>
+
+	</body>
 </html>

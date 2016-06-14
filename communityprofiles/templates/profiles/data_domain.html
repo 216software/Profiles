@@ -22,12 +22,14 @@
         var INIT = function(){
             initScrollSpy();
         }
+
         {% if user.is_authenticated %}var AUTHN=true;{%endif%}
         var index = new Array();
     </script>
-<script>FEEDBACK_FORM_URL="http://feedback.provplan.org"</script> 
-<script src="http://feedback.provplan.org/static/js/embedFeedback.js"></script>     
-    
+<!--<script>FEEDBACK_FORM_URL="http://feedback.provplan.org"</script>
+ <script src="http://feedback.provplan.org/static/js/embedFeedback.js"></script>
+-->
+
 <style>
 img.feedback_fixed
 {
@@ -35,7 +37,7 @@ position:fixed;
 top:130px;
 right:5px;
 }
-</style> 
+</style>
 {%endblock%}
 {% block content %}
 
@@ -43,7 +45,7 @@ right:5px;
     <div ng-controller="MapCntrl">
         <span id="data-domain-loading" ng-show="activity"><img class="loading-image" src="{{ STATIC_URL }}images/profiles-loading.gif" /></span>
 
-       
+
             {%comment%}
             <div id="data-domains">
                 {% data_domains geo_level geo_record data_domain %}
@@ -56,14 +58,14 @@ right:5px;
     </div>
     {%endcomment%}
     <div class="row" id="wrap">
-     
+
         <div class="col-md-3" id="sb">
             <div class= "sb-fix" data-spy="affix" data-offset-top="140" data-offset-bottom="0">
-                
+
             <h4 id="geo-rec-title"  ng-class="{'hidden-print': dataViewActive}">{{geo_record.name}}</h4>
             <h3 id="domain-title"  ng-class="{'hidden-print': dataViewActive}">{{data_domain}}</h3>
             <div id="map" class="hidden-print">
-               
+
             </div>{#end map#}
             <div id="map-tools" class="well hidden-print">
                 <h3> Explore </h3>
@@ -72,7 +74,7 @@ right:5px;
                     <select class="form-control input-sm" ng-model="selected_record" ng-options="rec.name for rec in lev_records | orderBy:geoLabelSort" ng-change='updateRecordFromSimilar()'>
                         <option value="">{{geo_record.name}}</option>
                     </select>
-                    
+
                 </div>
 
                 <h5 class="map-sub-header">Change Geography Level </h5><span title="How to Find Your Community" data-content="You can click on a town or city on the map or use the drop downs to find your community. <button type='button' class='btn btn-warning pull-right tour_btn' onclick='tour()'>Next</button>" data-placement="top" id="tour_geo"></span>
@@ -85,11 +87,11 @@ right:5px;
                        <option value="">{[{level.name.substring(level.name.length-1) == 'y' && level.name.substring(0, level.name.length-1) + 'ie' || level.name}]}s in {{geo_record.name}}</option>
                     </select>
                 </div>
-                
-                <h5 class="map-sub-header">Find an Address</h5> 
+
+                <h5 class="map-sub-header">Find an Address</h5>
                   <form ng-submit="geocodeAddress($event)">
                         <div class="input-group" id="find-address-form">
-                      
+
                           <input type="text" class="form-control input-sm" id="address-input" ng-model="address" placeholder="Street, City, Zip" />
                           <span class="input-group-btn">
                             <button class="btn btn-default btn-sm" type="submit">Go!</button>
@@ -101,7 +103,7 @@ right:5px;
                 <div class="list-group" id="address-results">
                     <a href="#" class="list-group-item preventable" ng-click="chooseAddress(addr, $event)" ng-repeat="addr in addr_results">{[{addr.location.address}]}</a>
                 </div>
-                
+
                 <div ng-bind-html="selected_address.message"></div>
 
                 <div class="list-group" id="address-breakdown">
@@ -114,14 +116,14 @@ right:5px;
         </div>
         </div> {# end sb#}
 
-        <div class="col-md-9" id ="tb" ng-class="{'hidden-print': dataViewActive}"> 
+        <div class="col-md-9" id ="tb" ng-class="{'hidden-print': dataViewActive}">
             <div class="row" id ="main-tables">
 
                 <div id="table-actions">
                     <a id="expand-all" class="domain-title" href="#">Expand All <span class="glyphicon glyphicon-chevron-right"></span></a>
                     <a id="close-all" class="domain-title" href="#">Close All <span class="glyphicon glyphicon-chevron-down"></span></a>
                 </div><!-- end table-actions -->
-               
+
                 {%for domain in data_domain.subdomains.all%}
                 {% if domain.publish %}
                 <div class="panel panel-default" id="{{domain.slug}}">
@@ -151,16 +153,16 @@ right:5px;
 
 {% endif %}
 
-                        <table class="table table-condensed ng-cloak hidden" ng-cloak> 
+                        <table class="table table-condensed ng-cloak hidden" ng-cloak>
                             <tbody>
                             {#<!--- header -->#}
                             <tr class="table-header" ng-repeat-start="s in data_cache['{{g.name}}'].sortedGroupedTimes" ng-init="time=data_cache['{{g.name}}'].groupedTimes[s]">
                                 <td class="indicator-name"></td>
-                                
+
                                 <td class="indicator-time" colspan="{[{time.times.length|col}]}" ng-repeat='t in time.times'>
                                     <div>{[{t}]}</div>
                                 </td>
-                                
+
                                 <td class="indicator-info hidden-print"></td>
                                 <td class="indicator-options hidden-print"><div class="wrap"></div></td>
                             </tr>
@@ -183,7 +185,7 @@ index["{{indicator.slug}}"] = '{{indicator.data_type}}';
                                 </td>
                                 <td class="indicator-info hidden-print">
                                     <div> <a href="#" ng-click="indicatorInfo($event, indicator)"><span class="glyphicon glyphicon-info-sign"></span></a><span data-original-title="More Information" data-content="Source information and definition of the indicator can be found here. <button type='button' class='btn btn-warning pull-right tour_btn' onclick='tour()'>Next</button>" id="tour_info"></span></div>
-                                </td>                                    
+                                </td>
                                 <td class="indicator-options hidden-print">
                                     <div class="wrap">
                                {%if forloop.first %}<a href="{[{indicator.targ_url}]}" data-indicator="{[{indicator.name}]}" class="map-link" ng-click="mapIt($event)">MAP{#<span class="glyphicon glyphicon-globe"></span>#}</a> <span data-placement="top" data-original-title="'Map it'" id="tour_map" data-content="Display the data on a map and compare with other communities. <button type='button' class='btn btn-warning pull-right tour_btn' onclick='tour()'>Done</button>"></span>{%else%}
@@ -195,12 +197,12 @@ index["{{indicator.slug}}"] = '{{indicator.data_type}}';
                             </tr>
                             {#<!--- denoms -->#}
                             <tr id="{[{denom.slug}]}" ng-repeat="denom in indicator.denominators" ng-repeat-end class="denominator-row">
-                        
+
                                 <td class="indicator-name" ng-bind-html="denom.name | safehtml"></td>
 
                                 <td class="indicator-time" colspan="{[{indicator.times.length|col}]}" ng-repeat='t in indicator.times'>
                                     <div class="val-wrap denominator" {#data-toggle="tooltip" title="{[{denom.vals[t].number | prefix:'of'}]}"#}>{[{denom.vals[t].value}]} <div class="moe-wrap" ng-bind-html=denom.vals[t].moe|safehtml></div> <small>of</small> {[{ denom.vals[t].number }]}</div>
-                                    
+
                                 </td>
 
                                 <td colspan="2">
@@ -209,7 +211,7 @@ index["{{indicator.slug}}"] = '{{indicator.data_type}}';
 
                             <tr ng-repeat-end class="sep shim {[{$last | ifBool:'last'}]}"><td></td></tr>
                             {#<!---end ind data -->#}
-                            
+
                             </tbody>
                         </table>
                     </li>
@@ -279,7 +281,7 @@ document.getElementById("tour_dot").className = "ng-show";
        else if(clicks==7){
          $('#tour_info').popover('hide');
          $('#tour_map').popover({html:true});
-         $('#tour_map').popover('show'); 
+         $('#tour_map').popover('show');
        }
        else if(clicks==8){$(".first-tour.expanded[ng-click]").click();clicks=0;close_all_tour();}
    }
@@ -291,7 +293,7 @@ document.getElementById("tour_dot").className = "ng-show";
 
            //window.innerWidth = 1239;
            sb.className = 'col-md-12';
-           tb.className = 'col-md-12'; 
+           tb.className = 'col-md-12';
        }
        else{
            sb.className = 'col-md-3';
