@@ -129,7 +129,8 @@ right:5px;
                 <div class="panel panel-default" id="{{domain.slug}}">
                     <div class="panel-heading sub-domain">
                         <h5>{{domain.name}}</h5>
-                        <form class="dl-form hidden-print" name="download" action="{{API_URL}}/csv/" method="get">
+                        <form class="dl-form hidden-print"
+                              name="download" action="{{API_URL}}/csv/" method="get">
                             <input type="hidden" name="i" value="{%for g in domain.sorted_groups%}{%for indicator in g|group_filter:geo_level %}{{indicator.id}},{% endfor %}{% endfor %}">
                             <input type="hidden" name="g" value="{{geo_record.id}}">
                             <input type="hidden" name="dom" value="{{domain.name}}">
@@ -142,10 +143,20 @@ right:5px;
                     <ul class="domain-groups">
                     {%for g in domain.sorted_groups%}
                     <li>
-{% if g|group_filter:geo_level %}
+                    {% if g|group_filter:geo_level %}
                     <a href="#" class="domain-title">
-                        <span id="{{g.name}}" class="title {% if forloop.parentloop.first %}{%if forloop.first%}first-tour{%endif%}{%endif%}{%if forloop.first%} first-group{%endif%}" ng-click='groupSelect([{%for indicator in g|group_filter:geo_level %}
-                           {{indicator.get_slug_time_props|order_key:forloop.counter|safe}}{%if forloop.last%}{%else%},{%endif%}{%endfor%}],"{{g.name}}", $event)'>{{g.name}} <span class="glyphicon glyphicon-chevron-right"></span></span></a>{% if forloop.parentloop.first %}{%if forloop.first%}<span class="tour_data" data-original-title="The Data Table" data-content="This table will reflect data for the geography selected. <button type='button' class='btn btn-warning pull-right tour_btn' onclick='tour()'>Next</button>"></span>{%endif%}{%endif%}
+                        <span id="{{g.name}}" class="title
+                        {% if forloop.parentloop.first %}{%if forloop.first%}first-tour
+                        {%endif%}{%endif%}
+                        {%if forloop.first%} first-group{%endif%}"
+                        ng-click='groupSelect([{%for indicator in g|group_filter:geo_level %}                        {{indicator.get_slug_time_props|order_key:forloop.counter|safe}}
+                        {%if forloop.last%}{%else%},{%endif%}
+                        {%endfor%}],"{{g.name}}", $event)'>
+                        {{g.name}} <span class="glyphicon glyphicon-chevron-right"></span>
+                        </span></a>
+
+
+                    {% if forloop.parentloop.first %}{%if forloop.first%}<span class="tour_data" data-original-title="The Data Table" data-content="This table will reflect data for the geography selected. <button type='button' class='btn btn-warning pull-right tour_btn' onclick='tour()'>Next</button>"></span>{%endif%}{%endif%}
 {% else %}
                     {%if forloop.first %}<a href="#" class="domain-title" rel="popover" data-trigger="hover" style="color:gray" data-title="The Data Table (No Data)" data-content="This table will reflect data for the geography selected. (Data not available at all geography levels)">{%else%}
                     <a href="#" class="domain-title" rel="popover" data-trigger="hover" style="color:gray" data-title="No Data" data-content="Data not available at all geography levels">{%endif%}

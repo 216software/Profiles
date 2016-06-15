@@ -96,7 +96,9 @@ class DataDomain(models.Model):
 
     @property
     def sorted_groups(self):
-        groups = [g.group for g in DataDomainIndex.objects.filter(dataDomain=self).only('group')]
+        groups = [g.group for g
+            in DataDomainIndex.objects.filter(dataDomain=self).\
+            only('group')]
         return groups
 
     def __unicode__(self):
@@ -508,9 +510,9 @@ class Indicator(models.Model):
         if self.data_as_of:
             notes.append({'label':'Data As Of', 'text':self.data_as_of.strftime("%B, %d %Y")})
         def remove_underscore(str):
-            if(str[-1]=='_'): 
+            if(str[-1]=='_'):
                return str[:-1]
-            else: 
+            else:
                return str
         #construct the tables string
         if num_tbls:
@@ -971,7 +973,7 @@ class DataGenerator(Sortable):
             tokens = prs.tokens(str(self.formula))
             if tokens == None:
                return tables
-            
+
             for tl in tokens:
                 if type(tl) == data.Table:
                     # single item its just a census.Table
@@ -1016,7 +1018,7 @@ class Denominator(models.Model):
     indicator = models.ForeignKey(Indicator)
     sort = models.PositiveIntegerField(default = 1)
     slug = models.SlugField(max_length=100, unique=True, db_index=True, null=True, blank=True)
-    published = models.BooleanField(default=True) 
+    published = models.BooleanField(default=True)
 
     @property
     def display_name(self):
@@ -1386,7 +1388,7 @@ class TaskStatus(models.Model):
     error = models.BooleanField(default=False, blank=True)
     traceback = models.TextField(null=True, blank=True)
     unicode_name = models.CharField(max_length=255, null=True, blank=True)
-     
+
     def save(self, **kwargs):
         try:
             label = IndicatorTask.objects.get(task_id= self.t_id).indicator.name
@@ -1400,7 +1402,7 @@ class TaskStatus(models.Model):
                                                                    self.last_updated)
         self.unicode_name = unicode_name
         super(TaskStatus, self).save()
-    
+
     def __unicode__(self):
         try:
             label = IndicatorTask.objects.get(task_id= self.t_id).indicator.name

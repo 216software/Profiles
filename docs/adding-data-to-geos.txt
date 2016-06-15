@@ -1,0 +1,68 @@
++++++++++++++++++++++++++++++++++++++++
+We want to add some data to a Geography
++++++++++++++++++++++++++++++++++++++++
+
+
+Figure out what our Data Domains are (that )
+----------------------------------------------------------------
+
+We want to direct our attention to the following postgres tables::
+
+    profiles_datadomain
+
+This table should have been loaded with data from migrating the database
+and loading the sample census data.
+
+When we do a migrate, the column 'publish' is set to false. Pick the
+ones we want to use and update the column 'publish' to true::
+
+    update profiles_datadomain set publish = true;
+
+
+Subdomains
+----------
+
+The db contains a link table to set up subdomains. It's called
+'profiles_datadomain_subdomains' -- with a link to the top domain and
+the domain below it. In this way, we can fill out on each page which
+domains get displayed.
+
+Now for the DATA
+----------------
+
+Now that we can see how domains work, it would be helpful if we could
+actually view the data for a given domain and location.
+
+Ok, important tables to know here -- Indicators (variables) are bound
+up into groups.
+
+So, make a new group for your variables
+---------------------------------------
+
+Insert into the table profiles_group::
+
+    insert into profiles_group (name, order)
+    values ('Test Population', 1);
+
+
+profiles_group is references by profiles_datadomainindex, which means we
+need to connect our group to our data domain.::
+
+     insert into profiles_datadomainindex ("order", name, "dataDomain_id",
+     group_id) values (1, 'Population Test', 13, 1);
+
+This will be the header we see in the app for the set of data. Now we
+need to attach indicators to the domain as well into the table
+'profiles_indicatordomain' like this::
+
+     insert into profiles_indicatordomain  (indicator_id, domain_id,
+     "default") values (1, 1, true);
+
+
+
+
+
+
+
+
+.. vim:set syntax=rst:

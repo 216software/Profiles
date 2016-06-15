@@ -17,15 +17,18 @@ NEXT
 Get python manage.py syncdb to work correctly. Database peer
 authentication fails
 
--  In maps -- we're mapping one level too defined - we need to back out
-   one level so that we only get the asked for polygon,  not the
-   entire set of subpolygons -- so state PA should only return the PA
-   mapping.
+-  Figure out how to display data -- at the moment, no data is being
+   displayed
+
+   Where does the data come from -- how do we map it to geo records and
+   get it to display???
 
 -  With Matt, figure out what Mappings we'll need for the app
 
--  Figure out how to display data -- at the moment, no data is being
-   displayed
+
+Next UP:
+
+
 
 
 .. vim:set syntax=rst:
