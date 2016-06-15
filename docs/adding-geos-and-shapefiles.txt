@@ -60,16 +60,78 @@ Here's how to set it up
 
        python manage.py createsuperuser
 
-2. Once you're in to the admin interface, click on 'Geo Levels'.
+2. Once you're in to the admin interface, click on 'Shape Files'.
    There should already be a set of GeoLevels created, from the
    migration of the DB that we've completed earlier.
 
-   In one of the Geo Levels, say state for instance, click on the link.
-   You should see a screen where you'll be able to upload a ShapeFile.
+   Then click 'Add new' and we'll be able to upload our own shapefile.
 
    The shape files can be obtained from the Census Bureau here:
 
    https://www.census.gov/geo/maps-data/data/cbf/cbf_tracts.html
+
+3. I've added a sample map in this folder::
+
+      sample_maps/PA-county-shapes.zip
+
+4. The upload screen asks us for a few fields -- these fields will map
+   the shape files back to the geographies already defined in our
+   database. (table profiles_georecords)
+
+   We should have already a few counties defined from using syncdb,
+   namely Allegheny County, Beaver County and Adams County.
+
+   We'll map these counties to shapes.
+
+5. We'll go field by field when we upload the file --
+
+   - Name -- choose your own -- in this case maybe
+   something like 'PA County Shapes'
+
+   - Label Column -- This is the label for the shape, in case the label
+     should be the name of the county. It maps to columns on the
+     shapefiles that we're importing. In this case, it's fairly simple,
+     just : 'Name'
+
+  -  Geo Key Column -- This datapoint should be the column name in the
+     shapefile that maps back to our profiles_georecords -- in this
+     case, the column is called : 'COUNTYFP'
+
+  -  Geo meta key column -- This is optional, but seems to function as
+     the parent geo id -- so in this case we want the column : 'STATEFP'
+     since each of the columns are contained within the state geo record
+     ID.
+
+  -  Geom Type -- set this to 'polygon'
+
+  -  Shape File -- choose the zip file in /sample_maps -- upload the
+     whole zip file
+
+  -  color -- seems to let you select a color for the map (in HEX)
+
+  -  Zoom Threshold -- This is at what level the map appears -- counties
+     seem to have a level of 7, so let's set it to that or something
+     less
+
+6. OK now click 'Save' and the shapefile should get uploaded, and the
+   database updated accordingly.
+
+7. One final step -- the COUNTYFP only provides 3 digits of the county,
+   whereas our profiles_georecord geo_keys counties are all preceded with
+   '42'. So if the county id is '007', it won't match in our database
+   without the preceding '42'.
+
+   Run the following query to update the geo_keys::
+
+       update maps_polygonmapfeature set geo_key = CONCAT('42', geo_key);
+
+8. Now hit the link below and you should see the shape drawn in the map!
+
+    http://localhost:8000/profiles/county/42001/overview/
+
+
+
+
 
 
 
