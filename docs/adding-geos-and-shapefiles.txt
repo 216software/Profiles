@@ -49,6 +49,30 @@ If that table is empty, then obviously there's nothing to look up.
 So we've gotta figure out how to get some shp files.
 
 
+Here's how to set it up
+-----------------------
+
+1. First enter the admin section of the webapge (/admin) login with
+   the username and password that you used when you did syncdb.
+
+   If you forgot the one you made, or want to add another admin user,
+   issue the following command::
+
+       python manage.py createsuperuser
+
+2. Once you're in to the admin interface, click on 'Geo Levels'.
+   There should already be a set of GeoLevels created, from the
+   migration of the DB that we've completed earlier.
+
+   In one of the Geo Levels, say state for instance, click on the link.
+   You should see a screen where you'll be able to upload a ShapeFile.
+
+   The shape files can be obtained from the Census Bureau here:
+
+   https://www.census.gov/geo/maps-data/data/cbf/cbf_tracts.html
+
+
+
 
 
 
