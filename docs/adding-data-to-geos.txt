@@ -58,9 +58,96 @@ need to attach indicators to the domain as well into the table
      insert into profiles_indicatordomain  (indicator_id, domain_id,
      "default") values (1, 1, true);
 
+We also need something in profiles_groupindex::
 
 
+    insert into profiles_groupindex ( "order", name, groups_id, indicators_id )
 
+    values (1, 'Total Population', 1, 1);
+
+
+In profiles_indicatorpart, we keep track of a formulate and a time range
+for a certain indicator. Meaning if we have a population indicator, then
+we're able to link it up to separate time ranges.
+
+The sample data should have two indicatorparts. These indicator parts
+need to be hooked up to geographic levels depending on what we actually
+have data for.
+
+This is done in the table profiles_indicatorpart_levels. We can do it as
+follows (this will, for example insert all records for each indicator we
+have) ::
+
+    insert into profiles_indicatorpart_levels (indicatorpart_id,
+    geolevel_id)
+
+    select 1, id from profiles_geolevel where year != '2010';
+
+    insert into profiles_indicatorpart_levels (indicatorpart_id,
+    geolevel_id)
+
+    select 2, id from profiles_geolevel where year = '2010';
+
+
+OK, in the app, we can now get the query to run against the API, but there's still no actual data available!? What the heck.
+--------------------------------------------------------------------------------------------
+
+So we need to actually get some data to return when the API tries to
+look up a particular indicator.
+
+The values that the API looks up are actually stored in the table
+'profiles_flatvalue' . When we enter the SAS data, we'll need to throw
+it in this table.
+
+For now, we want some flat data values based on geography and
+indicators.::
+
+    insert into profiles_flatvalue
+
+    (indicator_id, display_title, indicator_slug, geography_id,
+    geography_name, geography_slug, geography_geo_key, value_type,
+    time_key, published, f_number, number)
+
+    values (1, 'Total Population', 'total-population',
+        5, 'Allegheny County', 42003, 7, 'COUNT', '2010', true,
+        "1,281,666", 1281666);
+
+This should return something like this::
+
+    {
+    "objects": [
+        {
+            "display_title": "Total Population",
+            "f_moe": null,
+            "f_number": "1,281,666",
+            "f_percent": null,
+            "geography_geo_key": "42003",
+            "geography_id": 21,
+            "geography_name": "Allegheny County",
+            "indicator_slug": "poptottotal-population",
+            "moe": null,
+            "number": 1281666.0,
+            "percent": null,
+            "time_key": "2000",
+            "value_type": "i"
+        }
+    ],
+    "related": [
+        {
+            "slug": "poptottotal-population",
+            "time_key": "2000",
+            "title": "Total Population"
+        },
+        {
+            "slug": "poptottotal-population",
+            "time_key": "2010",
+            "title": "Total Population"
+        }
+    ]
+    }
+
+
+Next up -- figure out how these values relate to each other + numerators and denominators...
 
 
 

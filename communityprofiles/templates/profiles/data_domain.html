@@ -144,25 +144,29 @@ right:5px;
                     {%for g in domain.sorted_groups%}
                     <li>
                     {% if g|group_filter:geo_level %}
-                    <a href="#" class="domain-title">
-                        <span id="{{g.name}}" class="title
-                        {% if forloop.parentloop.first %}{%if forloop.first%}first-tour
+                        <a href="#" class="domain-title">
+                            <span id="{{g.name}}" class="title
+                            {% if forloop.parentloop.first %}{%if forloop.first%}first-tour
+                            {%endif%}{%endif%}
+                            {%if forloop.first%} first-group{%endif%}"
+                            ng-click='groupSelect([{%for indicator in g|group_filter:geo_level %}
+                            {{indicator.get_slug_time_props|order_key:forloop.counter|safe}}
+                            {%if forloop.last%}{%else%},{%endif%}
+                            {%endfor%}],"{{g.name}}", $event)'>
+                            {{g.name}} <span class="glyphicon glyphicon-chevron-right"></span>
+                            </span></a>
+
+
+                        {% if forloop.parentloop.first %}
+                        {%if forloop.first%}
+                        <span class="tour_data" data-original-title="The Data Table" data-content="This table will reflect data for the geography selected. <button type='button' class='btn btn-warning pull-right tour_btn' onclick='tour()'>Next</button>"></span>
                         {%endif%}{%endif%}
-                        {%if forloop.first%} first-group{%endif%}"
-                        ng-click='groupSelect([{%for indicator in g|group_filter:geo_level %}                        {{indicator.get_slug_time_props|order_key:forloop.counter|safe}}
-                        {%if forloop.last%}{%else%},{%endif%}
-                        {%endfor%}],"{{g.name}}", $event)'>
-                        {{g.name}} <span class="glyphicon glyphicon-chevron-right"></span>
-                        </span></a>
-
-
-                    {% if forloop.parentloop.first %}{%if forloop.first%}<span class="tour_data" data-original-title="The Data Table" data-content="This table will reflect data for the geography selected. <button type='button' class='btn btn-warning pull-right tour_btn' onclick='tour()'>Next</button>"></span>{%endif%}{%endif%}
-{% else %}
-                    {%if forloop.first %}<a href="#" class="domain-title" rel="popover" data-trigger="hover" style="color:gray" data-title="The Data Table (No Data)" data-content="This table will reflect data for the geography selected. (Data not available at all geography levels)">{%else%}
-                    <a href="#" class="domain-title" rel="popover" data-trigger="hover" style="color:gray" data-title="No Data" data-content="Data not available at all geography levels">{%endif%}
-                        <span id="{{g.name}}" class="title">{{g.name}}</span></a>
-
-{% endif %}
+                        {% else %}
+                        {%if forloop.first %}<a href="#" class="domain-title" rel="popover" data-trigger="hover" style="color:gray" data-title="The Data Table (No Data)" data-content="This table will reflect data for the geography selected. (Data not available at all geography levels)">
+                        {%else%}
+                        <a href="#" class="domain-title" rel="popover" data-trigger="hover" style="color:gray" data-title="No Data" data-content="Data not available at all geography levels">{%endif%}
+                            <span id="{{g.name}}" class="title">{{g.name}}</span></a>
+                        {% endif %}
 
                         <table class="table table-condensed ng-cloak hidden" ng-cloak>
                             <tbody>
