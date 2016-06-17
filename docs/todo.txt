@@ -27,7 +27,8 @@ authentication fails
 
 
 Next UP:
-
+-   What is the public IP of this amazon box? we need to expose it to
+    the internet so we can hit the box
 
 
 
