@@ -2,5 +2,4 @@
 *.swp
 *.db
 ENV/
-local_settings.py
 
