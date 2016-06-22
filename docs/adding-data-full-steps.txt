@@ -1,0 +1,63 @@
++++++++++++++++++++++++
+We want to add new data
++++++++++++++++++++++++
+
+Steps to insert indicator and data
+----------------------------------
+
+
+1. Insert new indicator::
+
+    insert into profiles_indicator
+
+    (name, short_definition, long_definition, universe, purpose, slug, data_type,
+    display_name, source, display_percent, display_change, display_distribution, published,
+    limitations, routine_use, notes)
+
+    values ('Age 18+', 'Population count under the age of 18',
+    'Longer Definition', 'Milky Way Galaxy Universe', 'this is a purpose', 'age-18-plus', 'COUNT', 'Age 18+',
+    'U.S. Census Bureau', false, false, false, true, 'None', true, 'No notes');
+
+2. Insert a new indicator part::
+
+    insert into profiles_indicatorpart
+
+    (data_source_id, formula, published, indicator_id, time_id, "order")
+
+    values
+
+    (7, 'P001001', true, 9, 2, 1)
+
+3. Hook up indicator part to geo levels (this will insert for all
+   geolevels) ::
+
+    insert into profiles_indicatorpart_levels
+
+    (indicatorpart_id, geolevel_id)
+
+    select 4, id from
+
+    profiles_geolevel;
+
+4.  Insert the indicator into a group (those are the cateogry like
+    things on the website itself)::
+
+    insert into profiles_groupindex
+
+    ("order", name, groups_id, indicators_id)
+
+    values
+
+    ( 2, 'Under 18', 1, 9);
+
+
+5.  Now insert the actual flat value -- remember, the slug name must
+    match the indicator slug...
+
+
+
+
+
+
+
+.. vim:set syntax=rst:

@@ -17,8 +17,8 @@ app.service('launchDataview', function(){
         var wW = $(window).width();
         var wH = $(window).height();
         var tH = wH -(wH *.25);
-        
-      
+
+
         $("#dataview-modal .modal-body").css({
             height:tH
         });
@@ -31,7 +31,7 @@ app.service('launchDataview', function(){
         }
         $("#dataview-modal iframe").attr("src", url);
         $('#dataview-modal').modal('show');
-    } 
+    }
 
 });
 
@@ -63,17 +63,17 @@ app.filter('ifBool', function(){
         if(bool){
             return out;
         }
-    } 
+    }
 });
 
 app.filter('roundDecimal', function(){
     return function(val){
         if(val == "n/a") return val;
         val = parseFloat(val);
-        
+
         if(val % 1 !== 0){
             d = Math.round( val * 10 ) / 10;
-            return d;  
+            return d;
         }
         return val;
     }
@@ -103,7 +103,7 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
     $scope.onGeoRollover = function(e){
         var l = e.target;
         var props = l.feature.geometry.properties;
-        
+
         $scope.pm.infoBox.update('<h4>'+props.label+'</h4>');
         $scope.pm.highlightLayer(e);
     }
@@ -146,7 +146,7 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
     $scope.onLevChange = function(updateTS){
         if(updateTS == true){
             var now = Date.now()
-            $scope.$storage.levelstate = { 
+            $scope.$storage.levelstate = {
                 level: $scope.level,
                 time: now
             } // keep track of the level state as it changes
@@ -248,7 +248,7 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
                 callback(levSlug);
             }
         });
-        
+
     }
     $scope.getLevelFromSlug = function(slug){
         /*Get Level object from its slug*/
@@ -266,7 +266,7 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
         $scope.level = level;
         $scope.onLevChange(updateTS);
     }
-      
+
     $scope.getLinkedRec = function(levSlug, geoKey){
         return $scope.linkage[levSlug][parseInt(geoKey)]
     }
@@ -303,7 +303,7 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
             for(var i in inds){
                 var proms = [];
                 var denoms = {};
-                
+
                 if(!indicators.hasOwnProperty(inds[i].slug)){
                     indicators[inds[i].slug] = inds[i];
                     indicators[inds[i].slug]['vals'] = {};
@@ -321,14 +321,14 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
 
                 indicators[inds[i].slug]['targ_url'] = "//" + $scope.app_url + "/profiles/dataview/"+$scope.init_level.slug+"/"+$scope.init_record.slug+"/"+inds[i].slug;
                 if(!angular.isUndefined(window.AUTHN)){
-                    indicators[inds[i].slug]['alink'] = '<a class="admin-link hidden-print" target="blank" href="/admin/profiles/indicator/'+ inds[i].id +'">EDIT</a>';   
+                    indicators[inds[i].slug]['alink'] = '<a class="admin-link hidden-print" target="blank" href="/admin/profiles/indicator/'+ inds[i].id +'">EDIT</a>';
                 }
 
                 for(var k in inds[i].times){
-                    var p = $http.get($scope.api_url + '/indicator/'+inds[i].slug, 
+                    var p = $http.get($scope.api_url + '/indicator/'+inds[i].slug,
                             {
                             params:{
-                                geos:$scope.init_record.id, 
+                                geos:$scope.init_record.id,
                                 time:inds[i].times[k],
                                 slg:inds[i].slug,
                                 t:"i",
@@ -340,22 +340,22 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
                     // also grab any denoms
                     for(var d in inds[i].denoms){
                         denoms[inds[i].denoms[d].slug]['targ_url'] = "//" + $scope.app_url + "/profiles/dataview/"+$scope.init_level.slug+"/"+$scope.init_record.slug+"/"+inds[i].denoms[d].slug + "/?d=t";
-                        var p = $http.get($scope.api_url + '/indicator/'+inds[i].denoms[d].slug, 
+                        var p = $http.get($scope.api_url + '/indicator/'+inds[i].denoms[d].slug,
                                 {
                                     params:{
-                                         geos:$scope.init_record.id, 
+                                         geos:$scope.init_record.id,
                                          time:inds[i].times[k],
                                          slg:inds[i].denoms[d].slug,
                                          t:"d",
                                         },
                                  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                         });
-                    
+
                         proms.push(p);
                     }
                     indicators[inds[i].slug].denominators = denoms;
-                    
-                }  
+
+                }
 
                 $q.all(proms).then(function(results){
                     /*at this point all of this indicator's data has come back including denoms*/
@@ -392,7 +392,7 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
                                 indicators[k].denominators[p.slg]['vals'][p.time] = {value:"-", moe:$scope.moe(null), count:"-"};
                             }
                         }
-                       
+
                     }
                     if(!$scope.data_cache[group_name].groupedTimes.hasOwnProperty(times.join("&"))){
                         $scope.data_cache[group_name].groupedTimes[times.join("&")] = {times:times, indicators:[]};
@@ -405,10 +405,10 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
 
                     $scope.data_cache[group_name].groupedTimes[times.join("&")].indicators.push(indicators[k]);
                 });
-               
+
             } // end for i in inds
-            
-            
+
+
             $timeout(function(){
                 targ.find('.moe').tooltip({delay:{show:10, hide:10}});
                 targ.find('.denominator').tooltip({delay:{show:10, hide:10}});
@@ -441,7 +441,7 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
     }
 
     $scope.bcrumbNav = function(event){
-        
+
     }
 
     $scope.updateRecord = function(recordSlug, levelSlug){
@@ -468,7 +468,7 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
         var st = pAddr[0] || null;
         var city = pAddr[1] || "";
         var zip = pAddr[2] || "";
-        
+
         if(st != null){
             $scope.startSpinner();
             $http.get("//" + $scope.app_url + "/" + "maps_api/v1/geocode/", {params:{street:st, city:city, zipcode:zip}})
@@ -497,7 +497,7 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
         $event.preventDefault();
         $scope.$storage.levelstate = null; // we need to wipe out the levelstate
         $scope.geocode_mssg = "";
-        $scope.addr_results = []; 
+        $scope.addr_results = [];
         addr.location.address = addr.location.address.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
         if(addr.geography.length == 0) {
             addr.message = "<h5> " + addr.location.address + "</h5> <span class=\"label wrap-label label-warning\">Corresponding geographies and data not available for this address</span>";
@@ -506,14 +506,14 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
         }
         $scope.selected_address = addr;
     }
-    
+
     $scope.indicatorInfo = function(event, indicator){
         event.preventDefault();
         $http.get("//" + $scope.app_url + "/profiles/indicator/info/", {params:{
             s:indicator.slug
         }})
         .success(function(data, status, headers, config){
-            
+
             var wW = $(window).width();
             var wH = $(window).height();
             var tW = wW - (wW *.45);
@@ -524,7 +524,7 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
             $("#info-modal .modal-content").css({
                 width: tW
             });
-            
+
             $("#info-modal .modal-title").text(indicator.name);
             $("#info-modal .modal-content .modal-body").html(data)
             $('#info-modal').modal('show');
@@ -536,7 +536,7 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
         launchDataview(event, $scope);
     }
 
-    $scope.startSpinner = function () { 
+    $scope.startSpinner = function () {
         /*UTIL for creating and managing the loading dio*/
         $scope.activity = true;
     }
@@ -573,7 +573,7 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
         $scope.times = $scope.indicator.times.sort();
         $scope.time = $scope.times[$scope.times.length -1]; // this gets the last time in the series
         $scope.recordIdstr="";
-        
+
         // collect basic info on records that are in or around this geography
         for(var i in $scope.levels){
             proms.push($scope.getAllRecsForLev($scope.levels[i]));
@@ -610,7 +610,7 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
             $scope.data_cache[slug] = {};
         }
 
-        
+
         //Collect geoms for this level
         geoms = [];
         geoms = $scope.record_sets[level.name].map(function(obj){
@@ -619,12 +619,12 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
 
         for(var i in $scope.times){
             var t = $scope.times[i]; // time
-        
+
             // track progress
             if(geoms.length > 0){
                 // we need to be able to determine when this time has loaded all of its level data
                 p = $http.get(url, { params:{
-                                geos:geoms.join(","), 
+                                geos:geoms.join(","),
                                 time:t,
                                 geom:"t",
                                 key:level.name, // this is a hack for adding returning an extra field later. It is the level. It will be made available in config.params
@@ -635,28 +635,28 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
                 .success(function(data, status, headers, config){
                     //$scope.progress.completed += 1;
                     //$scope.progress.percent = ($scope.progress.completed/$scope.progress.total) * 100;
-                }); 
+                });
                 proms.push(p);
            }
         }
-        
+
         $q.all(proms).then(function(results){
             // add a memo that this level has been loaded.
             $scope.avail_levels[$scope.indicator.slug][level.name] = true;
             for(var i in results){
                 // iterating through a level -> time -> dataset
-                
+
                 // check to see if the cache has a time member for this indicator
-                if(!$scope.data_cache[$scope.indicator.slug].hasOwnProperty(results[i].config.params.time)){ 
+                if(!$scope.data_cache[$scope.indicator.slug].hasOwnProperty(results[i].config.params.time)){
                     $scope.data_cache[$scope.indicator.slug][results[i].config.params.time] = {}; // if not add one
                 }
-                $scope.data_cache[$scope.indicator.slug][results[i].config.params.time][results[i].config.params.key] = results[i].data.objects;  
+                $scope.data_cache[$scope.indicator.slug][results[i].config.params.time][results[i].config.params.key] = results[i].data.objects;
             }
             if(!angular.isUndefined(callback) && callback != null){
-                callback();   
+                callback();
             }
             $scope.stopSpinner();
-            
+
         });
     }
 
@@ -683,14 +683,14 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
                         moe: $scope.moe($scope.data_cache[$scope.indicator.slug][t][lev][rec].values.moe),
                         value_type : $scope.data_cache[$scope.indicator.slug][t][lev][rec].values.value_type,
                         numerator: $scope.data_cache[$scope.indicator.slug][t][lev][rec].values.numerator || null,
-                        numerator_moe: $scope.moe($scope.data_cache[$scope.indicator.slug][t][lev][rec].values.numerator_moe), 
+                        numerator_moe: $scope.moe($scope.data_cache[$scope.indicator.slug][t][lev][rec].values.numerator_moe),
                         number: $scope.data_cache[$scope.indicator.slug][t][lev][rec].values.number || null
 
                     };
                 }
             }
         }
-        
+
         // finally clean up the data into a more sensible array
         var a; // resuable array
         var d; // reusable obj
@@ -710,7 +710,7 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
             $(".moe").tooltip();
         }, 200)
         $scope.updateTable();
-    } 
+    }
 
     $scope.updateMapData = function(){
         /*Updates Displayed map data*/
@@ -780,7 +780,7 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
             },
             click:function(){
 
-            }  
+            }
         }
         var data = {'objects':$scope.data_cache[$scope.indicator.slug][$scope.time][$scope.level.name]};
         var base_layer = $scope.pm.DataPolyFeatureGroup($scope.reference_layer_data, {
@@ -789,11 +789,11 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
 			fill:false,
 			color:"#444",
 			dashArray: '5',
-        
+
         });
 
         var choro = $scope.pm.DataChoroplethFeatureGroup(data,
-                $scope.indicator.key, mouseEvents, 
+                $scope.indicator.key, mouseEvents,
                 $scope.disp_opts['legend'],
                 $scope.disp_opts['value_format'],
                 "<h3>%s</h3><div class='clear'></div>".replace("%s", $scope.time)
@@ -850,12 +850,12 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
     }
 
     $scope.updateTable = function(){
-        
+
         var escapedName = $scope.level.name.replace(/\s/g, "\\ ");
         $timeout(function(){
             $scope.tableReverse = true; // set back to default
             $scope.sortTable('label'); // always resort by label
-            tableize("#table-data-"+escapedName); 
+            tableize("#table-data-"+escapedName);
         }, 20);
     }
 
@@ -864,7 +864,7 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
         if($scope.avail_levels[$scope.indicator.slug].hasOwnProperty(level.name)){
             $scope.level = level;
             if($scope.indicatorOptions != false){
-                $scope.generateTables();                
+                $scope.generateTables();
             }
             $scope.updateMapData();
             $scope.updateTable();
@@ -880,15 +880,15 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
     $scope.changeIndicator = function(i){
         $scope.switchDataLevel($scope.level)
     }
-    
+
     $scope.sortTable = function (sortKey, option){
         var aC, bc = null;
-        $scope.tableReverse = !$scope.tableReverse; 
+        $scope.tableReverse = !$scope.tableReverse;
         if($scope.tableReverse){
             $scope.sortClass  = 'glyphicon-chevron-up';
         }else{
             $scope.sortClass  = 'glyphicon-chevron-down';
-            
+
         }
         $scope.table_data[$scope.level.name].sort(function(a, b){
             if (sortKey == 'label'){
@@ -961,7 +961,7 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
         // launch a print friendly version of the dataview page we are in
         window.open($window.location.pathname+"?status=print");
     }
-    
+
     $scope.init = function(){
         $scope.levels = window.LEVELS; // set levels
         $scope.level = $scope.levels[$scope.getLevelFromSlug(window.LEVEL.slug)]; // the currently selected level
@@ -985,7 +985,7 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
             $scope.pm.init();
             $scope.pm.infoBox = $scope.pm.makeInfoBox('info label', "<h4>"+ $scope.init_record.name +"</h4>");
             $scope.pm.infoBox.addTo($scope.pm.map);
-            
+
             // get intial data
             if(angular.isUndefined($scope.indicator)){
                 $scope.records = [window.RECORD];
@@ -1023,16 +1023,16 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
                     var targ = $("#" + p[1] + " #" + p[2].replace(/\s/g, "\\ ").replace(/,/g, "\\,")); // TODO: DRY this up.
                     targ.click(); // TODO:silly hack.
 
-                    // We need to scroll 
+                    // We need to scroll
                     $('body').animate({ scrollTop: targ.offset().top});
                 }
-               
+
             }else{
                 $scope.disp_opts = window.DISP_OPTS;
                 $scope.records = [window.RECORD]; // active records as in active geography records that we are looking at
                 $scope.getIndicatorGeoms();
                 $scope.avail_levels = {}; // create an available levels index. that is levels thave loaded data for a given indicator
-                
+
                 $scope.wTop = window.top === window.self;
 
                 if($scope.indicatorOptions != false){
@@ -1048,7 +1048,7 @@ function MapCntrl($scope, $http, $sanitize, $compile, $timeout, $q, $log, $locat
             }
 
             $scope.addPointOverlays();
-                         
+
         });
         try{
             window.INIT();
