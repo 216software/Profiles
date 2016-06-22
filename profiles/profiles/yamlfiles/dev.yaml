@@ -1,18 +1,19 @@
 app:
+
     secret:                     2246 Tudor
-    host:                       ie.216software.com
+    host: &host                 test.profiles.local
     scheme:                     http
     launch_debugger_on_error:   False
-    webapp_port:                6659
+    webapp_port:                6661
     pidfile:                    /tmp/profiles-webapp.pid
-    num_webapp_workers:         4
+    num_webapp_workers:         1
 
 postgresql:
-    database:   ieint_dev
-    user:       matt
-    host:       null
-    port:       null
-    password:   null
+    database:   profiles_dev
+    user:       profiles
+    host:       localhost
+    port:       5432
+    password:   pr0f1l3s
 
 smtp:
     host: &smtphost  localhost
@@ -31,7 +32,6 @@ logging:
                 propagate: False
                 level: DEBUG
                 handlers: [console, tmpfile]
-
             werkzeug: *profileslogging
 
             horsemeat: *profileslogging
@@ -45,11 +45,11 @@ logging:
             console:
                 class: logging.StreamHandler
                 level: DEBUG
-                formatter: consolefmt
+                formatter: colorfmt
 
             tmpfile:
                 class: logging.FileHandler
-                filename: /tmp/profiles.log
+                filename: /tmp/pyprofiles.log
                 mode: a
                 level: DEBUG
                 formatter: consolefmt
@@ -60,24 +60,44 @@ logging:
                 class: logging.handlers.SMTPHandler
                 mailhost: *smtphost
 
-                fromaddr: profiles@profiles
+                fromaddr: profiles@*host
 
                 toaddrs:
-                    - matt@tplus1.com
-                    # - robert.heinen@gmail.com
+                    # matt@216software.com
+                    - rob@216software.com
+                    - robert.heinen@gmail.com
 
                 subject: production error
 
         formatters:
             consolefmt:
                 format: '%(asctime)-22s [%(process)d] %(name)-30s %(lineno)-5d %(levelname)-8s %(message)s'
+            colorfmt:
+                (): "colorlog.ColoredFormatter"
+
+                # format: "%(log_color)s%(levelname)-8s%(reset)s %(blue)s%(message)s"
+
+                format: "%(log_color)s%(asctime)-22s [%(process)d] %(name)-30s %(lineno)-5d %(levelname)-8s %(message)s"
+
 
     script: *defaultlogging
 
-profiles:
 
-    weekly_manifest_email_recipients:
-        -   matt@216software.com
+rackspace:
+    username:   bormesh
+    apikey:     c1267316d6b50c145facca34cb1cc0dd
+    region:     ORD
+    # get temp key like this:
+    # pyrax.cloudfiles._manager.api.get_temp_url_key()
+    tempurlkey: hairyman
+    # get management key like this:
+    # pyrax.cloudfiles._manager.api.management_url
+    mgmt_url: https://storage101.ord1.clouddrive.com/v1/MossoCloudFS_9cf33369-f5a0-472c-8da9-db02967e1120
+    containers:
+            album:
+                name:         profiles-album-photos-dev
+                cdn_ssl_uri:  https://565f373a178d124cb821-6ec213033db005fcb73c2f462b1d1188.ssl.cf2.rackcdn.com
+
 
 
 # vim: set filetype=yaml :
