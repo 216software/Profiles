@@ -1,0 +1,51 @@
+<ul class="nav nav-tabs">
+
+<li role="presentation"
+    data-bind="css: {active: pager.activePage$().id() == 'update-password'}">
+
+    <a data-bind="page-href: 'update-password'">Update password</a>
+</li>
+
+</ul>
+
+
+<div data-bind="page: {
+    id: 'update-password',
+    role: 'start'}">
+
+<h2>Update your password</h2>
+
+<form class="form">
+
+<div class="form-group">
+
+<label>Current password</label>
+<input class="form-control"
+    type="password" data-bind="value: current_password" />
+
+<label>New password</label>
+<input class="form-control"
+    type="password" data-bind="value: new_password1" />
+
+<label>Confirm new password</label>
+<input class="form-control"
+    type="password" data-bind="value: new_password2" />
+
+</div><!-- closes form group -->
+
+<div class="panel panel-danger"
+    data-bind="visible: show_mismatched_password_warning">
+<div class="panel-heading">
+Sorry, those passwords don't match!
+</div><!-- closes panel-heading -->
+</div><!-- closes panel panel-danger -->
+
+<button class="btn btn-primary"
+    data-bind="attr: {disabled: $root.is_busy},
+        css: {disabled: $root.is_busy},
+        text: update_password_button_text,
+        click: update_password"></button>
+
+</form><!-- closes form -->
+
+</div><!-- closes update-password -->

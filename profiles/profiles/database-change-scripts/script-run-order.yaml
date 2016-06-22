@@ -1,0 +1,16 @@
+# already been run in here!  The python script upgrade_database.py will
+# check the horsemeat_schema_version table and skip scripts that have
+# already been run.
+
+setup_script: initial-setup.sql
+
+script_order:
+-   make-people-and-sessions-et-al-tables.sql
+-   insert-test-users.sql
+-   convert-id-to-uuid.sql
+-   adjust-session-expires-time.sql
+-   add-photos.sql
+#-   create-photo-containers.py
+-   add-albums.sql
+-   add-thumb-finished-to-photos.sql
+-   add-album-special-urls.sql

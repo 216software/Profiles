@@ -1,0 +1,25 @@
+Frippery / Horsemeat
+====================
+
+*   Figure out if it is possible to reorganize logging in the yaml file
+    so that it is more obvious how to just change the parts you want
+    without having to copy over everything.
+
+    Can handlers and formatters be defined elsewhere and then I just
+    refer to them?
+
+*   Break out webapp_session and user view models into separate files
+    and store these in frippery so that other projects have this stuff.
+
+*   Add a --rollback option to the upgrade-database script, so that it
+    is super-easy to run stuff and check for errors.  Of course this
+    won't catch all types of errors, but it will help.
+
+*   Copy the emailtemplates directory and a contrived example into
+    frippery.  Maybe something that shows how to reset password.
+
+*   Add some notes to frippery to show how to use bower to check for
+    updates and then update libraries.
+
+
+.. vim: set syntax=rst:

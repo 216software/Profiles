@@ -1,0 +1,25 @@
+#! /bin/bash -e
+
+if (( $# != 2 ))
+then
+
+    echo "usage: $0 yaml_file dumpfile"
+    exit 99;
+
+else
+
+    VIRTUALENVBINDIR="/home/streamliner/.virtualenvs/streamliner/bin";
+    DBNAME=`$VIRTUALENVBINDIR/profiles-config $1 database_name`
+    DBUSER=`$VIRTUALENVBINDIR/profiles-config $1 database_user`
+
+    /usr/bin/dropdb --if-exists $DBNAME
+    /usr/bin/createdb --owner $DBUSER $DBNAME
+    /usr/bin/createlang plpythonu $DBNAME
+    /usr/bin/psql -v "ON_ERROR_STOP=1" --quiet -d $DBNAME -c 'create extension "hstore";'
+    /usr/bin/psql -v "ON_ERROR_STOP=1" --quiet -d $DBNAME -c 'create extension "uuid-ossp";'
+    /usr/bin/psql -v "ON_ERROR_STOP=1" --quiet -d $DBNAME -c 'create extension "pgcrypto";'
+    /usr/bin/psql -v "ON_ERROR_STOP=1" --quiet -d $DBNAME -c 'create extension "citext";'
+    /usr/bin/psql -v "ON_ERROR_STOP=1" --quiet -d $DBNAME -c "create extension btree_gist;"
+    /usr/bin/pg_restore --no-owner --exit-on-error -U $DBUSER -d $DBNAME $2
+
+fi

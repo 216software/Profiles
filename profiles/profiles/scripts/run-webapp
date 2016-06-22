@@ -1,0 +1,29 @@
+#! /bin/bash -e
+
+# If you get an error like "profiles-config not found", then you either
+# need to install profiles globally, or activate the virtualenv where you
+# installed profiles.
+#
+# If you're running this from supervisord, just set the env PATH to
+# point to your .virtualenvs/blargh/bin folder.
+
+if (( $# != 1 ))
+then
+
+    echo "usage: $0 yaml_file"
+    exit 99;
+
+else
+
+    PORT=`$VIRTUAL_ENV/bin/profiles-config $1 webapp_port`
+    PIDFILE=`$VIRTUAL_ENV/bin/profiles-config $1 pidfile`
+    NUM_WORKERS=`$VIRTUAL_ENV/bin/profiles-config $1 num_webapp_workers`
+
+    exec $VIRTUAL_ENV/bin/gunicorn \
+    --debug \
+    --workers $NUM_WORKERS \
+    --bind 127.0.0.1:$PORT \
+    --pid $PIDFILE \
+    profiles.configwrapper:ConfigWrapper.load_yaml\(\"$1\"\).build_webapp\(\)
+
+fi

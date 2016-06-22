@@ -1,0 +1,245 @@
+<h1>All Users</h1>
+
+<ul class="nav nav-tabs">
+
+<li role="presentation" data-bind="css: {active: pager.activePage$().id() == 'active-users'}">
+<a data-bind="page-href: 'active-users'">Active users</a>
+</li>
+
+<li role="presentation" data-bind="css: {active: pager.activePage$().id() == 'deactivated-users'}">
+<a data-bind="page-href: 'deactivated-users'">Deactivated users</a>
+</li>
+
+<li role="presentation" data-bind="css: {active:
+pager.activePage$().id() == 'scanner-users-with-tlms'}">
+<a data-bind="page-href: 'scanner-users-with-tlms'">Scanners and Trucks</a>
+</li>
+
+<li role="presentation" data-bind="css: {active: pager.activePage$().id() == 'add-user'}">
+<a data-bind="page-href: 'add-user'">Make a new user</a>
+</li>
+
+<!--
+<li role="presentation" data-bind="css: {active: pager.activePage$().id() == 'reports'}">
+<a data-bind="page-href: 'reports'">Reports</a>
+</li>
+-->
+
+</ul>
+
+<hr />
+
+<div data-bind="page: {id: 'active-users', role: 'start'}">
+
+<a class="small pull-right"
+    target="_blank"
+    data-bind="visible: api_address, attr: {href: api_address}">API data</a>
+
+<p>Displaying <span class="text-info" data-bind="text: active_users().length"></span> Users</p>
+
+<ul class="list-unstyled">
+
+<li>
+
+<a target="_blank"
+    class="btn btn-info"
+    href="/csv/scanner-speed.csv">
+<i class="fa fa-file"></i>Scanner speed CSV</a>
+
+</ul>
+
+<p class="small text-info">Note: all the CSV files on this page are
+written out once daily.</p>
+
+<table class="table table-striped table-bordered table-condensed">
+<thead>
+<tr>
+<th>Person Name</th>
+<th>Email</th>
+<th>Group</th>
+<th>Current Status</th>
+<th>Send Forgot Password Email</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody data-bind="foreach:active_users">
+<tr>
+
+<td>
+<span data-bind="text: display_name"></span>
+<br>
+<span class="small text-muted" data-bind="text: group_title"></span>
+
+<span data-bind="visible: group_title() != 'admin'">
+<br>
+<a target="_blank"
+    class="btn btn-info btn-xs"
+    data-bind="attr: {href: my_scan_report}">
+<i class="fa fa-file"></i>
+Scans for last 7 days</a>
+</span>
+
+</td>
+
+<td data-bind="text: email_address"></td>
+
+<td>
+
+<select
+    style="width: 100px; display:inline;"
+    class="form-control" data-bind="options:$parent.groups(), value:group_title"></select>
+
+<button class="btn btn-primary btn-sm"
+    style="margin-left: 20px;"
+    data-bind="visible: original_group_title() != group_title(), click:function(data){change_person_group(data)}">Save</button>
+
+</td>
+<td data-bind="text: person_status"></td>
+<td>
+<button class="btn btn-primary"
+data-bind="click:function(data){ $parent.send_password_forget_email(data)}">Send Reset Email Password</button>
+</td>
+<td>
+<button class="btn"
+    data-bind="
+        css: {'btn-danger': person_status() == 'confirmed',
+            'btn-primary': person_status() != 'confirmed'},
+        click:function(data){$parent.toggle_status(data)},
+        text: person_status() == 'confirmed' ? 'Deactivate' : 'Activate'"></button>
+</td>
+</tr> <!-- ends tr -->
+
+</tbody>
+
+</table>
+
+</div><!-- closes page: active-users -->
+
+<div data-bind="page: {id: 'deactivated-users'}">
+
+<a class="small pull-right"
+    target="_blank"
+    data-bind="visible: api_address, attr: {href: api_address}">API data</a>
+
+<p>Displaying <span class="text-info" data-bind="text: deactivated_users().length"></span> Users</p>
+
+<table class="table table-striped table-bordered table-condensed">
+<thead>
+<tr>
+<th>Person Name</th>
+<th>Email</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody data-bind="foreach:deactivated_users">
+<tr>
+<td data-bind="text: display_name"></td>
+<td data-bind="text: email_address"></td>
+
+<td>
+<button class="btn"
+    data-bind="
+        css: {'btn-danger': person_status() == 'confirmed',
+            'btn-primary': person_status() != 'confirmed'},
+        click:function(data){$parent.toggle_status(data)},
+        text: person_status() == 'confirmed' ? 'Deactivate' : 'Activate'"></button>
+</td>
+</tr> <!-- ends tr -->
+
+</tbody>
+
+</table>
+
+</div><!-- closes page deactivated users -->
+
+<div data-bind="page: {id: 'scanner-users-with-tlms',
+                    afterShow:scannersWithTrucksInitialize}">
+
+<a class="small pull-right"
+    target="_blank"
+    data-bind="visible: api_address, attr: {href: api_address}">API data</a>
+
+<p>Displaying <span class="text-info"
+data-bind="text:scanners_with_trucks().length"></span> trucks</p>
+
+<table class="table table-striped table-bordered table-condensed">
+<thead>
+<tr>
+<th>BOL (tlm_id)</th>
+<th>Scanners</th>
+<th>Configure</th>
+</tr>
+</thead>
+
+<tbody data-bind="foreach:scanners_with_trucks">
+<tr>
+<td> <span data-bind="text: bol"></span>
+<small> (tlm_id: <span data-bind="text: tlm_id"></span>)</small>
+</td>
+<td>
+<ul data-bind="foreach:scanners">
+    <li><a data-bind="page-href: {
+                path:'/configure-scanning',
+                params: {
+                    tlm_id:tlm_id,
+                    person_uuid:person_uuid
+                }}, text:display_name"></a>
+
+    <span class="badge" data-bind="if:classic_mode">classic</span>
+    <span data-bind="if: wholesale_container_id"> | wholesale:
+       <span data-bind="text: wholesale_container_id"></span></span>
+
+    <span data-bind="if: ecommerce_container_id"> | ecommerce:
+       <span data-bind="text: ecommerce_container_id"></span></span>
+    </li>
+</ul>
+</td>
+<td>
+<a class="btn btn-default"
+    data-bind="page-href: {path:'/configure-scanning', params:
+{tlm_id: tlm_id}}">Configure scanning</a>
+</td>
+</tr> <!-- ends tr -->
+</tbody>
+
+</table>
+
+</div><!-- closes page deactivated users -->
+
+
+
+
+<div data-bind="page: {
+    id: 'add-user',
+    source: '/static/templates/adduser.html',
+    afterShow: addUserInitialize}"></div>
+
+<div data-bind="page: {
+    id: 'reports'}">
+
+<table class="table table-striped">
+
+<tbody>
+<tr>
+<td>
+
+<a target="_blank"
+    class="btn btn-info"
+    href="/csv/scanner-speed.csv">
+<i class="fa fa-file"></i>Scanner speed CSV</a>
+
+</td>
+
+<td>One row per person per day, shows average scans per minute
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div><!-- closes reports -->
+

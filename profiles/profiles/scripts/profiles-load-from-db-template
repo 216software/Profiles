@@ -1,0 +1,20 @@
+#! /bin/bash -e
+
+if (( $# != 2 ))
+then
+
+    echo "usage: $0 yaml_file db_template"
+    exit 99;
+
+else
+
+    DBNAME=`profiles-config $1 database_name`;
+    DBUSER=`profiles-config $1 database_user`;
+
+    sudo -u postgres dropdb --if-exists $DBNAME;
+    sudo -u postgres createdb --template $2 --owner $DBUSER $DBNAME;
+
+    echo "All done!  Created $DBNAME from template $2.";
+
+fi
+

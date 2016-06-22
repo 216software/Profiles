@@ -1,0 +1,33 @@
+<h2>Get your party started and sign up for Keepix!</h2>
+
+<div
+    data-bind="with: new_user" style="margin-top:30px">
+
+<div class="form-group">
+<label>First, tell us your email-address --</label>
+<input type="text" data-bind="textInput: email_address"
+    class="form-control"
+    placeholder="gettinhitched@gmail.com" />
+
+</div>
+
+<div class="form-group">
+
+<label>and then pick a password --</label>
+<input type="password" data-bind="textInput: raw_password"
+    class="form-control"
+    />
+</div>
+
+<div class="form-group">
+<label>finally, what should we call you?</label>
+<input type="text" data-bind="textInput: display_name"
+    class="form-control"
+    placeholder="what's your name: Zach, Kelly, Slater, Lisa, etc" />
+
+</div>
+
+<button class="btn btn-primary"
+    data-bind="disable:add_new_user_disable, click: save_new_user">Sign up!</button>
+</div>
+

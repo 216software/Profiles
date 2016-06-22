@@ -1,0 +1,288 @@
+#! /usr/bin/env python
+# vim: set expandtab ts=4 sw=4 filetype=python fileencoding=utf8:
+
+import argparse
+import logging
+import os
+import subprocess
+import textwrap
+
+import pkg_resources
+import yaml
+
+from profiles import configwrapper
+
+log = logging.getLogger('profiles.upgrade_database')
+
+def set_up_arguments():
+
+    ap = argparse.ArgumentParser()
+
+    ap.add_argument(
+        'yaml_file_name',
+        help='This is your config file')
+
+    ap.add_argument('--dry-run', action='store_true',
+        help='Do not actually update anything in the database.')
+
+    return ap.parse_args()
+
+def find_new_scripts(script_order, already_ran_scripts):
+
+    """
+    Generator that yields strings of script names that still need to be
+    run.
+    """
+
+    for script_name in script_order:
+
+        absolute_path = pkg_resources.resource_filename(
+            "profiles", "database-change-scripts/{0}".format(script_name))
+
+        just_the_file = os.path.basename(absolute_path)
+
+        if just_the_file not in already_ran_scripts:
+
+            yield absolute_path
+
+def get_scripts_already_ran(pgconn):
+
+    """
+    Return a set of strings of scripts we already ran.
+    """
+
+    cursor = pgconn.cursor()
+
+    cursor.execute(textwrap.dedent("""
+        select script_path
+        from profiles_schema_changes
+        """))
+
+    # Return these as a set, so lookups are a little faster.
+    return {row.script_path for row in cursor}
+
+
+def run_py_script(cw, path_to_script, yaml_file_name):
+
+    pgconn = cw.get_pgconn()
+    cursor = pgconn.cursor()
+
+    try:
+
+        cursor.execute(textwrap.dedent("""
+            insert into profiles_schema_changes
+            (script_path, script_contents)
+            values
+            (
+                %(path_to_script)s,
+                %(script_contents)s
+            )
+            """),
+            {
+                'path_to_script': os.path.basename(path_to_script),
+                'script_contents': open(path_to_script, 'r').read()
+            })
+
+        result = subprocess.check_call([
+            "python",
+            path_to_script,
+            yaml_file_name,
+        ])
+
+    except subprocess.CalledProcessError as ex:
+
+        log.exception(ex)
+
+        log.critical("script {0} blew up!".format(path_to_script))
+
+        pgconn.rollback()
+        raise Exception("A script blew up, let's not do anything else past this.")
+
+    else:
+
+        pgconn.commit()
+
+
+def run_script(cw, path_to_script, yaml_file_name):
+
+    junk, suffix = os.path.splitext(path_to_script)
+
+    if suffix == ".sql":
+        run_sql_script(cw, path_to_script)
+
+    elif suffix == ".py":
+        run_py_script(cw, path_to_script, yaml_file_name)
+
+    else:
+        raise ValueError("Sorry, I can't handle {0} scripts! ({1})".format(
+            suffix,
+            path_to_script))
+
+
+
+def run_sql_script(cw, path_to_script):
+
+    pgconn = cw.get_pgconn()
+
+    cursor = pgconn.cursor()
+
+    just_the_file = os.path.basename(path_to_script)
+
+    cursor.execute(textwrap.dedent("""
+        insert into profiles_schema_changes
+        (script_path, script_contents)
+        values
+        (
+            %(path_to_script)s,
+            %(script_contents)s
+        )
+        """),
+        {
+            'path_to_script': just_the_file,
+            'script_contents': open(path_to_script, 'r').read()
+        })
+
+    # Next, run the SQL script, in single-transaction mode, so
+    # hopefully, everything will get rolled back if something goes
+    # wrong.
+
+    env = os.environ.copy()
+    env["PGOPTIONS"] = "--client-min-messages=warning"
+
+    # TODO: this code is duplicated elsewhere in this same file.
+    # Fix that.
+    if cw.database_password:
+        env['PGPASSWORD'] = cw.database_password
+
+    x = [
+        "psql",
+        "--quiet",
+        "--no-psqlrc",
+        "-U",
+        cw.database_user,
+        "-d",
+        cw.database_name,
+        "--single-transaction",
+        "-v",
+        "ON_ERROR_STOP=1",
+        "--pset",
+        "pager=off",
+        "-f",
+        path_to_script,
+    ]
+
+    if cw.database_host:
+        x.append("-h")
+        x.append(cw.database_host)
+
+    if cw.database_port:
+        x.append("-p")
+        x.append(str(cw.database_port))
+
+    subprocess.check_call(x, env=env)
+
+    pgconn.commit()
+
+    log.info("Just ran {0}.".format(
+        os.path.basename(path_to_script)))
+
+
+def maybe_run_setup_script(pgconn, setup_script):
+
+    """
+    Check if the profiles_schema_changes table exists.
+
+    If it does not, run the initial setup script.
+    """
+
+    cursor = pgconn.cursor()
+
+    cursor.execute(textwrap.dedent("""
+        select exists(
+            select 1
+            from pg_catalog.pg_class
+            where relname = 'profiles_schema_changes'
+            and relkind = 'r'
+        )
+        """))
+
+    if cursor.fetchone().exists:
+        return
+
+    else:
+        log.info("About to create profiles_schema_changes table.")
+
+        env = os.environ.copy()
+        env["PGOPTIONS"] = "--client-min-messages=warning"
+
+        if cw.database_password:
+            env['PGPASSWORD'] = cw.database_password
+
+        path_to_setup_script = pkg_resources.resource_filename(
+            "profiles", "database-change-scripts/{0}".format(setup_script))
+
+        x = [
+            "psql",
+            "--quiet",
+            "--no-psqlrc",
+            "-U",
+            cw.database_user,
+            "-d",
+            cw.database_name,
+            "--single-transaction",
+            "-v",
+            "ON_ERROR_STOP=1",
+            "--pset",
+            "pager=off",
+            "-f",
+            path_to_setup_script,
+        ]
+
+        if cw.database_host:
+            x.append("-h")
+            x.append(cw.database_host)
+
+        if cw.database_port:
+            x.append("-p")
+            x.append(str(cw.database_port))
+
+        subprocess.check_call(x, env=env)
+
+if __name__ == '__main__':
+
+    args = set_up_arguments()
+
+    cw = configwrapper.ConfigWrapper.load_yaml(
+        args.yaml_file_name)
+
+    cw.configure_logging()
+
+    # cw.create_postgresql_connection(register_composite_types=False)
+
+    d = yaml.safe_load(pkg_resources.resource_stream(
+        "profiles",
+        "database-change-scripts/script-run-order.yaml"))
+
+    maybe_run_setup_script(
+        cw.get_pgconn(register_composite_types=False),
+        d['setup_script'])
+
+    already_ran_scripts = get_scripts_already_ran(cw.get_pgconn())
+
+    for new_script in find_new_scripts(
+        d['script_order'],
+        already_ran_scripts):
+
+        try:
+            run_script(cw, new_script, args.yaml_file_name)
+
+        except Exception as ex:
+            log.exception(ex)
+            log.critical("script {0} blew up!".format(new_script))
+            log.critical("Rolling everything back and quitting.")
+            cw.get_pgconn().rollback()
+            break
+
+    else:
+
+        log.info("All done!")

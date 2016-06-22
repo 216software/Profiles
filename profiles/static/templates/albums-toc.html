@@ -1,0 +1,37 @@
+<div data-bind="page: {
+    id: 'new-album',
+    with: newalbumvm,
+    source:'/static/templates/albums/new-album.html',
+    afterShow: newalbumvm.initialize
+}"></div>
+
+
+<div data-bind="page: {
+    id: 'album',
+    with: albumvm,
+    source:'/static/templates/albums/album.html',
+    params: ['album_uuid'],
+    afterShow: albumvm.initialize
+}"></div>
+
+<div data-bind="page: {
+    id: 'add-photos',
+    with: addphotosvm,
+    source:'/static/templates/albums/add-photos.html',
+    params: ['album_uuid'],
+    afterShow: addphotosvm.initialize
+}"></div>
+
+
+
+<div data-bind="page: {
+    id: 'albums',
+    role: 'start',
+    with: albumsvm,
+    source:'/static/templates/albums/albums.html',
+    afterShow: albumsvm.initialize
+}"></div>
+
+
+
+

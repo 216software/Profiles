@@ -1,0 +1,102 @@
+{% extends 'profiles/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block main %}
+
+<!-- not signed in yet -->
+<div data-bind="visible: !user_logged_in(), with: webapp_session().user">
+
+<h1>Log in to Keepix</h1>
+
+<div data-bind="visible: !forgot_password()">
+
+<div class="form-group">
+
+<label>Email address</label>
+
+<input class="form-control" type="email"
+    data-bind="value: email_address" />
+</div> <!-- closes form-group -->
+
+<div class="form-group">
+<label>Password</label>
+
+<input class="form-control"
+    type="password"
+    data-bind="value: raw_password" />
+
+</div><!-- closes form-group -->
+
+<p>
+<button class="btn btn-primary"
+    data-bind="click: sign_in">Sign in</button>
+</p>
+
+</div>
+
+<p>
+<a data-bind="page-href:'/sign-up'">Sign up!</a>
+or
+<a href="#"
+    data-bind="click: toggle_forgot_password,
+        text: forgot_password_label"
+    class="text-muted"></a>
+</p>
+
+<form class="form"
+    data-bind="visible: forgot_password() && !reset_email_sent()">
+
+<p>
+If you don't remember your password, type your email address below.
+I'll send you a link in your email that you can use to reset password.
+</p>
+
+<div class="form-group">
+<label>Email address</label>
+
+<input class="form-control" type="email"
+    data-bind="value: email_address" />
+
+</div>
+
+<p>
+<button class="btn btn-primary"
+    data-bind="click: send_reset_password_email">
+    Send reset-password email</button>
+</p>
+
+</form>
+
+<div data-bind="visible: reset_email_sent">
+
+<p>Go check your email!  Remember, we sent the email to:
+</p>
+
+<h2 data-bind="text: email_address"></h2>
+
+</div><!-- reset_email_sent -->
+
+
+</div>
+
+
+<div data-bind="visible: user_logged_in()">
+
+<h1>Welcome back to Keepix,
+<span data-bind="text: webapp_session().user().display_name"></span>
+</h1>
+
+<p>User home page -- first time users get tutorial?</p>
+<ul>
+    <li data-bind="visible:show_user_admin">
+    <a data-bind="page-href:'/user'">My albums</a>
+    </li>
+
+</ul>
+
+</div><!-- visible webapp_session().person_uuid -->
+
+{% endblock main %}
+
+{# vim: set syntax=htmldjango: #}

@@ -1,0 +1,13 @@
+++++++++++++++++++++++++++++++++++
+Checklist for using photos /  jpeg
+++++++++++++++++++++++++++++++++++
+
+
+Install these packages
+----------------------
+
+Just run this line::
+    $sudo apt-get install libjpeg-dev zlib1g-dev libpng12-dev
+
+
+.. vim:set syntax=rst:

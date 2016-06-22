@@ -1,0 +1,94 @@
+{% extends 'profiles/base.html' %}
+
+{% block title %}Keepix{% endblock %}
+
+{% block styles %}
+<style type="text/css">
+
+</style>
+{% endblock styles %}
+
+{% block main %}
+
+<div data-bind="page: {
+    id: 'login',
+    sourceOnShow: '/login #main',
+    afterShow: check_login_status}">
+</div>
+
+<div data-bind="page: {
+    id: 'sign-up',
+    sourceOnShow: '/static/templates/adduser.html',
+    with:uavm,
+    afterShow: uavm.addUserInitialize
+ }">
+</div>
+
+
+<div data-bind="page: {
+    id: 'user',
+    sourceOnShow: '/static/templates/user.html',
+    with: uavm
+ }">
+</div>
+
+<div data-bind="page: {
+    id: 'reset-password',
+    params: ['payload'],
+    sourceOnShow: '/reset-password #main',
+    sourceLoaded: setup_reset_password}">
+</div>
+
+<div data-bind="page: {
+    id: 'my-account',
+    role: 'start',
+    source: '/static/templates/my-account.html',
+    with: webapp_session().user(),
+    afterShow: webapp_session().user().initialize}"></div>
+
+
+<!-- Albums has multiple sub pages :bindings are in albums-toc.html -->
+<div data-bind="page: {
+    id: 'albums',
+    source: '/static/templates/albums-toc.html',
+}">
+</div>
+
+{% endblock main %}
+
+{% block scripts %}
+
+<script type="text/javascript" src="/static/viewmodels/daterange.js"></script>
+<script type="text/javascript" src="/static/viewmodels/photos.js"></script>
+<script type="text/javascript" src="/static/viewmodels/useradmin.js"></script>
+<script type="text/javascript" src="/static/viewmodels/webappsession.js"></script>
+
+<script type="text/javascript" src="/static/viewmodels/albums/album.js"></script>
+<script type="text/javascript" src="/static/viewmodels/albums/albumvm.js"></script>
+<script type="text/javascript" src="/static/viewmodels/albums/albumsvm.js"></script>
+<script type="text/javascript" src="/static/viewmodels/albums/newalbumvm.js"></script>
+<script type="text/javascript" src="/static/viewmodels/albums/addphotosvm.js"></script>
+
+<script type="text/javascript" src="/static/viewmodels/profilesviewmodel.js"></script>
+
+<script type="text/javascript">
+
+var kpvm;
+
+$(document).ready(function () {
+
+    kpvm= new KeepixViewModel({});
+
+    pager.extendWithPage(kpvm);
+    ko.applyBindings(kpvm);
+    pager.start();
+    kpvm.check_login_status();
+});
+
+
+
+</script>
+
+{% endblock scripts %}
+
+{# vim: set syntax=htmldjango: #}

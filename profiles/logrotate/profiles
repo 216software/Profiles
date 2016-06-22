@@ -1,0 +1,42 @@
+/var/log/profiles/*.log {
+
+    # rotate the files every day.
+	daily
+
+    # don't freak out if a file mentioned in the top doesn't exist.
+	missingok
+
+    # keep 30 rotations.
+	rotate 30
+
+    # gzip the old logs
+	compress
+
+    # but don't compress/gzip yesterday's log.
+	delaycompress
+
+    # If the file is empty, don't bother rotating it
+	notifempty
+
+    # make new empty files with these permissions and this owner and
+    # group
+	create 640 profiles profiles
+
+    # Only run the postrotate script once, after rotating all the logs
+    # at the top.
+	sharedscripts
+
+    # This is a silly thing that I had to put in because otherwise
+    # logrotate won't touch stuff in /tmp, since /tmp is world-writable.
+    su profiles profiles
+
+    # After rotating files, do this stuff.  You can add extra lines if
+    # you want to.
+	postrotate
+
+        /home/profiles/.virtualenvs/profiles/bin/supervisorctl \
+        -c /home/profiles/checkouts/profiles/supervisord/profiles.conf \
+        restart all > /dev/null;
+
+	endscript
+}

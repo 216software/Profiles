@@ -1,0 +1,95 @@
+/bin
+/boot
+/dev
+/home
+/lib
+/lib64
+/lost+found
+/media
+/mnt
+/opt
+/proc
+/root/mysql/backups
+root/mysql/backups
+/run
+/sbin
+/selinux
+/srv
+/sys
+/tmp
+/usr
+/var/backups
+/var/cache
+/var/lib
+/var/local
+/var/lock
+/var/log
+/var/mail
+/var/opt
+/var/run
+/var/spool
+/var/tmp
+/var/www/vendor/symfony
+var/www/vendor/symfony
+.idea/workspace.xml
+.*.swp
+/var/www/log/*
+/profiles/docs/todo.html
+
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+/env/
+/bin/
+/build/
+/develop-eggs/
+/dist/
+/eggs/
+/lib/
+/lib64/
+/parts/
+/sdist/
+/var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+# Rope
+.ropeproject
+
+# Django stuff:
+*.log
+*.pot
+
+# Sphinx documentation
+/docs/_build/
+
+# My stuff.
+.*.swp

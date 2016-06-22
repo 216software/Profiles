@@ -1,0 +1,12 @@
+Some bower tricks::
+
+    sudo npm -g install bower
+
+    bower search strengthjs
+
+    bower install --save --production strengthjs
+
+
+Install from github::
+
+    bower install --save --production https://github.com/dropbox/zxcvbn.git

@@ -1,0 +1,32 @@
+{
+  "name": "profiles",
+  "version": "0.0.0",
+  "authors": [
+    "W. Matthew Wilson <matt@216software.com>",
+    "Robert Heinen <rob@216software.com>"
+  ],
+  "license": "private",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+    "knockout": "~3.3.0",
+    "font-awesome": "~4.1.0",
+    "jquery-ui": "~1.11.0",
+    "toastr": "~2.1.1",
+    "pagerjs": "~1.0.1",
+    "numeral": "~1.5.3",
+    "momentjs": "~2.10.3",
+    "strengthjs": "*",
+    "zxcvbn": "https://github.com/dropbox/zxcvbn.git",
+    "bootstrap-datepicker": "~1.5.1",
+    "bootstrap-select": "~1.7.3",
+    "css-progress-wizard":"*"
+  }
+}
