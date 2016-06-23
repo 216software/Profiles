@@ -1,0 +1,45 @@
+{% extends 'profiles/base.html' %}
+
+{% block title %}Profiles{% endblock %}
+
+{% block styles %}
+<style type="text/css">
+
+</style>
+{% endblock styles %}
+
+{% block main %}
+
+<div>
+Hello there, good to see you've arrived safely.
+</div>
+
+{% endblock main %}
+
+{% block scripts %}
+
+<script type="text/javascript" src="/static/viewmodels/daterange.js"></script>
+<script type="text/javascript" src="/static/viewmodels/webappsession.js"></script>
+
+<script type="text/javascript" src="/static/viewmodels/profilesviewmodel.js"></script>
+
+<script type="text/javascript">
+
+var kpvm;
+
+$(document).ready(function () {
+
+    pvm= new ProfilesViewModel({});
+
+    pager.extendWithPage(pvm);
+    ko.applyBindings(kpvm);
+    pager.start();
+});
+
+
+
+</script>
+
+{% endblock scripts %}
+
+{# vim: set syntax=htmldjango: #}
