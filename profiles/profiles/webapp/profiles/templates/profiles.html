@@ -10,11 +10,23 @@
 
 {% block main %}
 
-<div>
-Hello there, good to see you've arrived safely.
+<div data-bind="page: {
+    id: 'about',
+    source: '/static/templates/about.html'
+    }">
 </div>
 
+<div data-bind="page: {
+    id: 'faq',
+    source: '/static/templates/faq.html'
+    }">
+</div>
+
+
+
 {% endblock main %}
+
+
 
 {% block scripts %}
 
@@ -32,7 +44,7 @@ $(document).ready(function () {
     pvm= new ProfilesViewModel({});
 
     pager.extendWithPage(pvm);
-    ko.applyBindings(kpvm);
+    ko.applyBindings(pvm);
     pager.start();
 });
 

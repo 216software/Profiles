@@ -8,7 +8,6 @@
    data-bind="executeOnEnter: sendMessage, button : buttonSelector"
 */
 
-/* Visiblity div fading in and out */
 function ProfilesViewModel (data) {
 
     var self = this;
@@ -27,4 +26,4 @@ function ProfilesViewModel (data) {
         }
     };
 
-;
+};

@@ -14,22 +14,58 @@
                 <a class="navbar-brand" href="/"><img src="/static/images/pittslogo.png"
                    class="log" /></a>
             </div>
-            <form class="navbar-form navbar-right search-form" role="search" action="/search/" method="get">
-                <ul class="nav navbar-nav navbar-left about-faq"><li><a href="javascript:void(0)" onclick="tour();" style="color: #fff; font-size: small;padding-top:7px;" id="tour"class="ng-hide">Take A Tour</a></li></ul>
-                <ul class="nav navbar-nav navbar-left"><li style="color:#fff;font-family: cursive;font-size: xx-large; font-weight: bold; top:-18px" id="tour_dot" class="ng-hide">.</li></ul>
-                <ul class="nav navbar-nav navbar-left about-faq"><li><a href="/about" style="color: #fff; font-size: small;padding-top:7px;">About</a></li></ul>
+            <div class="navbar-right search-form">
+                <ul class="nav navbar-nav navbar-left about-faq">
+                <li><a data-bind="page-href: 'about'" href="#"
+                       style="color: #fff; font-size: small;padding-top:7px;">About</a>
+                </li></ul>
                 <ul class="nav navbar-nav navbar-left"><li style="color:#fff;font-family: cursive;font-size: xx-large; font-weight: bold; top:-18px">.</li></ul>
-                <ul class="nav navbar-nav navbar-left about-faq"><li><a href="/about/FAQ" style="color:#fff; font-size: small;padding-top:7px;">FAQ</a></li></ul>
-                <div class="form-group">
-<span id="tour_search" data-original-title="Search" data-content="Having trouble finding the data you're looking for? Try using the search bar. <button type='button' class='btn btn-warning pull-right tour_btn' onclick='tour()'>Next</button>" data-placement="bottom"></span>
-                    <input name="q" type="text" class="form-control" placeholder="Find an Indicator">
-                    <input name="rid" type="hidden" value="">
-                </div>
-                <button type="submit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-search"></span></button>
-            </form>
+                <ul class="nav navbar-nav navbar-left about-faq">
+                <li><a data-bind="page-href: 'faq'" href="#"
+                       style="color: #fff; font-size: small;padding-top:7px;">FAQ</a>
+                </li></ul>
         </div>
-        <div class="col-md-12" style="height: 40px">
+
+        <div class="container hidden-print">
+           <div class="col-md-12">
+           <div class="row">
+           <div class="navbar navbar-default" role="navigation"
+                style="background-color:transparent;">
+           <!-- Brand and toggle get grouped for better mobile display -->
+           <div class="navbar-header">
+           <button type="button" class="navbar-toggle"
+                    data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span></button>
+          </div> <!-- closes navbar header -->
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse"
+               id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+            <span data-placement="left"
+                  data-original-title="Explore the Data"
+                  data-content="Use the category tabs along the top to browse through the information available. <button type='button' class='btn btn-warning pull-right tour_btn' onclick='tour()'>Next</button>" id="tour_exp">
+            </span>
+            <li class="domain active">
+            <a href="#" class="sub-nav">Overview</a></li>
+            <li class="domain"><a href="#" class="sub-nav">Progress Metrics</a></li>
+            <li class="domain"><a href="#" class="sub-nav">Population</a></li>
+            <li class="domain"><a href="#" class="sub-nav">Safety</a></li>
+            <li class="domain"><a href="#" class="sub-nav">Stabilization</a></li>
+            <li class="domain"><a href="#" class="sub-nav">Community</a></li>
+            <li class="domain"><a href="#" class="sub-nav">Health</a></li>
+            <li class="domain"><a href="#" class="sub-nav">Education</a></li>
+            <li class="domain"><a href="#" class="sub-nav">Workforce</a></li>
+            <li class="domain"><a href="#" class="sub-nav">Economy</a></li>
+           </ul>
+        </div><!-- /.navbar-collapse -->
         </div>
-    </nav>
+        </div> <!-- closes row -->
+        </div> <!-- closes col-md-12 -->
+     </div> <!-- closes container hidden-print -->
+</nav>
 
 {# vim: set syntax=htmldjango: #}

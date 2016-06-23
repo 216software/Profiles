@@ -1,6 +1,11 @@
 html{
      /*overflow-y: scroll;*/
 }
+
+#main{
+    margin-top:30px;
+}
+
 .btn-default {
     background-color: #fff;
 }
@@ -21,14 +26,14 @@ html{
 
 .search-form{
     position:relative;
-}  
+}
 
 .search-form .btn{
     border:none;
     position:absolute;
     top:1px;
     right:16px;
-    
+
 }
 
 .search-form input[type="text"]{
@@ -94,7 +99,7 @@ border-bottom: 0px solid #ddd;
 .denominator-row{
     background-color: #f9f9f9;
     font-style:italic;
-    
+
 }
 
 .denominator-row .indicator-name:before{
@@ -110,7 +115,7 @@ border-bottom: 0px solid #ddd;
 
 .sep.shim{
     height:20px;
-}   
+}
 
 .indicator-data-row td, .denominator-row td{
     border:none !important;
@@ -181,7 +186,7 @@ border-bottom: 0px solid #ddd;
 .dataview #map{
     font-size:12px;
     height:100%;
-}@media print 
+}@media print
 
 #domains-wrap li a{
 }
@@ -218,14 +223,14 @@ border-bottom: 0px solid #ddd;
     background-color: #f5f5f5;
 }
 
-.domain-title span.title:hover .glyphicon, 
+.domain-title span.title:hover .glyphicon,
 .domain-title .expanded .glyphicon,
 .domain-title .title.expanded:hover .glyphicon{
    /*top:0px;*/
 }
 
 
-.domain-title .expanded, 
+.domain-title .expanded,
 .domain-title .title.expanded:hover{
     background-color: #3276b1 !important;
     border-color: #285e8e !important;
@@ -246,7 +251,7 @@ ul.nav a:hover { background-color: #92D3D2 !important; }
     font-size:14px;
     font-weight:400;
     font-family: 'Lato', sans-serif;
-    
+
 }
 
 #main-tables{
@@ -380,7 +385,7 @@ select.form-control{
     max-height:600px;
     overflow-y:auto;
 }
-    
+
 
 .notes-wrap h1, h2, h3{
     margin-top:0px;
@@ -400,7 +405,7 @@ select.form-control{
 
 .notes-wrap h3{
     font-size: 20px;
-    
+
 }
 
 #dataview-modal iframe{
@@ -430,7 +435,7 @@ select.form-control{
 
 .info h5{
     font-family: Arial, Helvetica, sans-serif !important;
-    
+
     font-size: 13px;
     margin: 5px 10px;
     color: #777;
@@ -445,7 +450,7 @@ select.form-control{
     border-bottom: 1px solid #e3e3e3;
     padding-bottom:3px;
     text-align:center;
-    
+
 }
 
 .info.label{
@@ -655,7 +660,7 @@ td.indicator-options .admin-link{
 
 
 .nav-tabs>li>a {
-	margin-right: -6px !important; 
+	margin-right: -6px !important;
 }
 
 
@@ -687,7 +692,7 @@ td.indicator-options .admin-link{
   .sb-fix.affix {
     width: 263px;
   }
-  
+
  .domain-groups table {
     margin-left:20px;
     width:825px;
@@ -714,7 +719,7 @@ td.indicator-options .admin-link{
     .dataview #map{
         height:700px !important;
     }
-    
+
     .domain-title .title.expanded{
         display:inline-block !important;
         background:none !important;
