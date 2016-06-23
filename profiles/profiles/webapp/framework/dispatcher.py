@@ -26,17 +26,7 @@ class Dispatcher(dispatcher.Dispatcher):
             'profiles.webapp.profiles.handlers'))
 
         self.handlers.extend(self.make_handlers_from_module_string(
-            'profiles.webapp.photos.handlers'))
-
-        self.handlers.extend(self.make_handlers_from_module_string(
             'profiles.webapp.ajaxauth.handlers'))
-
-
-        # This should be done right before not found, but after
-        # everything else, since it has handlers that vacuum
-        # up most everything else
-        self.handlers.extend(self.make_handlers_from_module_string(
-            'profiles.webapp.shortcode.handlers'))
 
         self.handlers.extend(self.make_handlers_from_module_string(
             'profiles.webapp.notfound.handlers'))

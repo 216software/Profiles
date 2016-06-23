@@ -60,20 +60,6 @@ class ConfigWrapper(configwrapper.ConfigWrapper):
             pgconn,
             factory=SessionFactory)
 
-        from profiles.pg.albums import AlbumFactory
-
-        psycopg2.extras.register_composite(
-            'albums',
-            pgconn,
-            factory=AlbumFactory)
-
-        from profiles.pg.photos import PhotoFactory
-
-        psycopg2.extras.register_composite(
-            'photos',
-            pgconn,
-            factory=PhotoFactory)
-
         log.info('Just registered composite types in psycopg2')
 
         return pgconn
