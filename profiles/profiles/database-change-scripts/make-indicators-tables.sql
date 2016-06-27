@@ -57,7 +57,7 @@ values
    of the income category */
 create table indicators
 (
-    indicator_uuid uuid not null default uuid_generate_v4(),
+    indicator_uuid uuid not null default uuid_generate_v4() primary key,
     title citext unique,
 
     description text,
@@ -122,7 +122,7 @@ create table location_types
     description text,
 
     contained_in citext
-    references location_types (title),
+    references location_types (location_type),
 
     inserted timestamp not null default now(),
     updated timestamp
@@ -140,7 +140,7 @@ values
 ('county', null),
 ('city', 'county'),
 ('neighborhood', 'city'),
-('Community Development Corporation (CDC)', 'city');
+('community development corporation', 'city');
 
 /* This is an actual place */
 create table locations
@@ -163,9 +163,9 @@ create table locations
 
 );
 
-create trigger location_types_set_updated_column
+create trigger location_set_updated_column
 before update
-on location_types
+on locations
 for each row
 execute procedure set_updated_column();
 

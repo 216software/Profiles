@@ -29,4 +29,24 @@ database::
     CREATE EXTENSION postgis_topology;
 
 
+Convert Shape file to sql file for imporation
+---------------------------------------------
+
+1. Find your shape file that you want to import -- a good source is
+here:
+https://www.census.gov/geo/maps-data/data/cbf/cbf_concity.html
+
+Then use a utility called 'shp2pgsql' that should have been installed
+with your postgres PostGIS installation.
+
+Issue the following command to convert a shapefile into a sql files::
+    shp2pgsql -s 4326 shapefile.shp shapefile postgres > shapefile.sql
+
+Note -- the -s 4326 is a transformation, and should match what you have
+your MultiPolygon column set up for in the psql database.
+
+Also, you ll need your .shp file, your .shx file and your .dbf file all
+together as well.
+
+
 .. vim:set syntax=rst:
