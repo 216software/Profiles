@@ -139,32 +139,21 @@ class InsertAlbum(Handler):
             new_album=new_album))
 
 
-class AlbumDetails(Handler):
+class Location(Handler):
 
-    route_strings = set(["GET /api/album-details"])
+    route_strings = set(["GET /api/location"])
     route = Handler.check_route_strings
 
     def handle(self, req):
 
-        if "album_uuid" not in req.wz_req.args:
-            return Response.json(dict(
-                message="Sorry, I need an album UUID!",
-                reply_timestamp=datetime.datetime.now(),
-                success=False))
+        l = pg.locations.Location.by_location_uuid(
+            self.cw.get_pgconn(),
+            "babb1813-1ad9-4d9f-9d4b-64ffdb201cbd")
 
-        else:
-
-            a = pg.albums.Album.by_album_uuid(
-                self.cw.get_pgconn(),
-                req.wz_req.args["album_uuid"])
-
-            a.look_up_my_photos(self.cw.get_pgconn())
-            a.look_up_my_shortcode(self.cw.get_pgconn());
-
-            return Response.json(dict(
-                message="Found this album",
-                reply_timestamp=datetime.datetime.now(),
-                success=True,
-                album=a))
+        return Response.json(dict(
+            message="Found this location",
+            reply_timestamp=datetime.datetime.now(),
+            success=True,
+            location=l))
 
 
