@@ -26,4 +26,6 @@ function ProfilesViewModel (data) {
         }
     };
 
+    self.startpagevm = new StartPageViewModel({rootvm:this});
+
 };

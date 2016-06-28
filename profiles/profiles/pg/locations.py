@@ -17,15 +17,15 @@ class LocationsFactory(psycopg2.extras.CompositeCaster):
 class Location(object):
 
     def __init__(self, location_uuid, title, description,
-        location_type, location_shape, inserted, updated):
+        location_type, location_shape, location_shape_json,
+        inserted, updated):
 
         self.location_uuid = location_uuid
         self.title = title
         self.description = description
         self.location_type = location_type
         self.location_shape = location_shape
-
-        self.location_shape_coordinates = None
+        self.location_shape_json = location_shape_json
 
         self.inserted = inserted
         self.updated = updated
@@ -34,6 +34,8 @@ class Location(object):
     def __jsondata__(self):
 
         d = copy.copy(self.__dict__)
+        # We don't want to return the actual shape, just the json
+        del d['location_shape']
         return d
 
 

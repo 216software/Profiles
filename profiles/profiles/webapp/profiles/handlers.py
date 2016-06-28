@@ -148,7 +148,7 @@ class Location(Handler):
 
         l = pg.locations.Location.by_location_uuid(
             self.cw.get_pgconn(),
-            "babb1813-1ad9-4d9f-9d4b-64ffdb201cbd")
+            "967c2265-6f20-43a6-8053-093b416a7e83")
 
         return Response.json(dict(
             message="Found this location",

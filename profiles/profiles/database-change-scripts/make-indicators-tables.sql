@@ -158,6 +158,8 @@ create table locations
 
     location_shape geometry(MultiPolygon, 4326),
 
+    location_shape_json json,
+
     inserted timestamp not null default now(),
     updated timestamp
 
@@ -170,6 +172,26 @@ for each row
 execute procedure set_updated_column();
 
 
+/* So we don't have to return a geometry to the HTML / frontend
+   let's set up a trigger to transform geometry multipolygon
+   into a more easily readable json shape object */
+create or replace function set_location_shape_json ()
+returns trigger
+as
+$$
+
+begin
+    new.location_shape_json:= ST_AsGeoJSON(new.location_shape);
+    return new;
+end;
+$$
+language plpgsql;
+
+create trigger locations_setlocation_shape_json
+before insert or update
+on locations
+for each row
+execute procedure set_location_shape_json();
 
 
 /* For each indicator, we can have values that relate to
