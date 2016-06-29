@@ -157,3 +157,38 @@ class Location(Handler):
             location=l))
 
 
+class Locations(Handler):
+
+    route_strings = set(["GET /api/all-locations"])
+    route = Handler.check_route_strings
+
+    def handle(self, req):
+
+        locations = \
+            [x for x in pg.locations.Location.select_all(self.cw.get_pgconn())]
+
+        return Response.json(dict(
+            message="Found this location",
+            reply_timestamp=datetime.datetime.now(),
+            success=True,
+            locations=locations))
+
+
+
+class LocationTypes(Handler):
+
+    route_strings = set(["GET /api/location-types"])
+    route = Handler.check_route_strings
+
+    def handle(self, req):
+
+        location_types = \
+            pg.locations.all_location_types(self.cw.get_pgconn())
+
+        return Response.json(dict(
+            message="Found this location",
+            reply_timestamp=datetime.datetime.now(),
+            success=True,
+            location_types=location_types))
+
+

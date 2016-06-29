@@ -2,11 +2,36 @@
 <div class="row" style="margin-bottom:15px">
 
 <div class="col-md-8 col-md-offset-2">
-<div id="mapid" style="height:600px"></div>
+
+<!-- Navbar type thing here -->
+
+<div class="form-group">
+    <label>
+    Location Type
+    </label>
+    <select class="form-control" data-bind="options: location_types,
+                                 optionsCaption: 'all',
+                                 value:selected_location_type"></select>
+</div> <!-- closes form-group -->
+
+<div class="form-group">
+    <label>
+    Location
+    </label>
+    <select class="form-control" data-bind="options: filtered_locations,
+                                    optionsCaption: 'Choose...',
+                                    optionsText:'title',
+                                    value:selected_location"></select>
+</div> <!-- closes form-group -->
+
+
+<div class="form-group">
+    <button class="form-control btn btn-primary" data-bind="click:change_location,
+    disable:selected_location() == undefined">
+Change Location</button>
+</div> <!-- closes form-group -->
+<div id="mapid" style="height:400px; width:400px"></div>
 <h1>Start Page stuff</h1>
-
-<p class="lead">Let's get our map to appear here</p>
-
 
 
 </div>

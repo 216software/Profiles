@@ -56,38 +56,34 @@ class Location(object):
 
 
     @classmethod
-    def select_all(cls, pgconn, offset=None, limit=None,
-        sort_direction='desc'):
+    def select_all(cls, pgconn):
 
-        qry_tmpl = textwrap.dedent("""
-            select (locationss.*)::locationss as x
-            from locationss
+        qry = textwrap.dedent("""
+            select (locations.*)::locations as x
+            from locations
 
-            {where_string}
-
-            order by locationss.inserted {sort_direction}
-            offset %(offset)s
-            limit %(limit)s
+            order by location_type
             """)
-
-        where_clauses = []
-
-        where_string = ""
-
-        qry = qry_tmpl.format(
-            where_string=where_string,
-            sort_direction=sort_direction)
 
         cursor = pgconn.cursor()
 
-        cursor.execute(
-            qry,
-            dict(
-                offset=offset,
-                limit=limit))
+        cursor.execute(qry)
 
         for row in cursor:
             yield row.x
 
+
+
+def all_location_types(pgconn):
+
+    cursor = pgconn.cursor()
+
+    cursor.execute(textwrap.dedent("""
+
+        select location_type from location_types
+
+    """))
+
+    return [row.location_type for row in cursor]
 
 
