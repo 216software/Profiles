@@ -157,7 +157,7 @@ class Location(Handler):
             location=l))
 
 
-class Locations(Handler):
+class AllLocations(Handler):
 
     route_strings = set(["GET /api/all-locations"])
     route = Handler.check_route_strings
@@ -173,7 +173,26 @@ class Locations(Handler):
             success=True,
             locations=locations))
 
+class IndicatorValuesByLocation(Handler):
 
+    route_strings = set(["GET /api/indicators-by-location"])
+    route = Handler.check_route_strings
+
+    def handle(self, req):
+
+        location = pg.locations.Location.by_location_uuid(self.cw.get_pgconn(),
+            req.wz_req.args['location_uuid'])
+
+        indicator_values = [x for x in \
+            location.look_up_indicators(self.cw.get_pgconn())]
+
+
+        return Response.json(dict(
+            message="Found these indicator values for this location {0}".\
+                format(location.title),
+            reply_timestamp=datetime.datetime.now(),
+            success=True,
+            indicator_values=indicator_values))
 
 class LocationTypes(Handler):
 

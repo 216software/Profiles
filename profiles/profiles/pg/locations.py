@@ -72,6 +72,30 @@ class Location(object):
         for row in cursor:
             yield row.x
 
+    def look_up_indicators(self, pgconn, time_period = None):
+
+        """
+
+        Look up all indicators and all values associated with
+        this location
+
+        """
+
+        cursor = pgconn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+
+        cursor.execute(textwrap.dedent("""
+
+            select indicator_uuid, value, time_period
+
+            from indicator_location_values
+
+            where location_uuid = %(location_uuid)s
+
+        """), dict(location_uuid=self.location_uuid))
+
+        for row in cursor.fetchall():
+            yield row
+
 
 
 def all_location_types(pgconn):

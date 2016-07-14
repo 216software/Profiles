@@ -7,7 +7,7 @@
 
 create table indicator_categories
 (
-    title citext primary key,
+    category citext primary key,
     description text,
     inserted timestamp not null default now(),
     updated timestamp
@@ -64,6 +64,9 @@ create table indicators
 
     indicator_value_format citext not null default 'number'
     references indicator_value_formats (format),
+
+    indicator_category citext not null
+    references indicator_categories (category),
 
     inserted timestamp not null default now(),
     updated timestamp
