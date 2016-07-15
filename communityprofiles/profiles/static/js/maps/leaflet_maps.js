@@ -62,12 +62,12 @@ ProfilesMap.prototype.createHomeButton = function(){
 		this._div.innerHTML = '<a href="#"></a>';
 		return this._div;
 	}
-	
+
 	homeButton.setPosition('topleft');
 	homeButton.addTo(this.map);
 
 	$(".map-home-btn a").click(function(e){
-		// navigate whatever homeLocation is	
+		// navigate whatever homeLocation is
 		e.preventDefault();
 		window.location = self.homeLocation;
 	});
@@ -81,7 +81,7 @@ ProfilesMap.prototype.createGeoJsonLayer = function(feat, style, funcList){
 	 * <style> a style object
 	*/
 	var self = this;
-	if(typeof(style)==='undefined' || style===null){ 
+	if(typeof(style)==='undefined' || style===null){
 		style = self.defaultStyle;
 	}
 	if(typeof(funcList) ==='undefined'){
@@ -91,7 +91,7 @@ ProfilesMap.prototype.createGeoJsonLayer = function(feat, style, funcList){
 			style:style,
 	    		onEachFeature:self.createFeatureMouseHandlers(funcList)
 	});
-	
+
 	return layer;
 
 }
@@ -116,7 +116,7 @@ ProfilesMap.prototype.addPointOverlay = function(title, data){
                      .bindPopup(feature.properties.label);
             }
 	});
-	
+
         this.controls.addOverlay(overlay, title);
 }
 
@@ -125,7 +125,7 @@ ProfilesMap.prototype.createGeoLabelLayer = function(feat, style){
 	 * TODO: should this accept funcList?*/
 	var self = this;
 
-	if(typeof(style)==='undefined' || style===null){ 
+	if(typeof(style)==='undefined' || style===null){
 		style = self.defaultStyle;
 	}
 	var icon = L.divIcon({html:'<span style="color:'+style.color+';">'+feat.label+'</span>', className:'divicon'});
@@ -157,7 +157,7 @@ ProfilesMap.prototype.getPoint = function (){
 		if(place_rx.test(window.location.hash)){
 			pl_match = place_rx.exec(window.location.hash)[0].replace("PL=","");
 			marker.bindPopup(decodeURIComponent(pl_match)).openPopup();
-			
+
 		}
 	}
 
@@ -223,7 +223,7 @@ ProfilesMap.prototype.DataChoroplethFeatureGroup = function(data, valueKey, func
      * bin:
      * Profiles map supports 5 types of data classifier bins
      * Equally Spaced: eq
-     * Custom Breaks: cb 
+     * Custom Breaks: cb
      * Equal Interval: ei
      * All Categories: all
 	 * */
@@ -306,7 +306,7 @@ ProfilesMap.prototype.DataChoroplethFeatureGroup = function(data, valueKey, func
         }else{
             // if there are fewer than 3 items in the data just return an 'all' bin
             value_bin = self.makeBins(self.binAll(values), false);
-            
+
         }
 
         // Now interate the data and create geopolys
@@ -333,7 +333,7 @@ ProfilesMap.prototype.DataChoroplethFeatureGroup = function(data, valueKey, func
                         //..
                     }
                 }else{
-                    var b_style = {}; 
+                    var b_style = {};
                     $.extend(b_style, style);
                     b_style.fillColor = "#999"; // this means there is no value for this poly
                     try{
@@ -388,7 +388,7 @@ ProfilesMap.prototype.getFormatter = function(formatter){
             format_func = function(value){
                 return self.formatCount(value);
             }
-             
+
     }
     return format_func;
 }
@@ -409,7 +409,7 @@ ProfilesMap.prototype.createChroplethLegend = function(value_bins, position, for
         if(headingText !== undefined){
             div.innerHTML += headingText;
         }
-        
+
         for(var i in value_bins){
             var bin = value_bins[i];
             div.innerHTML +='<i><svg height="18" width="18"><rect height="18" width="18" fill="'+ bin.color+ '"></svg></i>';
@@ -511,13 +511,13 @@ ProfilesMap.prototype.unhighlightLayer = function(e){
 		layer.bringToBack();
 	}
 	delete profilesMapActiveLayers[id];
-	
+
 }
 
 /*INFObox*/
 
 ProfilesMap.prototype.makeInfoBox = function(className, defaultContent){
-	/* Creates and returns and Infobox 
+	/* Creates and returns and Infobox
 	 *
 	 * <defaultContent> String
 	 *
@@ -526,14 +526,14 @@ ProfilesMap.prototype.makeInfoBox = function(className, defaultContent){
 		defaultContent = '';
 	}
 	var info = L.control();
-	
+
 	// some info handlers
 	info.onAdd = function(map){
 		this._div = L.DomUtil.create('div', className); // create a div with a class "info"
 		this.update();
 		return this._div;
 	}
-	
+
 	// method that we will use to update the control based on feature properties passed
 	info.update = function (content) {
 	    this._div.innerHTML = (content? content : defaultContent);
@@ -546,7 +546,7 @@ ProfilesMap.prototype.makeInfoBox = function(className, defaultContent){
 
 ProfilesMap.prototype.getValueCodeFormat = function(value){
     /*Check for special instances of "codes"
-     * -1 is always suppressed, 
+     * -1 is always suppressed,
      *  -999999 is always null data
      *
      * */
@@ -681,14 +681,14 @@ ProfilesMap.prototype.binJenks = function(data, num_bins){
     if(num_bins >= clean_data.length){
          num_bins = clean_data.length-1;
     }
-  
+
     var s = new geostats(clean_data);
     var u = s.getUniqueValues();
     var f = new geostats(u);
     if(num_bins >= u.length){
         num_bins = u.length-1;
     }
-    return f.getJenks(num_bins); 
+    return f.getJenks(num_bins);
 }
 
 ProfilesMap.prototype.binEqSpaced = function(data, num_bins){
@@ -729,7 +729,7 @@ ProfilesMap.prototype.binAll = function(data){
 }
 
 ProfilesMap.prototype.inBin = function(value, bin){
-    /* Return True if value is in bin 
+    /* Return True if value is in bin
      * if bin.values is an array bin ex: [1, 10] we will check if value meets that range
      * if bin.values is a single value we will do a == comparison
      * */
@@ -740,7 +740,7 @@ ProfilesMap.prototype.inBin = function(value, bin){
         bin.values = bin.values.sort(function(a,b){
             return a-b;
         });
-        result = value >= bin.values[0] && value <=bin.values[1]; 
+        result = value >= bin.values[0] && value <=bin.values[1];
     }else if(bin.values.length == 1){
         result = value == bin.values[0];
     }
@@ -779,7 +779,7 @@ ProfilesMap.prototype.makeBins = function(num_array, min_max){
 ProfilesMap.prototype.gOrd = function(var_name, default_val){
     /* default vars in functions */
     if(typeof(var_name) ==='undefined' || var_name==null) var_name = default_val;
-    return var_name;    
+    return var_name;
 }
 
 ProfilesMap.prototype.getColor = function(value, bins){
@@ -798,9 +798,9 @@ ProfilesMap.prototype.getColor = function(value, bins){
 	}
 
 	return color;
-} 
+}
 
-	 
+
 /*Zoom manager*/
 
 ProfilesMap.prototype.updateLayers = function(currentZoomLevel){
@@ -824,7 +824,7 @@ ProfilesMap.prototype.updateLayers = function(currentZoomLevel){
 			// lets check to see if the map has the layer already
 			var checked = $("input.leaflet-control-layers-selector:checked").parent().children('span').text();
 			if(!self.map.hasLayer(layer)){
-				// but only if its checked in the checkbox 
+				// but only if its checked in the checkbox
 				if(checked.indexOf(name)!==-1){
 					self.map.addLayer(layer);
 					// take this out of the layer control if it has one.
@@ -835,7 +835,7 @@ ProfilesMap.prototype.updateLayers = function(currentZoomLevel){
 		}else{
 			// get rid of the layer
 			if(self.map.hasLayer(layer)){
-				self.map.removeLayer(layer);	
+				self.map.removeLayer(layer);
 				if(layerCtrl) layerCtrl.removeLayer(layer);
 
 			}
@@ -850,17 +850,17 @@ ProfilesMap.prototype.valid_moe = function(value_obj){
 	}else{
 		return true;
 	}
-	
+
 }
 
 /**
-* geostats() is a tiny and standalone javascript library for classification 
+* geostats() is a tiny and standalone javascript library for classification
 * Project page - https://github.com/simogeo/geostats
 * Copyright (c) 2011 Simon Georget, http://valums.com
 * Licensed under the MIT license
 */
 /*
- * 
+ *
  *
  * */
 var _t=function(h){return h},inArray=function(h,a){for(var b=0;b<a.length;b++)if(a[b]==h)return!0;return!1},geostats=function(h){this.legendSeparator=this.separator=" - ";this.method="";this.roundlength=2;this.is_uniqueValues=!1;this.bounds=[];this.ranges=[];this.colors=[];this.counter=[];this.stat_cov=this.stat_stddev=this.stat_variance=this.stat_pop=this.stat_min=this.stat_max=this.stat_sum=this.stat_median=this.stat_mean=this.stat_sorted=null;this.serie="undefined"!==typeof h&&0<h.length?h:[];

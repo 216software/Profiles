@@ -7,7 +7,7 @@
 
 create table indicator_categories
 (
-    title citext primary key,
+    category citext primary key,
     description text,
     inserted timestamp not null default now(),
     updated timestamp
@@ -57,13 +57,16 @@ values
    of the income category */
 create table indicators
 (
-    indicator_uuid uuid not null default uuid_generate_v4(),
+    indicator_uuid uuid not null default uuid_generate_v4() primary key,
     title citext unique,
 
     description text,
 
     indicator_value_format citext not null default 'number'
     references indicator_value_formats (format),
+
+    indicator_category citext not null
+    references indicator_categories (category),
 
     inserted timestamp not null default now(),
     updated timestamp
@@ -122,7 +125,7 @@ create table location_types
     description text,
 
     contained_in citext
-    references location_types (title),
+    references location_types (location_type),
 
     inserted timestamp not null default now(),
     updated timestamp
@@ -140,7 +143,7 @@ values
 ('county', null),
 ('city', 'county'),
 ('neighborhood', 'city'),
-('Community Development Corporation (CDC)', 'city');
+('community development corporation', 'city');
 
 /* This is an actual place */
 create table locations
@@ -158,18 +161,40 @@ create table locations
 
     location_shape geometry(MultiPolygon, 4326),
 
+    location_shape_json json,
+
     inserted timestamp not null default now(),
     updated timestamp
 
 );
 
-create trigger location_types_set_updated_column
+create trigger location_set_updated_column
 before update
-on location_types
+on locations
 for each row
 execute procedure set_updated_column();
 
 
+/* So we don't have to return a geometry to the HTML / frontend
+   let's set up a trigger to transform geometry multipolygon
+   into a more easily readable json shape object */
+create or replace function set_location_shape_json ()
+returns trigger
+as
+$$
+
+begin
+    new.location_shape_json:= ST_AsGeoJSON(new.location_shape);
+    return new;
+end;
+$$
+language plpgsql;
+
+create trigger locations_setlocation_shape_json
+before insert or update
+on locations
+for each row
+execute procedure set_location_shape_json();
 
 
 /* For each indicator, we can have values that relate to

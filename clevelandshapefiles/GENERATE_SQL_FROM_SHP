@@ -1,0 +1,35 @@
+++++++++++++++++++++++++++++++++++++++++
+Here's how to convert shape files to sql
+++++++++++++++++++++++++++++++++++++++++
+
+First unzip the zip file in this folder::
+
+    unzip cnp_shapefiles.zip
+
+This should add a bunch of dbf, prj, shx, and shp files in your
+directory.
+
+There are two sets of files here, one with the filename
+area_cdc_rev27jan2016_region.EXT and one lcaled clev_spa2010_region.EXT.
+
+We'll generate both of these sets of files into requisite SQL insert
+statements.
+
+Run the following two commands::
+
+    shp2pgsql -s 4326 area_cdc_rev27Jan2016_region.shp area_cdc postgres > area_cdc.sql
+
+and::
+
+     shp2pgsql -s 4326 clev_spa2010_region.shp clev_spa2010 postgres > clev_spa2010.sql
+
+
+Then, when you open the sql files, you'll be able to find the insert
+statments for the given areas. Use these how you will (either by
+creating the tables the sql files will create, or by copying iand
+pasting the parts you need into your own insert scripts).
+
+
+
+
+.. vim:set syntax=rst:

@@ -139,32 +139,96 @@ class InsertAlbum(Handler):
             new_album=new_album))
 
 
-class AlbumDetails(Handler):
+class Location(Handler):
 
-    route_strings = set(["GET /api/album-details"])
+    route_strings = set(["GET /api/location"])
     route = Handler.check_route_strings
 
     def handle(self, req):
 
-        if "album_uuid" not in req.wz_req.args:
-            return Response.json(dict(
-                message="Sorry, I need an album UUID!",
-                reply_timestamp=datetime.datetime.now(),
-                success=False))
+        l = pg.locations.Location.by_location_uuid(
+            self.cw.get_pgconn(),
+            "45326d0d-d9ba-4da8-95b3-1d585cc630a3")
 
-        else:
-
-            a = pg.albums.Album.by_album_uuid(
-                self.cw.get_pgconn(),
-                req.wz_req.args["album_uuid"])
-
-            a.look_up_my_photos(self.cw.get_pgconn())
-            a.look_up_my_shortcode(self.cw.get_pgconn());
-
-            return Response.json(dict(
-                message="Found this album",
-                reply_timestamp=datetime.datetime.now(),
-                success=True,
-                album=a))
+        return Response.json(dict(
+            message="Found this location",
+            reply_timestamp=datetime.datetime.now(),
+            success=True,
+            location=l))
 
 
+class AllLocations(Handler):
+
+    route_strings = set(["GET /api/all-locations"])
+    route = Handler.check_route_strings
+
+    def handle(self, req):
+
+        locations = \
+            [x for x in pg.locations.Location.select_all(self.cw.get_pgconn())]
+
+        return Response.json(dict(
+            message="Found this location",
+            reply_timestamp=datetime.datetime.now(),
+            success=True,
+            locations=locations))
+
+class IndicatorValuesByLocation(Handler):
+
+    route_strings = set(["GET /api/indicators-by-location"])
+    route = Handler.check_route_strings
+
+    def handle(self, req):
+
+        location = pg.locations.Location.by_location_uuid(self.cw.get_pgconn(),
+            req.wz_req.args['location_uuid'])
+
+        indicator_values = [x for x in \
+            location.look_up_indicators(self.cw.get_pgconn())]
+
+
+        return Response.json(dict(
+            message="Found these indicator values for this location {0}".\
+                format(location.title),
+            reply_timestamp=datetime.datetime.now(),
+            success=True,
+            indicator_values=indicator_values))
+
+class IndicatorCategoriesAndValuesByLocation(Handler):
+
+    route_strings = set(["GET /api/indicator-categories-with-values-by-location"])
+    route = Handler.check_route_strings
+
+    def handle(self, req):
+
+        location = pg.locations.Location.by_location_uuid(self.cw.get_pgconn(),
+            req.wz_req.args['location_uuid'])
+
+        indicator_category_values = [x for x in \
+            location.all_indicator_categories_with_values_by_location(self.cw.get_pgconn())]
+
+
+        return Response.json(dict(
+            message="Found these indicator categories and values for this location {0}".\
+                format(location.title),
+            reply_timestamp=datetime.datetime.now(),
+            success=True,
+            indicator_category_values=indicator_category_values))
+
+
+
+class LocationTypes(Handler):
+
+    route_strings = set(["GET /api/location-types"])
+    route = Handler.check_route_strings
+
+    def handle(self, req):
+
+        location_types = \
+            pg.locations.all_location_types(self.cw.get_pgconn())
+
+        return Response.json(dict(
+            message="Found this location",
+            reply_timestamp=datetime.datetime.now(),
+            success=True,
+            location_types=location_types))

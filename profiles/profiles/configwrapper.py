@@ -60,6 +60,14 @@ class ConfigWrapper(configwrapper.ConfigWrapper):
             pgconn,
             factory=SessionFactory)
 
+        from profiles.pg.locations import LocationsFactory
+
+        psycopg2.extras.register_composite(
+            'locations',
+            pgconn,
+            factory=LocationsFactory)
+
+
         log.info('Just registered composite types in psycopg2')
 
         return pgconn

@@ -9,3 +9,7 @@ script_order:
 -   insert-test-users.sql
 -   convert-id-to-uuid.sql
 -   adjust-session-expires-time.sql
+-   make-indicators-tables.sql
+-   insert-initial-places-data.sql
+-   make-indicator-values-link-tables.sql
+-   make-sample-indicators-and-values.sql

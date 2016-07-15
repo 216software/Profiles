@@ -11,6 +11,16 @@
 {% block main %}
 
 <div data-bind="page: {
+    id: 'start',
+    source: '/static/templates/startpage.html',
+    with: startpagevm,
+    afterShow: startpagevm.initialize,
+
+    sourceLoaded: startpagevm.sourceLoaded
+}">
+</div>
+
+<div data-bind="page: {
     id: 'about',
     source: '/static/templates/about.html'
     }">
@@ -32,8 +42,10 @@
 
 <script type="text/javascript" src="/static/viewmodels/daterange.js"></script>
 <script type="text/javascript" src="/static/viewmodels/webappsession.js"></script>
+<script type="text/javascript" src="/static/viewmodels/location.js"></script>
 
 <script type="text/javascript" src="/static/viewmodels/profilesviewmodel.js"></script>
+<script type="text/javascript" src="/static/viewmodels/startpageviewmodel.js"></script>
 
 <script type="text/javascript">
 
