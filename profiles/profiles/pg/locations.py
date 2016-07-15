@@ -97,6 +97,72 @@ class Location(object):
             yield row
 
 
+    def all_indicator_values_by_time_period_and_category(self, pgconn):
+
+        """
+        Indicator Values sorted by time period
+        """
+
+        cursor = pgconn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+
+        cursor.execute(textwrap.dedent("""
+
+            with indicator_value_location_full  as
+            (
+                select (i.*::indicators), ilv.indicator_uuid,
+                l.title, ilv.value, ilv.time_period
+                from indicator_location_values ilv
+
+                join indicators i on i.indicator_uuid = ilv.indicator_uuid
+                join locations l on l.location_uuid = ilv.location_uuid
+            )
+        """), dict(location_uuid=self.location_uuid))
+
+        for row in cursor.fetchall():
+            yield row
+
+
+    def all_indicator_categories_with_values_by_location(self, pgconn):
+
+        """
+        Indicator Values sorted by categories
+        """
+
+        cursor = pgconn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+
+        cursor.execute(textwrap.dedent("""
+
+
+            with category_time_indicator as (
+                with indicator_value_location_full  as
+                (
+                    select (i.*::indicators), ilv.indicator_uuid,
+                    l.title, ilv.value, ilv.time_period, i.indicator_category
+                    from indicator_location_values ilv
+
+                    join indicators i on i.indicator_uuid = ilv.indicator_uuid
+                    join locations l on l.location_uuid = ilv.location_uuid
+
+                    where l.location_uuid = %(location_uuid)s
+                )
+
+
+                select indicator_category, time_period,
+                array_to_json(array_agg((ilv.*)))
+
+                from indicator_value_location_full ilv
+                group by indicator_category, time_period
+            )
+
+
+            select cti.indicator_category, array_to_json(array_agg(cti.*))
+
+            from category_time_indicator cti group by cti.indicator_category
+
+        """), dict(location_uuid=self.location_uuid))
+
+        for row in cursor.fetchall():
+            yield row
 
 def all_location_types(pgconn):
 

@@ -20,6 +20,7 @@ execute procedure set_updated_column();
 insert into time_periods
 (time_period)
 values
+('2000'),
 ('2010');
 
 

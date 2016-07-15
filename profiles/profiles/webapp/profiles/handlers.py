@@ -194,6 +194,29 @@ class IndicatorValuesByLocation(Handler):
             success=True,
             indicator_values=indicator_values))
 
+class IndicatorCategoriesAndValuesByLocation(Handler):
+
+    route_strings = set(["GET /api/indicator-categories-with-values-by-location"])
+    route = Handler.check_route_strings
+
+    def handle(self, req):
+
+        location = pg.locations.Location.by_location_uuid(self.cw.get_pgconn(),
+            req.wz_req.args['location_uuid'])
+
+        indicator_category_values = [x for x in \
+            location.all_indicator_categories_with_values_by_location(self.cw.get_pgconn())]
+
+
+        return Response.json(dict(
+            message="Found these indicator categories and values for this location {0}".\
+                format(location.title),
+            reply_timestamp=datetime.datetime.now(),
+            success=True,
+            indicator_category_values=indicator_category_values))
+
+
+
 class LocationTypes(Handler):
 
     route_strings = set(["GET /api/location-types"])
@@ -209,5 +232,3 @@ class LocationTypes(Handler):
             reply_timestamp=datetime.datetime.now(),
             success=True,
             location_types=location_types))
-
-
