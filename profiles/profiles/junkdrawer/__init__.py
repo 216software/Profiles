@@ -183,9 +183,57 @@ def make_first_insert_line(table_name, d):
             ", ".join(sorted(d.keys())),
             ", ".join(str(d[k]) for k in sorted(d.keys()))))
 
-    log.debug(s)
-
     return s
 
+
+
+def make_n_insert_lines(table_name, rows):
+
+    """
+    >>> d2 = {'a': 1, 'b':2, 'c':3}
+
+    >>> make_first_insert_line('abc', [d2, d2, d2]) == '''
+    ... insert into abc
+    ... columns
+    ... (a, b, c)
+    ... values
+    ... (1, 2, 3),
+    ... (1, 2, 3),
+    ... (1, 2, 3)
+    ... ;
+    ... '''
+    True
+
+    """
+
+    first_row = rows.next()
+
+    column_names = sorted(first_row.keys())
+
+    values = []
+
+    values_string = "({0})".format(", ".join(str(first_row[k] for k in column_names)))
+
+    values.append(values_string)
+
+    for row in rows:
+
+        values_string = "({0})".format(", ".join(str(row[k] for k in column_names)))
+
+        values.append(values_string)
+
+    s = textwrap.dedent("""
+        insert into {0}
+        columns
+        ({1})
+        values
+        {2}
+        ;
+        """.format(
+            table_name,
+            ", ".join(sorted(d.keys())),
+            ",\n".join(values)))
+
+    return s
 
 
