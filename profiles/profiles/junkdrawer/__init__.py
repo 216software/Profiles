@@ -237,3 +237,8 @@ def make_n_insert_lines(table_name, rows):
             ",\n        ".join(values)))
 
     return s
+
+if __name__ == "__main__":
+
+    import doctest
+    doctest.testmod()
