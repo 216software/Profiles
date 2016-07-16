@@ -190,9 +190,9 @@ def make_first_insert_line(table_name, d):
 def make_n_insert_lines(table_name, rows):
 
     """
-    >>> d2 = {'a': 1, 'b':2, 'c':3}
+    >>> d = {'a': 1, 'b':2, 'c':3}
 
-    >>> make_first_insert_line('abc', [d2, d2, d2]) == '''
+    >>> make_n_insert_lines('abc', [d, d, d]) == '''
     ... insert into abc
     ... columns
     ... (a, b, c)
@@ -206,19 +206,21 @@ def make_n_insert_lines(table_name, rows):
 
     """
 
-    first_row = rows.next()
+    iterator = iter(rows)
+
+    first_row = iterator.next()
 
     column_names = sorted(first_row.keys())
 
     values = []
 
-    values_string = "({0})".format(", ".join(str(first_row[k] for k in column_names)))
+    values_string = "({0})".format(", ".join(str(first_row[k]) for k in column_names))
 
     values.append(values_string)
 
-    for row in rows:
+    for row in iterator:
 
-        values_string = "({0})".format(", ".join(str(row[k] for k in column_names)))
+        values_string = "({0})".format(", ".join(str(row[k]) for k in column_names))
 
         values.append(values_string)
 
@@ -231,9 +233,7 @@ def make_n_insert_lines(table_name, rows):
         ;
         """.format(
             table_name,
-            ", ".join(sorted(d.keys())),
-            ",\n".join(values)))
+            ", ".join(column_names),
+            ",\n        ".join(values)))
 
     return s
-
-
