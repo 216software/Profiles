@@ -20,7 +20,7 @@ for each row
 execute procedure set_updated_column();
 
 insert into indicator_categories
-(title)
+(category)
 values
 ('Population'),
 ('Income');
