@@ -21,7 +21,7 @@ function StartPageViewModel (data) {
     self.locations = ko.observableArray([]);
     self.location_types = ko.observableArray([]);
 
-    self.selected_location = ko.observable();
+    self.selected_location = ko.observable(new Location({rootvm:data.rootvm}));
     self.selected_location_type = ko.observable();
 
     self.filtered_locations = ko.computed(function(){
@@ -127,6 +127,7 @@ function StartPageViewModel (data) {
 
     };
 
+
     self.change_location = function(){
 
         // Remove any old layers:
@@ -139,10 +140,14 @@ function StartPageViewModel (data) {
 
         self.create_feature_layer(self.selected_location());
 
+        pager.navigate('start/location');
+
+
+        /* Also -- look up data for this location */
 
     }
 
-    /* Makes an outline of an area */
+    /* Makes an outline of an area on the map*/
     self.create_feature_layer = function(new_location){
 
         console.log(new_location.location_shape_json());
@@ -162,4 +167,8 @@ function StartPageViewModel (data) {
         self.added_map_layers.push(fg);
 
     }
+
+    self.selected_location_initialize = function(){
+        console.log('using location uuid param, do the init here');
+    };
 };

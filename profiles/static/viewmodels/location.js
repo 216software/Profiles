@@ -12,4 +12,6 @@ function Location (data) {
 
     // Away to see my various indicator values?
 
+    console.log('created, ', self.type);
+
 };
