@@ -35,13 +35,14 @@ Change Location</button>
 
 
 <div data-bind="page: {id: 'location',
-                with:selected_location,
-                params:['location_uuid'],
-                afterShow:selected_location_initialize}">
+                params:{location_uuid:location_uuid()}}">
+
+<div data-bind="with:selected_location">
     <h3>Showing location <span data-bind="text:title"></h3>
-</div>
+</div> <!-- closes with:selected_location -->
+</div> <!-- closes  page: id 'location' -->
 
 
-</div>
+</div> <!-- closes col-md-8 -->
 
 </div> <!-- closes row -->
