@@ -136,8 +136,11 @@ class Location(object):
             with category_time_indicator as (
                 with indicator_value_location_full  as
                 (
-                    select (i.*::indicators), ilv.indicator_uuid,
-                    l.title, ilv.value, ilv.time_period, i.indicator_category
+                    select
+                    i.indicator_uuid, i.title, i.indicator_value_format,
+                    ilv.indicator_uuid,
+                    l.title as location_title,
+                    ilv.value, ilv.time_period, i.indicator_category
                     from indicator_location_values ilv
 
                     join indicators i on i.indicator_uuid = ilv.indicator_uuid
@@ -148,14 +151,15 @@ class Location(object):
 
 
                 select indicator_category, time_period,
-                array_to_json(array_agg((ilv.*)))
+                array_to_json(array_agg((ilv.*))) as indicator_values
 
                 from indicator_value_location_full ilv
                 group by indicator_category, time_period
             )
 
 
-            select cti.indicator_category, array_to_json(array_agg(cti.*))
+            select cti.indicator_category,
+            array_to_json(array_agg(cti.*)) as time_period_values
 
             from category_time_indicator cti group by cti.indicator_category
 

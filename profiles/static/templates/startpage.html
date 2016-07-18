@@ -31,9 +31,18 @@
 Change Location</button>
 </div> <!-- closes form-group -->
 <div id="mapid" style="height:400px; width:400px"></div>
-<h1>Start Page stuff</h1>
 
 
-</div>
+
+<div data-bind="page: {id: 'location',
+                params:{location_uuid:location_uuid()}}">
+
+<div data-bind="with:selected_location">
+    <h3>Showing location <span data-bind="text:title"></h3>
+</div> <!-- closes with:selected_location -->
+</div> <!-- closes  page: id 'location' -->
+
+
+</div> <!-- closes col-md-8 -->
 
 </div> <!-- closes row -->

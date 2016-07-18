@@ -21,7 +21,10 @@ function StartPageViewModel (data) {
     self.locations = ko.observableArray([]);
     self.location_types = ko.observableArray([]);
 
-    self.selected_location = ko.observable();
+    /* We might have a selected location from the parameter line */
+    self.location_uuid = ko.observable(data.location_uuid);
+
+    self.selected_location = ko.observable(new Location({rootvm:data.rootvm}));
     self.selected_location_type = ko.observable();
 
     self.filtered_locations = ko.computed(function(){
@@ -39,7 +42,8 @@ function StartPageViewModel (data) {
 
     self.initialize = function(){
 
-        self.get_all_location_types().then(self.get_all_locations);
+        self.get_all_location_types().then(self.get_all_locations).
+            then(self.selected_location_initialize);
     };
 
     self.get_all_location_types = function(){
@@ -100,10 +104,12 @@ function StartPageViewModel (data) {
      * so that we can instantiate the map here */
     self.sourceLoaded = function(){
 
+        console.log('source loaded function in ', self.type);
+
         self.map = L.map("mapid").setView([41.49, -81.69], 10);
         L.esri.basemapLayer("Streets").addTo(self.map);
 
-        self.rootvm.is_busy(false);
+        self.rootvm.is_busy(true);
 
         /* Look up map location */
 
@@ -112,7 +118,6 @@ function StartPageViewModel (data) {
             type: "GET",
             dataType: "json",
             complete: function () {
-
                 self.rootvm.is_busy(false);
             },
             success: function (data) {
@@ -127,10 +132,13 @@ function StartPageViewModel (data) {
 
     };
 
+
     self.change_location = function(){
 
-        // Remove any old layers:
+        /* Updates the map and then looks up values for
+         * a given location */
 
+        // Remove any old layers:
         for (var index in self.added_map_layers){
             console.log('removing layer' , self.added_map_layers[index]);
             self.map.removeLayer(self.added_map_layers[index]);
@@ -139,10 +147,14 @@ function StartPageViewModel (data) {
 
         self.create_feature_layer(self.selected_location());
 
+        pager.navigate('start/location?location_uuid=' +
+            self.selected_location().location_uuid());
 
+        /* Also -- look up data for this location */
+        self.selected_location().look_up_indicator_and_values();
     }
 
-    /* Makes an outline of an area */
+    /* Makes an outline of an area on the map*/
     self.create_feature_layer = function(new_location){
 
         console.log(new_location.location_shape_json());
@@ -162,4 +174,20 @@ function StartPageViewModel (data) {
         self.added_map_layers.push(fg);
 
     }
+
+    self.selected_location_initialize = function(){
+
+        if(self.location_uuid() != undefined){
+            self.selected_location(ko.utils.arrayFirst(self.locations(), function(loc){
+                return self.location_uuid() == loc.location_uuid();
+            }));
+
+            // Also, we want our map layer to be updated accordingly
+            self.change_location();
+
+        }
+        else{
+            return false;
+        }
+    };
 };
