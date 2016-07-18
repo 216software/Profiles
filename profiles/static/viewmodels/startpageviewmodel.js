@@ -135,8 +135,10 @@ function StartPageViewModel (data) {
 
     self.change_location = function(){
 
-        // Remove any old layers:
+        /* Updates the map and then looks up values for
+         * a given location */
 
+        // Remove any old layers:
         for (var index in self.added_map_layers){
             console.log('removing layer' , self.added_map_layers[index]);
             self.map.removeLayer(self.added_map_layers[index]);
@@ -149,8 +151,7 @@ function StartPageViewModel (data) {
             self.selected_location().location_uuid());
 
         /* Also -- look up data for this location */
-
-        self.selected_location().
+        self.selected_location().look_up_indicator_and_values();
     }
 
     /* Makes an outline of an area on the map*/

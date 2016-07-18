@@ -10,29 +10,42 @@ function Location (data) {
     self.location_type = ko.observable(data.location_type);
     self.location_shape_json = ko.observable(data.location_shape_json);
 
+    self.indicators = ko.observableArray([]);
+
     self.look_up_indicator_and_values = function(){
 
-        self.rootvm.is_busy(true);
+        /* At some point, we're going to need the tab we're on
+         * so that we only return the correct info -- unless
+         * that's computed on the HTML / js side */
 
-        return $.ajax({
-            url: "/api/location",
-            type: "GET",
-            dataType: "json",
-            complete: function () {
+        // only do this if we need to:
+        //
+        console.log(self.indicators().length == 0);
+        if(self.indicators() == 0){
 
-                self.rootvm.is_busy(false);
-            },
-            success: function (data) {
-                if (data.success) {
-                    self.create_feature_layer(new Location(data['location']))
+            self.rootvm.is_busy(true);
+
+            return $.ajax({
+                url: "/api/indicator-categories-with-values-by-location",
+                type: "GET",
+                dataType: "json",
+                data: {'location_uuid':self.location_uuid()},
+                complete: function () {
+
+                    self.rootvm.is_busy(false);
+                },
+                success: function (data) {
+                    if (data.success) {
+                        console.log(data);
+                        self.indicators.push(1);
+                    }
+                    else {
+                        toastr.error(data.message);
+                    }
                 }
-                else {
-                    toastr.error(data.message);
-                }
-            }
-        });
-
-    });
+            });
+        }
+    };
 
     // Away to see my various indicator values?
 };
