@@ -168,6 +168,63 @@ class Location(object):
         for row in cursor.fetchall():
             yield row
 
+
+    def all_indicator_categories_by_indicator(self, pgconn):
+
+        """
+        For every category, give us all of the indicators.
+
+        For each indicator, give us the indicator values for a given
+        time period
+
+        So Population (category):
+            Male Population (indicator):
+                50,000 2010 (indicator_value)
+                25,000 2000 (indicator_value)
+
+        """
+
+        cursor = pgconn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+
+        cursor.execute(textwrap.dedent("""
+
+
+            with category_indicator_value as (
+                with indicator_value_location_full  as
+                (
+                    select
+                    i.indicator_uuid, i.title, i.indicator_value_format,
+                    l.title as location_title,
+                    ilv.value, ilv.time_period, i.indicator_category
+                    from indicator_location_values ilv
+
+                    join indicators i on i.indicator_uuid = ilv.indicator_uuid
+                    join locations l on l.location_uuid = ilv.location_uuid
+
+                    where l.location_uuid = %(location_uuid)s
+                )
+
+
+                select indicator_category, ilv.indicator_uuid, ilv.title,
+                array_to_json(array_agg((ilv.*))) as indicator_values
+
+                from indicator_value_location_full ilv
+                group by indicator_category, ilv.indicator_uuid, ilv.title
+            )
+
+
+            select cti.indicator_category,
+            array_to_json(array_agg(cti.*)) as indicators
+
+            from category_indicator_value cti group by cti.indicator_category
+
+        """), dict(location_uuid=self.location_uuid))
+
+        for row in cursor.fetchall():
+            yield row
+
+
+
 def all_location_types(pgconn):
 
     cursor = pgconn.cursor()

@@ -10,7 +10,7 @@ function Location (data) {
     self.location_type = ko.observable(data.location_type);
     self.location_shape_json = ko.observable(data.location_shape_json);
 
-    self.indicators = ko.observableArray([]);
+    self.category_indicator_values = ko.observableArray([]);
 
     self.look_up_indicator_and_values = function(){
 
@@ -20,8 +20,8 @@ function Location (data) {
 
         // only do this if we need to:
         //
-        console.log(self.indicators().length == 0);
-        if(self.indicators() == 0){
+        console.log(self.category_indicator_values().length == 0);
+        if(self.category_indicator_values() == 0){
 
             self.rootvm.is_busy(true);
 
@@ -31,13 +31,25 @@ function Location (data) {
                 dataType: "json",
                 data: {'location_uuid':self.location_uuid()},
                 complete: function () {
-
                     self.rootvm.is_busy(false);
                 },
                 success: function (data) {
                     if (data.success) {
                         console.log(data);
-                        self.indicators.push(1);
+
+                        /* Data is mapped categories, to indicator to
+                         * values
+                         *
+                         * category [ indicators [indicator_values, ..], ..  ]
+                         **/
+
+                        self.category_indicator_values(ko.utils.arrayMap(
+                            data.category_indicator_values || [],
+                            function (x) {
+                                x.rootvm = self.rootvm;
+                                return new IndicatorCategory(x);
+                            }));
+
                     }
                     else {
                         toastr.error(data.message);

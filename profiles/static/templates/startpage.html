@@ -38,7 +38,23 @@ Change Location</button>
                 params:{location_uuid:location_uuid()}}">
 
 <div data-bind="with:selected_location">
+
+    <h1>TODO: Make this into a pretty table with years!</h1>
     <h3>Showing location <span data-bind="text:title"></h3>
+
+    <ul data-bind="foreach:category_indicator_values">
+        <li data-bind="text:category"></li>
+        <ul data-bind="foreach:indicators">
+            <li data-bind="text:title"></li>
+
+            <ul data-bind="foreach:indicator_values">
+                <li>
+                <span data-bind="text:time_period"></span> -
+                <span data-bind="text:value"></span></li>
+            </ul>
+
+        </ul>
+    </ul>
 </div> <!-- closes with:selected_location -->
 </div> <!-- closes  page: id 'location' -->
 
