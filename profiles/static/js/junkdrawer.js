@@ -480,4 +480,31 @@ ko.extenders.number_format = function(target, format) {
     return result;
 };
 
+/* Good to have a toggle function available to true/false observables */
+ko.observable.fn.toggle = function () {
+    var obs = this;
+    return function () {
+        obs(!obs())
+    };
+};
+
+/* Slide Visible
+
+   bind like this:
+   <div class="panel-body" data-bind="slideVisible:visible">
+
+   see this stackoverflow question: http://stackoverflow.com/questions/19536881/always-use-jquery-slideup-slidedown-in-knockoutjs
+*/
+
+ko.bindingHandlers.slideVisible = {
+    init: function (element, valueAccessor) {
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        $(element).toggle(value);
+    },
+    update: function (element, valueAccessor) {
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        value ? $(element).slideDown() : $(element).slideUp();
+    }
+};
+
 

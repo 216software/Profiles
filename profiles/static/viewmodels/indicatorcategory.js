@@ -9,7 +9,8 @@ function IndicatorCategory (data) {
 
     self.category = ko.observable(data.indicator_category);
 
-    console.log('creating indicator category');
+    self.visible = ko.observable(true);
+
     self.indicators = ko.observableArray(ko.utils.arrayMap(
                             data.indicators || [],
                             function (x) {
