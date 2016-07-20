@@ -37,9 +37,43 @@ Change Location</button>
 <div data-bind="page: {id: 'location',
                 params:{location_uuid:location_uuid()}}">
 
-<div data-bind="with:selected_location">
-    <h3>Showing location <span data-bind="text:title"></h3>
+<div data-bind="with:selected_location" style="margin-top:15px">
+    <h3><span data-bind="text:title"></span> statistics</h3>
+
+    <div data-bind="foreach:category_indicator_values" class="panel panel-default">
+        <div class="panel-heading" data-bind="click: visible.toggle()">
+            <button data-bind="function(){click:visible.toggle()"
+                class="btn btn-small pull-right">
+            <i data-bind="visible:!visible()" class="glyphicon glyphicon-plus"></i>
+            <i data-bind="visible:visible" class="glyphicon glyphicon-minus"></i>
+            </button>
+            <h4>
+                Indicator: <span data-bind="text:category"></span>
+            </h4>
+                </div> <!-- closes panel-header -->
+        <div class="panel-body" data-bind="slideVisible:visible">
+        <div data-bind="foreach:indicators">
+            <table class="table table-bordered table-hover">
+                <caption data-bind="text:title"></caption>
+                <tr>
+                    <th>Time Period</th>
+                    <th>Value</th>
+                </tr>
+                <tbody data-bind="foreach:indicator_values">
+                    <tr>
+                    <td data-bind="text:time_period"></td>
+                    <td data-bind="text:value"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div> <!-- closes foreach:indicators -->
+        </div> <!-- closes panel-body -->
+    </div> <!-- closes foreach category_indicator_values -->
+
+
 </div> <!-- closes with:selected_location -->
+
 </div> <!-- closes  page: id 'location' -->
 
 

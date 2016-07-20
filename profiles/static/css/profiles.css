@@ -161,8 +161,14 @@ border-bottom: 0px solid #ddd;
     top: 5px;
 }
 
-.table td, .table th{
+/*.table td, .table th{
     text-align:right;
+}*/
+
+.table caption{
+    font-size:16px;
+    text-align:left;
+    font-weight:bold;
 }
 
 .table .indicator-name{

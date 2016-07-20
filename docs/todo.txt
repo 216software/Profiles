@@ -15,7 +15,11 @@ NEXT
 ----
 
 - We need to query for values -- so for a given location, look up
-  the indicators that go along with it.
+  the indicators that go along with it. (this now works)
+
+- How do we order indicators (if they relate to each other?
+
+- How do we decide which Indicators show up on which page?
 
 
 .. vim:set syntax=rst:

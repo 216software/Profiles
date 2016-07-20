@@ -204,8 +204,8 @@ class IndicatorCategoriesAndValuesByLocation(Handler):
         location = pg.locations.Location.by_location_uuid(self.cw.get_pgconn(),
             req.wz_req.args['location_uuid'])
 
-        indicator_category_values = [x for x in \
-            location.all_indicator_categories_with_values_by_location(self.cw.get_pgconn())]
+        category_indicator_values = [x for x in \
+            location.all_indicator_categories_by_indicator(self.cw.get_pgconn())]
 
 
         return Response.json(dict(
@@ -213,8 +213,7 @@ class IndicatorCategoriesAndValuesByLocation(Handler):
                 format(location.title),
             reply_timestamp=datetime.datetime.now(),
             success=True,
-            indicator_category_values=indicator_category_values))
-
+            category_indicator_values=category_indicator_values))
 
 
 class LocationTypes(Handler):
