@@ -4,6 +4,7 @@ import csv
 import logging
 import os
 import re
+import string
 import textwrap
 
 import openpyxl
@@ -47,15 +48,23 @@ def csv_to_pg_table(csv_file_path, sql_file_path):
 
     Open the csv file.
 
-    Read the field names and use those for columns.
-
-    Read the first row of data and take a guess about data types.
-
-    Write out create table text to sql_file path.
-
     Open an outfile to contain the generated SQL.
 
-    Write out some insert lines to the out file.
+    Go line-by-line through the CSV file.
+
+        Guess if each line is a heading line, a data line, or something
+        else.
+
+        If it is the heading line, read the field names and use those
+        for columns.
+
+        If it is the first data line, take a guess about data types.
+
+        After we have both the heading and the first row of data, write
+        out create table text to sql_file path.
+
+        For the first data line and all following data lines,  write out
+        some insert lines to the out file.
 
     Close the file.
 
@@ -63,22 +72,23 @@ def csv_to_pg_table(csv_file_path, sql_file_path):
 
     """
 
-
     leftstub, dot, suffix = os.path.basename(csv_file_path).rpartition(".")
 
     table_name = "csv_" + leftstub
-
-    log.debug(table_name)
 
     f = open(csv_file_path)
 
     cr = csv.DictReader(f)
 
-    log.debug(cr.fieldnames)
-
     first_row = cr.next()
 
-    log.debug(first_row)
+    second_row = cr.next()
+
+    third_row = cr.next()
+
+    fourth_row = cr.next()
+
+    fifth_row = cr.next()
 
     table_columns = []
 
@@ -108,15 +118,7 @@ def csv_to_pg_table(csv_file_path, sql_file_path):
 
         sql_outfile.write(make_first_insert_line(table_name, first_row))
 
-        columns = sorted(first_row.keys())
-
-        for row_number, d in enumerate(cr):
-
-            log.debug(d)
-
-
-            values
-
+        sql_outfile.write(make_n_insert_lines(table_name, cr))
 
     return sql_file_path
 
@@ -151,7 +153,6 @@ def guess_sql_type_to_use(s):
 
     else:
         return "text"
-
 
 
 def make_first_insert_line(table_name, d):
@@ -238,7 +239,93 @@ def make_n_insert_lines(table_name, rows):
 
     return s
 
+class CSVchunker(object):
+
+    def __init__(self, open_csv_file):
+        self.open_csv_file = open_csv_file
+        self.cr = csv.reader(self.open_csv_file)
+
+        self.headings = None
+
+    @classmethod
+    def load_csv_file(cls, csv_file_path):
+        f = open(csv_file_path)
+        return cls(f)
+
+    def find_headings_row(self):
+
+        """
+        Look for a row that comes immediately before another row, where
+
+        *   both have same number of columns
+        *   the first row is all fields that look like headings (i.e., start with alpha characters)
+        *   the second drow is all fields that look like data (but not
+            sure how to test for that).
+
+        """
+
+        if self.headings:
+            return self.headings
+
+        else:
+
+            prev_row = None
+
+            for row_number, row in enumerate(self.cr, start=1):
+
+                cleaned_row = [col for col in row if col.strip()]
+
+                if prev_row and len(prev_row) == len(cleaned_row):
+
+                    # Check if all columns in prev row could be valid
+                    # headings.
+
+                    if all(is_valid_heading(col) for col in prev_row):
+                        self.headings = prev_row
+                        return self.headings
+
+                    else:
+
+                        prev_row = cleaned_row
+
+                else:
+                    prev_row = cleaned_row
+
+
+def is_valid_heading(s):
+
+    """
+    Guess if string s is a valid column heading.
+
+    >>> f = is_valid_heading
+    >>> f("abc123")
+    True
+    >>> f(99)
+    False
+    >>> f(3.14)
+    False
+    >>> f("3.14")
+    False
+    >>> f("-99")
+    False
+
+    """
+
+    if isinstance(s, (int, float)):
+        return False
+
+    elif isinstance(s, (basestring)) \
+    and len(s) > 0 \
+    and (s[0] in "_" or s[0].isalpha()):
+
+        return True
+
+    else:
+        return False
+
+
 if __name__ == "__main__":
 
     import doctest
     doctest.testmod()
+
