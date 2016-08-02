@@ -2,6 +2,7 @@
 
 import argparse
 import csv
+import datetime
 import logging
 import os
 import re
@@ -97,14 +98,14 @@ def insert_armslength2011to2015_cdc(path_to_file, pgconn):
         # Find this CDC.
         try:
 
-            pg.locations.Location.by_location_type_and_title(
+            loc = pg.locations.Location.by_location_type_and_title(
                 pgconn,
                 "community development corporation",
                 row["cdc_name"])
 
         except KeyError as ex:
 
-            pg.locations.Location.insert(
+            loc = pg.locations.Location.insert(
                 pgconn,
                 "community development corporation",
                 row["cdc_name"],
@@ -112,24 +113,28 @@ def insert_armslength2011to2015_cdc(path_to_file, pgconn):
                 None,
                 None)
 
+        log.debug("Location for this row is {0}".format(loc))
+
         for (k, v) in row.items():
 
-            match = ends_with_year.match(k)
+            if v:
 
-            if match:
+                match = ends_with_year.match(k)
 
-                indicator_name = match.groupdict().get("indicator_name")
+                if match:
 
-                year = match.groupdict().get("year")
+                    indicator_name = match.groupdict().get("indicator_name")
 
-                if row_number == 1:
+                    year = match.groupdict().get("year")
 
-                    log.debug("{0} {1} {2} {3} {4}".format(
-                        k,
-                        v,
-                        indicator_name,
-                        year,
-                        row["cdc_name"]))
+                    if row_number == 1:
+
+                        log.debug("{0} {1} {2} {3} {4}".format(
+                            k,
+                            v,
+                            indicator_name,
+                            year,
+                            row["cdc_name"]))
 
                     try:
                         ind = pg.indicators.Indicator.by_title(
@@ -143,8 +148,20 @@ def insert_armslength2011to2015_cdc(path_to_file, pgconn):
                             indicator_name, # title
                             None, # description
                             None, # indicator value format
-                            None  # indicator category
+                            None, # indicator category
+                            os.path.basename(path_to_file)
                         )
+
+                    indlocval = pg.indicators.IndicatorLocationValue.insert(
+                        pgconn,
+                        ind.indicator_uuid,
+                        loc.location_uuid,
+                        datetime.datetime.strptime(year, "%Y").date(),
+                        None, # observation_range
+                        v)
+
+
+
 
 
 if __name__ == "__main__":
@@ -162,5 +179,7 @@ if __name__ == "__main__":
             args.csv_file_folder,
             "armslength2011to2015_cdc.csv"),
         pgconn)
+
+    pgconn.commit()
 
     log.info("All done!")

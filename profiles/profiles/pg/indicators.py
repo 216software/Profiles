@@ -20,6 +20,7 @@ class indicator(object):
 
     def __init__(self, indicator_uuid, title, description,
         indicator_value_format, indicator_category,
+        source_document,
         inserted, updated):
 
         self.indicator_uuid = indicator_uuid
@@ -27,6 +28,7 @@ class indicator(object):
         self.description = description
         self.indicator_value_format = indicator_value_format
         self.indicator_category = indicator_category
+        self.source_document = source_document
         self.inserted = inserted
         self.updated = updated
 
@@ -74,20 +76,21 @@ class indicator(object):
 
     @classmethod
     def insert(cls, pgconn, title, description,
-        indicator_value_format, indicator_category):
+        indicator_value_format, indicator_category,
+        source_document):
 
         cursor = pgconn.cursor()
 
         cursor.execute(textwrap.dedent("""
             insert into indicators
             (title, description, indicator_value_format,
-            indicator_category)
+            indicator_category, source_document)
             values
-            (%s, %s, %s, %s)
+            (%s, %s, %s, %s, %s)
             returning (indicators.*)::indicators as ind
             """),
             [title, description, indicator_value_format,
-            indicator_category])
+            indicator_category, source_document])
 
         return cursor.fetchone().ind
 
@@ -191,25 +194,36 @@ class IndicatorCategory(RelationWrapper):
 
 class IndicatorLocationValue(RelationWrapper):
 
-    def __init__(self, indicator_uuid, location_uuid, time_period,
+    def __init__(self, indicator_uuid, location_uuid,
+        observation_timestamp, observation_range,
         value, inserted, updated):
 
         self.indicator_uuid = indicator_uuid
         self.location_uuid = location_uuid
-        self.time_period = time_period
+        self.observation_timestamp = observation_timestamp
+        self.observation_range = observation_range
         self.value = value
         self.inserted = inserted
         self.updated = updated
 
     @classmethod
-    def insert(cls, pgconn, indicator_uuid, location_uuid, time_period,
-        value):
+    def insert(cls, pgconn, indicator_uuid, location_uuid,
+        observation_timestamp, observation_range, value):
 
         cursor = pgconn.cursor()
 
         cursor.execute(textwrap.dedent("""
             insert into indicator_location_values
             (
+                indicator_uuid, location_uuid, observation_timestamp,
+                observation_range, value
             )
-            """))
+            values
+            (%s, %s, %s, %s, %s)
+            returning
+            (indicator_location_values.*)::indicator_location_values as indlocval
+            """), [indicator_uuid, location_uuid, observation_timestamp,
+            observation_range, value])
+
+        return cursor.fetchone().indlocval
 
