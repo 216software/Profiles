@@ -31,3 +31,5 @@ fancyjsondumps = functools.partial(
 # These imports are down here on purpose, after the definition of
 # RelationWrapper.
 from profiles.pg import indicators
+from profiles.pg import locations
+

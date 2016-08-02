@@ -67,6 +67,13 @@ class ConfigWrapper(configwrapper.ConfigWrapper):
             pgconn,
             factory=LocationsFactory)
 
+        from profiles.pg.locations import LocationTypeFactory
+
+        psycopg2.extras.register_composite(
+            'location_types',
+            pgconn,
+            factory=LocationTypeFactory)
+
         from profiles.pg.indicators import indicatorsFactory
 
         psycopg2.extras.register_composite(

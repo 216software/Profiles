@@ -6,6 +6,8 @@ import textwrap
 
 import psycopg2.extras
 
+from profiles.pg import RelationWrapper
+
 log = logging.getLogger(__name__)
 
 class LocationsFactory(psycopg2.extras.CompositeCaster):
@@ -29,6 +31,25 @@ class Location(object):
 
         self.inserted = inserted
         self.updated = updated
+
+    @classmethod
+    def insert(cls, pgconn, location_type, title, description,
+        location_shape, location_shape_json):
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+            insert into locations
+            (location_type, title, description, location_shape,
+                location_shape_json)
+            values
+            (%s, %s, %s, %s, %s)
+            returning (locations.*)::locations as loc
+            """), [location_type, title, description,
+                location_shape, location_shape_json])
+
+        return cursor.fetchone().loc
+
 
     @property
     def __jsondata__(self):
@@ -223,6 +244,56 @@ class Location(object):
         for row in cursor.fetchall():
             yield row
 
+    @classmethod
+    def by_location_type_and_title(cls, pgconn, location_type, title):
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+            select (locations.*)::locations as loc
+            from locations
+            where location_type = %s
+            and title = %s
+            """), [location_type, title])
+
+        if cursor.rowcount:
+            return cursor.fetchone().loc
+
+        else:
+            raise KeyError("Sorry, not location {0} / {1} found!".format(
+                location_type,
+                title))
+
+class LocationTypeFactory(psycopg2.extras.CompositeCaster):
+
+    def make(self, values):
+        d = dict(zip(self.attnames, values))
+        return LocationType(**d)
+
+class LocationType(RelationWrapper):
+
+    def __init__(self, location_type, description, contained_in,
+        inserted, updated):
+
+        self.location_type = location_type
+        self.description = description
+        self.contained_in = contained_in
+        self.inserted = inserted
+        self.updated = updated
+
+    @classmethod
+    def all(cls, pgconn):
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+            select (location_types.*)::location_types loctype
+            from location_types
+            order by location_type
+            """))
+
+        for row in cursor:
+            yield row.loctype
 
 
 def all_location_types(pgconn):
@@ -236,5 +307,3 @@ def all_location_types(pgconn):
     """))
 
     return [row.location_type for row in cursor]
-
-

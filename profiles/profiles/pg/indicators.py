@@ -72,17 +72,6 @@ class indicator(object):
         for row in cursor:
             yield row.x
 
-    def look_up_indicators(self, pgconn, time_period = None):
-
-        """
-
-        Look up all indicators and all values associated with
-        this indicator
-
-        """
-
-        pass
-
     @classmethod
     def insert(cls, pgconn, title, description,
         indicator_value_format, indicator_category):
@@ -109,7 +98,7 @@ class indicator(object):
         cursor = pgconn.cursor()
 
         cursor.execute(textwrap.dedent("""
-            select (ind.*)::indicators ind
+            select (indicators.*)::indicators ind
             from indicators
             where title = %s
             """), [title])
@@ -200,4 +189,27 @@ class IndicatorCategory(RelationWrapper):
             raise KeyError("No indicator_category {0}!".format(
                 category))
 
+class IndicatorLocationValue(RelationWrapper):
+
+    def __init__(self, indicator_uuid, location_uuid, time_period,
+        value, inserted, updated):
+
+        self.indicator_uuid = indicator_uuid
+        self.location_uuid = location_uuid
+        self.time_period = time_period
+        self.value = value
+        self.inserted = inserted
+        self.updated = updated
+
+    @classmethod
+    def insert(cls, pgconn, indicator_uuid, location_uuid, time_period,
+        value):
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+            insert into indicator_location_values
+            (
+            )
+            """))
 

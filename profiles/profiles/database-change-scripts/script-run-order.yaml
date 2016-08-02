@@ -14,3 +14,6 @@ script_order:
 -   make-indicator-values-link-tables.sql
 -   make-sample-indicators-and-values.sql
 -   alter-indicator-location-values.sql
+-   add-indexes-on-locations.sql
+-   alter-indicator-location-values-2.sql
+-   alter-indicator-location-values-3.sql

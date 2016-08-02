@@ -94,8 +94,23 @@ def insert_armslength2011to2015_cdc(path_to_file, pgconn):
 
     for row_number, row in enumerate(cr, start=1):
 
-        if row_number == 1:
-            print row
+        # Find this CDC.
+        try:
+
+            pg.locations.Location.by_location_type_and_title(
+                pgconn,
+                "community development corporation",
+                row["cdc_name"])
+
+        except KeyError as ex:
+
+            pg.locations.Location.insert(
+                pgconn,
+                "community development corporation",
+                row["cdc_name"],
+                None,
+                None,
+                None)
 
         for (k, v) in row.items():
 
@@ -109,17 +124,26 @@ def insert_armslength2011to2015_cdc(path_to_file, pgconn):
 
                 if row_number == 1:
 
-                    # log.debug("{0} {1} {2} {3}".format(
-                        # k,
-                        # indicator_name,
-                        # year))
+                    log.debug("{0} {1} {2} {3} {4}".format(
+                        k,
+                        v,
+                        indicator_name,
+                        year,
+                        row["cdc_name"]))
 
-                    ind = pg.indicators.Indicator.insert(
-                        pgconn,
-                        indicator_name, # title
-                        None, # description
-                        None, # indicator value format
-                        None  # indicator category
+                    try:
+                        ind = pg.indicators.Indicator.by_title(
+                            pgconn,
+                            indicator_name)
+
+                    except KeyError as ex:
+
+                        ind = pg.indicators.Indicator.insert(
+                            pgconn,
+                            indicator_name, # title
+                            None, # description
+                            None, # indicator value format
+                            None  # indicator category
                         )
 
 
