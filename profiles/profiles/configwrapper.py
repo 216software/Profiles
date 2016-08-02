@@ -67,6 +67,19 @@ class ConfigWrapper(configwrapper.ConfigWrapper):
             pgconn,
             factory=LocationsFactory)
 
+        from profiles.pg.indicators import indicatorsFactory
+
+        psycopg2.extras.register_composite(
+            'indicators',
+            pgconn,
+            factory=indicatorsFactory)
+
+        from profiles.pg.indicators import IndicatorCategoryFactory
+
+        psycopg2.extras.register_composite(
+            'indicator_categories',
+            pgconn,
+            factory=IndicatorCategoryFactory)
 
         log.info('Just registered composite types in psycopg2')
 

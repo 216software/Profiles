@@ -13,3 +13,4 @@ script_order:
 -   insert-initial-places-data.sql
 -   make-indicator-values-link-tables.sql
 -   make-sample-indicators-and-values.sql
+-   alter-indicator-location-values.sql

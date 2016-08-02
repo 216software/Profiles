@@ -6,6 +6,8 @@ import textwrap
 
 import psycopg2.extras
 
+from profiles.pg import RelationWrapper
+
 log = logging.getLogger(__name__)
 
 class indicatorsFactory(psycopg2.extras.CompositeCaster):
@@ -17,16 +19,14 @@ class indicatorsFactory(psycopg2.extras.CompositeCaster):
 class indicator(object):
 
     def __init__(self, indicator_uuid, title, description,
-        indicator_type, indicator_shape, indicator_shape_json,
+        indicator_value_format, indicator_category,
         inserted, updated):
 
         self.indicator_uuid = indicator_uuid
         self.title = title
         self.description = description
-        self.indicator_type = indicator_type
-        self.indicator_shape = indicator_shape
-        self.indicator_shape_json = indicator_shape_json
-
+        self.indicator_value_format = indicator_value_format
+        self.indicator_category = indicator_category
         self.inserted = inserted
         self.updated = updated
 
@@ -83,6 +83,49 @@ class indicator(object):
 
         pass
 
+    @classmethod
+    def insert(cls, pgconn, title, description,
+        indicator_value_format, indicator_category):
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+            insert into indicators
+            (title, description, indicator_value_format,
+            indicator_category)
+            values
+            (%s, %s, %s, %s)
+            returning (indicators.*)::indicators as ind
+            """),
+            [title, description, indicator_value_format,
+            indicator_category])
+
+        return cursor.fetchone().ind
+
+
+    @classmethod
+    def by_title(cls, pgconn, title):
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+            select (ind.*)::indicators ind
+            from indicators
+            where title = %s
+            """), [title])
+
+        if cursor.rowcount:
+            return cursor.fetchone().ind
+
+        else:
+            raise KeyError(
+                "Sorry, no indicator with title {0} found!".format(
+                    title))
+
+
+# Matt can't abide classes named in lower-case.
+Indicator = indicator
+
 def all_indicator_categories(pgconn):
 
     cursor = pgconn.cursor()
@@ -94,5 +137,67 @@ def all_indicator_categories(pgconn):
     """))
 
     return [row.category for row in cursor]
+
+class IndicatorCategoryFactory(psycopg2.extras.CompositeCaster):
+
+    def make(self, values):
+        d = dict(zip(self.attnames, values))
+        return IndicatorCategory(**d)
+
+class IndicatorCategory(RelationWrapper):
+
+    def __init__(self, category, description, inserted, updated):
+        self.category = category
+        self.description = description
+        self.inserted = inserted
+        self.updated = updated
+
+    @classmethod
+    def all(cls, pgconn):
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+            select (indicator_categories.*)::indicator_categories ic
+             from indicator_categories
+            """))
+
+        for row in cursor:
+            yield row.ic
+
+    @classmethod
+    def insert(cls, pgconn, category, description):
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+            insert into indicator_categories
+            (category, description)
+            values
+            (%s, %s)
+            returning indicator_categories.*::indicator_categories as ic
+            """), [category, description])
+
+        return cursor.fetchone().ic
+
+    @classmethod
+    def by_category(cls, pgconn, category):
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+            select indicator_categories.*::indicator_categories as ic
+            from indicator_categories
+            where category = %s
+            """), [category])
+
+        if cursor.rowcount:
+
+            return cursor.fetchone().ic
+
+        else:
+
+            raise KeyError("No indicator_category {0}!".format(
+                category))
 
 
