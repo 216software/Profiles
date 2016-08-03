@@ -17,3 +17,5 @@ script_order:
 -   add-indexes-on-locations.sql
 -   alter-indicator-location-values-2.sql
 -   alter-indicators.sql
+-   create-view-pretty-indicator-location-values.sql
+-   add-sas-variable-to-indicators.sql

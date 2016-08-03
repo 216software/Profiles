@@ -20,7 +20,7 @@ class indicator(object):
 
     def __init__(self, indicator_uuid, title, description,
         indicator_value_format, indicator_category,
-        source_document,
+        source_document, sas_variable,
         inserted, updated):
 
         self.indicator_uuid = indicator_uuid
@@ -29,6 +29,7 @@ class indicator(object):
         self.indicator_value_format = indicator_value_format
         self.indicator_category = indicator_category
         self.source_document = source_document
+        self.sas_variable = sas_variable
         self.inserted = inserted
         self.updated = updated
 
@@ -77,20 +78,20 @@ class indicator(object):
     @classmethod
     def insert(cls, pgconn, title, description,
         indicator_value_format, indicator_category,
-        source_document):
+        source_document, sas_variable):
 
         cursor = pgconn.cursor()
 
         cursor.execute(textwrap.dedent("""
             insert into indicators
             (title, description, indicator_value_format,
-            indicator_category, source_document)
+            indicator_category, source_document, sas_variable)
             values
-            (%s, %s, %s, %s, %s)
+            (%s, %s, %s, %s, %s, %s)
             returning (indicators.*)::indicators as ind
             """),
             [title, description, indicator_value_format,
-            indicator_category, source_document])
+            indicator_category, source_document, sas_variable])
 
         return cursor.fetchone().ind
 
