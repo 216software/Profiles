@@ -37,6 +37,28 @@ usps_vac2011to2015._cdc2016Jan27.csv
 usps_vac2011to2015_spa2016Jan27.csv
 """
 
+# These are from the spreadsheet April sent us -- Descriptions are not
+# in CSV so we'll hardcode here
+INDICATOR_DESCRIPTIONS = {
+    'med_ntal_price':'Median sales price, parcels with no history of foreclosure',
+    'ntal_sales ':'Sales, parcels with no history of foreclosure',
+    'med_sfprice':'',
+    'med_al_price':'',
+    '_sfsale    ':'',
+    'sfsale     ':'',
+    '_mfsale    ':'',
+    'mfsale     ':'',
+    'distress   ':'Distressed Sales',
+    'al_sales   ':'',
+    '_distress  ':'Distressed Sales rate',
+    '_ntalsales ':'Sales, parcels with no history of foreclosure rate',
+    'med_mfprice':'',
+    'cdsale     ':'',
+    'med_cdprice':'',
+    '_cdsale    ':'',
+}
+
+
 def set_up_args():
 
     ap = argparse.ArgumentParser()
@@ -146,7 +168,7 @@ def insert_armslength2011to2015_cdc(path_to_file, pgconn):
                         ind = pg.indicators.Indicator.insert(
                             pgconn,
                             indicator_name, # title
-                            None, # description
+                            INDICATOR_DESCRIPTIONS.get('indicator_name'), # description
                             None, # indicator value format
                             None, # indicator category
                             os.path.basename(path_to_file)

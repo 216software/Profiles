@@ -20,6 +20,27 @@
 }">
 </div>
 
+
+<div data-bind="page: {
+    id: 'population',
+    source: '/static/templates/population.html',
+    with: populationvm,
+    afterShow: populationvm.initialize,
+    sourceLoaded: populationvm.sourceLoaded
+}">
+</div>
+
+<div data-bind="page: {
+    id: 'stabilization',
+    source: '/static/templates/stabilization.html',
+    with: stabilizationvm,
+    afterShow: stabilizationvm.initialize,
+    sourceLoaded: stabilizationvm.sourceLoaded
+}">
+</div>
+
+
+
 <div data-bind="page: {
     id: 'about',
     source: '/static/templates/about.html'
@@ -48,6 +69,9 @@
 
 <script type="text/javascript" src="/static/viewmodels/profilesviewmodel.js"></script>
 <script type="text/javascript" src="/static/viewmodels/startpageviewmodel.js"></script>
+<script type="text/javascript" src="/static/viewmodels/populationviewmodel.js"></script>
+<script type="text/javascript" src="/static/viewmodels/stabilizationviewmodel.js"></script>
+
 
 <script type="text/javascript">
 
