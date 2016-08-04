@@ -11,6 +11,7 @@ script_order:
 -   adjust-session-expires-time.sql
 -   make-indicators-tables.sql
 -   insert-initial-places-data.sql
+-   insert-cdc-locations.sql
 -   make-indicator-values-link-tables.sql
 -   make-sample-indicators-and-values.sql
 -   alter-indicator-location-values.sql

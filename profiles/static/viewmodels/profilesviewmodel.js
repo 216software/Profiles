@@ -15,6 +15,7 @@ function ProfilesViewModel (data) {
     self.type = "ProfilesViewModel";
     self.is_busy = ko.observable(false);
     self.syslog = ko.observable();
+    self.active_tab = ko.observable();
 
     self.click_on_enter = function(selector_id){
 
@@ -30,4 +31,8 @@ function ProfilesViewModel (data) {
     self.populationvm = new PopulationViewModel({rootvm:self});
     self.stabilizationvm= new StabilizationViewModel({rootvm:self});
 
+
+    pager.onMatch.add(function(){
+        self.active_tab(pager.getActivePage().currentId);
+    });
 };

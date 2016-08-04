@@ -146,6 +146,8 @@ class Location(Handler):
 
     def handle(self, req):
 
+        # TODO this is hardcoded -- fix it to take in an argument
+
         l = pg.locations.Location.by_location_uuid(
             self.cw.get_pgconn(),
             "45326d0d-d9ba-4da8-95b3-1d585cc630a3")

@@ -1,7 +1,6 @@
-
 <div class="row" style="margin-bottom:15px">
 
-<div class="col-md-8 col-md-offset-2">
+<div class="col-md-4">
 
 <!-- Navbar type thing here -->
 
@@ -30,52 +29,65 @@
     disable:selected_location() == undefined">
 Change Location</button>
 </div> <!-- closes form-group -->
-<div id="mapid" style="height:400px; width:400px"></div>
+
+<div id="mapid" style="height:300px;"></div>
 
 
+</div> <!-- closes col-md-4 -->
 
-<div data-bind="page: {id: 'location',
-                params:{location_uuid:location_uuid()}}">
+<div class="col-md-8">
 
-<div data-bind="with:selected_location" style="margin-top:15px">
-    <h3><span data-bind="text:title"></span> statistics</h3>
+<!-- all of our sub page tabs go here ? -->
 
-    <div data-bind="foreach:category_indicator_values" class="panel panel-default">
-        <div class="panel-heading" data-bind="click: visible.toggle()">
-            <button data-bind="function(){click:visible.toggle()"
-                class="btn btn-small pull-right">
-            <i data-bind="visible:!visible()" class="glyphicon glyphicon-plus"></i>
-            <i data-bind="visible:visible" class="glyphicon glyphicon-minus"></i>
-            </button>
-            <h4>
-                Indicator: <span data-bind="text:category"></span>
-            </h4>
-                </div> <!-- closes panel-header -->
-        <div class="panel-body" data-bind="slideVisible:visible">
-        <div data-bind="foreach:indicators">
-            <table class="table table-bordered table-hover">
-                <caption data-bind="text:title"></caption>
-                <tr>
-                    <th>Time Period</th>
-                    <th>Value</th>
-                </tr>
-                <tbody data-bind="foreach:indicator_values">
-                    <tr>
-                    <td data-bind="text:time_period"></td>
-                    <td data-bind="text:value"></td>
-                    </tr>
-                </tbody>
-            </table>
+<div data-bind="page: {
+    id: 'start',
+    source: '/static/templates/overview.html',
+}"></div>
 
-        </div> <!-- closes foreach:indicators -->
-        </div> <!-- closes panel-body -->
-    </div> <!-- closes foreach category_indicator_values -->
+<div data-bind="page: {
+    id: 'community',
+    source: '/static/templates/community.html',
+}"></div>
 
+<div data-bind="page: {
+    id: 'economy',
+    source: '/static/templates/economy.html',
+}"></div>
 
-</div> <!-- closes with:selected_location -->
+<div data-bind="page: {
+    id: 'education',
+    source: '/static/templates/education.html',
+}"></div>
 
-</div> <!-- closes  page: id 'location' -->
+<div data-bind="page: {
+    id: 'health',
+    source: '/static/templates/health.html',
+}"></div>
 
+<div data-bind="page: {
+    id: 'population',
+    source: '/static/templates/population.html',
+}"></div>
+
+<div data-bind="page: {
+    id: 'progress',
+    source: '/static/templates/progress-metrics.html',
+}"></div>
+
+<div data-bind="page: {
+    id: 'safety',
+    source: '/static/templates/safety.html',
+}"></div>
+
+<div data-bind="page: {
+    id: 'stabilization',
+    source: '/static/templates/stabilization.html',
+}"></div>
+
+<div data-bind="page: {
+    id: 'workforce',
+    source: '/static/templates/workforce.html',
+}"></div>
 
 </div> <!-- closes col-md-8 -->
 

@@ -42,20 +42,24 @@ usps_vac2011to2015_spa2016Jan27.csv
 INDICATOR_DESCRIPTIONS = {
     'med_ntal_price':'Median sales price, parcels with no history of foreclosure',
     'ntal_sales ':'Sales, parcels with no history of foreclosure',
-    'med_sfprice':'',
-    'med_al_price':'',
-    '_sfsale    ':'',
-    'sfsale     ':'',
-    '_mfsale    ':'',
-    'mfsale     ':'',
-    'distress   ':'Distressed Sales',
-    'al_sales   ':'',
-    '_distress  ':'Distressed Sales rate',
-    '_ntalsales ':'Sales, parcels with no history of foreclosure rate',
-    'med_mfprice':'',
-    'cdsale     ':'',
-    'med_cdprice':'',
-    '_cdsale    ':'',
+    'med_sfprice':None,
+    'med_al_price':None,
+    '_sfsale':None,
+    'sfsale':None,
+    '_mfsale':None,
+    'mfsale':None,
+    'distress':'Distressed Sales',
+    'al_sales':None,
+    '_distress':'Distressed Sales rate',
+    '_ntalsales':'Sales, parcels with no history of foreclosure rate',
+    'med_mfprice':None,
+    'cdsale':None,
+    'med_cdprice':None,
+    '_cdsale':None,
+    'shf':'Sherriff\'s sales',
+    'f':'Foreclosure filings',
+    'hsg_den':'Housing Density per square mile',
+    'res_occ':'Residential Occupancy'
 }
 
 
@@ -169,7 +173,7 @@ class CSVInserter(object):
                             ind = pg.indicators.Indicator.insert(
                                 pgconn,
                                 indicator_name, # title
-                                INDICATOR_DESCRIPTIONS.get('indicator_name'), # description
+                                INDICATOR_DESCRIPTIONS.get(indicator_name), # description
                                 None, # indicator value format
                                 None, # indicator category
                                 os.path.basename(self.path_to_csv),
@@ -178,7 +182,6 @@ class CSVInserter(object):
 
                         indlocval = pg.indicators.IndicatorLocationValue.insert(
                             pgconn,
-                            indicator_name, # title
                             ind.indicator_uuid,
                             loc.location_uuid,
                             datetime.datetime.strptime(year, "%Y").date(),

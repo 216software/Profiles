@@ -15,44 +15,8 @@
     source: '/static/templates/startpage.html',
     with: startpagevm,
     afterShow: startpagevm.initialize,
-
-    sourceLoaded: startpagevm.sourceLoaded
-}">
+    sourceLoaded: startpagevm.sourceLoaded}">
 </div>
-
-
-<div data-bind="page: {
-    id: 'population',
-    source: '/static/templates/population.html',
-    with: populationvm,
-    afterShow: populationvm.initialize,
-    sourceLoaded: populationvm.sourceLoaded
-}">
-</div>
-
-<div data-bind="page: {
-    id: 'stabilization',
-    source: '/static/templates/stabilization.html',
-    with: stabilizationvm,
-    afterShow: stabilizationvm.initialize,
-    sourceLoaded: stabilizationvm.sourceLoaded
-}">
-</div>
-
-
-
-<div data-bind="page: {
-    id: 'about',
-    source: '/static/templates/about.html'
-    }">
-</div>
-
-<div data-bind="page: {
-    id: 'faq',
-    source: '/static/templates/faq.html'
-    }">
-</div>
-
 
 
 {% endblock main %}

@@ -1,47 +1,4 @@
 
-<div data-bind="page: {id: 'community'">
-
-<div class="row" style="margin-bottom:15px">
-
-<div class="col-md-4">
-
-<!-- Navbar type thing here -->
-
-<div class="form-group">
-    <label>
-    Location Type
-    </label>
-    <select class="form-control" data-bind="options: location_types,
-                                 optionsCaption: 'all',
-                                 value:selected_location_type"></select>
-</div> <!-- closes form-group -->
-
-<div class="form-group">
-    <label>
-    Location
-    </label>
-    <select class="form-control" data-bind="options: filtered_locations,
-                                    optionsCaption: 'Choose...',
-                                    optionsText:'title',
-                                    value:selected_location"></select>
-</div> <!-- closes form-group -->
-
-
-<div class="form-group">
-    <button class="form-control btn btn-primary" data-bind="click:change_location,
-    disable:selected_location() == undefined">
-Change Location</button>
-</div> <!-- closes form-group -->
-<div id="popmapid" style="height:200px"></div>
-
-</div> <!-- closes col-md-4 col-md-offset-2 -->
-
-<div class="col-md-8">
 <h2>Community</h2>
 
 <p>Table of data goes here for a given location -- see CSV </p>
-</div> <!-- closes col-md-8 -->
-
-</div> <!-- closes row -->
-
-</div> <!-- closes page id = population-->
