@@ -1,4 +1,3 @@
-"Crimes, 2010-2014"
 Variable Name,Variable Description ,Formula,Note
 v,Violent crimes,"Violent crimes include homicide, rape, robbery and aggravated assault"
 _v,"Violent crimes per 100,000 population",(Violent Crime/Population) X 100000
@@ -57,7 +56,3 @@ pctchgrt_od,Five year percent change -- other illicit drug crime rate (2011 to 2
 pctchgrt_lq,Five year percent change -- liquor law violation rate (2011 to 2015),((liquor law violation rate in 2015 - liquor law violation rate in 2011) / liquor law violation rate in 2011) X 100
 pctchgrt_Ia,Five year percent change -- Type I crime rate (2011 to 2015),((Type I crime rate in 2015 - Type I crime rate in 2011) / Type I crime rate in 2011) X 100
 pctchgrt_II,Five year percent change -- Type II crime rate (2011 to 2015),((Type II crime rate in 2015 - Type II crime rate in 2011) / Type II crime rate in 2011) X 100
-
-Source: Cleveland Police Department
-
-Note: Population used in the calculation of crime rates is based on the population proportion from the 2010 Census and benchmarked to the American Community Survey (ACS) 1-year estimates population.

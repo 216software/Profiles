@@ -1,10 +1,3 @@
-"Blood Lead Level , 2010-2014"
 Variable Name,Variable Description ,Formula
 _ebll_c,Percent of children aged 0-6 with confirmed blood lead level  >= 5.0 μg/dL,Number of children aged 0-6 with confirmed blood lead level  >= 5.0 μg/dL  /  Number of children aged 0-6 tested for blood lead level
 _ebll_c1014avg,Five year average - Percent of children aged 0-6 with confirmed blood lead level >= 5.0 μg/dL,(Sum of percent of children aged 0-6 with confirmed blood lead level  >= 5.0 μg/dL  from 2010 to 2014 ) / 5
-
-Source: Ohio Department of Health
-
-"Note 1: In order to avoid possible disclosure of any confidential information, rates are suppressed when the number of children tested for  blood lead level is less than 10.  The code  '999999' is used to show suppression."
-
-Note 2: μg/dL stands for micrograms per deciliter

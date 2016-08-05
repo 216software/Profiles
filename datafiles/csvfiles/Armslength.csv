@@ -1,10 +1,9 @@
-"Arms-length Residential Parcel Sales, 2011-2015"
 Variable Name,Variable Description ,Formula,Note
 al_sales,"Arms-length residential parcel sales (include only single-family, multi-family and condo sales)"
 sfsale,Arms-length residential parcel sales - single family
 mfsale,Arms-length residential parcel sales - multi-family
 cdsale,Arms-length residential parcel sales - condo
-med_al_price,Arms-length residential median sales price 
+med_al_price,Arms-length residential median sales price
 med_sfprice,Arms-length residential median sales price - single family
 med_mfprice,Arms-length residential median sales price - multi-family
 med_cdprice,Arms-length residential median sales price - condo
@@ -19,7 +18,6 @@ pctchg_medalprice,Five year percent change -- arms-length median sale price,((Ar
 pctchg_medsfprice,Five year percent change -- arms-length median single-family sale price,((Arms-length median single-family sale price in 2015 - Arms-length median single-family sale price in 2011) / Arms-length median single-family sale price in 2011) X 100
 pctchg_medmfprice,Five year percent change -- arms-length median multi-family sale price,((Arms-length median multi-family sale price in 2015 - Arms-length median multi-family sale price in 2011) / Arms-length median multi-family sale price in 2011) X 100
 pctchg_medcdprice,Five year percent change -- arms-length median condo sale price,((Arms-length median condo sale price in 2015 - Arms-length median condo sale price in 2011) / Arms-length median condo sale price in 2011) X 100
-
 ntal_sales,"Arms-length residential parcel sales (include only single-family, multi-family and condo sales) - non-tainted parcels",Parcels with no history of foreclosure
 med_ntal_price,Arms-length residential median sales price - non-tained parcels
 pctchgrt_ntalsales,Five year percent change -- Percent of arms-length sales - non-tainted parcels,((Percent of nontainted arms-length residential parcel sales in 2015 - Percent of non-tainted arms-length residential parcel sales in 2011) / Percent of non-tainted arms-length residential parcel sales in 2011) X 100
@@ -28,5 +26,3 @@ _sfsale,Percent of arms-length residential parcel sales - single family,(Arms-le
 _mfsale,Percent arms-length residential parcel sales - multi-family,(Arms-length residential parcel sales - multi-family/Arms-length residential parcel sales) X 100
 _cdsale,Percent of arms-length residential parcel sales - condo,(Arms-length residential parcel sales - condo/Arms-length residential parcel sales) X 100
 _ntalsales,Percent of arms-length residential parcel sales  - non-tainted parcels,(Arms-length residential parcel sales - non-tainted/Arms-length residential parcel sales) X 100
-
-Sources: Cuyahoga County Fiscal Office; Cuyahoga County Clerk of Courts

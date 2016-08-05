@@ -1,4 +1,3 @@
-"Housing Density and Foreclsoures, 2011-2015"
 Variable Name,Variable Description ,Formula,Note
 hsg_den,"Housing density (include only single-family, multi-family, condo, apartment and other residential parcels)",Number of residential structures / area,Number of residential structures per square mile
 f,"Foreclosure filings (include only single-family, multi-family and condo)"
@@ -10,5 +9,3 @@ _f,"Percent of foreclosure filings (include only single-family, multi-family and
 pctchgrt_f,Five year percent change -- Percent of foreclosure filings,((Percent of foreclosure filings in 2015 - Percent of foreclosure filings in 2011) / Percent of foreclosure filings in 2011) X 100
 _shf,"Percent of sheriff's deeds (include only single-family, multi-family and condo)",(Sheriff's deeds / Number of residential structures)  X 100
 pctchgrt_shf,Five year percent change -- Percent of sheriff's deeds,((Percent of sheriff's deeds in 2015 - Percent of sheriff's deeds in 2011) / Percent of sheriff's deeds in 2011) X 100
-
-Sources: Cuyahoga County Fiscal Office; Cuyahoga County Clerk of Courts; Cuyahoga County Sheriff's Department
