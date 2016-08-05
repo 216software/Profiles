@@ -20,3 +20,4 @@ script_order:
 -   alter-indicators.sql
 -   create-view-pretty-indicator-location-values.sql
 -   add-sas-variable-to-indicators.sql
+-   insert_all_csv_files.py
