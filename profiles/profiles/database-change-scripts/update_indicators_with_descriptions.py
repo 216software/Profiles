@@ -57,18 +57,53 @@ if __name__ == "__main__":
 
         else:
 
-            cr = csv.reader(open(csv_file_path))
-
-            previous_row = None
+            cr = csv.DictReader(open(csv_file_path))
 
             for row_number, row in enumerate(cr, start=1):
 
-                if row_number < 3:
+                # Clean up whitespace around keys.
+                for col in row.keys():
+                    row[col.strip()] = row[col]
+
+                if row_number < 2:
                     log.debug(row)
 
-                previous_row = row
+                if "Variable Name" in row and "Variable Description" in row:
+                    ind_title = row["Variable Name"]
+                    ind_description = row["Variable Description"]
 
+                elif "neighbor10" in row:
+                    ind_title = row["neighbor10"]
+                    ind_description = row["Neighborhood"]
 
-    # pgconn.commit()
+                else:
+
+                    log.critical(row)
+                    raise Exception("Could not figure out what column has variable name in it!")
+
+                try:
+
+                    updated_ind = pg.indicators.Indicator.update_description_by_title(
+                        pgconn,
+                        ind_title,
+                        ind_description)
+
+                except KeyError as ex:
+
+                    try:
+
+                        for ind in pg.indicators.Indicator.by_sas_variable(
+                            pgconn,
+                            ind_title):
+
+                            updated_ind = ind.update_description(
+                                pgconn,
+                                ind_description)
+
+                    except KeyError as ex:
+
+                        log.error("{0}:{1} not in indicators".format(csv_file_name, ind_title))
+
+    pgconn.commit()
 
     log.info("All done!")
