@@ -1,0 +1,12 @@
+"USPS Vacancy, 2011-2015"
+Variable Name,Variable Description ,Formula
+ams_res,Total number of residential addresses
+res_occ,Non-vacant residential addresses,(Non-vacant residential addresses / Total number of residential addresses) X 100
+ams_bus,Total number of business addresses
+bus_occ,Non-vacant business addresses
+_res_occ,Percent of non-vacant residential addresses
+_bus_occ,Percent of non-vacant business addresses,(Non-vacant business addresses / Total number of business addresses) X 100
+pctchgrt_res,Five year percent change -- percent of non-vacant residential addresses (2011 to 2015),((Percent of non-vacant residential addresses in 2015 - Percent of non-vacant residential addresses in 2011) / Percent of non-vacant residential addresses in 2011) X 100
+pctchgrt_bus,Five year percent change -- percent of non-vacant business addresses  (2011 to 2015),((Percent of non-vacant business addresses in 2015 - Percent of non-vacant business addresses in 2011) / Percent of non-vacant business addresses in 2011) X 100
+
+"Source: The United States Postal Service (USPS) provides quarterly extracts to the U.S. Department of Housing and Urban Development (HUD).  HUD geocodes and aggregates the data, and posts it on its web site for others to download."

@@ -1,0 +1,6 @@
+"CMSD Attendance, 2010-11 to 2014-15 school years"
+Variable Name,Variable Description ,Formula
+_attend,Attendance rate,(Number of days a student attended school/number of school days a student is enrolled) X 100
+pctchgrt_attend,Five year percent change -- attendance rate (2010-11 to 2014-15 school year),((Attendance rate in 2014-2015 school year - Attendance rate in 2010-2011 school year) / Attendance rate in 2010-2011 school year) X 100
+
+Source: Cleveland Metropolitan School District

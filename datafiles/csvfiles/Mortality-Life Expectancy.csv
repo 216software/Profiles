@@ -1,0 +1,10 @@
+"Mortality Rates and Life Expectancy Estimates, 2009-2013 (5-year average)",Note
+Variable Name,Variable Description ,Formula
+mort_rate0913,"Mortality Rate (Per 1,000 Population)",(Average Number of Deaths 2009-2013 / Population 2009-2013) X 1000
+infmort_rate0913,"Infant Mortality Rate (Per 1,000 live births)",(Average Number of Infant Deaths 2009-2013 / Average Number of Live Births 2009-2013) X 1000
+le0913,Life Expectancy (in years),Life expectancy is calculated using the Life Expectancy Calculator created by Daniel Eayres published in the South East Public Health Observatory (SEPHO) website.
+
+
+Sources:  U.S. Census Bureau - 2009-2013 ACS 5-year estimates; Ohio Department of Health Vital Statistics Divisions
+
+Note: This study includes data provided by the Ohio Department of Health which should not be considered an endorsement of this study or its conclusions.
