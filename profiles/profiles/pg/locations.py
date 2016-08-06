@@ -205,6 +205,8 @@ class Location(object):
                 where indicator_uuid = any(
                     select indicator_uuid from indicators where
                     title = any(%(indicators)s))
+
+                and location_uuid = %(location_uuid)s
                 order by observation_timestamp asc;
 
         """), dict(location_uuid=self.location_uuid,

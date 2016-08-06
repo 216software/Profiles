@@ -23,13 +23,9 @@
 <td data-bind="text:title"></td>
 
 <!-- ko foreach:$parent.observable_timestamps -->
-
-<!-- if $parent.indicator_values()[$index()].observation_timestamp().year() == $data.year() -->
-<td><span data-bind="text:$parent.indicator_values()[$index()].value()"></span>
+<td><span data-bind="text:$parent.indicator_value_by_year($data.year())"></span>
 (<span data-bind="text:$data.format('YYYY')"></span>)
 </td>
-<!-- /ko -->
-
 <!-- /ko --> <!-- closes inner for loop -->
 
 </tr>

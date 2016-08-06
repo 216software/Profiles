@@ -11,11 +11,14 @@ function StabilizationViewModel (data) {
         console.log('initing ', self.type);
     };
 
-    self.indicator_titles = ['distress', '_distress'];
+    self.indicator_titles = ['distress', '_distress', 'med_ntal_price', 'ntal_sales',
+        'shf', 'f', 'hsg_den', 'res_occ'];
+
     self.indicators = ko.observableArray([]);
 
-    self.parentvm.selected_location.subscribe(function(){
+    self.test_observable = ko.observable(0);
 
+    self.parentvm.selected_location.subscribe(function(){
         self.parentvm.look_up_indicator_and_values(self.indicator_titles,
             self.look_up_indicator_complete);
     });
@@ -27,6 +30,8 @@ function StabilizationViewModel (data) {
     self.look_up_indicator_complete = function(data){
 
         console.log('look_up_indicator complete');
+
+        console.log(data);
 
         self.observable_timestamps(ko.utils.arrayMap(
             data.distinct_observable_timestamps || [],

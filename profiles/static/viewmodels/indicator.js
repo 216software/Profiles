@@ -23,6 +23,19 @@ function Indicator (data) {
                                 return new IndicatorValue(x);
                             }));
 
+    self.indicator_value_by_year = function(year){
+        item = ko.utils.arrayFirst(this.indicator_values(), function(iv) {
+            return iv.observation_timestamp_year() == year;
+        });
+
+        if (item)
+        {
+            return item.value();
+        }
+        else{
+            return null;
+        }
+    };
 
     console.log(self.indicator_values());
 
@@ -46,4 +59,10 @@ function IndicatorValue(data){
     self.value = ko.observable(data.value).extend({number_format:'number'});
     self.observation_timestamp = ko.observable(new moment(data.observation_timestamp));
     self.location_title = ko.observable(data.location_title);
+
+    self.observation_timestamp_year = ko.computed(function(){
+        if(self.observation_timestamp() != undefined){
+            return self.observation_timestamp().year();
+        }
+    });
 };

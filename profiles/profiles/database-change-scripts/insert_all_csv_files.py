@@ -37,32 +37,6 @@ usps_vac2011to2015._cdc2016Jan27.csv
 usps_vac2011to2015_spa2016Jan27.csv
 """
 
-# These are from the spreadsheet April sent us -- Descriptions are not
-# in CSV so we'll hardcode here
-INDICATOR_DESCRIPTIONS = {
-    'med_ntal_price':'Median sales price, parcels with no history of foreclosure',
-    'ntal_sales ':'Sales, parcels with no history of foreclosure',
-    'med_sfprice':None,
-    'med_al_price':None,
-    '_sfsale':None,
-    'sfsale':None,
-    '_mfsale':None,
-    'mfsale':None,
-    'distress':'Distressed Sales',
-    'al_sales':None,
-    '_distress':'Distressed Sales rate',
-    '_ntalsales':'Sales, parcels with no history of foreclosure rate',
-    'med_mfprice':None,
-    'cdsale':None,
-    'med_cdprice':None,
-    '_cdsale':None,
-    'shf':'Sherriff\'s sales',
-    'f':'Foreclosure filings',
-    'hsg_den':'Housing Density per square mile',
-    'res_occ':'Residential Occupancy'
-}
-
-
 def set_up_args():
 
     ap = argparse.ArgumentParser()
@@ -172,7 +146,7 @@ class CSVInserter(object):
                             ind = pg.indicators.Indicator.insert(
                                 pgconn,
                                 indicator_name, # title
-                                INDICATOR_DESCRIPTIONS.get(indicator_name), # description
+                                None,
                                 None, # indicator value format
                                 None, # indicator category
                                 os.path.basename(self.path_to_csv),
