@@ -166,3 +166,10 @@ class ConfigWrapper(configwrapper.ConfigWrapper):
             region=d["region"])
 
         return pyrax
+
+    @property
+    def csv_data_files_folder(self):
+
+        return self.config_dictionary["profiles"]["csv_data_files_folder"]
+
+

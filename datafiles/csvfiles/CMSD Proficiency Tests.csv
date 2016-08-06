@@ -1,0 +1,25 @@
+Variable Name,Variable Description ,Formula,Comment
+rpass50,Number of students passed OAA Reading (Grade 3),Please see Note 2 below
+rpass10,Number of students passed OAA Reading (Grade 4),Please see Note 2 below
+rpass20,Number of students passed OAA Reading (Grade 6),Please see Note 2 below
+rpass41,Number of students passed OGT Reading (Grade 10)
+mpass50,Number of students passed OAA Math (Grade 3),Please see Note 2 below
+mpass10,Number of students passed OAA Math (Grade 4),Please see Note 2 below
+mpass20,Number of students passed OAA Math (Grade 6),Please see Note 2 below
+mpass41,Number of students passed OGT Math (Grade 10)
+_rpass50,OAA passage rate - Reading (Grade 3),(Number of 3rd graders passing the 3rd grade reading test / 3rd graders who took the test) X 100,Please see Note 2 below
+_rpass10,OAA passage rate - Reading (Grade 4),(Number of 4th graders passing the 4th grade reading test / 4th graders who took the test) X 100,Please see Note 2 below
+_rpass20,OAA passage rate - Reading (Grade 6),(Number of 6th graders passing the 6th grade reading test / 6th graders who took the test) X 100,Please see Note 2 below
+_rpass41,OGT passage rate - Reading (Grade 10),(Number of 10th graders passing the OGT reading test / 10th graders who took the test) X 100
+_mpass50,OAA passage rate - Math (Grade 3),(Number of 3rd graders passing the 3rd grade math test / 3rd graders who took the test) X 100,Please see Note 2 below
+_mpass10,OAA passage rate - Math (Grade 4),(Number of 4th graders passing the 4th grade math test / 4th graders who took the test) X 100,Please see Note 2 below
+_mpass20,OAA passage rate - Math (Grade 6),(Number of 6th graders passing the 6th grade math test / 6th graders who took the test) X 100,Please see Note 2 below
+_mpass41,OGT passage rate - Math (Grade 10),(Number of 10th graders passing the OGT math test / 10th graders who took the test) X 100
+pctchgrt_rpass50,Five year percent change -- Grade 3 reading passage rate (2010-11 to 2014-15 school year),((2014-2015 Grade 3 reading passage rate  - 2010-2011 Grade 3 reading passage rate) / 2010-2011 Grade 3 reading passage rate) X 100,Please see Note 2 below
+pctchgrt_rpass10,Five year percent change -- Grade 4 reading passage rate (2010-11 to 2014-15 school year),((2014-2015 Grade 4 reading passage rate  - 2010-2011 Grade 4 reading passage rate) / 2010-2011 Grade 4 reading passage rate) X 100,Please see Note 2 below
+pctchgrt_rpass20,Five year percent change -- Grade 6 reading passage rate (2010-11 to 2014-15 school year),((2014-2015 Grade 6 reading passage rate  - 2010-2011 Grade 6 reading passage rate) / 2010-2011 Grade 6 reading passage rate) X 100,Please see Note 2 below
+pctchgrt_rpass41,Five year percent change -- Grade 10 OGT reading passage rate (2010-11 to 2014-15 school year),((2014-2015 Grade 10 OGT reading passage rate  - 2010-2011 Grade 10 OGT reading passage rate) / 2010-2011 Grade 10 OGT reading passage rate) X 100
+pctchgrt_mpass50,Five year percent change -- Grade 3 math passage rate (2010-11 to 2014-15 school year),((2014-2015 Grade 3 math passage rate  - 2010-2011 Grade 3 math passage rate) / 2010-2011 Grade 3 math passage rate) X 100,Please see Note 2 below
+pctchgrt_mpass10,Five year percent change -- Grade 4 math passage rate (2010-11 to 2014-15 school year),((2014-2015 Grade 4 math passage rate  - 2010-2011 Grade 4 math passage rate) / 2010-2011 Grade 4 math passage rate) X 100,Please see Note 2 below
+pctchgrt_mpass20,Five year percent change -- Grade 6 math passage rate (2010-11 to 2014-15 school year),((2014-2015 Grade 6 math passage rate  - 2010-2011 Grade 6 math passage rate) / 2010-2011 Grade 6 math passage rate) X 100,Please see Note 2 below
+pctchgrt_mpass41,Five year percent change -- Grade 10 OGT math passage rate (2010-11 to 2014-15 school year),((2014-2015 Grade 10 OGT math passage rate  - 2010-2011 Grade 10 OGT math passage rate) / 2010-2011 Grade 10 OGT math passage rate) X 100

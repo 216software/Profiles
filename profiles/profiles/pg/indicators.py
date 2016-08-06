@@ -19,9 +19,8 @@ class indicatorsFactory(psycopg2.extras.CompositeCaster):
 class indicator(object):
 
     def __init__(self, indicator_uuid, title, description,
-        indicator_value_format, indicator_category,
-        source_document, sas_variable,
-        inserted, updated):
+        indicator_value_format, indicator_category, source_document,
+        sas_variable, formula, extra_notes, inserted, updated):
 
         self.indicator_uuid = indicator_uuid
         self.title = title
@@ -30,6 +29,8 @@ class indicator(object):
         self.indicator_category = indicator_category
         self.source_document = source_document
         self.sas_variable = sas_variable
+        self.formula = formula
+        self.extra_notes = extra_notes
         self.inserted = inserted
         self.updated = updated
 
@@ -115,6 +116,81 @@ class indicator(object):
                 "Sorry, no indicator with title {0} found!".format(
                     title))
 
+    @classmethod
+    def by_sas_variable(cls, pgconn, sas_variable):
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+            select indicators.*::indicators as ind
+            from indicators
+            where sas_variable = %s
+            """), [sas_variable])
+
+        for row in cursor:
+            yield row.ind
+
+    def update_description(self, pgconn, new_description):
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+            update indicators
+            set description = %s
+            where indicator_uuid = %s
+            returning indicators.*::indicators as updated_ind
+            """), [new_description, self.indicator_uuid])
+
+        if cursor.rowcount:
+
+            updated_ind = cursor.fetchone().updated_ind
+
+            log.info("Updated description on {0} to {1}".format(
+                updated_ind,
+                new_description))
+
+            return updated_ind
+
+        else:
+            raise KeyError("Could not find indicator {0}!".format(self))
+
+
+    @classmethod
+    def update_description_by_title(cls, pgconn, title, description):
+
+        """
+        Use the title to find this indicator.  Then update the
+        description.  Then return the updated indicator.
+        """
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+            update indicators
+            set description = %s
+            where title = %s
+            returning indicators.*::indicators as updated_ind
+            """), [description, title])
+
+        if cursor.rowcount:
+
+            updated_ind = cursor.fetchone().updated_ind
+
+            log.info("Updated description on {0} to {1}".format(
+                updated_ind,
+                description))
+
+            return updated_ind
+
+        else:
+            raise KeyError("Could not find indicator {0}!".format(title))
+
+    def __repr__(self):
+
+        return """<{0}.{1} (title="{2}")>""".format(
+            self.__class__.__module__,
+            self.__class__.__name__,
+            self.title)
 
 # Matt can't abide classes named in lower-case.
 Indicator = indicator

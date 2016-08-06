@@ -41,87 +41,39 @@ def xls2csv(xls_file_path, csv_file_path):
 
         return csv_file_path
 
-def csv_to_pg_table(csv_file_path, sql_file_path):
+def multi_page_xls2csv(xls_file_path, csv_folder_path):
 
-    """
-    Make up a postgresql table name based on the csv file name
+    wb = openpyxl.load_workbook(xls_file_path)
 
-    Open the csv file.
+    sheet_names = wb.get_sheet_names()
 
-    Open an outfile to contain the generated SQL.
+    if len(sheet_names) == 1:
 
-    Go line-by-line through the CSV file.
+        log.critical("Sorry, {0} has {1} sheets and I can only "
+            "handle multi-sheet files!".format(
+            xls_file_path,
+            len(sheet_names)))
 
-        Guess if each line is a heading line, a data line, or something
-        else.
+    else:
 
-        If it is the heading line, read the field names and use those
-        for columns.
+        for sheet_name in sheet_names:
 
-        If it is the first data line, take a guess about data types.
+            out_file_path = os.path.join(
+                csv_folder_path,
+                "{0}.csv".format(sheet_name))
 
-        After we have both the heading and the first row of data, write
-        out create table text to sql_file path.
+            f = open(out_file_path, "w")
+            out = csv.writer(f)
 
-        For the first data line and all following data lines,  write out
-        some insert lines to the out file.
+            ws = wb.get_sheet_by_name(sheet_name)
 
-    Close the file.
+            for row in ws.rows:
 
-    Return the path to the sql file.
+                out.writerow([cell.value.encode("utf-8") for cell in row if cell.value])
 
-    """
+            f.close()
 
-    leftstub, dot, suffix = os.path.basename(csv_file_path).rpartition(".")
-
-    table_name = "csv_" + leftstub
-
-    f = open(csv_file_path)
-
-    cr = csv.DictReader(f)
-
-    first_row = cr.next()
-
-    second_row = cr.next()
-
-    third_row = cr.next()
-
-    fourth_row = cr.next()
-
-    fifth_row = cr.next()
-
-    table_columns = []
-
-    for (k, v) in first_row.items():
-
-        sql_type = guess_sql_type_to_use(v)
-
-        log.debug("{0} {1} {2}".format(k, v, sql_type))
-
-        table_columns.append("{0} {1}".format(k, sql_type))
-
-    create_table_string = textwrap.dedent("""
-        create table {0}
-        (
-            {1}
-        );
-
-        """.format(
-            table_name,
-            "\n".join(table_columns)))
-
-    log.debug(create_table_string)
-
-    with open(sql_file_path, "w") as sql_outfile:
-
-        sql_outfile.write(create_table_string)
-
-        sql_outfile.write(make_first_insert_line(table_name, first_row))
-
-        sql_outfile.write(make_n_insert_lines(table_name, cr))
-
-    return sql_file_path
-
+            log.info("Saved {0}.".format(out_file_path))
 
 
 def guess_sql_type_to_use(s):

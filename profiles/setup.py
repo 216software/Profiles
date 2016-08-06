@@ -21,7 +21,6 @@ setup(
         "profiles/scripts/profiles-config",
         "profiles/scripts/profiles-yaml-example",
         "profiles/scripts/profiles-load-dump",
-        "profiles/scripts/process-thumbnails.py",
         "profiles/scripts/xls2csv",
         "profiles/scripts/insert_all_csv_files.py",
     ],

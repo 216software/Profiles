@@ -67,7 +67,6 @@ def set_up_args():
 
     ap = argparse.ArgumentParser()
     ap.add_argument("yaml_file_name")
-    ap.add_argument("csv_file_folder")
 
     return ap.parse_args()
 
@@ -219,21 +218,21 @@ class CSVInserter(object):
 def load_neighborhood(csv_file_name):
 
     global pgconn
-    global args
+    global cw
 
     return CSVInserter.load_neighborhood(
         pgconn,
-        args.csv_file_folder,
+        cw.csv_data_files_folder,
         csv_file_name)
 
 def load_cdc(csv_file_name):
 
     global pgconn
-    global args
+    global cw
 
     return CSVInserter.load_cdc(
         pgconn,
-        args.csv_file_folder,
+        cw.csv_data_files_folder,
         csv_file_name)
 
 if __name__ == "__main__":

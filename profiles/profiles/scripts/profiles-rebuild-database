@@ -34,4 +34,3 @@ else
     echo "Now run profiles-upgrade-database $1"
 
 fi
-
