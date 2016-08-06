@@ -93,7 +93,7 @@ class Location(object):
         for row in cursor:
             yield row.x
 
-    def look_up_indicators(self, pgconn, time_period = None):
+    def look_up_indicators(self, pgconn):
 
         """
 
@@ -106,7 +106,7 @@ class Location(object):
 
         cursor.execute(textwrap.dedent("""
 
-            select indicator_uuid, value, time_period
+            select indicator_uuid, value
 
             from indicator_location_values
 
@@ -118,7 +118,7 @@ class Location(object):
             yield row
 
 
-    def all_indicator_values_by_time_period_and_category(self, pgconn):
+    def all_indicator_values_by_observation_timestamp_and_category(self, pgconn):
 
         """
         Indicator Values sorted by time period
@@ -131,19 +131,90 @@ class Location(object):
             with indicator_value_location_full  as
             (
                 select (i.*::indicators), ilv.indicator_uuid,
-                l.title, ilv.value, ilv.time_period
+                l.title, ilv.value, ilv.observation_timestamp,
+                ilv.observation_range
+
                 from indicator_location_values ilv
 
                 join indicators i on i.indicator_uuid = ilv.indicator_uuid
                 join locations l on l.location_uuid = ilv.location_uuid
+                order by ilv.observation_timestamp asc
             )
         """), dict(location_uuid=self.location_uuid))
 
         for row in cursor.fetchall():
             yield row
 
+    def indicators_with_values_by_location(self, pgconn,
+        indicators):
 
-    def all_indicator_categories_with_values_by_location(self, pgconn):
+        """
+        Indicator Values sorted by categories
+        """
+
+        cursor = pgconn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+
+        cursor.execute(textwrap.dedent("""
+
+
+                with indicator_value_location  as
+                (
+                    select
+                    i.indicator_uuid, i.title, i.indicator_value_format,
+                    ilv.indicator_uuid,
+                    l.title as location_title,
+                    ilv.value, ilv.observation_timestamp, i.indicator_category
+                    from indicator_location_values ilv
+
+                    join indicators i on i.indicator_uuid = ilv.indicator_uuid
+                    join locations l on l.location_uuid = ilv.location_uuid
+
+                    where l.location_uuid = %(location_uuid)s
+                    and i.title = any(%(indicators)s)
+
+                    order by ilv.observation_timestamp asc
+                )
+
+                select ilv.title, array_to_json(array_agg(ilv.*)) as indicator_values
+                from indicator_value_location ilv
+                group by ilv.title
+
+
+        """), dict(location_uuid=self.location_uuid,
+                indicators=indicators))
+
+        for row in cursor.fetchall():
+            yield row
+
+    def distinct_observation_timestamp_for_indicators(self, pgconn,
+        indicators):
+
+        """
+        Give us the distinct observable_timestamps over a given set of
+        indicators
+
+
+        """
+
+        cursor = pgconn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+
+        cursor.execute(textwrap.dedent("""
+
+                select distinct observation_timestamp
+                from indicator_location_values
+                where indicator_uuid = any(
+                    select indicator_uuid from indicators where
+                    title = any(%(indicators)s))
+                order by observation_timestamp asc;
+
+        """), dict(location_uuid=self.location_uuid,
+                indicators=indicators))
+
+        for row in cursor.fetchall():
+            yield row
+
+    def all_indicator_categories_with_values_by_location(self, pgconn,
+        indicators):
 
         """
         Indicator Values sorted by categories
@@ -161,30 +232,32 @@ class Location(object):
                     i.indicator_uuid, i.title, i.indicator_value_format,
                     ilv.indicator_uuid,
                     l.title as location_title,
-                    ilv.value, ilv.time_period, i.indicator_category
+                    ilv.value, ilv.observation_timestamp, i.indicator_category
                     from indicator_location_values ilv
 
                     join indicators i on i.indicator_uuid = ilv.indicator_uuid
                     join locations l on l.location_uuid = ilv.location_uuid
 
                     where l.location_uuid = %(location_uuid)s
+                    and i.title in %(indicators)s
                 )
 
 
-                select indicator_category, time_period,
+                select indicator_category, ,
                 array_to_json(array_agg((ilv.*))) as indicator_values
 
                 from indicator_value_location_full ilv
-                group by indicator_category, time_period
+                group by indicator_category, observation_timestamp
             )
 
 
             select cti.indicator_category,
-            array_to_json(array_agg(cti.*)) as time_period_values
+            array_to_json(array_agg(cti.*)) as observation_timestamp_values
 
             from category_time_indicator cti group by cti.indicator_category
 
-        """), dict(location_uuid=self.location_uuid))
+        """), dict(location_uuid=self.location_uuid,
+                indicators=indicators))
 
         for row in cursor.fetchall():
             yield row
@@ -216,7 +289,7 @@ class Location(object):
                     select
                     i.indicator_uuid, i.title, i.indicator_value_format,
                     l.title as location_title,
-                    ilv.value, ilv.time_period, i.indicator_category
+                    ilv.value, ilv.observation_timestamp, i.indicator_category
                     from indicator_location_values ilv
 
                     join indicators i on i.indicator_uuid = ilv.indicator_uuid

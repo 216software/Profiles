@@ -188,7 +188,6 @@ class IndicatorValuesByLocation(Handler):
         indicator_values = [x for x in \
             location.look_up_indicators(self.cw.get_pgconn())]
 
-
         return Response.json(dict(
             message="Found these indicator values for this location {0}".\
                 format(location.title),
@@ -196,7 +195,7 @@ class IndicatorValuesByLocation(Handler):
             success=True,
             indicator_values=indicator_values))
 
-class IndicatorCategoriesAndValuesByLocation(Handler):
+class IndicatorValuesByLocation(Handler):
 
     route_strings = set(["GET /api/indicator-categories-with-values-by-location"])
     route = Handler.check_route_strings
@@ -206,16 +205,23 @@ class IndicatorCategoriesAndValuesByLocation(Handler):
         location = pg.locations.Location.by_location_uuid(self.cw.get_pgconn(),
             req.wz_req.args['location_uuid'])
 
-        category_indicator_values = [x for x in \
-            location.all_indicator_categories_by_indicator(self.cw.get_pgconn())]
+        indicators = req.wz_req.args.getlist('indicators[]')
 
+        category_indicator_values = [x for x in \
+            location.indicators_with_values_by_location(self.cw.get_pgconn(),
+                indicators)]
+
+        distinct_observable_timestamps = [x for x in \
+            location.distinct_observation_timestamp_for_indicators(self.cw.get_pgconn(),
+                indicators)]
 
         return Response.json(dict(
             message="Found these indicator categories and values for this location {0}".\
                 format(location.title),
             reply_timestamp=datetime.datetime.now(),
             success=True,
-            category_indicator_values=category_indicator_values))
+            indicator_values=category_indicator_values,
+            distinct_observable_timestamps=distinct_observable_timestamps))
 
 
 class LocationTypes(Handler):
