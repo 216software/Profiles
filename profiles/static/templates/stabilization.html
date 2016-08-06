@@ -1,6 +1,48 @@
 
 <h2>Stabilization</h2>
 
-<p>All of our stabilization Page data goes here...</p>
+<div data-bind="with:parentvm.selected_location()">
 
-</div> <!-- closes page id = stabilization -->
+<p> Now viewing data for <span data-bind="text:title"></p>
+
+</div>
+
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Indicator</th>
+<!-- ko foreach:observable_timestamps -->
+    <th data-bind="text:$data.format('YYYY')"></th>
+<!-- /ko -->
+</tr>
+</thead>
+<tbody>
+<!-- ko foreach:indicators -->
+
+<tr>
+<td data-bind="text:title"></td>
+
+<!-- ko foreach:$parent.observable_timestamps -->
+
+<!-- if $parent.indicator_values()[$index()].observation_timestamp().year() == $data.year() -->
+<td><span data-bind="text:$parent.indicator_values()[$index()].value()"></span>
+(<span data-bind="text:$data.format('YYYY')"></span>)
+</td>
+<!-- /ko -->
+
+<!-- /ko --> <!-- closes inner for loop -->
+
+</tr>
+<!-- /ko -->
+
+</tbody>
+
+</table>
+
+<!--
+    <ul data-bind="foreach:indicator_values">
+        <li data-bind="text:value"></li>
+    </ul>
+</ul>
+-->
+

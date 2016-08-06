@@ -28,11 +28,10 @@ function ProfilesViewModel (data) {
     };
 
     self.startpagevm = new StartPageViewModel({rootvm:self});
-    self.populationvm = new PopulationViewModel({rootvm:self});
-    self.stabilizationvm= new StabilizationViewModel({rootvm:self});
 
-
-    pager.onMatch.add(function(){
+    /* For update of tabs at the top of the page, subscribe to afterShow
+     */
+    pager.afterShow.add(function(){
         self.active_tab(pager.getActivePage().currentId);
     });
 };

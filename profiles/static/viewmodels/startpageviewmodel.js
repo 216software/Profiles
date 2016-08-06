@@ -25,10 +25,10 @@ function StartPageViewModel (data) {
     self.location_uuid = ko.observable(data.location_uuid);
 
     self.selected_location = ko.observable(new Location({rootvm:data.rootvm}));
+    self.selector_location = ko.observable();
     self.selected_location_type = ko.observable();
 
     self.filtered_locations = ko.computed(function(){
-
          if(self.selected_location_type() != undefined){
              return ko.utils.arrayFilter(self.locations(), function(l) {
                 return l.location_type() == self.selected_location_type();
@@ -37,10 +37,14 @@ function StartPageViewModel (data) {
         else{
             return self.locations();
         }
-
     });
 
+    self.stabilizationvm = new StabilizationViewModel({'rootvm':data.rootvm,
+        'parentvm':self});
+
     self.initialize = function(){
+
+        console.log('initing start page vm');
 
         self.get_all_location_types().then(self.get_all_locations).
             then(self.selected_location_initialize);
@@ -113,6 +117,7 @@ function StartPageViewModel (data) {
 
         /* Look up map location */
 
+        /*
         return $.ajax({
             url: "/api/location",
             type: "GET",
@@ -129,6 +134,7 @@ function StartPageViewModel (data) {
                 }
             }
         });
+        */
 
     };
 
@@ -137,6 +143,9 @@ function StartPageViewModel (data) {
 
         /* Updates the map and then looks up values for
          * a given location */
+
+        // Set selected to location to the one that has been selected
+        self.selected_location(self.selector_location());
 
         // Remove any old layers:
         for (var index in self.added_map_layers){
@@ -147,11 +156,8 @@ function StartPageViewModel (data) {
 
         self.create_feature_layer(self.selected_location());
 
-        pager.navigate('start/location?location_uuid=' +
-            self.selected_location().location_uuid());
-
         /* Also -- look up data for this location */
-        self.selected_location().look_up_indicator_and_values();
+        //self.look_up_indicator_and_values();
     }
 
     /* Makes an outline of an area on the map*/
@@ -184,10 +190,64 @@ function StartPageViewModel (data) {
 
             // Also, we want our map layer to be updated accordingly
             self.change_location();
-
         }
         else{
             return false;
         }
     };
+
+
+    /* We need to load indicators based on current location and current
+     * tab */
+
+    self.indicators = ko.observableArray([]);
+
+    self.look_up_indicator_and_values = function(indicators, success_callback){
+
+        /* At some point, we're going to need the tab we're on
+         * so that we only return the correct info -- unless
+         * that's computed on the HTML / js side */
+
+        // only do this if we need to:
+        //
+        self.rootvm.is_busy(true);
+
+        return $.ajax({
+            url: "/api/indicator-categories-with-values-by-location",
+            type: "GET",
+            dataType: "json",
+            processData: true,
+            data: {'location_uuid':self.selected_location().location_uuid(),
+                   'indicators':indicators
+                   },
+            complete: function () {
+                self.rootvm.is_busy(false);
+            },
+            success: function (data) {
+                if (data.success) {
+                    console.log(data);
+
+                    /* Data is mapped categories, to indicator to
+                     * values
+                     *
+                     * category [ indicators [indicator_values, ..], ..  ]
+                     **/
+
+                    success_callback(data);
+
+                    self.indicators(ko.utils.arrayMap(
+                        data.indicator_values || [],
+                        function (x) {
+                            x.rootvm = self.rootvm;
+                            return new Indicator(x);
+                        }));
+
+                }
+                else {
+                    toastr.error(data.message);
+                }
+            }
+        });
+    };
+
 };

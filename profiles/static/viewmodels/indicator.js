@@ -23,6 +23,9 @@ function Indicator (data) {
                                 return new IndicatorValue(x);
                             }));
 
+
+    console.log(self.indicator_values());
+
     // Away to see my various indicator values?
 };
 
@@ -41,6 +44,6 @@ function IndicatorValue(data){
     /* These will only be filled out if we have a value for this indicator as well
     */
     self.value = ko.observable(data.value).extend({number_format:'number'});
-    self.time_period = ko.observable(data.time_period);
+    self.observation_timestamp = ko.observable(new moment(data.observation_timestamp));
     self.location_title = ko.observable(data.location_title);
 };

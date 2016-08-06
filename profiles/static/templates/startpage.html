@@ -20,7 +20,7 @@
     <select class="form-control" data-bind="options: filtered_locations,
                                     optionsCaption: 'Choose...',
                                     optionsText:'title',
-                                    value:selected_location"></select>
+                                    value:selector_location"></select>
 </div> <!-- closes form-group -->
 
 
@@ -82,6 +82,8 @@ Change Location</button>
 <div data-bind="page: {
     id: 'stabilization',
     source: '/static/templates/stabilization.html',
+    with: stabilizationvm,
+    afterShow: stabilizationvm.initialize
 }"></div>
 
 <div data-bind="page: {
