@@ -10,13 +10,13 @@ from profiles.pg import RelationWrapper
 
 log = logging.getLogger(__name__)
 
-class indicatorsFactory(psycopg2.extras.CompositeCaster):
+class IndicatorsFactory(psycopg2.extras.CompositeCaster):
 
     def make(self, values):
         d = dict(zip(self.attnames, values))
-        return indicator(**d)
+        return Indicator(**d)
 
-class indicator(object):
+class Indicator(object):
 
     def __init__(self, indicator_uuid, title, description,
         indicator_value_format, indicator_category, source_document,
@@ -38,8 +38,6 @@ class indicator(object):
     def __jsondata__(self):
 
         d = copy.copy(self.__dict__)
-        # We don't want to return the actual shape, just the json
-        del d['indicator_shape']
         return d
 
 
@@ -191,9 +189,6 @@ class indicator(object):
             self.__class__.__module__,
             self.__class__.__name__,
             self.title)
-
-# Matt can't abide classes named in lower-case.
-Indicator = indicator
 
 def all_indicator_categories(pgconn):
 

@@ -24,3 +24,4 @@ script_order:
 -   add-more-indicator-columns.sql
 -   insert_all_csv_files.py
 -   update_indicators_with_descriptions.py
+-   insert-indicator-formatting-based-on-spreadsheet.sql

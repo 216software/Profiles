@@ -227,12 +227,6 @@ function StartPageViewModel (data) {
                 if (data.success) {
                     console.log(data);
 
-                    /* Data is mapped categories, to indicator to
-                     * values
-                     *
-                     * category [ indicators [indicator_values, ..], ..  ]
-                     **/
-
                     success_callback(data);
 
                     self.indicators(ko.utils.arrayMap(

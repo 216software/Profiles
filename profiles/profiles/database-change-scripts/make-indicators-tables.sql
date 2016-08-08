@@ -47,7 +47,8 @@ insert into indicator_value_formats
 (format)
 values
 ('number'),
-('currency');
+('currency'),
+('percent');
 
 
 /* Indicators or Variables are what we're measuring.

@@ -3,6 +3,8 @@ function Indicator (data) {
     /*
      * An indicator with a possible value */
 
+    console.log(data);
+
     var self = this;
     self.type = "Indicator";
     self.rootvm = data.rootvm;
@@ -56,7 +58,7 @@ function IndicatorValue(data){
     self.indicator_value_format = ko.observable(data.indicator_value_format);
     /* These will only be filled out if we have a value for this indicator as well
     */
-    self.value = ko.observable(data.value).extend({number_format:'number'});
+    self.value = ko.observable(data.value).extend({number_format:data.indicator_value_format || 'number'});
     self.observation_timestamp = ko.observable(new moment(data.observation_timestamp));
     self.location_title = ko.observable(data.location_title);
 

@@ -103,7 +103,6 @@ rackspace:
 # This is stuff just for this project
 profiles:
 
-    # Rob, you'll need to change this
-    csv_data_files_folder: /home/matt/Profiles/datafiles/csvfiles
+    csv_data_files_folder: /home/rob/checkouts/Profiles/datafiles/csvfiles
 
 # vim: set filetype=yaml :

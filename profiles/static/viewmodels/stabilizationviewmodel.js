@@ -43,8 +43,10 @@ function StabilizationViewModel (data) {
         self.indicators(ko.utils.arrayMap(
             data.indicator_values || [],
             function (x) {
-                x.rootvm = self.rootvm;
-                return new Indicator(x);
+                x.indicator.rootvm = self.rootvm;
+                x.indicator.indicator_values = x.indicator_values;
+                console.log(x.indicator);
+                return new Indicator(x.indicator);
             }));
 
     };

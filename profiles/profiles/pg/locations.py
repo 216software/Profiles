@@ -161,7 +161,6 @@ class Location(object):
                 (
                     select
                     i.indicator_uuid, i.title, i.indicator_value_format,
-                    ilv.indicator_uuid,
                     l.title as location_title,
                     ilv.value, ilv.observation_timestamp, i.indicator_category
                     from indicator_location_values ilv
@@ -175,9 +174,13 @@ class Location(object):
                     order by ilv.observation_timestamp asc
                 )
 
-                select ilv.title, array_to_json(array_agg(ilv.*)) as indicator_values
+                select (i.*)::indicators as indicator,
+                array_to_json(array_agg(ilv.*)) as indicator_values
+
                 from indicator_value_location ilv
-                group by ilv.title
+                join indicators i on ilv.indicator_uuid = i.indicator_uuid
+
+                group by (i.*)
 
 
         """), dict(location_uuid=self.location_uuid,
@@ -245,7 +248,7 @@ class Location(object):
                 )
 
 
-                select indicator_category, ,
+                select indicator_category,
                 array_to_json(array_agg((ilv.*))) as indicator_values
 
                 from indicator_value_location_full ilv

@@ -20,7 +20,7 @@
 <!-- ko foreach:indicators -->
 
 <tr>
-<td data-bind="text:title"></td>
+<td> <span data-bind="text:title"></span>-<span data-bind="text:description"></span></td>
 
 <!-- ko foreach:$parent.observable_timestamps -->
 <td><span data-bind="text:$parent.indicator_value_by_year($data.year())"></span>
