@@ -25,6 +25,23 @@ function Indicator (data) {
                                 return new IndicatorValue(x);
                             }));
 
+    self.indicator_values_sorted_asc = ko.computed(function(){
+
+        return self.indicator_values.sort(function (left, right) {
+            return left.observation_timestamp_year() == right.observation_timestamp_year() ? 0 :
+                (left.observation_timestamp_year() < right.observation_timestamp_year() ? -1 : 1) })
+
+    });
+
+    self.percent_change_indicator_value = ko.computed(function(){
+
+        var first = self.indicator_values_sorted_asc()[0].value()
+        var last = self.indicator_values_sorted_asc()[self.indicator_values().length - 1].value();
+
+        return ((last - first) / first) * 100;
+
+    });
+
     self.indicator_value_by_year = function(year){
         item = ko.utils.arrayFirst(this.indicator_values(), function(iv) {
             return iv.observation_timestamp_year() == year;

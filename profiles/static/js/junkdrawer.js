@@ -447,7 +447,7 @@ ko.extenders.number_format = function(target, format) {
 
     //In this case, format should be one of 'number', 'money', 'percent'
     //create a writable computed observable to intercept writes to our observable
-    var result = ko.pureComputed({
+    target.formatted = ko.pureComputed({
         read: target,  //always return the original observables value
         write: function(newValue) {
             var current = target(),
@@ -474,10 +474,10 @@ ko.extenders.number_format = function(target, format) {
     }).extend({ notify: 'always' });
 
     //initialize with current value to make sure it is rounded appropriately
-    result(target());
+    //result(target());
 
     //return the new computed observable
-    return result;
+    return target;
 };
 
 /* Good to have a toggle function available to true/false observables */
