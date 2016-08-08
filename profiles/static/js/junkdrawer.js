@@ -447,38 +447,37 @@ ko.extenders.number_format = function(target, format) {
 
     //In this case, format should be one of 'number', 'money', 'percent'
     //create a writable computed observable to intercept writes to our observable
-    target.formatted = ko.pureComputed({
-        read: target,  //always return the original observables value
-        write: function(newValue) {
-            var current = target(),
-            newValueAsNum = isNaN(newValue) ? 0 : +newValue,
-            valueToWrite = (newValueAsNum.toFixed(0).replace(/(\d)(?=(\d{3})+$)/g, '$1,'));
 
-            if (format == 'percent'){
-                valueToWrite += '%';
-            }
-            if (format == 'money'){
-                valueToWrite = '$' + valueToWrite
-            }
+    target.formatted = ko.observable();
 
-            //only write if it changed
-            if (valueToWrite !== current) {
-                target(valueToWrite);
-            } else {
-                //if the rounded value is the same, but a different value was written, force a notification for the current field
-                if (newValue !== current) {
-                    target.notifySubscribers(valueToWrite);
-                }
-            }
+    function format(newValue) {
+
+        console.log('formatting!');
+        newValueAsNum = isNaN(newValue) ? 0 : +newValue,
+        valueToWrite = (newValueAsNum.toFixed(0).replace(/(\d)(?=(\d{3})+$)/g, '$1,'));
+
+        console.log('value to write ', valueToWrite)
+
+        if (format == 'percent'){
+            valueToWrite += '%';
         }
-    }).extend({ notify: 'always' });
+        if (format == 'money'){
+            valueToWrite = '$' + valueToWrite
+        }
+
+        target.formatted(valueToWrite);
+    };
+
+    //initial formatting
+    format(target());
 
     //initialize with current value to make sure it is rounded appropriately
-    //result(target());
+    target.subscribe(format);
 
     //return the new computed observable
     return target;
 };
+
 
 /* Good to have a toggle function available to true/false observables */
 ko.observable.fn.toggle = function () {

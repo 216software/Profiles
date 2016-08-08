@@ -49,10 +49,10 @@ function Indicator (data) {
 
         if (item)
         {
-            return item.value();
+            return item.value;
         }
         else{
-            return null;
+            return {};
         }
     };
 
