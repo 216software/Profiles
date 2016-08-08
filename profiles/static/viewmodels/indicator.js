@@ -34,11 +34,16 @@ function Indicator (data) {
     });
 
     self.percent_change_indicator_value = ko.computed(function(){
-
         var first = self.indicator_values_sorted_asc()[0].value()
         var last = self.indicator_values_sorted_asc()[self.indicator_values().length - 1].value();
 
-        return ((last - first) / first) * 100;
+        if (first == 0){
+            return 0;
+        }
+        else{
+            result = ((last - first) / first) * 100;
+            return format_value(result, 'percent');
+        }
 
     });
 
@@ -55,10 +60,6 @@ function Indicator (data) {
             return {};
         }
     };
-
-    console.log(self.indicator_values());
-
-    // Away to see my various indicator values?
 };
 
 function IndicatorValue(data){

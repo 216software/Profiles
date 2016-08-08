@@ -21,12 +21,11 @@
 <!-- ko foreach:indicators -->
 
 <tr>
-<td> <span data-bind="text:title"></span>-<span data-bind="text:description"></span></td>
-<td> <span data-bind="text:percent_change_indicator_value"></span></td>
+<td data-bind="text:description"></td>
+<td data-bind="text:percent_change_indicator_value"></td>
 
 <!-- ko foreach:$parent.observable_timestamps -->
 <td><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
-(<span data-bind="text:$data.format('YYYY')"></span>)
 </td>
 <!-- /ko --> <!-- closes inner for loop -->
 

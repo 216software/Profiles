@@ -1,3 +1,22 @@
+// Global formatter
+var format_value  = function(newValue, format, fixed_digits){
+
+    newValueAsNum = isNaN(newValue) ? 0 : +newValue,
+    valueToWrite = (newValueAsNum.toFixed(fixed_digits || 0).replace(/(\d)(?=(\d{3})+$)/g, '$1,'));
+
+    console.log('value to write ', valueToWrite)
+
+    if (format == 'percent'){
+        valueToWrite += '%';
+    }
+    if (format == 'money'){
+        valueToWrite = '$' + valueToWrite
+    }
+
+    return valueToWrite
+
+};
+
 ko.bindingHandlers.masked_input =  {
 
   init: function(element, valueAccessor, allBindings, viewModel, bindingContext)   {
@@ -452,19 +471,7 @@ ko.extenders.number_format = function(target, format) {
 
     function format(newValue) {
 
-        console.log('formatting!');
-        newValueAsNum = isNaN(newValue) ? 0 : +newValue,
-        valueToWrite = (newValueAsNum.toFixed(0).replace(/(\d)(?=(\d{3})+$)/g, '$1,'));
-
-        console.log('value to write ', valueToWrite)
-
-        if (format == 'percent'){
-            valueToWrite += '%';
-        }
-        if (format == 'money'){
-            valueToWrite = '$' + valueToWrite
-        }
-
+        valueToWrite = format_value(newValue, format);
         target.formatted(valueToWrite);
     };
 
