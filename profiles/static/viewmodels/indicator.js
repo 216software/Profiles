@@ -3,8 +3,6 @@ function Indicator (data) {
     /*
      * An indicator with a possible value */
 
-    console.log(data);
-
     var self = this;
     self.type = "Indicator";
     self.rootvm = data.rootvm;
@@ -63,6 +61,22 @@ function Indicator (data) {
     };
 };
 
+
+/* static-y method :-p
+ *
+ * Returns an indicator by title, given a list of indicators and a
+ * title
+ */
+Indicator.indicator_by_title = function(indicators, title){
+
+    console.log('indicator by title ', indicators);
+    return ko.utils.arrayFirst(indicators, function (i){
+        return i.title() == title;
+    });
+    return {};
+
+}
+
 function IndicatorValue(data){
     var self = this;
     self.type = "IndicatorValue";
@@ -87,3 +101,8 @@ function IndicatorValue(data){
         }
     });
 };
+
+
+
+
+

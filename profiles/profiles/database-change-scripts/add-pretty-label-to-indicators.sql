@@ -19,5 +19,3 @@ update indicators set pretty_label = 'Median sales price, parcels with no histor
 /* Economy */
 update indicators set pretty_label = 'Jobs in neighborhood' where title = 'alljobs';
 update indicators set pretty_label = 'Commercial Occupancy' where title = '_bus_occ';
-
-

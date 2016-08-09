@@ -26,17 +26,6 @@ function StabilizationViewModel (data) {
 
     self.indicators = ko.observableArray([]);
 
-    /* Indicator by title is really a more utility function -- where
-     * should we move it? */
-    self.indicator_by_title = function(title){
-
-        console.log('looking up indicator');
-
-        return ko.utils.arrayFirst(self.indicators(), function (i){
-            return i.title() == title;
-        });
-    };
-
     self.extra_formatting = function(title){
         return self.indicator_titles_extra_formatting[title];
     };
@@ -68,7 +57,6 @@ function StabilizationViewModel (data) {
             function (x) {
                 x.indicator.rootvm = self.rootvm;
                 x.indicator.indicator_values = x.indicator_values;
-                console.log(x.indicator);
                 return new Indicator(x.indicator);
             }));
 

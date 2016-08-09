@@ -19,15 +19,6 @@ function EconomyViewModel (data) {
 
     self.indicators = ko.observableArray([]);
 
-    /* Indicator by title is really a more utility function -- where
-     * should we move it? */
-    self.indicator_by_title = function(title){
-
-        return ko.utils.arrayFirst(self.indicators(), function (i){
-            return i.title() == title;
-        });
-    };
-
     self.parentvm.selected_location.subscribe(function(){
         self.parentvm.look_up_indicator_and_values(self.indicator_titles,
             self.look_up_indicator_complete);

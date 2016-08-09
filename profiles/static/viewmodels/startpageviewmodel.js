@@ -56,8 +56,6 @@ function StartPageViewModel (data) {
 
     self.get_all_location_types = function(){
 
-        console.log('location types');
-
         /* Look up the different location_types */
 
         return $.ajax({
@@ -79,8 +77,6 @@ function StartPageViewModel (data) {
     }
 
     self.get_all_locations = function(){
-
-        console.log('locations');
 
         return $.ajax({
             url: "/api/all-locations",

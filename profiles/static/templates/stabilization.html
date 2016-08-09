@@ -20,7 +20,7 @@
 <tbody>
 <!-- ko foreach:indicator_titles -->
 
-<!-- ko with:$parent.indicator_by_title($data) -->
+<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
 <td> <span data-bind="text:pretty_label"></span>
 <span data-bind="text:$parents[1].extra_formatting(title())"></span>
