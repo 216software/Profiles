@@ -4,12 +4,10 @@ var format_value  = function(newValue, format, fixed_digits){
     newValueAsNum = isNaN(newValue) ? 0 : +newValue,
     valueToWrite = (newValueAsNum.toFixed(fixed_digits || 0).replace(/(\d)(?=(\d{3})+$)/g, '$1,'));
 
-    console.log('value to write ', valueToWrite)
-
     if (format == 'percent'){
         valueToWrite += '%';
     }
-    if (format == 'money'){
+    if (format == 'currency'){
         valueToWrite = '$' + valueToWrite
     }
 
@@ -462,7 +460,7 @@ ko.bindingHandlers.piety = {
 
  * Got this from Knockouts Doc pages: http://knockoutjs.com/documentation/extenders.html
  */
-ko.extenders.number_format = function(target, format) {
+ko.extenders.number_format = function(target, type_of_format) {
 
     //In this case, format should be one of 'number', 'money', 'percent'
     //create a writable computed observable to intercept writes to our observable
@@ -471,7 +469,7 @@ ko.extenders.number_format = function(target, format) {
 
     function format(newValue) {
 
-        valueToWrite = format_value(newValue, format);
+        valueToWrite = format_value(newValue, type_of_format);
         target.formatted(valueToWrite);
     };
 

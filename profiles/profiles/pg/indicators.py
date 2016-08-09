@@ -19,12 +19,13 @@ class IndicatorsFactory(psycopg2.extras.CompositeCaster):
 class Indicator(object):
 
     def __init__(self, indicator_uuid, title, description,
-        indicator_value_format, indicator_category, source_document,
+        pretty_label, indicator_value_format, indicator_category, source_document,
         sas_variable, formula, extra_notes, inserted, updated):
 
         self.indicator_uuid = indicator_uuid
         self.title = title
         self.description = description
+        self.pretty_label = pretty_label
         self.indicator_value_format = indicator_value_format
         self.indicator_category = indicator_category
         self.source_document = source_document

@@ -11,12 +11,35 @@ function StabilizationViewModel (data) {
         console.log('initing ', self.type);
     };
 
-    self.indicator_titles = ['distress', '_distress', 'med_ntal_price', 'ntal_sales',
-        'shf', 'f', 'hsg_den', 'res_occ'];
+    /* This should also include the order we want to display */
+    self.indicator_titles = ['res_occ', '_res_occ',
+        'hsg_den', 'f',
+        'shf',
+        'distress', '_distress',
+        'ntal_sales', '_ntal_sales',
+        'med_ntal_price'];
+
+    self.indicator_titles_extra_formatting = {
+        'hsg_den':'*', 'distress':'**',
+        'ntal_sales':'***'
+    }
 
     self.indicators = ko.observableArray([]);
 
-    self.test_observable = ko.observable(0);
+    /* Indicator by title is really a more utility function -- where
+     * should we move it? */
+    self.indicator_by_title = function(title){
+
+        console.log('looking up indicator');
+
+        return ko.utils.arrayFirst(self.indicators(), function (i){
+            return i.title() == title;
+        });
+    };
+
+    self.extra_formatting = function(title){
+        return self.indicator_titles_extra_formatting[title];
+    };
 
     self.parentvm.selected_location.subscribe(function(){
         self.parentvm.look_up_indicator_and_values(self.indicator_titles,
@@ -50,27 +73,4 @@ function StabilizationViewModel (data) {
             }));
 
     };
-
-    // so the look up could be here -- based on our indicator
-    // and the parentvm's chosen location, we could say something like
-    //
-    // parentvm.look_up_indicator_values(indicator_list, selected_location,
-    //  callback_to_populate values)
-    //
-    //  the call back is the actual values we're going to look up.
-    //
-    //  What about changed location? That should trigger a new lookup...
-    //  We could subscribe --
-    //  $parentvm.selected_location.subscribe(callback)
-    //  callback triggers new lookup the same way our init does.
-    //
-    //  Then, for a given set of indicators, we're able to display what
-    //  we want in the groups we want?
-    //
-    //  Test with stabilization first -- indicators are 'distress' and
-    //  '_distress'
-    //
-    //  We need a list of all years for these values, as well as
-    //  the value with a given timestamp. Then we can display
-
 };

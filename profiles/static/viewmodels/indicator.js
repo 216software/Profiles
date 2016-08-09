@@ -11,6 +11,7 @@ function Indicator (data) {
 
     self.indicator_uuid = ko.observable(data.indicator_uuid);
     self.title = ko.observable(data.title);
+    self.pretty_label = ko.observable(data.pretty_label);
     self.description = ko.observable(data.description);
     self.indicator_value_format = ko.observable(data.indicator_value_format);
 
