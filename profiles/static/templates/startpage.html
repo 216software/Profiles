@@ -52,6 +52,8 @@ Change Location</button>
 <div data-bind="page: {
     id: 'economy',
     source: '/static/templates/economy.html',
+    with: economyvm,
+    afterShow: economyvm.initialize
 }"></div>
 
 <div data-bind="page: {

@@ -1,6 +1,44 @@
 
 <h2>Economy Metrics</h2>
 
-<p>Table of data goes here for a given location -- see CSV </p>
+<div data-bind="with:parentvm.selected_location()">
+
+<h4> Now viewing data for <span data-bind="text:title"></h4>
+
+</div>
+
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Indicator</th>
+<th>% change</th>
+<!-- ko foreach:observable_timestamps -->
+    <th data-bind="text:$data.format('YYYY')"></th>
+<!-- /ko -->
+</tr>
+</thead>
+<tbody>
+<!-- ko foreach:indicator_titles -->
+
+<!-- ko with:$parent.indicator_by_title($data) -->
+<tr>
+<td> <span data-bind="text:pretty_label"></span>
+</td>
+<td data-bind="text:percent_change_indicator_value"></td>
+
+<!-- ko foreach:$parents[1].observable_timestamps -->
+<td><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+</td>
+<!-- /ko --> <!-- closes inner for loop -->
+
+</tr>
+
+<!-- /ko -->
+
+<!-- /ko -->
+</tbody>
+
+</table>
+
 
 

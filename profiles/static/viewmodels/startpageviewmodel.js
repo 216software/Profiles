@@ -42,6 +42,10 @@ function StartPageViewModel (data) {
     self.stabilizationvm = new StabilizationViewModel({'rootvm':data.rootvm,
         'parentvm':self});
 
+    self.economyvm = new EconomyViewModel({'rootvm':data.rootvm,
+        'parentvm':self});
+
+
     self.initialize = function(){
 
         console.log('initing start page vm');

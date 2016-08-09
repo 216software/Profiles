@@ -16,4 +16,8 @@ update indicators set pretty_label = 'Sales, parcels with no history of foreclos
 update indicators set pretty_label = 'Sales, parcels with no history of foreclosure rate' where title = '_ntal_sales';
 update indicators set pretty_label = 'Median sales price, parcels with no history of foreclosure' where title = 'med_ntal_price';
 
+/* Economy */
+update indicators set pretty_label = 'Jobs in neighborhood' where title = 'alljobs';
+update indicators set pretty_label = 'Commercial Occupancy' where title = '_bus_occ';
+
 
