@@ -20,6 +20,7 @@ class Location(object):
 
     def __init__(self, location_uuid, title, description,
         location_type, location_shape, location_shape_json,
+        display_me,
         inserted, updated):
 
         self.location_uuid = location_uuid
@@ -28,6 +29,7 @@ class Location(object):
         self.location_type = location_type
         self.location_shape = location_shape
         self.location_shape_json = location_shape_json
+        self.display_me = display_me
 
         self.inserted = inserted
         self.updated = updated
