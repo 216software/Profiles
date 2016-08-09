@@ -59,6 +59,8 @@ Change Location</button>
 <div data-bind="page: {
     id: 'education',
     source: '/static/templates/education.html',
+    with: educationvm,
+    afterShow: educationvm.initialize
 }"></div>
 
 <div data-bind="page: {

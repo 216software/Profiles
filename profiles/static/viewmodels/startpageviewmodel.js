@@ -45,6 +45,10 @@ function StartPageViewModel (data) {
     self.economyvm = new EconomyViewModel({'rootvm':data.rootvm,
         'parentvm':self});
 
+    self.educationvm = new EducationViewModel({'rootvm':data.rootvm,
+        'parentvm':self});
+
+
 
     self.initialize = function(){
 
