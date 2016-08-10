@@ -2,7 +2,6 @@ function Indicator (data) {
 
     /*
      * An indicator with a possible value */
-
     var self = this;
     self.type = "Indicator";
     self.rootvm = data.rootvm;
@@ -13,7 +12,11 @@ function Indicator (data) {
     self.description = ko.observable(data.description);
     self.indicator_value_format = ko.observable(data.indicator_value_format);
 
+
     self.indicator_category = ko.observable(data.indicator_category);
+
+    // If this indicator has a Coefficient Variation associated with it
+    self.indicator_CV = ko.observable();
 
     self.indicator_values = ko.observableArray(ko.utils.arrayMap(
                             data.indicator_values || [],
