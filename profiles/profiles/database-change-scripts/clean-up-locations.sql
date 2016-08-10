@@ -12,9 +12,6 @@ and location_uuid not in (
     from indicator_location_values
 );
 
-alter table locations
-add column display_me boolean not null default true;
-
 update locations
 set display_me = false
 where title ~ '^_';

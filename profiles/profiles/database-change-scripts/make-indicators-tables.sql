@@ -164,6 +164,8 @@ create table locations
 
     location_shape_json json,
 
+    display_me boolean not null default true,
+
     inserted timestamp not null default now(),
     updated timestamp
 
