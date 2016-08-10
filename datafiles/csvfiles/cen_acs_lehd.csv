@@ -19,48 +19,48 @@ _roccrnt750to10002000,"% Gross rent $750 to $999, 2000",(roccrnt750to10002000/ca
 _roccrnt1000to15002000,"% Gross rent $1000 to $1499, 2000",(roccrnt1000to15002000/cashrent2000)*100
 _roccrnt1500p2000,"% Gross rent $1500 or more, 2000",(roccrnt1500p2000/cashrent2000)*100
 _norent2000,"% No cash rent, 2000",(norent2000/rent_den2000)*100
-rent_den1014,"Renter-occupied housing units, 2010-2014"
-cashrent1014,"Renter-occupied housing units with cash rent, 2010-2014"
-roccrntls2001014,"Gross rent < $200, 2010-2014"
-roccrnt200to3001014,"Gross rent $200 to $299, 2010-2014"
-roccrnt300to5001014,"Gross rent $300 to $499, 2010-2014"
-roccrnt500to7501014,"Gross rent $500 to $749, 2010-2014"
-roccrnt750to10001014,"Gross rent $750 to $999, 2010-2014"
-roccrnt1000to15001014,"Gross rent $1000 to $1499, 2010-2014"
-roccrnt1500p1014,"Gross rent $1500 or more, 2010-2014"
-norent1014,"No cash rent, 2010-2014"
-_grent1014,"Median gross rent, 2010-2014"
-mrent_den1014,"Renter-occupied housing units, MOE, 2010-2014"
-mcashrent1014,"Renter-occupied housing units with cash rent, MOE, 2010-2014"
-mroccrntls2001014,"Gross rent < $200, MOE, 2010-2014"
-mroccrnt200to3001014,"Gross rent $200 to $299, MOE, 2010-2014"
-mroccrnt300to5001014,"Gross rent $300 to $499, MOE, 2010-2014"
-mroccrnt500to7501014,"Gross rent $500 to $749, MOE, 2010-2014"
-mroccrnt750to10001014,"Gross rent $750 to $999, MOE, 2010-2014"
-mroccrnt1000to15001014,"Gross rent $1000 to $1499, MOE, 2010-2014"
-mroccrnt1500p1014,"Gross rent $1500 or more, MOE, 2010-2014"
-mnorent1014,"No cash rent, MOE, 2010-2014"
-m_grent1014,"Median gross rent, MOE, 2010-2014"
-_cashrent1014,"% Renter-occupied housing units with cash rent, 2010-2014",(cashrent1014/rent_den1014)*100
-_roccrntls2001014,"% Gross rent < $200, 2010-2014",(roccrntls2001014/cashrent1014)*100
-_roccrnt200to3001014,"% Gross rent $200 to $299, 2010-2014",(roccrnt200to3001014/cashrent1014)*100
-_roccrnt300to5001014,"% Gross rent $300 to $499, 2010-2014",(roccrnt300to5001014/cashrent1014)*100
-_roccrnt500to7501014,"% Gross rent $500 to $749, 2010-2014",(roccrnt500to7501014/cashrent1014)*100
-_roccrnt750to10001014,"% Gross rent $750 to $999, 2010-2014",(roccrnt750to10001014/cashrent1014)*100
-_roccrnt1000to15001014,"% Gross rent $1000 to $1499, 2010-2014",(roccrnt1000to15001014/cashrent1014)*100
-_roccrnt1500p1014,"% Gross rent $1500 or more, 2010-2014",(roccrnt1500p1014/cashrent1014)*100
-_norent1014,"% No cash rent, 2010-2014",(norent1014/rent_den1014)*100
-m_cashrent1014,"% Renter-occupied housing units with cash rent, MOE, 2010-2014"
-m_roccrntls2001014,"% Gross rent < $200, MOE, 2010-2014"
-m_roccrnt200to3001014,"% Gross rent $200 to $299, MOE, 2010-2014"
-m_roccrnt300to5001014,"% Gross rent $300 to $499, MOE, 2010-2014"
-m_roccrnt500to7501014,"% Gross rent $500 to $749, MOE, 2010-2014"
-m_roccrnt750to10001014,"% Gross rent $750 to $999, MOE, 2010-2014"
-m_roccrnt1000to15001014,"% Gross rent $1000 to $1499, MOE, 2010-2014"
-m_roccrnt1500p1014,"% Gross rent $1500 or more, MOE, 2010-2014"
-m_norent1014,"% No cash rent, MOE, 2010-2014"
-pctchgrt_rhh,"Five year percent change -- renter-occupied housing units with cash rent, 2010-2014",(_cashrent1014-_cashrent2000)/_cashrent2000*100
-pctchg_mdrent,% change in median gross rent,(_grent1014-_grent2000)/_grent2000*100
+rent_den2014,"Renter-occupied housing units, 2010-2014"
+cashrent2014,"Renter-occupied housing units with cash rent, 2010-2014"
+roccrntls2002014,"Gross rent < $200, 2010-2014"
+roccrnt200to3002014,"Gross rent $200 to $299, 2010-2014"
+roccrnt300to5002014,"Gross rent $300 to $499, 2010-2014"
+roccrnt500to7502014,"Gross rent $500 to $749, 2010-2014"
+roccrnt750to10002014,"Gross rent $750 to $999, 2010-2014"
+roccrnt1000to15002014,"Gross rent $1000 to $1499, 2010-2014"
+roccrnt1500p2014,"Gross rent $1500 or more, 2010-2014"
+norent2014,"No cash rent, 2010-2014"
+_grent2014,"Median gross rent, 2010-2014"
+mrent_den2014,"Renter-occupied housing units, MOE, 2010-2014"
+mcashrent2014,"Renter-occupied housing units with cash rent, MOE, 2010-2014"
+mroccrntls2002014,"Gross rent < $200, MOE, 2010-2014"
+mroccrnt200to3002014,"Gross rent $200 to $299, MOE, 2010-2014"
+mroccrnt300to5002014,"Gross rent $300 to $499, MOE, 2010-2014"
+mroccrnt500to7502014,"Gross rent $500 to $749, MOE, 2010-2014"
+mroccrnt750to10002014,"Gross rent $750 to $999, MOE, 2010-2014"
+mroccrnt1000to15002014,"Gross rent $1000 to $1499, MOE, 2010-2014"
+mroccrnt1500p2014,"Gross rent $1500 or more, MOE, 2010-2014"
+mnorent2014,"No cash rent, MOE, 2010-2014"
+m_grent2014,"Median gross rent, MOE, 2010-2014"
+_cashrent2014,"% Renter-occupied housing units with cash rent, 2010-2014",(cashrent2014/rent_den2014)*100
+_roccrntls2002014,"% Gross rent < $200, 2010-2014",(roccrntls2002014/cashrent2014)*100
+_roccrnt200to3002014,"% Gross rent $200 to $299, 2010-2014",(roccrnt200to3002014/cashrent2014)*100
+_roccrnt300to5002014,"% Gross rent $300 to $499, 2010-2014",(roccrnt300to5002014/cashrent2014)*100
+_roccrnt500to7502014,"% Gross rent $500 to $749, 2010-2014",(roccrnt500to7502014/cashrent2014)*100
+_roccrnt750to10002014,"% Gross rent $750 to $999, 2010-2014",(roccrnt750to10002014/cashrent2014)*100
+_roccrnt1000to15002014,"% Gross rent $1000 to $1499, 2010-2014",(roccrnt1000to15002014/cashrent2014)*100
+_roccrnt1500p2014,"% Gross rent $1500 or more, 2010-2014",(roccrnt1500p2014/cashrent2014)*100
+_norent2014,"% No cash rent, 2010-2014",(norent2014/rent_den2014)*100
+m_cashrent2014,"% Renter-occupied housing units with cash rent, MOE, 2010-2014"
+m_roccrntls2002014,"% Gross rent < $200, MOE, 2010-2014"
+m_roccrnt200to3002014,"% Gross rent $200 to $299, MOE, 2010-2014"
+m_roccrnt300to5002014,"% Gross rent $300 to $499, MOE, 2010-2014"
+m_roccrnt500to7502014,"% Gross rent $500 to $749, MOE, 2010-2014"
+m_roccrnt750to10002014,"% Gross rent $750 to $999, MOE, 2010-2014"
+m_roccrnt1000to15002014,"% Gross rent $1000 to $1499, MOE, 2010-2014"
+m_roccrnt1500p2014,"% Gross rent $1500 or more, MOE, 2010-2014"
+m_norent2014,"% No cash rent, MOE, 2010-2014"
+pctchgrt_rhh,"Five year percent change -- renter-occupied housing units with cash rent, 2010-2014",(_cashrent2014-_cashrent2000)/_cashrent2000*100
+pctchg_mdrent,% change in median gross rent,(_grent2014-_grent2000)/_grent2000*100
 hhinc_den2000,Total households. 2000
 hhincls10k2000,"Household income less than $10000, 2000"
 hhinc10to15k2000,"Household income $10000-14999, 2000"
@@ -83,73 +83,73 @@ _hhinc75to100k2000,"% Household income $75000-99999, 2000",(hhinc75to100k2000/hh
 _hhinc100to150k2000,"% Household income $100000-149999, 2000",(hhinc100to150k2000/hhinc_den2000)*100
 _hhinc150to200k2000,"% Household income $150000-199999, 2000",(hhinc150to200k2000/hhinc_den2000)*100
 _hhinc200kp2000,"% Household income $200000 or more, 2000",(hhinc200kp2000/hhinc_den2000)*100
-thh1014,"Total households, 2010-2014"
-hhincls10k1014,"Household income less than $10000, 2010-2014"
-hhinc10to15k1014,"Household income $10000-14999, 2010-2014"
-hhinc15to25k1014,"Household income $15000-24999, 2010-2014"
-hhinc25to35k1014,"Household income $25000-34999, 2010-2014"
-hhinc35to50k1014,"Household income $35000-49999, 2010-2014"
-hhinc50to75k1014,"Household income $50000-74999, 2010-2014"
-hhinc75to100k1014,"Household income $75000-99999, 2010-2014"
-hhinc100to150k1014,"Household income $100000-149999, 2010-2014"
-hhinc150to200k1014,"Household income $150000-199999, 2010-2014"
-hhinc200kp1014,"Household income $200000 or more, 2010-2014"
-_medinc1014,"Median household income, 2010-2014"
-mthh1014,"Total households, MOE, 2010-2014"
-mhhincls10k1014,"Household income less than $10000, MOE, 2010-2014"
-mhhinc10to15k1014,"Household income $10000-14999, MOE, 2010-2014"
-mhhinc15to25k1014,"Household income $15000-24999, MOE, 2010-2014"
-mhhinc25to35k1014,"Household income $25000-34999, MOE, 2010-2014"
-mhhinc35to50k1014,"Household income $35000-49999, MOE, 2010-2014"
-mhhinc50to75k1014,"Household income $50000-74999, MOE, 2010-2014"
-mhhinc75to100k1014,"Household income $75000-99999, MOE, 2010-2014"
-mhhinc100to150k1014,"Household income $100000-149999, MOE, 2010-2014"
-mhhinc150to200k1014,"Household income $150000-199999, MOE, 2010-2014"
-mhhinc200kp1014,"Household income $200000 or more, MOE, 2010-2014"
-_hhincls10k1014,"% Household income less than $10000, 2010-2014",(hhincls10k1014/hhinc_den1014)*100
-_hhinc10to15k1014,"% Household income $10000-14999, 2010-2014",(hhinc10to15k1014/hhinc_den1014)*100
-_hhinc15to25k1014,"% Household income $15000-24999, 2010-2014",(hhinc15to25k1014/hhinc_den1014)*100
-_hhinc25to35k1014,"% Household income $25000-34999, 2010-2014",(hhinc25to35k1014/hhinc_den1014)*100
-_hhinc35to50k1014,"% Household income $35000-49999, 2010-2014",(hhinc35to50k1014/hhinc_den1014)*100
-_hhinc50to75k1014,"% Household income $50000-74999, 2010-2014",(hhinc50to75k1014/hhinc_den1014)*100
-_hhinc75to100k1014,"% Household income $75000-99999, 2010-2014",(hhinc75to100k1014/hhinc_den1014)*100
-_hhinc100to150k1014,"% Household income $100000-149999, 2010-2014",(hhinc100to150k1014/hhinc_den1014)*100
-_hhinc150to200k1014,"% Household income $150000-199999, 2010-2014",(hhinc150to200k1014/hhinc_den1014)*100
-_hhinc200kp1014,"% Household income $200000 or more, 2010-2014",(hhinc200kp1014/hhinc_den1014)*100
-m_hhincls10k1014,"% Household income less than $10000, MOE, 2010-2014"
-m_hhinc10to15k1014,"% Household income $10000-14999, MOE, 2010-2014"
-m_hhinc15to25k1014,"% Household income $15000-24999, MOE, 2010-2014"
-m_hhinc25to35k1014,"% Household income $25000-34999, MOE, 2010-2014"
-m_hhinc35to50k1014,"% Household income $35000-49999, MOE, 2010-2014"
-m_hhinc50to75k1014,"% Household income $50000-74999, MOE, 2010-2014"
-m_hhinc75to100k1014,"% Household income $75000-99999, MOE, 2010-2014"
-m_hhinc100to150k1014,"% Household income $100000-149999, MOE, 2010-2014"
-m_hhinc150to200k1014,"% Household income $150000-199999, MOE, 2010-2014"
-m_hhinc200kp1014,"% Household income $200000 or more, MOE, 2010-2014"
+thh2014,"Total households, 2010-2014"
+hhincls10k2014,"Household income less than $10000, 2010-2014"
+hhinc10to15k2014,"Household income $10000-14999, 2010-2014"
+hhinc15to25k2014,"Household income $15000-24999, 2010-2014"
+hhinc25to35k2014,"Household income $25000-34999, 2010-2014"
+hhinc35to50k2014,"Household income $35000-49999, 2010-2014"
+hhinc50to75k2014,"Household income $50000-74999, 2010-2014"
+hhinc75to100k2014,"Household income $75000-99999, 2010-2014"
+hhinc100to150k2014,"Household income $100000-149999, 2010-2014"
+hhinc150to200k2014,"Household income $150000-199999, 2010-2014"
+hhinc200kp2014,"Household income $200000 or more, 2010-2014"
+_medinc2014,"Median household income, 2010-2014"
+mthh2014,"Total households, MOE, 2010-2014"
+mhhincls10k2014,"Household income less than $10000, MOE, 2010-2014"
+mhhinc10to15k2014,"Household income $10000-14999, MOE, 2010-2014"
+mhhinc15to25k2014,"Household income $15000-24999, MOE, 2010-2014"
+mhhinc25to35k2014,"Household income $25000-34999, MOE, 2010-2014"
+mhhinc35to50k2014,"Household income $35000-49999, MOE, 2010-2014"
+mhhinc50to75k2014,"Household income $50000-74999, MOE, 2010-2014"
+mhhinc75to100k2014,"Household income $75000-99999, MOE, 2010-2014"
+mhhinc100to150k2014,"Household income $100000-149999, MOE, 2010-2014"
+mhhinc150to200k2014,"Household income $150000-199999, MOE, 2010-2014"
+mhhinc200kp2014,"Household income $200000 or more, MOE, 2010-2014"
+_hhincls10k2014,"% Household income less than $10000, 2010-2014",(hhincls10k2014/hhinc_den2014)*100
+_hhinc10to15k2014,"% Household income $10000-14999, 2010-2014",(hhinc10to15k2014/hhinc_den2014)*100
+_hhinc15to25k2014,"% Household income $15000-24999, 2010-2014",(hhinc15to25k2014/hhinc_den2014)*100
+_hhinc25to35k2014,"% Household income $25000-34999, 2010-2014",(hhinc25to35k2014/hhinc_den2014)*100
+_hhinc35to50k2014,"% Household income $35000-49999, 2010-2014",(hhinc35to50k2014/hhinc_den2014)*100
+_hhinc50to75k2014,"% Household income $50000-74999, 2010-2014",(hhinc50to75k2014/hhinc_den2014)*100
+_hhinc75to100k2014,"% Household income $75000-99999, 2010-2014",(hhinc75to100k2014/hhinc_den2014)*100
+_hhinc100to150k2014,"% Household income $100000-149999, 2010-2014",(hhinc100to150k2014/hhinc_den2014)*100
+_hhinc150to200k2014,"% Household income $150000-199999, 2010-2014",(hhinc150to200k2014/hhinc_den2014)*100
+_hhinc200kp2014,"% Household income $200000 or more, 2010-2014",(hhinc200kp2014/hhinc_den2014)*100
+m_hhincls10k2014,"% Household income less than $10000, MOE, 2010-2014"
+m_hhinc10to15k2014,"% Household income $10000-14999, MOE, 2010-2014"
+m_hhinc15to25k2014,"% Household income $15000-24999, MOE, 2010-2014"
+m_hhinc25to35k2014,"% Household income $25000-34999, MOE, 2010-2014"
+m_hhinc35to50k2014,"% Household income $35000-49999, MOE, 2010-2014"
+m_hhinc50to75k2014,"% Household income $50000-74999, MOE, 2010-2014"
+m_hhinc75to100k2014,"% Household income $75000-99999, MOE, 2010-2014"
+m_hhinc100to150k2014,"% Household income $100000-149999, MOE, 2010-2014"
+m_hhinc150to200k2014,"% Household income $150000-199999, MOE, 2010-2014"
+m_hhinc200kp2014,"% Household income $200000 or more, MOE, 2010-2014"
 tpv2000,"Population for whom poverty status is determined, 2000"
 bpv2000,"Population living below poverty level, 2000"
 _bpv2000,"Poverty rate, 2000",(bpv2000/tpv2000)*100
-tpv1014,"Population for whom poverty status is determined, 2010-2014"
-bpv1014,"Population living below poverty level, 2010-2014"
-_bpv1014,"Poverty rate, 2010-2014",(bpv1014/tpv1014)*100
-mtpv1014,"Population for whom poverty status is determined, MOE, 2010-2014"
-mbpv1014,"Population living below poverty level, MOE, 2010-2014"
-m_bpv1014,"Poverty rate, MOE, 2010-2014"
-pctchgrt_pov,Five year percent change -- population living below poverty level,(_bpv1014-_bpv2000)/_bpv2000*100
-bpv1p1014,"Population 1 year and over for whom poverty status is determined, 2010-2014"
-bpv_samehou1014,"Persons aged 1+  living below poverty level in same house 1 year ago, 2010-2014"
-bpv_diffhou1014,"Persons aged 1+  living below poverty level in different house 1 year ago, 2010-2014"
-mbpv1p1014,"Population 1 year and over for whom poverty status is determined, MOE, 2010-2014"
-mbpv_samehou1014,"Persons aged 1+  living below poverty level in same house 1 year ago, MOE, 2010-2014"
-mbpv_diffhou1014,"Persons aged 1+  living below poverty level in different house 1 year ago, MOE, 2010-2014"
-_bpv_samehou1014,"% Persons aged 1+  living below poverty level in same house 1 year ago, 2010-2014",(bpv_samehou1014/bpv1p1014)*100
-_bpv_diffhou1014,"% Persons aged 1+  living below poverty level in different house 1 year ago, 2010-2014",(bpv_diffhou1014/bpv1p1014)*100
-m_bpv_samehou1014,"% Persons aged 1+  living below poverty level in same house 1 year ago, MOE, 2010-2014"
-m_bpv_diffhou1014,"% Persons aged 1+  living below poverty level in different house 1 year ago, MOE, 2010-2014"
+tpv2014,"Population for whom poverty status is determined, 2010-2014"
+bpv2014,"Population living below poverty level, 2010-2014"
+_bpv2014,"Poverty rate, 2010-2014",(bpv2014/tpv2014)*100
+mtpv2014,"Population for whom poverty status is determined, MOE, 2010-2014"
+mbpv2014,"Population living below poverty level, MOE, 2010-2014"
+m_bpv2014,"Poverty rate, MOE, 2010-2014"
+pctchgrt_pov,Five year percent change -- population living below poverty level,(_bpv2014-_bpv2000)/_bpv2000*100
+bpv1p2014,"Population 1 year and over for whom poverty status is determined, 2010-2014"
+bpv_samehou2014,"Persons aged 1+  living below poverty level in same house 1 year ago, 2010-2014"
+bpv_diffhou2014,"Persons aged 1+  living below poverty level in different house 1 year ago, 2010-2014"
+mbpv1p2014,"Population 1 year and over for whom poverty status is determined, MOE, 2010-2014"
+mbpv_samehou2014,"Persons aged 1+  living below poverty level in same house 1 year ago, MOE, 2010-2014"
+mbpv_diffhou2014,"Persons aged 1+  living below poverty level in different house 1 year ago, MOE, 2010-2014"
+_bpv_samehou2014,"% Persons aged 1+  living below poverty level in same house 1 year ago, 2010-2014",(bpv_samehou2014/bpv1p2014)*100
+_bpv_diffhou2014,"% Persons aged 1+  living below poverty level in different house 1 year ago, 2010-2014",(bpv_diffhou2014/bpv1p2014)*100
+m_bpv_samehou2014,"% Persons aged 1+  living below poverty level in same house 1 year ago, MOE, 2010-2014"
+m_bpv_diffhou2014,"% Persons aged 1+  living below poverty level in different house 1 year ago, MOE, 2010-2014"
 pop2000,"Total population, 2000"
-pop1014,"Total population, 2010-2014"
-mpop1014,"Total population, MOE, 2010-2014"
-pctchg_pop,% change in population,(pop1014-pop2000)/pop2000*100
+pop2014,"Total population, 2010-2014"
+mpop2014,"Total population, MOE, 2010-2014"
+pctchg_pop,% change in population,(pop2014-pop2000)/pop2000*100
 nhw2000,"Non-hispanic White, 2000"
 nhb2000,"Non-hispanic Black, 2000"
 nhapi2000,"Non-hispanic Asian/Pacific Islander, 2000"
@@ -160,51 +160,51 @@ _nhb2000,"% Non-hispanic Black, 2000",(nhb2000/pop2000)*100
 _nhapi2000,"% Non-hispanic Asian/Pacific Islander, 2000",(nhapi2000/pop2000)*100
 _nho2000,"% Non-hispanic other, 2000",(nho2000/pop2000)*100
 _hisp2000,"% Hispanic, 2000",(hisp2000/pop2000)*100
-nhw1014,"Non-hispanic White, 2010-2014"
-nhb1014,"Non-hispanic Black, 2010-2014"
-nhapi1014,"Non-hispanic Asian/Pacific Islander, 2010-2014"
-nho1014,"Non-hispanic other, 2010-2014"
-hisp1014,"Hispanic, 2010-2014"
-mnhw1014,"Non-hispanic White, MOE, 2010-2014"
-mnhb1014,"Non-hispanic Black, MOE, 2010-2014"
-mnhapi1014,"Non-hispanic Asian/Pacific Islander, MOE, 2010-2014"
-mnho1014,"Non-hispanic other, MOE, 2010-2014"
-mhisp1014,"Hispanic, MOE, 2010-2014"
-_nhw1014,"% Non-hispanic White, 2010-2014",(nhw1014/pop1014)*100
-_nhb1014,"% Non-hispanic Black, 2010-2014",(nhb1014/pop1014)*100
-_nhapi1014,"% Non-hispanic Asian/Pacific Islander, 2010-2014",(nhapi1014/pop1014)*100
-_nho1014,"% Non-hispanic other, 2010-2014",(nho1014/pop1014)*100
-_hisp1014,"% Hispanic, 2010-2014",(hisp1014/pop1014)*100
-m_nhw1014,"% Non-hispanic White, MOE, 2010-2014"
-m_nhb1014,"% Non-hispanic Black, MOE, 2010-2014"
-m_nhapi1014,"% Non-hispanic Asian/Pacific Islander, MOE, 2010-2014"
-m_nho1014,"% Non-hispanic other, MOE, 2010-2014"
-m_hisp1014,"% Hispanic, MOE, 2010-2014"
-pctchgrt_nhw,Five year percent change -- non-hispanic white population,(_nhw1014-_nhw2000)/_nhw2000*100
-pctchg_nhb,Five year percent change -- non-hispanic black population,(_nhb1014-_nhb2000)/_nhb2000*100
-pctchg_nhapi,Five year percent change -- non-hispanic asian/pacific islander population,(_nhapi1014-_nhapi2000)/_nhapi2000*100
-pctchg_nho,Five year percent change -- non-hispanic other population,(_nho1014-_nho2000)/_nho2000*100
-pctchg_hisp,Five year percent change -- hispanic population,(_hisp1014-_hisp2000)/_hisp2000*100
+nhw2014,"Non-hispanic White, 2010-2014"
+nhb2014,"Non-hispanic Black, 2010-2014"
+nhapi2014,"Non-hispanic Asian/Pacific Islander, 2010-2014"
+nho2014,"Non-hispanic other, 2010-2014"
+hisp2014,"Hispanic, 2010-2014"
+mnhw2014,"Non-hispanic White, MOE, 2010-2014"
+mnhb2014,"Non-hispanic Black, MOE, 2010-2014"
+mnhapi2014,"Non-hispanic Asian/Pacific Islander, MOE, 2010-2014"
+mnho2014,"Non-hispanic other, MOE, 2010-2014"
+mhisp2014,"Hispanic, MOE, 2010-2014"
+_nhw2014,"% Non-hispanic White, 2010-2014",(nhw2014/pop2014)*100
+_nhb2014,"% Non-hispanic Black, 2010-2014",(nhb2014/pop2014)*100
+_nhapi2014,"% Non-hispanic Asian/Pacific Islander, 2010-2014",(nhapi2014/pop2014)*100
+_nho2014,"% Non-hispanic other, 2010-2014",(nho2014/pop2014)*100
+_hisp2014,"% Hispanic, 2010-2014",(hisp2014/pop2014)*100
+m_nhw2014,"% Non-hispanic White, MOE, 2010-2014"
+m_nhb2014,"% Non-hispanic Black, MOE, 2010-2014"
+m_nhapi2014,"% Non-hispanic Asian/Pacific Islander, MOE, 2010-2014"
+m_nho2014,"% Non-hispanic other, MOE, 2010-2014"
+m_hisp2014,"% Hispanic, MOE, 2010-2014"
+pctchgrt_nhw,Five year percent change -- non-hispanic white population,(_nhw2014-_nhw2000)/_nhw2000*100
+pctchg_nhb,Five year percent change -- non-hispanic black population,(_nhb2014-_nhb2000)/_nhb2000*100
+pctchg_nhapi,Five year percent change -- non-hispanic asian/pacific islander population,(_nhapi2014-_nhapi2000)/_nhapi2000*100
+pctchg_nho,Five year percent change -- non-hispanic other population,(_nho2014-_nho2000)/_nho2000*100
+pctchg_hisp,Five year percent change -- hispanic population,(_hisp2014-_hisp2000)/_hisp2000*100
 clf2000,"Civilian labor force, 2000"
 unemp2000,"Persons unemployed, 2000"
 _unemp2000,"Unemployment rate, 2000",(unemp2000/clf2000)*100
-clf1014,"Civilian labor force, 2010-2014"
-unemp1014,"Persons unemployed, 2010-2014"
-_unemp1014,"Unemployment rate, 2010-2014",(unemp1014/clf1014)*100
-mclf1014,"Civilian labor force, MOE, 2010-2014"
-munemp1014,"Persons unemployed, MOE, 2010-2014"
-m_unemp1014,"Unemployment rate, MOE, 2010-2014"
-pctchgrt_unemp,Five year percent change -- persons unemployed,(_unemp1014-_unemp2000)/_unemp2000*100
+clf2014,"Civilian labor force, 2010-2014"
+unemp2014,"Persons unemployed, 2010-2014"
+_unemp2014,"Unemployment rate, 2010-2014",(unemp2014/clf2014)*100
+mclf2014,"Civilian labor force, MOE, 2010-2014"
+munemp2014,"Persons unemployed, MOE, 2010-2014"
+m_unemp2014,"Unemployment rate, MOE, 2010-2014"
+pctchgrt_unemp,Five year percent change -- persons unemployed,(_unemp2014-_unemp2000)/_unemp2000*100
 pop16p2000,"Population aged 16 and over, 2000"
 lf2000,"Persons in labor force, 2000"
 _lf2000,"Labor force participation rate, 2000",(lf2000/pop16p2000)*100
-pop16p1014,"Population aged 16 and over, 2010-2014"
-lf1014,"Persons in labor force, 2010-2014"
-_lf1014,"Labor force participation rate, 2010-2014",(lf1014/pop16p1014)*100
-mpop16p1014,"Population aged 16 and over, MOE, 2010-2014"
-mlf1014,"Persons in labor force, MOE, 2010-2014"
-m_lf1014,"Labor force participation rate, MOE, 2010-2014"
-pctchgrt_lf,Five year percent change -- persons in labor force,(_lf1014-_lf2000)/_lf2000*100
+pop16p2014,"Population aged 16 and over, 2010-2014"
+lf2014,"Persons in labor force, 2010-2014"
+_lf2014,"Labor force participation rate, 2010-2014",(lf2014/pop16p2014)*100
+mpop16p2014,"Population aged 16 and over, MOE, 2010-2014"
+mlf2014,"Persons in labor force, MOE, 2010-2014"
+m_lf2014,"Labor force participation rate, MOE, 2010-2014"
+pctchgrt_lf,Five year percent change -- persons in labor force,(_lf2014-_lf2000)/_lf2000*100
 pop25p2000,"Population aged 25 and over, 2000"
 hsls92000,"Persons with less than 9th grade education, 2000"
 hs9to122000,"Persons with 9th to 12th grade education, 2000"
@@ -220,43 +220,43 @@ _somecoll2000,"% Persons with some college, 2000",(somecoll2000/pop25p2000)*100
 _assoc2000,"% Persons with associate degree, 2000",(assoc2000/pop25p2000)*100
 _bs2000,"% Persons with bachelor degree, 2000",(bs2000/pop25p2000)*100
 _prof2000,"% Persons with graduate/professional degree, 2000",(prof2000/pop25p2000)*100
-pop25p1014,"Population aged 25 and over, 2010-2014"
-hsls91014,"Persons with less than 9th grade education, 2010-2014"
-hs9to121014,"Persons with 9th to 12th grade education, 2010-2014"
-hsgrad1014,"Persons with high school degree, 2010-2014"
-somecoll1014,"Persons with some college, 2010-2014"
-assoc1014,"Persons with associate degree, 2010-2014"
-bs1014,"Persons with bachelor degree, 2010-2014"
-prof1014,"Persons with graduate/professional degree, 2010-2014"
-mpop25p1014,"Population aged 25 and over, MOE, 2010-2014"
-mhsls91014,"Persons with less than 9th grade education, MOE, 2010-2014"
-mhs9to121014,"Persons with 9th to 12th grade education, MOE, 2010-2014"
-mhsgrad1014,"Persons with high school degree, MOE, 2010-2014"
-msomecoll1014,"Persons with some college, MOE, 2010-2014"
-massoc1014,"Persons with associate degree, MOE, 2010-2014"
-mbs1014,"Persons with bachelor degree, MOE, 2010-2014"
-mprof1014,"Persons with graduate/professional degree, MOE, 2010-2014"
-_hsls91014,"% Persons with less than 9th grade education, 2010-2014",(hsls91014/pop25p1014)*100
-_hs9to121014,"% Persons with 9th to 12th grade education, 2010-2014",(hs9to121014/pop25p1014)*100
-_hsgrad1014,"% Persons with high school degree, 2010-2014",(hsgrad1014/pop25p1014)*100
-_somecoll1014,"% Persons with some college, 2010-2014",(somecoll1014/pop25p1014)*100
-_assoc1014,"% Persons with associate degree, 2010-2014",(assoc1014/pop25p1014)*100
-_bs1014,"% Persons with bachelor degree, 2010-2014",(bs1014/pop25p1014)*100
-_prof1014,"% Persons with graduate/professional degree, 2010-2014",(prof1014/pop25p1014)*100
-m_hsls91014,"% Persons with less than 9th grade education, MOE, 2010-2014"
-m_hs9to121014,"% Persons with 9th to 12th grade education, MOE, 2010-2014"
-m_hsgrad1014,"% Persons with high school degree, MOE, 2010-2014"
-m_somecoll1014,"% Persons with some college, MOE, 2010-2014"
-m_assoc1014,"% Persons with associate degree, MOE, 2010-2014"
-m_bs1014,"% Persons with bachelor degree, MOE, 2010-2014"
-m_prof1014,"% Persons with graduate/professional degree, MOE, 2010-2014"
-pctchgrt_hsls9,Five year percent change -- persons with less than 9th grade education,(_hsls91014-_hsls92000/_hsls92000)*100
-pctchgrt_hs9to12,Five year percent change -- persons with 9th to 12th grade education,(_hs9to121014-_hs9to122000/_hs9to122000)*100
-pctchgrt_hsgrad,Five year percent change -- persons with high school degree,(_hsgrad1014-_hsgrad2000/_hsgrad2000)*100
-pctchgrt_somecoll,Five year percent change -- persons with some college education,(_somecoll1014-_somecoll2000/_somecoll2000)*100
-pctchgrt_assoc,Five year percent change -- persons with associate degree,(_assoc1014-_assoc2000/_assoc2000)*100
-pctchgrt_bs,Five year percent change -- persons with bachelor degree,(_bs1014-_bs2000/_bs2000)*100
-pctchgrt_prof,Five year percent change -- persons with graduate/professional degree,(_prof1014-_prof2000/_prof2000)*100
+pop25p2014,"Population aged 25 and over, 2010-2014"
+hsls92014,"Persons with less than 9th grade education, 2010-2014"
+hs9to122014,"Persons with 9th to 12th grade education, 2010-2014"
+hsgrad2014,"Persons with high school degree, 2010-2014"
+somecoll2014,"Persons with some college, 2010-2014"
+assoc2014,"Persons with associate degree, 2010-2014"
+bs2014,"Persons with bachelor degree, 2010-2014"
+prof2014,"Persons with graduate/professional degree, 2010-2014"
+mpop25p2014,"Population aged 25 and over, MOE, 2010-2014"
+mhsls92014,"Persons with less than 9th grade education, MOE, 2010-2014"
+mhs9to122014,"Persons with 9th to 12th grade education, MOE, 2010-2014"
+mhsgrad2014,"Persons with high school degree, MOE, 2010-2014"
+msomecoll2014,"Persons with some college, MOE, 2010-2014"
+massoc2014,"Persons with associate degree, MOE, 2010-2014"
+mbs2014,"Persons with bachelor degree, MOE, 2010-2014"
+mprof2014,"Persons with graduate/professional degree, MOE, 2010-2014"
+_hsls92014,"% Persons with less than 9th grade education, 2010-2014",(hsls92014/pop25p2014)*100
+_hs9to122014,"% Persons with 9th to 12th grade education, 2010-2014",(hs9to122014/pop25p2014)*100
+_hsgrad2014,"% Persons with high school degree, 2010-2014",(hsgrad2014/pop25p2014)*100
+_somecoll2014,"% Persons with some college, 2010-2014",(somecoll2014/pop25p2014)*100
+_assoc2014,"% Persons with associate degree, 2010-2014",(assoc2014/pop25p2014)*100
+_bs2014,"% Persons with bachelor degree, 2010-2014",(bs2014/pop25p2014)*100
+_prof2014,"% Persons with graduate/professional degree, 2010-2014",(prof2014/pop25p2014)*100
+m_hsls92014,"% Persons with less than 9th grade education, MOE, 2010-2014"
+m_hs9to122014,"% Persons with 9th to 12th grade education, MOE, 2010-2014"
+m_hsgrad2014,"% Persons with high school degree, MOE, 2010-2014"
+m_somecoll2014,"% Persons with some college, MOE, 2010-2014"
+m_assoc2014,"% Persons with associate degree, MOE, 2010-2014"
+m_bs2014,"% Persons with bachelor degree, MOE, 2010-2014"
+m_prof2014,"% Persons with graduate/professional degree, MOE, 2010-2014"
+pctchgrt_hsls9,Five year percent change -- persons with less than 9th grade education,(_hsls92014-_hsls92000/_hsls92000)*100
+pctchgrt_hs9to12,Five year percent change -- persons with 9th to 12th grade education,(_hs9to122014-_hs9to122000/_hs9to122000)*100
+pctchgrt_hsgrad,Five year percent change -- persons with high school degree,(_hsgrad2014-_hsgrad2000/_hsgrad2000)*100
+pctchgrt_somecoll,Five year percent change -- persons with some college education,(_somecoll2014-_somecoll2000/_somecoll2000)*100
+pctchgrt_assoc,Five year percent change -- persons with associate degree,(_assoc2014-_assoc2000/_assoc2000)*100
+pctchgrt_bs,Five year percent change -- persons with bachelor degree,(_bs2014-_bs2000/_bs2000)*100
+pctchgrt_prof,Five year percent change -- persons with graduate/professional degree,(_prof2014-_prof2000/_prof2000)*100
 alljobs2009,"Number of jobs, 2009"
 alljobs2010,"Number of jobs, 2010"
 alljobs2011,"Number of jobs, 2011"
@@ -265,97 +265,97 @@ alljobs2013,"Number of jobs, 2013"
 pctchg_alljobs,% change in number of jobs,(alljobs2013-alljobs2009)/alljobs2009*100
 emp2000,"Persons employed, 2000"
 _emp2000,"Employment rate, 2000"
-emp1014,"Persons employed, 2010-2014"
-memp1014,"Employment rate, 2010-2014"
-_emp1014,"Persons employed, MOE, 2010-2014"
-m_emp1014,"Employment rate, MOE, 2010-2014"
+emp2014,"Persons employed, 2010-2014"
+memp2014,"Employment rate, 2010-2014"
+_emp2014,"Persons employed, MOE, 2010-2014"
+m_emp2014,"Employment rate, MOE, 2010-2014"
 pctchgrt_emp,Five year percent change -- persons employed
-m_medinc1014,"Median household income, MOE, 2010-2014"
-cvrent_den1014,"Renter-occupied housing units, Coefficient of Variation, 2010-2014"
-cvcashrent1014,"Renter-occupied housing units with cash rent, Coefficient of Variation, 2010-2014"
-cvroccrntls2001014,"Gross rent < $200, Coefficient of Variation, 2010-2014"
-cvroccrnt200to3001014,"Gross rent $200 to $299, Coefficient of Variation, 2010-2014"
-cvroccrnt300to5001014,"Gross rent $300 to $499, Coefficient of Variation, 2010-2014"
-cvroccrnt500to7501014,"Gross rent $500 to $749, Coefficient of Variation, 2010-2014"
-cvroccrnt750to10001014,"Gross rent $750 to $999, Coefficient of Variation, 2010-2014"
-cvroccrnt1000to15001014,"Gross rent $1000 to $1499, Coefficient of Variation, 2010-2014"
-cvroccrnt1500p1014,"Gross rent $1500 or more, Coefficient of Variation, 2010-2014"
-cvnorent1014,"No cash rent, Coefficient of Variation, 2010-2014"
-cv_grent1014,"Median gross rent, Coefficient of Variation, 2010-2014"
-cv_cashrent1014,"% Renter-occupied housing units with cash rent, MOE, 2010-2014"
-cv_roccrntls2001014,"% Gross rent < $200, Coefficient of Variation, 2010-2014"
-cv_roccrnt200to3001014,"% Gross rent $200 to $299, Coefficient of Variation, 2010-2014"
-cv_roccrnt300to5001014,"% Gross rent $300 to $499, Coefficient of Variation, 2010-2014"
-cv_roccrnt500to7501014,"% Gross rent $500 to $749, Coefficient of Variation, 2010-2014"
-cv_roccrnt750to10001014,"% Gross rent $750 to $999, Coefficient of Variation, 2010-2014"
-cv_roccrnt1000to15001014,"% Gross rent $1000 to $1499, Coefficient of Variation, 2010-2014"
-cv_roccrnt1500p1014,"% Gross rent $1500 or more, Coefficient of Variation, 2010-2014"
-cv_norent1014,"% No cash rent, Coefficient of Variation, 2010-2014"
-cvthh1014,"Total households, Coefficient of Variation, 2010-2014"
-cvhhincls10k1014,"Household income less than $10000, Coefficient of Variation, 2010-2014"
-cvhhinc10to15k1014,"Household income $10000-14999, Coefficient of Variation, 2010-2014"
-cvhhinc15to25k1014,"Household income $15000-24999, Coefficient of Variation, 2010-2014"
-cvhhinc25to35k1014,"Household income $25000-34999, Coefficient of Variation, 2010-2014"
-cvhhinc35to50k1014,"Household income $35000-49999, Coefficient of Variation, 2010-2014"
-cvhhinc50to75k1014,"Household income $50000-74999, Coefficient of Variation, 2010-2014"
-cvhhinc75to100k1014,"Household income $75000-99999, Coefficient of Variation, 2010-2014"
-cvhhinc100to150k1014,"Household income $100000-149999, Coefficient of Variation, 2010-2014"
-cvhhinc150to200k1014,"Household income $150000-199999, Coefficient of Variation, 2010-2014"
-cvhhinc200kp1014,"Household income $200000 or more, Coefficient of Variation, 2010-2014"
-cv_medinc1014,"Median household income, Coefficient of Variation, 2010-2014"
-cv_hhincls10k1014,"% Household income less than $10000, Coefficient of Variation, 2010-2014"
-cv_hhinc10to15k1014,"% Household income $10000-14999, Coefficient of Variation, 2010-2014"
-cv_hhinc15to25k1014,"% Household income $15000-24999, Coefficient of Variation, 2010-2014"
-cv_hhinc25to35k1014,"% Household income $25000-34999, Coefficient of Variation, 2010-2014"
-cv_hhinc35to50k1014,"% Household income $35000-49999, Coefficient of Variation, 2010-2014"
-cv_hhinc50to75k1014,"% Household income $50000-74999, Coefficient of Variation, 2010-2014"
-cv_hhinc75to100k1014,"% Household income $75000-99999, Coefficient of Variation, 2010-2014"
-cv_hhinc100to150k1014,"% Household income $100000-149999, Coefficient of Variation, 2010-2014"
-cv_hhinc150to200k1014,"% Household income $150000-199999, Coefficient of Variation, 2010-2014"
-cv_hhinc200kp1014,"% Household income $200000 or more, Coefficient of Variation, 2010-2014"
-cvtpv1014,"Population for whom poverty status is determined, Coefficient of Variation, 2010-2014"
-cvbpv1014,"Population living below poverty level,Coefficient of Variation, 2010-2014"
-cv_bpv1014,"Poverty rate, Coefficient of Variation, 2010-2014"
-cvbpv1p1014,"Population 1 year and over for whom poverty status is determined, Coefficient of Variation, 2010-2014"
-cvbpv_samehou1014,"Persons aged 1+  living below poverty level in same house 1 year ago, Coefficient of Variation, 2010-2014"
-cvbpv_diffhou1014,"Persons aged 1+  living below poverty level in different house 1 year ago, Coefficient of Variation, 2010-2014"
-cv_bpv_samehou1014,"% Persons aged 1+  living below poverty level in same house 1 year ago, Coefficient of Variation, 2010-2014"
-cv_bpv_diffhou1014,"% Persons aged 1+  living below poverty level in different house 1 year ago, Coefficient of Variation, 2010-2014"
-cvpop1014,"Total population, Coefficient of Variation, 2010-2014"
-cvnhw1014,"Non-hispanic White, Coefficient of Variation, 2010-2014"
-cvnhb1014,"Non-hispanic Black, Coefficient of Variation, 2010-2014"
-cvnhapi1014,"Non-hispanic Asian/Pacific Islander, Coefficient of Variation, 2010-2014"
-cvnho1014,"Non-hispanic other, Coefficient of Variation, 2010-2014"
-cvhisp1014,"Hispanic, Coefficient of Variation, 2010-2014"
-cv_nhw1014,"% Non-hispanic White,  Coefficient of Variation, 2010-2014"
-cv_nhb1014,"% Non-hispanic Black, Coefficient of Variation, 2010-2014"
-cv_nhapi1014,"% Non-hispanic Asian/Pacific Islander, Coefficient of Variation, 2010-2014"
-cv_nho1014,"% Non-hispanic other,  Coefficient of Variation, 2010-2014"
-cv_hisp1014,"% Hispanic,  Coefficient of Variation, 2010-2014"
-cvclf1014,"Civilian labor force, Coefficient of Variation, 2010-2014"
-cvemp1014,"Persons employed, Coefficient of Variation, 2010-2014"
-cvunemp1014,"Persons unemployed, Coefficient of Variation, 2010-2014"
-cv_emp1014,"Employment rate, Coefficient of Variation, 2010-2014"
-cv_unemp1014,"Unemployment rate, Coefficient of Variation, 2010-2014"
-cvpop16p1014,"Population aged 16 and over, Coefficient of Variation, 2010-2014"
-cvlf1014,"Persons in labor force, Coefficient of Variation, 2010-2014"
-cv_lf1014,"Labor force participation rate, Coefficient of Variation, 2010-2014"
-cvpop25p1014,"Population aged 25 and over, Coefficient of Variation, 2010-2014"
-cvhsls91014,"Persons with less than 9th grade education, Coefficient of Variation, 2010-2014"
-cvhs9to121014,"Persons with 9th to 12th grade education, Coefficient of Variation, 2010-2014"
-cvhsgrad1014,"Persons with high school degree, Coefficient of Variation, 2010-2014"
-cvsomecoll1014,"Persons with some college, Coefficient of Variation, 2010-2014"
-cvassoc1014,"Persons with associate degree, Coefficient of Variation, 2010-2014"
-cvbs1014,"Persons with bachelor degree, Coefficient of Variation, 2010-2014"
-cvprof1014,"Persons with graduate/professional degree, Coefficient of Variation, 2010-2014"
-cv_hsls91014,"% Persons with less than 9th grade education, Coefficient of Variation, 2010-2014"
-cv_hs9to121014,"% Persons with 9th to 12th grade education, Coefficient of Variation, 2010-2014"
-cv_hsgrad1014,"% Persons with high school degree, Coefficient of Variation, 2010-2014"
-cv_somecoll1014,"% Persons with some college, Coefficient of Variation, 2010-2014"
-cv_assoc1014,"% Persons with associate degree, Coefficient of Variation, 2010-2014"
-cv_bs1014,"% Persons with bachelor degree, Coefficient of Variation, 2010-2014"
-cv_prof1014,"% Persons with graduate/professional degree, Coefficient of Variation, 2010-2014"
-pctchg_mdinc,% change in median household income,(_medinc1014-_medinc2000)/_medinc2000*100
+m_medinc2014,"Median household income, MOE, 2010-2014"
+cvrent_den2014,"Renter-occupied housing units, Coefficient of Variation, 2010-2014"
+cvcashrent2014,"Renter-occupied housing units with cash rent, Coefficient of Variation, 2010-2014"
+cvroccrntls2002014,"Gross rent < $200, Coefficient of Variation, 2010-2014"
+cvroccrnt200to3002014,"Gross rent $200 to $299, Coefficient of Variation, 2010-2014"
+cvroccrnt300to5002014,"Gross rent $300 to $499, Coefficient of Variation, 2010-2014"
+cvroccrnt500to7502014,"Gross rent $500 to $749, Coefficient of Variation, 2010-2014"
+cvroccrnt750to10002014,"Gross rent $750 to $999, Coefficient of Variation, 2010-2014"
+cvroccrnt1000to15002014,"Gross rent $1000 to $1499, Coefficient of Variation, 2010-2014"
+cvroccrnt1500p2014,"Gross rent $1500 or more, Coefficient of Variation, 2010-2014"
+cvnorent2014,"No cash rent, Coefficient of Variation, 2010-2014"
+cv_grent2014,"Median gross rent, Coefficient of Variation, 2010-2014"
+cv_cashrent2014,"% Renter-occupied housing units with cash rent, MOE, 2010-2014"
+cv_roccrntls2002014,"% Gross rent < $200, Coefficient of Variation, 2010-2014"
+cv_roccrnt200to3002014,"% Gross rent $200 to $299, Coefficient of Variation, 2010-2014"
+cv_roccrnt300to5002014,"% Gross rent $300 to $499, Coefficient of Variation, 2010-2014"
+cv_roccrnt500to7502014,"% Gross rent $500 to $749, Coefficient of Variation, 2010-2014"
+cv_roccrnt750to10002014,"% Gross rent $750 to $999, Coefficient of Variation, 2010-2014"
+cv_roccrnt1000to15002014,"% Gross rent $1000 to $1499, Coefficient of Variation, 2010-2014"
+cv_roccrnt1500p2014,"% Gross rent $1500 or more, Coefficient of Variation, 2010-2014"
+cv_norent2014,"% No cash rent, Coefficient of Variation, 2010-2014"
+cvthh2014,"Total households, Coefficient of Variation, 2010-2014"
+cvhhincls10k2014,"Household income less than $10000, Coefficient of Variation, 2010-2014"
+cvhhinc10to15k2014,"Household income $10000-14999, Coefficient of Variation, 2010-2014"
+cvhhinc15to25k2014,"Household income $15000-24999, Coefficient of Variation, 2010-2014"
+cvhhinc25to35k2014,"Household income $25000-34999, Coefficient of Variation, 2010-2014"
+cvhhinc35to50k2014,"Household income $35000-49999, Coefficient of Variation, 2010-2014"
+cvhhinc50to75k2014,"Household income $50000-74999, Coefficient of Variation, 2010-2014"
+cvhhinc75to100k2014,"Household income $75000-99999, Coefficient of Variation, 2010-2014"
+cvhhinc100to150k2014,"Household income $100000-149999, Coefficient of Variation, 2010-2014"
+cvhhinc150to200k2014,"Household income $150000-199999, Coefficient of Variation, 2010-2014"
+cvhhinc200kp2014,"Household income $200000 or more, Coefficient of Variation, 2010-2014"
+cv_medinc2014,"Median household income, Coefficient of Variation, 2010-2014"
+cv_hhincls10k2014,"% Household income less than $10000, Coefficient of Variation, 2010-2014"
+cv_hhinc10to15k2014,"% Household income $10000-14999, Coefficient of Variation, 2010-2014"
+cv_hhinc15to25k2014,"% Household income $15000-24999, Coefficient of Variation, 2010-2014"
+cv_hhinc25to35k2014,"% Household income $25000-34999, Coefficient of Variation, 2010-2014"
+cv_hhinc35to50k2014,"% Household income $35000-49999, Coefficient of Variation, 2010-2014"
+cv_hhinc50to75k2014,"% Household income $50000-74999, Coefficient of Variation, 2010-2014"
+cv_hhinc75to100k2014,"% Household income $75000-99999, Coefficient of Variation, 2010-2014"
+cv_hhinc100to150k2014,"% Household income $100000-149999, Coefficient of Variation, 2010-2014"
+cv_hhinc150to200k2014,"% Household income $150000-199999, Coefficient of Variation, 2010-2014"
+cv_hhinc200kp2014,"% Household income $200000 or more, Coefficient of Variation, 2010-2014"
+cvtpv2014,"Population for whom poverty status is determined, Coefficient of Variation, 2010-2014"
+cvbpv2014,"Population living below poverty level,Coefficient of Variation, 2010-2014"
+cv_bpv2014,"Poverty rate, Coefficient of Variation, 2010-2014"
+cvbpv1p2014,"Population 1 year and over for whom poverty status is determined, Coefficient of Variation, 2010-2014"
+cvbpv_samehou2014,"Persons aged 1+  living below poverty level in same house 1 year ago, Coefficient of Variation, 2010-2014"
+cvbpv_diffhou2014,"Persons aged 1+  living below poverty level in different house 1 year ago, Coefficient of Variation, 2010-2014"
+cv_bpv_samehou2014,"% Persons aged 1+  living below poverty level in same house 1 year ago, Coefficient of Variation, 2010-2014"
+cv_bpv_diffhou2014,"% Persons aged 1+  living below poverty level in different house 1 year ago, Coefficient of Variation, 2010-2014"
+cvpop2014,"Total population, Coefficient of Variation, 2010-2014"
+cvnhw2014,"Non-hispanic White, Coefficient of Variation, 2010-2014"
+cvnhb2014,"Non-hispanic Black, Coefficient of Variation, 2010-2014"
+cvnhapi2014,"Non-hispanic Asian/Pacific Islander, Coefficient of Variation, 2010-2014"
+cvnho2014,"Non-hispanic other, Coefficient of Variation, 2010-2014"
+cvhisp2014,"Hispanic, Coefficient of Variation, 2010-2014"
+cv_nhw2014,"% Non-hispanic White,  Coefficient of Variation, 2010-2014"
+cv_nhb2014,"% Non-hispanic Black, Coefficient of Variation, 2010-2014"
+cv_nhapi2014,"% Non-hispanic Asian/Pacific Islander, Coefficient of Variation, 2010-2014"
+cv_nho2014,"% Non-hispanic other,  Coefficient of Variation, 2010-2014"
+cv_hisp2014,"% Hispanic,  Coefficient of Variation, 2010-2014"
+cvclf2014,"Civilian labor force, Coefficient of Variation, 2010-2014"
+cvemp2014,"Persons employed, Coefficient of Variation, 2010-2014"
+cvunemp2014,"Persons unemployed, Coefficient of Variation, 2010-2014"
+cv_emp2014,"Employment rate, Coefficient of Variation, 2010-2014"
+cv_unemp2014,"Unemployment rate, Coefficient of Variation, 2010-2014"
+cvpop16p2014,"Population aged 16 and over, Coefficient of Variation, 2010-2014"
+cvlf2014,"Persons in labor force, Coefficient of Variation, 2010-2014"
+cv_lf2014,"Labor force participation rate, Coefficient of Variation, 2010-2014"
+cvpop25p2014,"Population aged 25 and over, Coefficient of Variation, 2010-2014"
+cvhsls92014,"Persons with less than 9th grade education, Coefficient of Variation, 2010-2014"
+cvhs9to122014,"Persons with 9th to 12th grade education, Coefficient of Variation, 2010-2014"
+cvhsgrad2014,"Persons with high school degree, Coefficient of Variation, 2010-2014"
+cvsomecoll2014,"Persons with some college, Coefficient of Variation, 2010-2014"
+cvassoc2014,"Persons with associate degree, Coefficient of Variation, 2010-2014"
+cvbs2014,"Persons with bachelor degree, Coefficient of Variation, 2010-2014"
+cvprof2014,"Persons with graduate/professional degree, Coefficient of Variation, 2010-2014"
+cv_hsls92014,"% Persons with less than 9th grade education, Coefficient of Variation, 2010-2014"
+cv_hs9to122014,"% Persons with 9th to 12th grade education, Coefficient of Variation, 2010-2014"
+cv_hsgrad2014,"% Persons with high school degree, Coefficient of Variation, 2010-2014"
+cv_somecoll2014,"% Persons with some college, Coefficient of Variation, 2010-2014"
+cv_assoc2014,"% Persons with associate degree, Coefficient of Variation, 2010-2014"
+cv_bs2014,"% Persons with bachelor degree, Coefficient of Variation, 2010-2014"
+cv_prof2014,"% Persons with graduate/professional degree, Coefficient of Variation, 2010-2014"
+pctchg_mdinc,% change in median household income,(_medinc2014-_medinc2000)/_medinc2000*100
 popls52000,"Persons aged under 5, 2000"
 pop5to92000,"Persons aged 5 to 9, 2000"
 pop10to142000,"Persons aged 10 to 14, 2000"
@@ -369,32 +369,32 @@ pop60to642000,"Persons aged 60 to 64, 2000"
 pop65to742000,"Persons aged 65 to 74, 2000"
 pop75to842000,"Persons aged 75 to 84, 2000"
 pop85p2000,"Persons aged 85 and over, 2000"
-popls51014,"Persons aged under 5, 2010-2014"
-pop5to91014,"Persons aged 5 to 9, 2010-2014"
-pop10to141014,"Persons aged 10 to 14, 2010-2014"
-pop15to191014,"Persons aged 15 to 19, 2010-2014"
-pop20to241014,"Persons aged 20 to 24, 2010-2014"
-pop25to341014,"Persons aged 25 to 34, 2010-2014"
-pop35to441014,"Persons aged 35 to 44, 2010-2014"
-pop45to541014,"Persons aged 45 to 54, 2010-2014"
-pop55to591014,"Persons aged 55 to 59, 2010-2014"
-pop60to641014,"Persons aged 60 to 64, 2010-2014"
-pop65to741014,"Persons aged 65 to 74, 2010-2014"
-pop75to841014,"Persons aged 75 to 84, 2010-2014"
-pop85p1014,"Persons aged 85 and over, 2010-2014"
-mpopls51014,"Persons aged under 5, MOE, 2010-2014"
-mpop5to91014,"Persons aged 5 to 9, MOE, 2010-2014"
-mpop10to141014,"Persons aged 10 to 14, MOE, 2010-2014"
-mpop15to191014,"Persons aged 15 to 19, MOE, 2010-2014"
-mpop20to241014,"Persons aged 20 to 24, MOE, 2010-2014"
-mpop25to341014,"Persons aged 25 to 34, MOE, 2010-2014"
-mpop35to441014,"Persons aged 35 to 44, MOE, 2010-2014"
-mpop45to541014,"Persons aged 45 to 54, MOE, 2010-2014"
-mpop55to591014,"Persons aged 55 to 59, MOE, 2010-2014"
-mpop60to641014,"Persons aged 60 to 64, MOE, 2010-2014"
-mpop65to741014,"Persons aged 65 to 74, MOE, 2010-2014"
-mpop75to841014,"Persons aged 75 to 84, MOE, 2010-2014"
-mpop85p1014,"Persons aged 85 and over, MOE, 2010-2014"
+popls52014,"Persons aged under 5, 2010-2014"
+pop5to92014,"Persons aged 5 to 9, 2010-2014"
+pop10to142014,"Persons aged 10 to 14, 2010-2014"
+pop15to192014,"Persons aged 15 to 19, 2010-2014"
+pop20to242014,"Persons aged 20 to 24, 2010-2014"
+pop25to342014,"Persons aged 25 to 34, 2010-2014"
+pop35to442014,"Persons aged 35 to 44, 2010-2014"
+pop45to542014,"Persons aged 45 to 54, 2010-2014"
+pop55to592014,"Persons aged 55 to 59, 2010-2014"
+pop60to642014,"Persons aged 60 to 64, 2010-2014"
+pop65to742014,"Persons aged 65 to 74, 2010-2014"
+pop75to842014,"Persons aged 75 to 84, 2010-2014"
+pop85p2014,"Persons aged 85 and over, 2010-2014"
+mpopls52014,"Persons aged under 5, MOE, 2010-2014"
+mpop5to92014,"Persons aged 5 to 9, MOE, 2010-2014"
+mpop10to142014,"Persons aged 10 to 14, MOE, 2010-2014"
+mpop15to192014,"Persons aged 15 to 19, MOE, 2010-2014"
+mpop20to242014,"Persons aged 20 to 24, MOE, 2010-2014"
+mpop25to342014,"Persons aged 25 to 34, MOE, 2010-2014"
+mpop35to442014,"Persons aged 35 to 44, MOE, 2010-2014"
+mpop45to542014,"Persons aged 45 to 54, MOE, 2010-2014"
+mpop55to592014,"Persons aged 55 to 59, MOE, 2010-2014"
+mpop60to642014,"Persons aged 60 to 64, MOE, 2010-2014"
+mpop65to742014,"Persons aged 65 to 74, MOE, 2010-2014"
+mpop75to842014,"Persons aged 75 to 84, MOE, 2010-2014"
+mpop85p2014,"Persons aged 85 and over, MOE, 2010-2014"
 _popls52000,"% Persons aged under 5, 2000",(popls52000/pop2000)*100
 _pop5to92000,"% Persons aged 5 to 9, 2000",(pop5to92000/pop2000)*100
 _pop10to142000,"% Persons aged 10 to 14, 2000",(pop10to142000/pop2000)*100
@@ -408,68 +408,68 @@ _pop60to642000,"% Persons aged 60 to 64, 2000",(pop60to642000/pop2000)*100
 _pop65to742000,"% Persons aged 65 to 74, 2000",(pop65to742000/pop2000)*100
 _pop75to842000,"% Persons aged 75 to 84, 2000",(pop75to842000/pop2000)*100
 _pop85p2000,"% Persons aged 85 and over, 2000",(pop85p2000/pop2000)*100
-_popls51014,"% Persons aged under 5, 2010-2014",(popls51014/pop1014)*100
-_pop5to91014,"% Persons aged 5 to 9, 2010-2014",(pop5to91014/pop1014)*100
-_pop10to141014,"% Persons aged 10 to 14, 2010-2014",(pop10to141014/pop1014)*100
-_pop15to191014,"% Persons aged 15 to 19, 2010-2014",(pop15to191014/pop1014)*100
-_pop20to241014,"% Persons aged 20 to 24, 2010-2014",(pop20to241014/pop1014)*100
-_pop25to341014,"% Persons aged 25 to 34, 2010-2014",(pop25to341014/pop1014)*100
-_pop35to441014,"% Persons aged 35 to 44, 2010-2014",(pop35to441014/pop1014)*100
-_pop45to541014,"% Persons aged 45 to 54, 2010-2014",(pop45to541014/pop1014)*100
-_pop55to591014,"% Persons aged 55 to 59, 2010-2014",(pop55to591014/pop1014)*100
-_pop60to641014,"% Persons aged 60 to 64, 2010-2014",(pop60to641014/pop1014)*100
-_pop65to741014,"% Persons aged 65 to 74, 2010-2014",(pop65to741014/pop1014)*100
-_pop75to841014,"% Persons aged 75 to 84, 2010-2014",(pop75to841014/pop1014)*100
-_pop85p1014,"% Persons aged 85 and over, 2010-2014",(pop85p1014/pop1014)*100
-m_popls51014,"% Persons aged under 5, MOE, 2010-2014"
-m_pop5to91014,"% Persons aged 5 to 9, MOE, 2010-2014"
-m_pop10to141014,"% Persons aged 10 to 14, MOE, 2010-2014"
-m_pop15to191014,"% Persons aged 15 to 19, MOE, 2010-2014"
-m_pop20to241014,"% Persons aged 20 to 24, MOE, 2010-2014"
-m_pop25to341014,"% Persons aged 25 to 34, MOE, 2010-2014"
-m_pop35to441014,"% Persons aged 35 to 44, MOE, 2010-2014"
-m_pop45to541014,"% Persons aged 45 to 54, MOE, 2010-2014"
-m_pop55to591014,"% Persons aged 55 to 59, MOE, 2010-2014"
-m_pop60to641014,"% Persons aged 60 to 64, MOE, 2010-2014"
-m_pop65to741014,"% Persons aged 65 to 74, MOE, 2010-2014"
-m_pop75to841014,"% Persons aged 75 to 84, MOE, 2010-2014"
-m_pop85p1014,"% Persons aged 85 and over, MOE, 2010-2014"
-pctchgrt_popls5,Five year percent change -- Persons aged under 5,(_popls51014-_popls52000)/_popls52000*100
-pctchgrt_pop5to9,Five year percent change -- Persons aged 5 to 9,(_pop5to91014-_pop5to92000)/_pop5to92000*100
-pctchgrt_pop10to14,Five year percent change -- Persons aged 10 to 14,(_pop10to141014-_pop10to142000)/_pop10to142000*100
-pctchgrt_pop15to19,Five year percent change -- Persons aged 15 to 19 ,(_pop15to191014-_pop15to192000)/_pop15to192000*100
-pctchgrt_pop20to24,Five year percent change -- Persons aged 20 to 24,(_pop20to241014-_pop20to242000)/_pop20to242000*100
-pctchgrt_pop25to34,Five year percent change -- Persons aged 25 to 34,(_pop25to341014-_pop25to342000)/_pop25to342000*100
-pctchgrt_pop35to44,Five year percent change -- Persons aged 35 to 44,(_pop35to441014-_pop35to442000)/_pop35to442000*100
-pctchgrt_pop45to54,Five year percent change -- Persons aged 45 to 54,(_pop45to541014-_pop45to542000)/_pop45to542000*100
-pctchgrt_pop55to59,Five year percent change -- Persons aged 55 to 59,(_pop55to591014-_pop55to592000)/_pop55to592000*100
-pctchgrt_pop60to64,Five year percent change -- Persons aged 60 to 64,(_pop60to641014-_pop60to642000)/_pop60to642000*100
-pctchgrt_pop65to74,Five year percent change -- Persons aged 65 to 74,(_pop65to741014-_pop65to742000)/_pop65to742000*100
-pctchgrt_pop75to84,Five year percent change -- Persons aged 75 to 84,(_pop75to841014-_pop75to842000)/_pop75to842000*100
-pctchgrt_pop85p,Five year percent change -- Persons aged 85 and over,(_pop85p1014-_pop85p2000)/_pop85p2000*100
-cvpopls51014,"Persons aged under 5, Coefficient of Variation, 2010-2014"
-cvpop5to91014,"Persons aged 5 to 9, Coefficient of Variation, 2010-2014"
-cvpop10to141014,"Persons aged 10 to 14, Coefficient of Variation, 2010-2014"
-cvpop15to191014,"Persons aged 15 to 19, Coefficient of Variation, 2010-2014"
-cvpop20to241014,"Persons aged 20 to 24, Coefficient of Variation, 2010-2014"
-cvpop25to341014,"Persons aged 25 to 34, Coefficient of Variation, 2010-2014"
-cvpop35to441014,"Persons aged 35 to 44, Coefficient of Variation, 2010-2014"
-cvpop45to541014,"Persons aged 45 to 54, Coefficient of Variation, 2010-2014"
-cvpop55to591014,"Persons aged 55 to 59, Coefficient of Variation, 2010-2014"
-cvpop60to641014,"Persons aged 60 to 64, Coefficient of Variation, 2010-2014"
-cvpop65to741014,"Persons aged 65 to 74, Coefficient of Variation, 2010-2014"
-cvpop75to841014,"Persons aged 75 to 84, Coefficient of Variation, 2010-2014"
-cvpop85p1014,"Persons aged 85 and over, Coefficient of Variation, 2010-2014"
-cv_popls51014,"% Persons aged under 5, Coefficient of Variation, 2010-2014"
-cv_pop5to91014,"% Persons aged 5 to 9, Coefficient of Variation, 2010-2014"
-cv_pop10to141014,"% Persons aged 10 to 14, Coefficient of Variation, 2010-2014"
-cv_pop15to191014,"% Persons aged 15 to 19, Coefficient of Variation, 2010-2014"
-cv_pop20to241014,"% Persons aged 20 to 24, Coefficient of Variation, 2010-2014"
-cv_pop25to341014,"% Persons aged 25 to 34, Coefficient of Variation, 2010-2014"
-cv_pop35to441014,"% Persons aged 35 to 44, Coefficient of Variation, 2010-2014"
-cv_pop45to541014,"% Persons aged 45 to 54, Coefficient of Variation, 2010-2014"
-cv_pop55to591014,"% Persons aged 55 to 59, Coefficient of Variation, 2010-2014"
-cv_pop60to641014,"% Persons aged 60 to 64, Coefficient of Variation, 2010-2014"
-cv_pop65to741014,"% Persons aged 65 to 74, Coefficient of Variation, 2010-2014"
-cv_pop75to841014,"% Persons aged 75 to 84, Coefficient of Variation, 2010-2014"
-cv_pop85p1014,"% Persons aged 85 and over, Coefficient of Variation, 2010-2014"
+_popls52014,"% Persons aged under 5, 2010-2014",(popls52014/pop2014)*100
+_pop5to92014,"% Persons aged 5 to 9, 2010-2014",(pop5to92014/pop2014)*100
+_pop10to142014,"% Persons aged 10 to 14, 2010-2014",(pop10to142014/pop2014)*100
+_pop15to192014,"% Persons aged 15 to 19, 2010-2014",(pop15to192014/pop2014)*100
+_pop20to242014,"% Persons aged 20 to 24, 2010-2014",(pop20to242014/pop2014)*100
+_pop25to342014,"% Persons aged 25 to 34, 2010-2014",(pop25to342014/pop2014)*100
+_pop35to442014,"% Persons aged 35 to 44, 2010-2014",(pop35to442014/pop2014)*100
+_pop45to542014,"% Persons aged 45 to 54, 2010-2014",(pop45to542014/pop2014)*100
+_pop55to592014,"% Persons aged 55 to 59, 2010-2014",(pop55to592014/pop2014)*100
+_pop60to642014,"% Persons aged 60 to 64, 2010-2014",(pop60to642014/pop2014)*100
+_pop65to742014,"% Persons aged 65 to 74, 2010-2014",(pop65to742014/pop2014)*100
+_pop75to842014,"% Persons aged 75 to 84, 2010-2014",(pop75to842014/pop2014)*100
+_pop85p2014,"% Persons aged 85 and over, 2010-2014",(pop85p2014/pop2014)*100
+m_popls52014,"% Persons aged under 5, MOE, 2010-2014"
+m_pop5to92014,"% Persons aged 5 to 9, MOE, 2010-2014"
+m_pop10to142014,"% Persons aged 10 to 14, MOE, 2010-2014"
+m_pop15to192014,"% Persons aged 15 to 19, MOE, 2010-2014"
+m_pop20to242014,"% Persons aged 20 to 24, MOE, 2010-2014"
+m_pop25to342014,"% Persons aged 25 to 34, MOE, 2010-2014"
+m_pop35to442014,"% Persons aged 35 to 44, MOE, 2010-2014"
+m_pop45to542014,"% Persons aged 45 to 54, MOE, 2010-2014"
+m_pop55to592014,"% Persons aged 55 to 59, MOE, 2010-2014"
+m_pop60to642014,"% Persons aged 60 to 64, MOE, 2010-2014"
+m_pop65to742014,"% Persons aged 65 to 74, MOE, 2010-2014"
+m_pop75to842014,"% Persons aged 75 to 84, MOE, 2010-2014"
+m_pop85p2014,"% Persons aged 85 and over, MOE, 2010-2014"
+pctchgrt_popls5,Five year percent change -- Persons aged under 5,(_popls52014-_popls52000)/_popls52000*100
+pctchgrt_pop5to9,Five year percent change -- Persons aged 5 to 9,(_pop5to92014-_pop5to92000)/_pop5to92000*100
+pctchgrt_pop10to14,Five year percent change -- Persons aged 10 to 14,(_pop10to142014-_pop10to142000)/_pop10to142000*100
+pctchgrt_pop15to19,Five year percent change -- Persons aged 15 to 19 ,(_pop15to192014-_pop15to192000)/_pop15to192000*100
+pctchgrt_pop20to24,Five year percent change -- Persons aged 20 to 24,(_pop20to242014-_pop20to242000)/_pop20to242000*100
+pctchgrt_pop25to34,Five year percent change -- Persons aged 25 to 34,(_pop25to342014-_pop25to342000)/_pop25to342000*100
+pctchgrt_pop35to44,Five year percent change -- Persons aged 35 to 44,(_pop35to442014-_pop35to442000)/_pop35to442000*100
+pctchgrt_pop45to54,Five year percent change -- Persons aged 45 to 54,(_pop45to542014-_pop45to542000)/_pop45to542000*100
+pctchgrt_pop55to59,Five year percent change -- Persons aged 55 to 59,(_pop55to592014-_pop55to592000)/_pop55to592000*100
+pctchgrt_pop60to64,Five year percent change -- Persons aged 60 to 64,(_pop60to642014-_pop60to642000)/_pop60to642000*100
+pctchgrt_pop65to74,Five year percent change -- Persons aged 65 to 74,(_pop65to742014-_pop65to742000)/_pop65to742000*100
+pctchgrt_pop75to84,Five year percent change -- Persons aged 75 to 84,(_pop75to842014-_pop75to842000)/_pop75to842000*100
+pctchgrt_pop85p,Five year percent change -- Persons aged 85 and over,(_pop85p2014-_pop85p2000)/_pop85p2000*100
+cvpopls52014,"Persons aged under 5, Coefficient of Variation, 2010-2014"
+cvpop5to92014,"Persons aged 5 to 9, Coefficient of Variation, 2010-2014"
+cvpop10to142014,"Persons aged 10 to 14, Coefficient of Variation, 2010-2014"
+cvpop15to192014,"Persons aged 15 to 19, Coefficient of Variation, 2010-2014"
+cvpop20to242014,"Persons aged 20 to 24, Coefficient of Variation, 2010-2014"
+cvpop25to342014,"Persons aged 25 to 34, Coefficient of Variation, 2010-2014"
+cvpop35to442014,"Persons aged 35 to 44, Coefficient of Variation, 2010-2014"
+cvpop45to542014,"Persons aged 45 to 54, Coefficient of Variation, 2010-2014"
+cvpop55to592014,"Persons aged 55 to 59, Coefficient of Variation, 2010-2014"
+cvpop60to642014,"Persons aged 60 to 64, Coefficient of Variation, 2010-2014"
+cvpop65to742014,"Persons aged 65 to 74, Coefficient of Variation, 2010-2014"
+cvpop75to842014,"Persons aged 75 to 84, Coefficient of Variation, 2010-2014"
+cvpop85p2014,"Persons aged 85 and over, Coefficient of Variation, 2010-2014"
+cv_popls52014,"% Persons aged under 5, Coefficient of Variation, 2010-2014"
+cv_pop5to92014,"% Persons aged 5 to 9, Coefficient of Variation, 2010-2014"
+cv_pop10to142014,"% Persons aged 10 to 14, Coefficient of Variation, 2010-2014"
+cv_pop15to192014,"% Persons aged 15 to 19, Coefficient of Variation, 2010-2014"
+cv_pop20to242014,"% Persons aged 20 to 24, Coefficient of Variation, 2010-2014"
+cv_pop25to342014,"% Persons aged 25 to 34, Coefficient of Variation, 2010-2014"
+cv_pop35to442014,"% Persons aged 35 to 44, Coefficient of Variation, 2010-2014"
+cv_pop45to542014,"% Persons aged 45 to 54, Coefficient of Variation, 2010-2014"
+cv_pop55to592014,"% Persons aged 55 to 59, Coefficient of Variation, 2010-2014"
+cv_pop60to642014,"% Persons aged 60 to 64, Coefficient of Variation, 2010-2014"
+cv_pop65to742014,"% Persons aged 65 to 74, Coefficient of Variation, 2010-2014"
+cv_pop75to842014,"% Persons aged 75 to 84, Coefficient of Variation, 2010-2014"
+cv_pop85p2014,"% Persons aged 85 and over, Coefficient of Variation, 2010-2014"
