@@ -152,6 +152,9 @@ class Location(object):
 
         """
         Indicator Values sorted by categories
+
+        We specifically do not return values that are '999999' as this
+        indicates the value is suppressed / should not be displayed
         """
 
         cursor = pgconn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
@@ -172,6 +175,7 @@ class Location(object):
 
                     where l.location_uuid = %(location_uuid)s
                     and i.title = any(%(indicators)s)
+                    and ilv.value != 999999
 
                     order by ilv.observation_timestamp asc
                 )

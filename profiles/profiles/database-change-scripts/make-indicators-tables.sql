@@ -61,6 +61,8 @@ create table indicators
     indicator_uuid uuid not null default uuid_generate_v4() primary key,
     title citext unique,
 
+    pretty_label citext,
+
     description text,
 
     indicator_value_format citext not null default 'number'

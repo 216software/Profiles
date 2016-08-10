@@ -1,8 +1,5 @@
 /* The spreadsheets given to us by CNP have different labels than the
  * indicator description. Add them here */
-alter table indicators
-add column pretty_label citext;
-
 
 /* Stabilization Tab */
 update indicators set pretty_label = 'Residential Occupancy' where title = 'res_occ';

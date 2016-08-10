@@ -27,13 +27,14 @@ function EducationViewModel (data) {
     self.kindergarten_readiness_titles =  ['band1', '_band1',
         'band2', '_band2',
         'band3', '_band3',
-        'meanscore'];
+        'meanscore', ];
 
+    self.other_indicators = ['qslots', '_attend']
 
 
     self.indicator_titles = (self.reading_indicator_titles.concat(
-        self.math_indicator_titles)).concat(self.kindergarten_readiness_titles);
-
+        self.math_indicator_titles)).concat(self.kindergarten_readiness_titles).concat(
+        self.other_indicators);
 
 
     self.indicators = ko.observableArray([]);
