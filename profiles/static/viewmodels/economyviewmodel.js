@@ -7,8 +7,6 @@ function EconomyViewModel (data) {
     self.type = "EconomyViewModel";
     self.rootvm = data.rootvm;
 
-    console.log('making economy vm');
-
     self.parentvm = data.parentvm;
     self.initialize = function(){
         console.log('initing ', self.type);

@@ -96,6 +96,8 @@ Change Location</button>
 <div data-bind="page: {
     id: 'workforce',
     source: '/static/templates/workforce.html',
+    with: workforcevm,
+    aftershow: workforcevm.initialize
 }"></div>
 
 </div> <!-- closes col-md-8 -->

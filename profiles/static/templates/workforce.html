@@ -1,4 +1,61 @@
 
-<h2>Workforce</h2>
+<h2>Workforce Metrics</h2>
 
-<p>Table of data goes here for a given location -- see CSV </p>
+<div data-bind="with:parentvm.selected_location()">
+
+<h4> Now viewing data for <span data-bind="text:title"></h4>
+
+</div>
+
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Indicator</th>
+<th>% change</th>
+<!-- ko foreach:observable_timestamps -->
+    <th data-bind="text:$data.format('YYYY')"></th>
+<!-- /ko -->
+</tr>
+</thead>
+<tbody>
+<!-- ko foreach:indicator_titles -->
+
+<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
+<tr>
+<td> <span data-bind="text:description"></span>
+</td>
+<td data-bind="text:percent_change_indicator_value"></td>
+
+<!-- ko foreach:$parents[1].observable_timestamps -->
+<td><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+</td>
+<!-- /ko --> <!-- closes inner for loop -->
+
+</tr>
+
+<!-- /ko -->
+
+<!-- /ko -->
+</tbody>
+
+</table>
+
+<p class="small">
+Source: 2000 Decennial Census and 2009-2013 American Community Survey
+5-year estimates.<br />
+Note: Information from 2009-2013 ACS 5 year estimates are estimates with
+a margin of error.<br />
+</p>
+
+<p class="small">
+* The Coefficient of Variation is a measure of reliability of the ACS
+estimate. The Census provides the following guidelines for determining
+the reliatiliby of the estimate:
+<ul class="small">
+<li>Coefficient of Variance &lt;15% - Good</li>
+<li>Coefficient of Variance &gt;15% and &lt; 61% - Fair</li>
+Coefficient of Variance &gt;&eq; 61% - Poor</li>
+</ul>
+
+</p>
+
