@@ -66,6 +66,9 @@ Change Location</button>
 <div data-bind="page: {
     id: 'health',
     source: '/static/templates/health.html',
+    with: healthvm,
+    afterShow: healthvm.initialize
+
 }"></div>
 
 <div data-bind="page: {

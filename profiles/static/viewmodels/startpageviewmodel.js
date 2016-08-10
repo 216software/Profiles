@@ -48,6 +48,9 @@ function StartPageViewModel (data) {
     self.educationvm = new EducationViewModel({'rootvm':data.rootvm,
         'parentvm':self});
 
+    self.healthvm = new HealthViewModel({'rootvm':data.rootvm,
+        'parentvm':self});
+
 
 
     self.initialize = function(){
