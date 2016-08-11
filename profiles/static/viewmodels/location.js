@@ -9,6 +9,7 @@ function Location (data) {
     self.description = ko.observable(data.description);
     self.location_type = ko.observable(data.location_type);
     self.location_shape_json = ko.observable(data.location_shape_json);
+    self.display_me = data.display_me;
 
     self.category_indicator_values = ko.observableArray([]);
 
@@ -20,7 +21,8 @@ function Location (data) {
 
         // only do this if we need to:
         //
-        console.log(self.category_indicator_values().length == 0);
+        // console.log(self.category_indicator_values().length == 0);
+
         if(self.category_indicator_values() == 0){
 
             self.rootvm.is_busy(true);
@@ -35,7 +37,8 @@ function Location (data) {
                 },
                 success: function (data) {
                     if (data.success) {
-                        console.log(data);
+
+                        // console.log(data);
 
                         /* Data is mapped categories, to indicator to
                          * values

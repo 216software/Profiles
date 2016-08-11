@@ -7,6 +7,7 @@ function StabilizationViewModel (data) {
     self.type = "StabilizationViewModel";
     self.rootvm = data.rootvm;
     self.parentvm = data.parentvm;
+
     self.initialize = function(){
         console.log('initing ', self.type);
     };
@@ -34,8 +35,6 @@ function StabilizationViewModel (data) {
         self.parentvm.look_up_indicator_and_values(self.indicator_titles,
             self.look_up_indicator_complete);
     });
-
-    console.log(self.parentvm);
 
     self.observable_timestamps = ko.observableArray([]);
 

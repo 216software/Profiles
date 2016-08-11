@@ -29,12 +29,34 @@ function StartPageViewModel (data) {
     self.selected_location_type = ko.observable();
 
     self.filtered_locations = ko.computed(function(){
-         if(self.selected_location_type() != undefined){
-             return ko.utils.arrayFilter(self.locations(), function(l) {
-                return l.location_type() == self.selected_location_type();
-            });
+
+         if(self.selected_location_type() != undefined) {
+
+             return ko.utils.arrayFilter(
+
+                self.locations(),
+
+                function(loc) {
+
+                    if (loc.display_me
+                        && loc.location_type() == self.selected_location_type()) {
+                        return true;
+
+                    } else {
+                        return false;
+                    }
+                }
+            ).sort(function(a, b) {
+                if (a.title() < b.title()) {
+                    return -1;
+                } else if (a.title() > b.title()) {
+                    return 1;
+                } else {
+                    return 0;
+                }});
         }
-        else{
+
+        else {
             return self.locations();
         }
     });
@@ -55,11 +77,7 @@ function StartPageViewModel (data) {
     self.healthvm = new HealthViewModel({'rootvm':data.rootvm,
         'parentvm':self});
 
-
-
     self.initialize = function(){
-
-        console.log('initing start page vm');
 
         self.get_all_location_types().then(self.get_all_locations).
             then(self.selected_location_initialize);
@@ -118,8 +136,6 @@ function StartPageViewModel (data) {
     /* We need to do this after the source is loaded and part of the DOM
      * so that we can instantiate the map here */
     self.sourceLoaded = function(){
-
-        console.log('source loaded function in ', self.type);
 
         self.map = L.map("mapid").setView([41.49, -81.69], 10);
         L.esri.basemapLayer("Streets").addTo(self.map);
