@@ -17,4 +17,33 @@ update indicators set pretty_label = 'Median sales price, parcels with no histor
 update indicators set pretty_label = 'Jobs in neighborhood' where title = 'alljobs';
 update indicators set pretty_label = 'Commercial Occupancy' where title = '_bus_occ';
 
+/* Workforce */
+update indicators set pretty_label = 'Employment' where title = 'emp';
+update indicators set pretty_label = '% employment' where title = '_emp';
 
+update indicators set pretty_label = 'Labor force participation' where title = 'lf';
+update indicators set pretty_label = '% labor force participation' where title = '_lf';
+
+
+
+update indicators set pretty_label = 'Population 25 years and older' where title = 'pop25p';
+update indicators set pretty_label = 'Less than 9th grade' where title = 'hsls9';
+update indicators set pretty_label = '% of population less than 9th grade' where title = '_hsls9';
+
+update indicators set pretty_label = '9th to 12th grade, no diploma' where title = 'hs9to12';
+update indicators set pretty_label = '% of population 9th to 12th grade, no diploma' where title = '_hs9to12';
+
+update indicators set pretty_label = 'High school graduate (includes equivalency)' where title = 'hsgrad';
+update indicators set pretty_label = '% of population high school graduate' where title = '_hsgrad';
+
+update indicators set pretty_label = 'Some college, no degree' where title = 'somecoll';
+update indicators set pretty_label = '% of population some college' where title = '_somecoll';
+
+update indicators set pretty_label = 'Associate''s Degree' where title = 'assoc';
+update indicators set pretty_label = '% of associate''s degree' where title = '_assoc';
+
+update indicators set pretty_label = 'Bachelor''s Degree' where title = 'bs';
+update indicators set pretty_label = '% of bachelor''s degree' where title = '_bs';
+
+update indicators set pretty_label = 'Graduate or professional degree' where title = 'prof';
+update indicators set pretty_label = '% of grad or professional degree' where title = '_prof';
