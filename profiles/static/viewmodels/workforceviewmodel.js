@@ -21,9 +21,10 @@ function WorkforceViewModel (data) {
     };
 
     /* This should also include the order we want to display */
-    self.indicator_titles = ['lf' ,'_lf', 'cvlf', '_cvlf'];
+    self.indicator_titles = ['lf' ,'_lf', 'cvlf', '_cvlf',
+        'emp', '_emp', 'cvemp'];
 
-    self.indicator_cv_pairings = {'lf':'cvlf'}
+    self.indicator_cv_pairings = {'lf':'cvlf', 'emp':'cvemp'}
 
 
     self.indicators = ko.observableArray([]);
@@ -58,10 +59,10 @@ function WorkforceViewModel (data) {
             }));
 
         for (var indicator_key in self.indicator_cv_pairings) {
-            var ind = Indicator.indicator_by_title(indicator_key)
-            var ind_cv = Indicator.indicator_by_title(
+            var ind = Indicator.indicator_by_title(self.indicators(), indicator_key)
+            var ind_cv = Indicator.indicator_by_title(self.indicators(),
                 self.indicator_cv_pairings[indicator_key])
-            ind.indicator_cv(ind_cv);
+            ind.indicator_CV(ind_cv);
         }
     }
 };
