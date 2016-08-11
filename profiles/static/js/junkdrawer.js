@@ -1,3 +1,20 @@
+// Global formatter
+var format_value  = function(newValue, format, fixed_digits){
+
+    newValueAsNum = isNaN(newValue) ? 0 : +newValue,
+    valueToWrite = (newValueAsNum.toFixed(fixed_digits || 0).replace(/(\d)(?=(\d{3})+$)/g, '$1,'));
+
+    if (format == 'percent'){
+        valueToWrite += '%';
+    }
+    if (format == 'currency'){
+        valueToWrite = '$' + valueToWrite
+    }
+
+    return valueToWrite
+
+};
+
 ko.bindingHandlers.masked_input =  {
 
   init: function(element, valueAccessor, allBindings, viewModel, bindingContext)   {
@@ -430,6 +447,68 @@ ko.bindingHandlers.piety = {
         $(element).change();
     }
 
+};
+
+/* Let's try making an extender!
+ *
+ * An extender is used in a view model like this:
+ *
+ * function AppViewModel(one, two) {
+ *     this.myNumberOne = ko.observable(one).extend({ numeric: 0 });
+ *     this.myNumberTwo = ko.observable(two).extend({ numeric: 2 });
+ * }
+
+ * Got this from Knockouts Doc pages: http://knockoutjs.com/documentation/extenders.html
+ */
+ko.extenders.number_format = function(target, type_of_format) {
+
+    //In this case, format should be one of 'number', 'money', 'percent'
+    //create a writable computed observable to intercept writes to our observable
+
+    target.formatted = ko.observable();
+
+    function format(newValue) {
+
+        valueToWrite = format_value(newValue, type_of_format);
+        target.formatted(valueToWrite);
+    };
+
+    //initial formatting
+    format(target());
+
+    //initialize with current value to make sure it is rounded appropriately
+    target.subscribe(format);
+
+    //return the new computed observable
+    return target;
+};
+
+
+/* Good to have a toggle function available to true/false observables */
+ko.observable.fn.toggle = function () {
+    var obs = this;
+    return function () {
+        obs(!obs())
+    };
+};
+
+/* Slide Visible
+
+   bind like this:
+   <div class="panel-body" data-bind="slideVisible:visible">
+
+   see this stackoverflow question: http://stackoverflow.com/questions/19536881/always-use-jquery-slideup-slidedown-in-knockoutjs
+*/
+
+ko.bindingHandlers.slideVisible = {
+    init: function (element, valueAccessor) {
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        $(element).toggle(value);
+    },
+    update: function (element, valueAccessor) {
+        var value = ko.utils.unwrapObservable(valueAccessor());
+        value ? $(element).slideDown() : $(element).slideUp();
+    }
 };
 
 

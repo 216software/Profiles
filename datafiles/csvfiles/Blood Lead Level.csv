@@ -1,0 +1,3 @@
+Variable Name,Variable Description ,Formula
+_ebll_c,Percent of children aged 0-6 with confirmed blood lead level  >= 5.0 μg/dL,Number of children aged 0-6 with confirmed blood lead level  >= 5.0 μg/dL  /  Number of children aged 0-6 tested for blood lead level
+_ebll_c1014avg,Five year average - Percent of children aged 0-6 with confirmed blood lead level >= 5.0 μg/dL,(Sum of percent of children aged 0-6 with confirmed blood lead level  >= 5.0 μg/dL  from 2010 to 2014 ) / 5

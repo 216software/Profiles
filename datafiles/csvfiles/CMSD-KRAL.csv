@@ -1,0 +1,13 @@
+Variable Name,Variable Description ,Formula,Note
+count,Number of students who took the KRA-L test
+band1,"Number of students in Band 1 (scored 0-13 points prior to 2014-15 school year, scored 1-16 points for new KRA)","Band 1 - indicates children need immediate interventions in language & literacy skills, and possibly health (oral, vision, and/or medical)"
+band2,"Number of students in Band 2 (scored 14-23 points prior to 2014-15 school year, scored 17-29 points for new KRA)",Band 2 - indicates a need to watch children who may be scoring at the lower end and to assess for targeted instruction
+band3,"Number of students in Band 3 (scored 24-29 points prior to 2014-15 school year, scored 30-39 points for new KRA)",Band 3 - indicates that children should do well with reading instruction and may need to be assessed for enrichment programs
+pctband1,Percent of students in Band 1,(Number of students in Band 1 /  Number of students who took the test) X 100
+pctband2,Percent of students in Band 2,(Number of students in Band 2 /  Number of students who took the test) X 100
+pctband3,Percent of students in Band 3,(Number of students in Band 3 /  Number of students who took the test) X 100
+meanscore,Average KRA-L score,(Sum of all KRA-L scores / Number of students who took the test) X 100
+pctchgrt_band1,Five year percent change -- Students in Band 1,((Percent of students in Band 1 in 2014-2015 - Percent of students in Band 1 in 2010-2011) /  Percent of students in Band 1 in 2010-2011) X 100,Please see Note 2 below
+pctchgrt_band2,Five year percent change -- Students in Band 2,((Percent of students in Band 2 in 2014-2015 - Percent of students in Band 2 in 2010-2011) /  Percent of students in Band 2 in 2010-2011) X 100,Please see Note 2 below
+pctchgrt_band3,Five year percent change -- Students Band 3,((Percent of students in Band 3 in 2014-2015 - Percent of students in Band 3 in 2010-2011) /  Percent of students in Band 3 in 2010-2011) X 100,Please see Note 2 below
+pctchg_meanscore,Five year percent change -- KRA-L average score,((Average KRA-L score in 2014-2015 - Average KRA-L score in 2010-2011) / Average KRA-L score in 2010-2011) X 100,Please see Note 2 below

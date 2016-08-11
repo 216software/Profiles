@@ -15,6 +15,7 @@ function ProfilesViewModel (data) {
     self.type = "ProfilesViewModel";
     self.is_busy = ko.observable(false);
     self.syslog = ko.observable();
+    self.active_tab = ko.observable();
 
     self.click_on_enter = function(selector_id){
 
@@ -26,6 +27,11 @@ function ProfilesViewModel (data) {
         }
     };
 
-    self.startpagevm = new StartPageViewModel({rootvm:this});
+    self.startpagevm = new StartPageViewModel({rootvm:self});
 
+    /* For update of tabs at the top of the page, subscribe to afterShow
+     */
+    pager.afterShow.add(function(){
+        self.active_tab(pager.getActivePage().currentId);
+    });
 };

@@ -14,22 +14,12 @@ it might come in more handy...
 NEXT
 ----
 
-Get python manage.py syncdb to work correctly. Database peer
-authentication fails
+- We need to query for values -- so for a given location, look up
+  the indicators that go along with it. (this now works)
 
--  Figure out how to display data -- at the moment, no data is being
-   displayed
+- How do we order indicators (if they relate to each other?
 
-   Where does the data come from -- how do we map it to geo records and
-   get it to display???
-
--  With Matt, figure out what Mappings we'll need for the app
-
-
-Next UP:
--   What is the public IP of this amazon box? we need to expose it to
-    the internet so we can hit the box
-
+- How do we decide which Indicators show up on which page?
 
 
 .. vim:set syntax=rst:

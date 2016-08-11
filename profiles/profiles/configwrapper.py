@@ -67,6 +67,26 @@ class ConfigWrapper(configwrapper.ConfigWrapper):
             pgconn,
             factory=LocationsFactory)
 
+        from profiles.pg.locations import LocationTypeFactory
+
+        psycopg2.extras.register_composite(
+            'location_types',
+            pgconn,
+            factory=LocationTypeFactory)
+
+        from profiles.pg.indicators import IndicatorsFactory
+
+        psycopg2.extras.register_composite(
+            'indicators',
+            pgconn,
+            factory=IndicatorsFactory)
+
+        from profiles.pg.indicators import IndicatorCategoryFactory
+
+        psycopg2.extras.register_composite(
+            'indicator_categories',
+            pgconn,
+            factory=IndicatorCategoryFactory)
 
         log.info('Just registered composite types in psycopg2')
 
@@ -146,3 +166,10 @@ class ConfigWrapper(configwrapper.ConfigWrapper):
             region=d["region"])
 
         return pyrax
+
+    @property
+    def csv_data_files_folder(self):
+
+        return self.config_dictionary["profiles"]["csv_data_files_folder"]
+
+

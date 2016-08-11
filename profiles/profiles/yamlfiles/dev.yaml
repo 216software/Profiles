@@ -1,3 +1,4 @@
+# Really should be named "web stuff"
 app:
 
     secret:                     2246 Tudor
@@ -7,6 +8,7 @@ app:
     webapp_port:                6661
     pidfile:                    /tmp/profiles-webapp.pid
     num_webapp_workers:         1
+
 
 postgresql:
     database:   profiles_dev
@@ -98,6 +100,9 @@ rackspace:
                 name:         profiles-album-photos-dev
                 cdn_ssl_uri:  https://565f373a178d124cb821-6ec213033db005fcb73c2f462b1d1188.ssl.cf2.rackcdn.com
 
+# This is stuff just for this project
+profiles:
 
+    csv_data_files_folder: /home/rob/checkouts/Profiles/datafiles/csvfiles
 
 # vim: set filetype=yaml :

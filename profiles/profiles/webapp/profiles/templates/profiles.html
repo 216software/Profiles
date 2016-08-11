@@ -15,23 +15,8 @@
     source: '/static/templates/startpage.html',
     with: startpagevm,
     afterShow: startpagevm.initialize,
-
-    sourceLoaded: startpagevm.sourceLoaded
-}">
+    sourceLoaded: startpagevm.sourceLoaded}">
 </div>
-
-<div data-bind="page: {
-    id: 'about',
-    source: '/static/templates/about.html'
-    }">
-</div>
-
-<div data-bind="page: {
-    id: 'faq',
-    source: '/static/templates/faq.html'
-    }">
-</div>
-
 
 
 {% endblock main %}
@@ -43,9 +28,18 @@
 <script type="text/javascript" src="/static/viewmodels/daterange.js"></script>
 <script type="text/javascript" src="/static/viewmodels/webappsession.js"></script>
 <script type="text/javascript" src="/static/viewmodels/location.js"></script>
+<script type="text/javascript" src="/static/viewmodels/indicator.js"></script>
+<script type="text/javascript" src="/static/viewmodels/indicatorcategory.js"></script>
 
 <script type="text/javascript" src="/static/viewmodels/profilesviewmodel.js"></script>
 <script type="text/javascript" src="/static/viewmodels/startpageviewmodel.js"></script>
+<script type="text/javascript" src="/static/viewmodels/populationviewmodel.js"></script>
+<script type="text/javascript" src="/static/viewmodels/stabilizationviewmodel.js"></script>
+<script type="text/javascript" src="/static/viewmodels/economyviewmodel.js"></script>
+<script type="text/javascript" src="/static/viewmodels/workforceviewmodel.js"></script>
+<script type="text/javascript" src="/static/viewmodels/educationviewmodel.js"></script>
+<script type="text/javascript" src="/static/viewmodels/healthviewmodel.js"></script>
+
 
 <script type="text/javascript">
 
@@ -53,7 +47,7 @@ var kpvm;
 
 $(document).ready(function () {
 
-    pvm= new ProfilesViewModel({});
+    pvm = new ProfilesViewModel({});
 
     pager.extendWithPage(pvm);
     ko.applyBindings(pvm);

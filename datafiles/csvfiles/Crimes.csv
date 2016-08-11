@@ -1,0 +1,58 @@
+Variable Name,Variable Description ,Formula,Note
+v,Violent crimes,"Violent crimes include homicide, rape, robbery and aggravated assault"
+_v,"Violent crimes per 100,000 population",(Violent Crime/Population) X 100000
+h,Homicides
+_h,"homicides per 100,000 population",(Homicides/Population) X 100000
+r,Rapes
+_r,"Rapes per 100,000 population",(Rapes/Population) X 100000
+ro,Robberies
+_ro,"Robberies per 100,000 population",(Robberies/Population) X 100000
+ag,Aggravated assaults
+_ag,"Aggravated assaults per 100,000 population",(Aggravated assaults/Population) X 100000
+a,Non-aggravated assaults
+_a,"Non-aggravated assaults per 100,000 population",(Non-aggravated assaults/Population) X 100000
+dv,Domestic violence assaults
+_dv,"Domestic violence assaults per 100,000 population",(Domestic violence assaults/Population) X 100000
+p,Property crimes,"Property crimes include burglary, larceny-theft, auto theft and arson"
+_p,"Property crimes per 100,000 population",(Property crimes/Population) X 100000
+b,Burglaries
+_b,"Burglaries per 100,000 population",(Burglaries/Population) X 100000
+l,Larceny-thefts
+_l,"Larceny-thefts per 100,000 population",(Larceny-thefts/Population) X 100000
+mv,Auto thefts
+_mv,"Auto thefts per 100,000 population",(Auto thefts/Population) X 100000
+ar,Arsons
+_ar,"Arsons per 100,000 population",(Arsons/Population) X 100000
+d,Illicit drug crimes,"Illicit drug crimes include illicit drug possession, illicit drug trafficking and other illicit drug violations"
+_d,"Illicit drug crimes per 100,000 population",(Illicit drug/Population) X 100000
+dp,Illicit drug possession
+_dp,"Illicit drug possession per 100,000 population",(Illicit drug possesion/Population) X 100000
+dt,Illicit drug trafficking
+_dt,"Illicit drug trafficking per 100,000 population",(Illicit drug trafficking/Population) X 100000
+od,Other illicit drug crimes
+_od,"Other illicit drug crimes per 100,000 population",(Other illicit drug crimes/Population) X 100000
+lq,Liquor law violations
+_lq,"Liquor law violations per 100,000 population",(Liquor law violations/Population) X 100000
+Ia,Part I crimes,Part I crimes include violent crimes and property crimes
+_Ia,"Part I crimes per 100,000 population",(Part I crimes/Population) X 100000
+II,Part II crimes,"Part II crimes include everything else such as non-aggravated assaults, forgery, fraud, embezzlement, receiving stolen property, vandalism, weapons violations, prostitution, drug violations, family offenses, disorderly conduct, kidnapping and all others."
+_II,"Part II crimes per 100,000 population",(Part II crimes/Population) X 100000
+pctchgrt_v,Five year percent change -- violent crime rate (2011 to 2015),((violent crimes rate in 2015 - violent crimes rate in 2011) / violent crime rate in 2011) X 100
+pctchgrt_h,Five year percent change -- homicide rate (2011 to 2015),((homicide rate in 2015 - homicide rate in 2011) / homicide rate in 2011) X 100
+pctchgrt_r,Five year percent change -- rape rate (2011 to 2015),((rape rate in 2015 - rape rate in 2011) / rape rate in 2011) X 100
+pctchgrt_ro,Five year percent change -- robbery rate (2011 to 2015),((robbery rate in 2015 - robbery rate in 2011) / robbery rate in 2011) X 100
+pctchgrt_ag,Five year percent change -- aggravated assault rate (2011 to 2015),((aggravated assault rate in 2015 - aggravated assault rate in 2011) / aggravated assault rate in 2011) X 100
+pctchgrt_a,Five year percent change -- non-aggravated assault rate (2011 to 2015),((non-aggravated assault rate in 2015 - non-aggravated assault rate in 2011) / non-aggravated assault rate in 2011) X 100
+pctchgrt_dv,Five year percent change -- domestic violence rate (2011 to 2015),((domestic violence rate in 2015 - domestic violence rate in 2011) / domestic violence rate in 2011) X 100
+pctchgrt_p,Five year percent change -- property crime rate (2011 to 2015),((property crime rate in 2015 - property crime rate in 2011) / property crime rate in 2011) X 100
+pctchgrt_b,Five year percent change -- burglary rate (2011 to 2015),((burglary rate in 2015 -burglary rate in 2011) / burglary rate in 2011) X 100
+pctchgrt_l,Five year percent change -- larceny-theft rate (2011 to 2015),((larceny-theft rate in 2015 - larceny-theft rate in 2011) / larceny-theft rate  in 2011) X 100
+pctchgrt_mv,Five year percent change -- auto theft rate (2011 to 2015),(( auto theft rate in 2015 -  auto theft rate in 2011) /  auto theft rate in 2011) X 100
+pctchgrt_ar,Five year percent change -- arson rate (2011 to 2015),((arson rate in 2015 - arson rate in 2011) / arson rate in 2011) X 100
+pctchgrt_d,Five year percent change -- illicit drug crime rate (2011 to 2015),((illicit drug crime rate in 2015 - illicit drug crime rate in 2011) /illicit drug crime rate in 2011) X 100
+pctchgrt_dp,Five year percent change -- illicit drug possession rate (2011 to 2015),(( illicit drug possession rate in 2015 -  illicit drug possession rate in 2011) /  illicit drug possession rate in 2011) X 100
+pctchgrt_dt,Five year percent change -- illicit drug trafficking rate (2011 to 2015),(( illicit drug trafficking rate in 2015 -  illicit drug trafficking rate in 2011) / illicit drug trafficking rate in 2011) X 100
+pctchgrt_od,Five year percent change -- other illicit drug crime rate (2011 to 2015),((other illicit drug crime rate in 2015 - other illicit drug crime rate in 2011) / other illicit drug crime rate in 2011) X 100
+pctchgrt_lq,Five year percent change -- liquor law violation rate (2011 to 2015),((liquor law violation rate in 2015 - liquor law violation rate in 2011) / liquor law violation rate in 2011) X 100
+pctchgrt_Ia,Five year percent change -- Type I crime rate (2011 to 2015),((Type I crime rate in 2015 - Type I crime rate in 2011) / Type I crime rate in 2011) X 100
+pctchgrt_II,Five year percent change -- Type II crime rate (2011 to 2015),((Type II crime rate in 2015 - Type II crime rate in 2011) / Type II crime rate in 2011) X 100

@@ -1,7 +1,6 @@
-
 <div class="row" style="margin-bottom:15px">
 
-<div class="col-md-8 col-md-offset-2">
+<div class="col-md-3">
 
 <!-- Navbar type thing here -->
 
@@ -21,7 +20,7 @@
     <select class="form-control" data-bind="options: filtered_locations,
                                     optionsCaption: 'Choose...',
                                     optionsText:'title',
-                                    value:selected_location"></select>
+                                    value:selector_location"></select>
 </div> <!-- closes form-group -->
 
 
@@ -30,10 +29,77 @@
     disable:selected_location() == undefined">
 Change Location</button>
 </div> <!-- closes form-group -->
-<div id="mapid" style="height:400px; width:400px"></div>
-<h1>Start Page stuff</h1>
+
+<div id="mapid" style="height:300px;"></div>
 
 
-</div>
+</div> <!-- closes col-md-4 -->
+
+<div class="col-md-8" style="margin-left:30px">
+
+<!-- all of our sub page tabs go here ? -->
+
+<div data-bind="page: {
+    id: 'start',
+    source: '/static/templates/overview.html',
+}"></div>
+
+<div data-bind="page: {
+    id: 'community',
+    source: '/static/templates/community.html',
+}"></div>
+
+<div data-bind="page: {
+    id: 'economy',
+    source: '/static/templates/economy.html',
+    with: economyvm,
+    afterShow: economyvm.initialize
+}"></div>
+
+<div data-bind="page: {
+    id: 'education',
+    source: '/static/templates/education.html',
+    with: educationvm,
+    afterShow: educationvm.initialize
+}"></div>
+
+<div data-bind="page: {
+    id: 'health',
+    source: '/static/templates/health.html',
+    with: healthvm,
+    afterShow: healthvm.initialize
+
+}"></div>
+
+<div data-bind="page: {
+    id: 'population',
+    source: '/static/templates/population.html',
+}"></div>
+
+<div data-bind="page: {
+    id: 'progress',
+    source: '/static/templates/progress-metrics.html',
+}"></div>
+
+<div data-bind="page: {
+    id: 'safety',
+    source: '/static/templates/safety.html',
+}"></div>
+
+<div data-bind="page: {
+    id: 'stabilization',
+    source: '/static/templates/stabilization.html',
+    with: stabilizationvm,
+    afterShow: stabilizationvm.initialize
+}"></div>
+
+<div data-bind="page: {
+    id: 'workforce',
+    source: '/static/templates/workforce.html',
+    with: workforcevm,
+    aftershow: workforcevm.initialize
+}"></div>
+
+</div> <!-- closes col-md-8 -->
 
 </div> <!-- closes row -->

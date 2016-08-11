@@ -1,0 +1,72 @@
+#! /usr/bin/env python
+# vim: set expandtab ts=4 sw=4 filetype=python fileencoding=utf8:
+
+import argparse
+import csv
+import glob
+import logging
+import os
+
+import openpyxl
+
+from profiles import configwrapper
+from profiles import junkdrawer
+
+log = logging.getLogger("profiles.scripts.xls2csv")
+
+def set_up_args():
+
+    ap = argparse.ArgumentParser("Convert all xlsx files in a folder to CSV files")
+
+    ap.add_argument("yaml_file_name")
+
+    ap.add_argument("xls_folder_path")
+
+    ap.add_argument("csv_folder_path")
+
+    return ap.parse_args()
+
+if __name__ == "__main__":
+
+    args = set_up_args()
+
+    cw = configwrapper.ConfigWrapper.load_yaml(args.yaml_file_name)
+
+    cw.configure_logging()
+
+    cw.set_as_default()
+
+    if not os.path.isdir(args.xls_folder_path):
+
+        log.critical(
+            "Sorry, but {0} ain't a folder!".format(
+                args.xls_folder_path))
+
+    elif not os.path.isdir(args.csv_folder_path):
+
+        log.critical(
+            "Sorry, but {0} ain't a folder!".format(
+                args.csv_folder_path))
+
+    else:
+
+        star_xls = os.path.join(args.xls_folder_path, "*.xlsx")
+
+        log.debug(star_xls)
+
+        for xls_file_path in glob.glob(star_xls):
+
+            xls_file_name = os.path.basename(xls_file_path)
+
+            leftstub, dot, suffix = xls_file_name.rpartition(".")
+
+            csv_file_name = "{0}.csv".format(leftstub)
+
+            csv_file_path = os.path.join(args.csv_folder_path, csv_file_name)
+
+            log.debug(csv_file_path)
+
+            junkdrawer.xls2csv(xls_file_path, csv_file_path)
+
+
+    log.info("All done!")

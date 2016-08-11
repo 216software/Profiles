@@ -7,7 +7,7 @@
 
 create table indicator_categories
 (
-    title citext primary key,
+    category citext primary key,
     description text,
     inserted timestamp not null default now(),
     updated timestamp
@@ -20,7 +20,7 @@ for each row
 execute procedure set_updated_column();
 
 insert into indicator_categories
-(title)
+(category)
 values
 ('Population'),
 ('Income');
@@ -47,7 +47,8 @@ insert into indicator_value_formats
 (format)
 values
 ('number'),
-('currency');
+('currency'),
+('percent');
 
 
 /* Indicators or Variables are what we're measuring.
@@ -60,10 +61,15 @@ create table indicators
     indicator_uuid uuid not null default uuid_generate_v4() primary key,
     title citext unique,
 
+    pretty_label citext,
+
     description text,
 
     indicator_value_format citext not null default 'number'
     references indicator_value_formats (format),
+
+    indicator_category citext not null
+    references indicator_categories (category),
 
     inserted timestamp not null default now(),
     updated timestamp
@@ -159,6 +165,8 @@ create table locations
     location_shape geometry(MultiPolygon, 4326),
 
     location_shape_json json,
+
+    display_me boolean not null default true,
 
     inserted timestamp not null default now(),
     updated timestamp

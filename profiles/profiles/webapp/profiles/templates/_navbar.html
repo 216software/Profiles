@@ -1,5 +1,3 @@
-<img id="beta-icon" src="/static/images/beta-icon.png" class="hidden-print" style="z-index:1;"/>
-
     <nav class="navbar navbar-default" id ="navbar" role="navigation">
         <div class="navbar-header">
            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#tour-search">
@@ -11,7 +9,7 @@
         </div>
         <div class="container hidden-print collapse navbar-collapse" id="tour-search">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/"><img src="/static/images/pittslogo.png"
+                <a class="navbar-brand" href="/"><img src="/static/images/nncplogo.png"
                    class="log" /></a>
             </div>
             <div class="navbar-right search-form">
@@ -49,17 +47,45 @@
                   data-original-title="Explore the Data"
                   data-content="Use the category tabs along the top to browse through the information available. <button type='button' class='btn btn-warning pull-right tour_btn' onclick='tour()'>Next</button>" id="tour_exp">
             </span>
-            <li class="domain active">
-            <a href="#" class="sub-nav">Overview</a></li>
-            <li class="domain"><a href="#" class="sub-nav">Progress Metrics</a></li>
-            <li class="domain"><a href="#" class="sub-nav">Population</a></li>
-            <li class="domain"><a href="#" class="sub-nav">Safety</a></li>
-            <li class="domain"><a href="#" class="sub-nav">Stabilization</a></li>
-            <li class="domain"><a href="#" class="sub-nav">Community</a></li>
-            <li class="domain"><a href="#" class="sub-nav">Health</a></li>
-            <li class="domain"><a href="#" class="sub-nav">Education</a></li>
-            <li class="domain"><a href="#" class="sub-nav">Workforce</a></li>
-            <li class="domain"><a href="#" class="sub-nav">Economy</a></li>
+
+            <li class="domain" data-bind="css: {active : active_tab() =='overview'}">
+            <a href="#"  data-bind="page-href:'//overview'"
+                class="sub-nav">Overview</a></li>
+
+
+            <li class="domain" data-bind="css: {active : active_tab() =='progress'}">
+            <a href="#"  data-bind="page-href:'//progress'"
+                class="sub-nav">Progress Metrics</a></li>
+
+            <li class="domain" data-bind="css: {active : active_tab() =='population'}">
+            <a href="#"  data-bind="page-href:'//population'"
+                         class="sub-nav">Population</a></li>
+
+            <li class="domain" data-bind="css: {active : active_tab() =='safety'}">
+            <a href="#" data-bind="page-href:'//safety'"  class="sub-nav">Safety</a></li>
+
+            <li class="domain" data-bind="css: {active : active_tab() =='stabilization'}">
+            <a href="#" data-bind="page-href:'//stabilization'" class="sub-nav">
+            Stabilization</a></li>
+
+            <li class="domain" data-bind="css: {active : active_tab() =='community'}">
+            <a href="#"  data-bind="page-href:'//community'"
+                class="sub-nav">Community</a></li>
+
+            <li class="domain" data-bind="css: {active : active_tab() =='health'}">
+            <a href="#"  data-bind="page-href:'//health'" class="sub-nav">Health</a></li>
+
+            <li class="domain" data-bind="css: {active : active_tab() =='education'}">
+            <a href="#"  data-bind="page-href:'//education'"
+                class="sub-nav">Education</a></li>
+
+            <li class="domain" data-bind="css: {active : active_tab() =='workforce'}">
+            <a href="#" data-bind="page-href:'//workforce'"
+               class="sub-nav">Workforce</a></li>
+
+            <li class="domain" data-bind="css: {active : active_tab() =='economy'}">
+            <a href="#" data-bind="page-href:'//economy'"
+                                   class="sub-nav">Economy</a></li>
            </ul>
         </div><!-- /.navbar-collapse -->
         </div>

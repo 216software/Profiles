@@ -21,30 +21,69 @@ function StartPageViewModel (data) {
     self.locations = ko.observableArray([]);
     self.location_types = ko.observableArray([]);
 
-    self.selected_location = ko.observable();
+    /* We might have a selected location from the parameter line */
+    self.location_uuid = ko.observable(data.location_uuid);
+
+    self.selected_location = ko.observable(new Location({rootvm:data.rootvm}));
+    self.selector_location = ko.observable();
     self.selected_location_type = ko.observable();
 
     self.filtered_locations = ko.computed(function(){
 
-         if(self.selected_location_type() != undefined){
-             return ko.utils.arrayFilter(self.locations(), function(l) {
-                return l.location_type() == self.selected_location_type();
-            });
-        }
-        else{
-            return self.locations();
+         if(self.selected_location_type() != undefined) {
+
+             return ko.utils.arrayFilter(
+
+                self.locations(),
+
+                function(loc) {
+
+                    if (loc.display_me
+                        && loc.location_type() == self.selected_location_type()) {
+                        return true;
+
+                    } else {
+                        return false;
+                    }
+                }
+            ).sort(function(a, b) {
+                if (a.title() < b.title()) {
+                    return -1;
+                } else if (a.title() > b.title()) {
+                    return 1;
+                } else {
+                    return 0;
+                }});
         }
 
+        else {
+            return self.locations();
+        }
     });
+
+    self.stabilizationvm = new StabilizationViewModel({'rootvm':data.rootvm,
+        'parentvm':self});
+
+    self.economyvm = new EconomyViewModel({'rootvm':data.rootvm,
+        'parentvm':self});
+
+    self.workforcevm = new WorkforceViewModel({'rootvm':data.rootvm,
+        'parentvm':self});
+
+
+    self.educationvm = new EducationViewModel({'rootvm':data.rootvm,
+        'parentvm':self});
+
+    self.healthvm = new HealthViewModel({'rootvm':data.rootvm,
+        'parentvm':self});
 
     self.initialize = function(){
 
-        self.get_all_location_types().then(self.get_all_locations);
+        self.get_all_location_types().then(self.get_all_locations).
+            then(self.selected_location_initialize);
     };
 
     self.get_all_location_types = function(){
-
-        console.log('location types');
 
         /* Look up the different location_types */
 
@@ -67,8 +106,6 @@ function StartPageViewModel (data) {
     }
 
     self.get_all_locations = function(){
-
-        console.log('locations');
 
         return $.ajax({
             url: "/api/all-locations",
@@ -103,16 +140,16 @@ function StartPageViewModel (data) {
         self.map = L.map("mapid").setView([41.49, -81.69], 10);
         L.esri.basemapLayer("Streets").addTo(self.map);
 
-        self.rootvm.is_busy(false);
+        self.rootvm.is_busy(true);
 
         /* Look up map location */
 
+        /*
         return $.ajax({
             url: "/api/location",
             type: "GET",
             dataType: "json",
             complete: function () {
-
                 self.rootvm.is_busy(false);
             },
             success: function (data) {
@@ -124,13 +161,20 @@ function StartPageViewModel (data) {
                 }
             }
         });
+        */
 
     };
 
+
     self.change_location = function(){
 
-        // Remove any old layers:
+        /* Updates the map and then looks up values for
+         * a given location */
 
+        // Set selected to location to the one that has been selected
+        self.selected_location(self.selector_location());
+
+        // Remove any old layers:
         for (var index in self.added_map_layers){
             console.log('removing layer' , self.added_map_layers[index]);
             self.map.removeLayer(self.added_map_layers[index]);
@@ -139,10 +183,11 @@ function StartPageViewModel (data) {
 
         self.create_feature_layer(self.selected_location());
 
-
+        /* Also -- look up data for this location */
+        //self.look_up_indicator_and_values();
     }
 
-    /* Makes an outline of an area */
+    /* Makes an outline of an area on the map*/
     self.create_feature_layer = function(new_location){
 
         console.log(new_location.location_shape_json());
@@ -162,4 +207,68 @@ function StartPageViewModel (data) {
         self.added_map_layers.push(fg);
 
     }
+
+    self.selected_location_initialize = function(){
+
+        if(self.location_uuid() != undefined){
+            self.selected_location(ko.utils.arrayFirst(self.locations(), function(loc){
+                return self.location_uuid() == loc.location_uuid();
+            }));
+
+            // Also, we want our map layer to be updated accordingly
+            self.change_location();
+        }
+        else{
+            return false;
+        }
+    };
+
+
+    /* We need to load indicators based on current location and current
+     * tab */
+
+    self.indicators = ko.observableArray([]);
+
+    self.look_up_indicator_and_values = function(indicators, success_callback){
+
+        /* At some point, we're going to need the tab we're on
+         * so that we only return the correct info -- unless
+         * that's computed on the HTML / js side */
+
+        // only do this if we need to:
+        //
+        self.rootvm.is_busy(true);
+
+        return $.ajax({
+            url: "/api/indicator-categories-with-values-by-location",
+            type: "GET",
+            dataType: "json",
+            processData: true,
+            data: {'location_uuid':self.selected_location().location_uuid(),
+                   'indicators':indicators
+                   },
+            complete: function () {
+                self.rootvm.is_busy(false);
+            },
+            success: function (data) {
+                if (data.success) {
+                    console.log(data);
+
+                    success_callback(data);
+
+                    self.indicators(ko.utils.arrayMap(
+                        data.indicator_values || [],
+                        function (x) {
+                            x.rootvm = self.rootvm;
+                            return new Indicator(x);
+                        }));
+
+                }
+                else {
+                    toastr.error(data.message);
+                }
+            }
+        });
+    };
+
 };
