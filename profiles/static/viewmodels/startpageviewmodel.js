@@ -70,12 +70,15 @@ function StartPageViewModel (data) {
     self.workforcevm = new WorkforceViewModel({'rootvm':data.rootvm,
         'parentvm':self});
 
-
     self.educationvm = new EducationViewModel({'rootvm':data.rootvm,
         'parentvm':self});
 
     self.healthvm = new HealthViewModel({'rootvm':data.rootvm,
         'parentvm':self});
+
+    self.safetyvm= new SafetyViewModel({'rootvm':data.rootvm,
+        'parentvm':self});
+
 
     self.initialize = function(){
 

@@ -84,6 +84,8 @@ Change Location</button>
 <div data-bind="page: {
     id: 'safety',
     source: '/static/templates/safety.html',
+    with: safetyvm,
+    afterShow: safetyvm.initialize,
 }"></div>
 
 <div data-bind="page: {
