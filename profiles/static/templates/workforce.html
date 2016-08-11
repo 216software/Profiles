@@ -33,9 +33,10 @@
 
 <!-- ko foreach:$parents[1].observable_timestamps -->
 <td><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
-
-<span data-bind="if:$parent.indicator_CV">(<span data-bind="text:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>)</span>
-</td>
+<span data-bind="if:$parent.indicator_CV"><span data-bind="if:
+$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
+<span data-bind="text:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
+)</span></span> </td>
 <!-- /ko --> <!-- closes inner for loop -->
 
 </tr>
