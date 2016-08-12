@@ -72,11 +72,6 @@ Change Location</button>
 }"></div>
 
 <div data-bind="page: {
-    id: 'population',
-    source: '/static/templates/population.html',
-}"></div>
-
-<div data-bind="page: {
     id: 'progress',
     source: '/static/templates/progress-metrics.html',
 }"></div>
@@ -101,6 +96,14 @@ Change Location</button>
     with: workforcevm,
     aftershow: workforcevm.initialize
 }"></div>
+
+<div data-bind="page: {
+    id: 'population',
+    source: '/static/templates/population.html',
+    with: populationvm,
+    aftershow: populationvm.initialize
+}"></div>
+
 
 </div> <!-- closes col-md-8 -->
 

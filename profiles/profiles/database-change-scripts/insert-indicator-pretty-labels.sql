@@ -47,3 +47,25 @@ update indicators set pretty_label = '% of bachelor''s degree' where title = '_b
 
 update indicators set pretty_label = 'Graduate or professional degree' where title = 'prof';
 update indicators set pretty_label = '% of grad or professional degree' where title = '_prof';
+
+/* Population */
+
+update indicators set pretty_label = 'Total population' where title = 'pop';
+
+update indicators set pretty_label = 'Non-hispanic white' where title = 'nhw';
+update indicators set pretty_label = '% Non-hispanic white' where title = '_nhw';
+
+update indicators set pretty_label = 'Non-hispanic black' where title = 'nhb';
+update indicators set pretty_label = '% Non-hispanic black' where title = '_nhb';
+
+update indicators set pretty_label = 'Non-hispanic Asian/Pacific Islander' where title = 'nhapi';
+update indicators set pretty_label = '% Non-hispanic Asian/Pacific Islander' where title = '_nhapi';
+
+update indicators set pretty_label = 'Non-hispanic other' where title = 'nho';
+update indicators set pretty_label = '% Non-hispanic other' where title = '_nho';
+
+update indicators set pretty_label = 'Hispanic' where title = 'hisp';
+update indicators set pretty_label = '% Hispanic' where title = '_hisp';
+
+
+

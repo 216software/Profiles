@@ -79,6 +79,10 @@ function StartPageViewModel (data) {
     self.safetyvm= new SafetyViewModel({'rootvm':data.rootvm,
         'parentvm':self});
 
+    self.populationvm = new PopulationViewModel({'rootvm':data.rootvm,
+        'parentvm':self});
+
+
 
     self.initialize = function(){
 
