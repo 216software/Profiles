@@ -390,6 +390,10 @@ function StartPageViewModel (data) {
                 return filtered_loc.title() == loc.title();
             }));
 
+        self.address_to_geocode(null);
+        self.geocode_results([]);
+        self.containing_neighborhoods([]);
+
     };
 
 };
