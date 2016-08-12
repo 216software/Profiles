@@ -67,5 +67,11 @@ update indicators set pretty_label = '% Non-hispanic other' where title = '_nho'
 update indicators set pretty_label = 'Hispanic' where title = 'hisp';
 update indicators set pretty_label = '% Hispanic' where title = '_hisp';
 
+/* Health */
+update indicators set pretty_label = 'Mortality/Life Expectancy' where title = 'le2009';
+
+update indicators set pretty_label = 'Infant Mortality' where title = 'infmort_rate2009';
+update indicators set pretty_label = 'Mortality' where title = 'mort_rate2009';
+update indicators set pretty_label = 'Blood Lead Levels' where title = '_ebll_c';
 
 

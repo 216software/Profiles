@@ -21,12 +21,8 @@ function HealthViewModel (data) {
     };
 
     /* This should also include the order we want to display */
-    self.indicator_titles = ['res_occ', '_res_occ',
-        'hsg_den', 'f',
-        'shf',
-        'distress', '_distress',
-        'ntal_sales', '_ntal_sales',
-        'med_ntal_price'];
+    self.indicator_titles = ['mort_rate2009','infmort_rate2009', 'le2009',
+        '_ebll_c'];
 
     self.indicators = ko.observableArray([]);
 
