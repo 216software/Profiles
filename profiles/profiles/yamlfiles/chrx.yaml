@@ -103,7 +103,6 @@ rackspace:
 # This is stuff just for this project
 profiles:
 
-    # Rob, you'll need to change this
     csv_data_files_folder: /home/matt/checkouts/Profiles/datafiles/csvfiles
 
 google:
