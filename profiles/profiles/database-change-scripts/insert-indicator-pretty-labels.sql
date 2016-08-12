@@ -74,4 +74,27 @@ update indicators set pretty_label = 'Infant Mortality' where title = 'infmort_r
 update indicators set pretty_label = 'Mortality' where title = 'mort_rate2009';
 update indicators set pretty_label = 'Blood Lead Levels' where title = '_ebll_c';
 
+/* Progress Indicators */
+update indicators set pretty_label = 'Median sales price of residential parcels' where title = 'med_al_price';
+
+update indicators set pretty_label = 'Median sales price: single-family' where title = 'med_sfprice';
+update indicators set pretty_label = 'Median sales price: multi-family' where title = 'med_mfprice';
+
+update indicators set pretty_label = 'Median sales price: condo parcels' where title = 'med_cdprice';
+
+
+update indicators set pretty_label = '# of arms-length sales of single parcels' where title = 'al_sales';
+
+
+update indicators set pretty_label = 'Single-family sales' where title = 'sfsale';
+update indicators set pretty_label = 'Multi-family sales' where title = 'mfsale';
+
+update indicators set pretty_label = 'Condo parcel sales' where title = 'cdsale';
+
+
+update indicators set pretty_label = '# of arms-length sales of single parcels' where title = 'al_sales';
+
+
+
+
 
