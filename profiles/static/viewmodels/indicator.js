@@ -72,7 +72,6 @@ function Indicator (data) {
  */
 Indicator.indicator_by_title = function(indicators, title){
 
-    console.log('indicator by title ', indicators);
     return ko.utils.arrayFirst(indicators, function (i){
         return i.title() == title;
     });

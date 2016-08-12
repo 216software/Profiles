@@ -140,3 +140,31 @@ class LocationTypes(Handler):
             reply_timestamp=datetime.datetime.now(),
             success=True,
             location_types=location_types))
+
+class FindContainingNeighborhoods(Handler):
+
+    route_strings = set(["GET /api/find-containing-neighborhoods"])
+
+    route = Handler.check_route_strings
+
+    def handle(self, req):
+
+        lat = float(req.wz_req.args["lat"])
+        lng = float(req.wz_req.args["lng"])
+        offset = int(req.wz_req.args.get("offset", 0))
+        limit = int(req.wz_req.args.get("limit", 40))
+
+        containing_neighborhoods = list(pg.locations.Location\
+        .find_containing_neighborhoods(
+            self.cw.get_pgconn(),
+            lat,
+            lng,
+            offset,
+            limit))
+
+        return Response.json(dict(
+            message="Found {0} neighborhoods".format(
+                len(containing_neighborhoods)),
+            reply_timestamp=datetime.datetime.now(),
+            success=True,
+            containing_neighborhoods=containing_neighborhoods))

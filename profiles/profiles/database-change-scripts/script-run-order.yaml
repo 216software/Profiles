@@ -27,3 +27,4 @@ script_order:
 -   insert-indicator-formatting-based-on-spreadsheet.sql
 -   insert-indicator-pretty-labels.sql
 -   clean-up-locations.sql
+-   add-index-to-locations.sql

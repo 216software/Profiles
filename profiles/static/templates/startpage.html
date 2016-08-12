@@ -30,8 +30,71 @@
 Change Location</button>
 </div> <!-- closes form-group -->
 
-<div id="mapid" style="height:300px;"></div>
+<div class="form-group"
+    data-bind="visible: google_maps_api_loaded">
 
+<label>Look up neighborhood using address</label>
+
+<input type="text" class="form-control"
+    data-bind="value: address_to_geocode"
+    placeholder="Type an address here" />
+
+</div><!-- closes form-group -->
+
+<div class="form-group"
+    data-bind="visible: google_maps_api_loaded">
+    <button
+        class="form-control btn btn-primary"
+        data-bind="click: geocode_address,
+            attr: {disabled: !address_to_geocode()},
+            css: {disabled: !address_to_geocode()}">
+Look up by address</button>
+
+</div> <!-- closes form-group -->
+
+<div data-bind="visible: geocode_results().length">
+
+<strong>We found these addresses</strong>
+
+<p class="help-block">Pick the address from the list below, and we'll
+look up the containing neighborhood for that address.</p>
+
+<div data-bind="foreach: geocode_results">
+
+<p data-bind="text: formatted_address"></p>
+
+<button class="btn btn-default btn-block"
+    data-bind="click: $parent.find_containing_neighborhood">Find
+containing neighborhoods
+</button>
+
+<button class="btn btn-default btn-block"
+    data-bind="click: $parent.center_map_here">Center map here</button>
+
+<div data-bind="visible: $parent.containing_neighborhoods().length">
+
+<strong>We found
+<span data-bind="text: $parent.containing_neighborhoods().length"></span>
+containing locations</strong>
+
+<div data-bind="foreach: $parent.containing_neighborhoods">
+
+<button class="btn btn-default btn-block"
+    data-bind="click: $root.startpagevm.set_selected_location">
+<span data-bind="text: title"></span>
+<small>(type=<span data-bind="text: location_type"></span>)</small>
+</button>
+
+</div><!-- closes foreach containing_neighborhoods -->
+
+</div><!-- closes visible containing_neighborhoods -->
+
+</div><!-- closes foreach -->
+
+</div><!-- closes visible geocode_results -->
+
+
+<div id="mapid" style="height:300px;"></div>
 
 </div> <!-- closes col-md-4 -->
 
