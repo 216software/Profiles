@@ -172,4 +172,8 @@ rackspace:
     # pyrax.cloudfiles._manager.api.management_url
     mgmt_url:   https://storage101.iad3.clouddrive.com/v1/MossoCloudFS_949731
 
+google:
+    google_maps_API_key:    AIzaSyBigZQyl666oFxkCvg6WM9vBW9-1F8-Hho
+
+
 # vim: set filetype=yaml :

@@ -348,6 +348,26 @@ class Location(object):
                 location_type,
                 title))
 
+    @classmethod
+    def find_containing_neighborhoods(cls, pgconn, lat, lng, offset, limit):
+
+        cursor = pgconn.cursor()
+
+        # I don't know what the 4326 parameter means.
+        cursor.execute(textwrap.dedent("""
+            select (locations.*)::locations as loc
+            from locations
+            where st_contains(
+                location_shape,
+                st_geomfromtext('point(%(lng)s %(lat)s)', 4326))
+            order by title
+            offset %(offset)s
+            limit %(limit)s
+            """), dict(lat=lat, lng=lng, offset=offset, limit=limit))
+
+        for row in cursor:
+            yield row.loc
+
 class LocationTypeFactory(psycopg2.extras.CompositeCaster):
 
     def make(self, values):

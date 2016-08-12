@@ -125,6 +125,10 @@ body {
 {% block scripts %}
 {% endblock %}
 
+<script
+    src="https://maps.googleapis.com/maps/api/js?key={{
+cw.google_maps_API_key }}&callback=pvm.startpagevm.mark_google_maps_api_loaded"
+    async defer></script>
 
 </body>
 
