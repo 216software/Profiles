@@ -20,7 +20,7 @@
 </tr>
 </thead>
 <tbody>
-<!-- ko foreach:indicator_titles -->
+<!-- ko foreach:sales_indicators -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
@@ -55,7 +55,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
 <tr>
 <th>Indicator</th>
 <th>% change</th>
-<!-- ko foreach:observable_timestamps -->
+<!-- ko foreach:observable_timestamps_census -->
     <!-- ko if:($index() == 0) -->
     <th data-bind="text:$data.format('YYYY')"></th>
     <!-- /ko -->
@@ -66,7 +66,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
 </tr>
 </thead>
 <tbody>
-<!-- ko foreach:indicator_titles -->
+<!-- ko foreach:rental_indicators -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
@@ -74,7 +74,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
 </td>
 <td data-bind="text:percent_change_indicator_value"></td>
 
-<!-- ko foreach:$parents[1].observable_timestamps -->
+<!-- ko foreach:$parents[1].observable_timestamps_census -->
 <td><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
 $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
@@ -93,8 +93,6 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
 </tbody>
 
 </table>
-
-<
 
 
 <p class="small">

@@ -94,6 +94,21 @@ update indicators set pretty_label = 'Condo parcel sales' where title = 'cdsale'
 
 update indicators set pretty_label = '# of arms-length sales of single parcels' where title = 'al_sales';
 
+update indicators set pretty_label = 'Median gross rent' where title = '_grent';
+update indicators set pretty_label = '# of renter households' where title = 'cashrent';
+
+update indicators set pretty_label = 'Number of households with income less than $10,000' where title = 'hhincls10k ';
+
+update indicators set pretty_label = 'Number of households with income less than $10,000' where title = 'hhinc10to15k';
+update indicators set pretty_label = 'Number of households with income less than $10,000' where title = 'hinc25to35k';
+update indicators set pretty_label = 'Number of households with income less than $10,000' where title = 'hinc25to35k';
+
+update indicators set pretty_label = 'Number of households with income less than $10,000' where title = 'hhinc35to50k';
+update indicators set pretty_label = 'Number of households with income less than $10,000' where title = 'hhinc50to75k';
+update indicators set pretty_label = 'Number of households with income less than $10,000' where title = 'hhinc75to100k';
+update indicators set pretty_label = 'Number of households with income less than $10,000' where title = 'hhinc100to150k';
+update indicators set pretty_label = 'Number of households with income less than $10,000' where title = 'hhinc150to200k';
+update indicators set pretty_label = 'Number of households with income less than $10,000' where title = 'hhinc200kp';
 
 
 
