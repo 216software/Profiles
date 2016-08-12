@@ -23,18 +23,20 @@
 </tr>
 </thead>
 <tbody>
-<!-- ko foreach:indicator_titles -->
+<!-- ko foreach:indicators_employment -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
-<td> <span data-bind="text:description"></span>
+<td> <span data-bind="text:pretty_label"></span>
 </td>
 <td data-bind="text:percent_change_indicator_value"></td>
 
 <!-- ko foreach:$parents[1].observable_timestamps -->
 <td><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
-
-</td>
+<span data-bind="if:$parent.indicator_CV"><span data-bind="if:
+$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
+<span data-bind="text:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
+)</span></span> </td>
 <!-- /ko --> <!-- closes inner for loop -->
 
 </tr>
@@ -42,6 +44,36 @@
 <!-- /ko -->
 
 <!-- /ko -->
+
+<tr>
+<th colspan="2">Population by education attainment level</th>
+</tr>
+<!-- ko foreach:indicators_pop_by_ed_attainment -->
+
+<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
+<tr>
+<td> <span data-bind="text:pretty_label"></span>
+</td>
+<td data-bind="text:percent_change_indicator_value"></td>
+
+<!-- ko foreach:$parents[1].observable_timestamps -->
+<td><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+
+<span data-bind="if:$parent.indicator_CV"><span data-bind="if:
+$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
+<span data-bind="text:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
+)</span></span> </td>
+<!-- /ko --> <!-- closes inner for loop -->
+
+</tr>
+
+<!-- /ko -->
+
+<!-- /ko -->
+
+
+
+
 </tbody>
 
 </table>

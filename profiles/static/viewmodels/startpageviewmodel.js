@@ -78,6 +78,14 @@ function StartPageViewModel (data) {
     self.healthvm = new HealthViewModel({'rootvm':data.rootvm,
         'parentvm':self});
 
+    self.safetyvm= new SafetyViewModel({'rootvm':data.rootvm,
+        'parentvm':self});
+
+    self.populationvm = new PopulationViewModel({'rootvm':data.rootvm,
+        'parentvm':self});
+
+
+
     self.initialize = function(){
 
         self.get_all_location_types().then(self.get_all_locations).

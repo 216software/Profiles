@@ -21,9 +21,26 @@ function WorkforceViewModel (data) {
     };
 
     /* This should also include the order we want to display */
-    self.indicator_titles = ['lf' ,'_lf', 'cvlf', '_cvlf'];
+    self.indicator_titles = ['lf' ,'_lf', 'cvlf', '_cvlf',
+        'emp', '_emp', 'cvemp', 'pop25p', 'cvpop25p', 'hsls9', '_hsls9', 'cvhsls9',
+        'hs9to12', '_hs9to12', 'cvhs9to12',
+        'hsgrad', '_hsgrad', 'cvhsgrad',
+        'somecoll', '_somecoll' , 'cvsomecoll',
+        'assoc', '_assoc', 'cvassoc',
+        'bs', '_bs', 'cvbs',
+        'prof', '_prof', 'cvprof'];
 
-    self.indicator_cv_pairings = {'lf':'cvlf'}
+    self.indicators_employment = ['emp', 'lf'];
+    self.indicators_pop_by_ed_attainment = ['pop25', 'hsls9', 'hs9to12',
+        'hsgrad', 'somecoll', 'assoc', 'bs', 'prof'];
+
+    self.indicator_cv_pairings = {'lf':'cvlf', 'emp':'cvemp',
+        'pop25p':'cvpop25p', 'hsls9':'cvhsls9',
+        'hs9to12':'cvhs9to12', 'hsgrad':'cvhsgrad',
+        'somecoll':'cvsomecoll',
+        'assoc':'cvassoc',
+        'bs':'cvbs', 'prof':'cvprof'
+        }
 
 
     self.indicators = ko.observableArray([]);
@@ -58,10 +75,10 @@ function WorkforceViewModel (data) {
             }));
 
         for (var indicator_key in self.indicator_cv_pairings) {
-            var ind = Indicator.indicator_by_title(indicator_key)
-            var ind_cv = Indicator.indicator_by_title(
+            var ind = Indicator.indicator_by_title(self.indicators(), indicator_key)
+            var ind_cv = Indicator.indicator_by_title(self.indicators(),
                 self.indicator_cv_pairings[indicator_key])
-            ind.indicator_cv(ind_cv);
+            ind.indicator_CV(ind_cv);
         }
     }
 };

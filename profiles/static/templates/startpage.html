@@ -1,6 +1,6 @@
 <div class="row" style="margin-bottom:15px">
 
-<div class="col-md-4">
+<div class="col-md-3">
 
 <!-- Navbar type thing here -->
 
@@ -98,7 +98,7 @@ containing locations</strong>
 
 </div> <!-- closes col-md-4 -->
 
-<div class="col-md-8">
+<div class="col-md-8" style="margin-left:30px">
 
 <!-- all of our sub page tabs go here ? -->
 
@@ -135,11 +135,6 @@ containing locations</strong>
 }"></div>
 
 <div data-bind="page: {
-    id: 'population',
-    source: '/static/templates/population.html',
-}"></div>
-
-<div data-bind="page: {
     id: 'progress',
     source: '/static/templates/progress-metrics.html',
 }"></div>
@@ -147,6 +142,8 @@ containing locations</strong>
 <div data-bind="page: {
     id: 'safety',
     source: '/static/templates/safety.html',
+    with: safetyvm,
+    afterShow: safetyvm.initialize,
 }"></div>
 
 <div data-bind="page: {
@@ -162,6 +159,14 @@ containing locations</strong>
     with: workforcevm,
     aftershow: workforcevm.initialize
 }"></div>
+
+<div data-bind="page: {
+    id: 'population',
+    source: '/static/templates/population.html',
+    with: populationvm,
+    aftershow: populationvm.initialize
+}"></div>
+
 
 </div> <!-- closes col-md-8 -->
 
