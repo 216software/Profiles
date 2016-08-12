@@ -74,6 +74,8 @@ Change Location</button>
 <div data-bind="page: {
     id: 'progress',
     source: '/static/templates/progress-metrics.html',
+    with: progressmetricsvm,
+    afterShow: progressmetricsvm.initialize
 }"></div>
 
 <div data-bind="page: {

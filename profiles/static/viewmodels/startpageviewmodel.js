@@ -82,6 +82,10 @@ function StartPageViewModel (data) {
     self.populationvm = new PopulationViewModel({'rootvm':data.rootvm,
         'parentvm':self});
 
+    self.progressmetricsvm = new ProgressMetricsViewModel({'rootvm':data.rootvm,
+        'parentvm':self});
+
+
 
 
     self.initialize = function(){

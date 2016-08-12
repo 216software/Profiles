@@ -24,6 +24,12 @@ function HealthViewModel (data) {
     self.indicator_titles = ['mort_rate2009','infmort_rate2009', 'le2009',
         '_ebll_c'];
 
+    self.indicator_titles_extra_formatting = {
+        'infmort_rate2009':'*', 'mort_rate2009':'**',
+        '_ebll_c':'&#9768;'
+    }
+
+
     self.indicators = ko.observableArray([]);
 
     self.parentvm.selected_location.subscribe(function(){
@@ -31,7 +37,10 @@ function HealthViewModel (data) {
             self.look_up_indicator_complete);
     });
 
-    console.log(self.parentvm);
+    self.extra_formatting = function(title){
+        return self.indicator_titles_extra_formatting[title];
+    };
+
 
     self.observable_timestamps = ko.observableArray([]);
 

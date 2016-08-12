@@ -1,4 +1,118 @@
 
 <h2>Progress Metrics</h2>
 
-<p>Table of data goes here for a given location -- see CSV </p>
+<div data-bind="with:parentvm.selected_location()">
+
+<h4>Now viewing data for <span data-bind="text:title"></h4>
+
+</div>
+
+
+<table class="table table-striped">
+<thead>
+<tr><th>Sales</th></tr>
+<tr>
+<th>Indicator</th>
+<th>% change</th>
+<!-- ko foreach:observable_timestamps -->
+    <th data-bind="text:$data.format('YYYY')"></th>
+<!-- /ko -->
+</tr>
+</thead>
+<tbody>
+<!-- ko foreach:indicator_titles -->
+
+<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
+<tr>
+<td> <span data-bind="text:pretty_label"></span>
+</td>
+<td data-bind="text:percent_change_indicator_value"></td>
+
+<!-- ko foreach:$parents[1].observable_timestamps -->
+<td><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+<span data-bind="if:$parent.indicator_CV"><span data-bind="if:
+$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
+<span data-bind="text:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
+)</span></span> </td>
+<!-- /ko --> <!-- closes inner for loop -->
+
+</tr>
+
+<!-- /ko -->
+
+<!-- /ko -->
+
+
+
+</tbody>
+
+</table>
+
+
+<table class="table table-striped">
+<thead>
+<tr><th>Rental</th></tr>
+<tr>
+<th>Indicator</th>
+<th>% change</th>
+<!-- ko foreach:observable_timestamps -->
+    <!-- ko if:($index() == 0) -->
+    <th data-bind="text:$data.format('YYYY')"></th>
+    <!-- /ko -->
+    <!-- ko if:($index() != 0) -->
+    <th>2009 - <span data-bind="text:$data.year() - 1"></span> (CV*)</th>
+    <!-- /ko -->
+<!-- /ko -->
+</tr>
+</thead>
+<tbody>
+<!-- ko foreach:indicator_titles -->
+
+<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
+<tr>
+<td> <span data-bind="text:pretty_label"></span>
+</td>
+<td data-bind="text:percent_change_indicator_value"></td>
+
+<!-- ko foreach:$parents[1].observable_timestamps -->
+<td><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+<span data-bind="if:$parent.indicator_CV"><span data-bind="if:
+$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
+<span data-bind="text:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
+)</span></span> </td>
+<!-- /ko --> <!-- closes inner for loop -->
+
+</tr>
+
+<!-- /ko -->
+
+<!-- /ko -->
+
+
+
+</tbody>
+
+</table>
+
+<
+
+
+<p class="small">
+Source: 2000 Decennial Census, 2009-2013 American Community Survey 5-year estimates, Cuyahoga County Fiscal Office.
+Note: Information from 2009-2013 ACS 5 year estimates are estimates with a margin of error.
+Arm's length sales include all property sales except those transferred at Sheriff sale, purchased by a bank, financial institution, GSE or local government, or recorded with a zero price. Bulk sales and self-sales are also excluded.
+Median sales price of residential parcels includes only residential single family, multi-family, and condominium parcels.
+</p>
+
+<p class="small">
+* The Coefficient of Variation is a measure of reliability of the ACS
+estimate. The Census provides the following guidelines for determining
+the reliatiliby of the estimate:
+<ul class="small">
+<li>Coefficient of Variance &lt;15% - Good</li>
+<li>Coefficient of Variance &gt;15% and &lt; 61% - Fair</li>
+Coefficient of Variance &gt;&eq; 61% - Poor</li>
+</ul>
+
+</p>
+
