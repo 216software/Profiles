@@ -18,28 +18,41 @@ function ProgressMetricsViewModel (data) {
 
     /* This should also include the order we want to display */
     self.indicator_titles = ['med_al_price', 'med_sfprice',
-        'med_fprice', 'med_cdprice', 'al_sales', 'sfsale',
+        'med_mfprice', 'med_cdprice', 'al_sales', 'sfsale',
         'mfsale', 'cdsale'];
 
     /* Do a separate look up for census */
-    self.census_indicator_titles = ['_grent', 'cashrent', 'cvcashrent',
+    self.census_indicator_titles = ['_grent', 'cashrent', 'cvcashrent', '_medinc',
         'hhincls10k', 'hhinc10to15k',
         'hinc15to25k', 'hinc25to35',
-        'hhinc35to50k', 'hhinc50to75k', 'hinc75to100k', 'hinc100to150k',
-        'hhinc35to50k', 'hhinc50to75k', 'hinc75to100k', 'hinc100to150k',
-        'hhinc150to200k', 'hhinc200kp'];
+        'hhinc35to50k', 'hhinc50to75k', 'hhinc75to100k', 'hhinc100to150k',
+        'hhinc150to200k', 'hhinc200kp', 'bpv', 'tpv', 'mbpv_samehou', 'mbpv_diffhou',
+        '_hhincls10k', '_hhinc10to15k',
+        '_hinc15to25k', '_hinc25to35k',
+        '_hhinc35to50k', '_hhinc50to75k', '_hhinc75to100k', '_hhinc100to150k',
+        '_hhinc150to200k', '_hhinc200kp',
+        'bpv','_bpv', 'tpv', '_tpv',
+        'mbpv_samehou', 'mbpv_diffhou'
+        ];
 
     self.sales_indicators = ['med_al_price', 'med_sfprice',
-        'med_fprice', 'med_cdprice', 'al_sales', 'sfsale',
+        'med_mfprice', 'med_cdprice', 'al_sales', 'sfsale',
         'mfsale', 'cdsale'];
 
-    self.rental_indicators = ['_grent', 'cashrent', 'hhincls10k', 'hhinc10to15k',
-        'hinc15to25k', 'hinc25to35',
-        'hhinc35to50k', 'hhinc50to75k', 'hinc75to100k', 'hinc100to150k',
-        'hhinc35to50k', 'hhinc50to75k', 'hinc75to100k', 'hinc100to150k',
-        'hhinc150to200k', 'hhinc200kp'];
+    self.rental_indicators = ['_grent', 'cashrent'];
 
+    self.income_indicators= ['_medinc', 'hhincls10k', '_hhincls10k',
+        'hhinc10to15k', '_hhinc10to15k',
+        'hinc15to25k','_hinc15to25k',
+        'hinc25to35','_hinc25to35',
+        'hhinc35to50k','_hhinc35to50k',
+        'hhinc50to75k','_hhinc50to75k',
+        'hhinc75to100k','_hhinc75to100k',
+        'hhinc100to150k','_hhinc100to150k',
+        'hhinc150to200k', '_hhinc150to200k',
+        'hhinc200kp','_hhinc200kp'];
 
+    self.poverty_indicators = ['bpv', 'tpv', 'mbpv_samehou', 'mbpv_diffhou'];
 
     self.indicator_cv_pairings = {'cashrent':'cvcashrent'};
 

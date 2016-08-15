@@ -10,7 +10,7 @@
 
 <table class="table table-striped">
 <thead>
-<tr><th>Sales</th></tr>
+<tr><th>Sales Data</th></tr>
 <tr>
 <th>Indicator</th>
 <th>% change</th>
@@ -51,7 +51,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
 
 <table class="table table-striped">
 <thead>
-<tr><th>Rental</th></tr>
+<tr><th>Rental Data</th></tr>
 <tr>
 <th>Indicator</th>
 <th>% change</th>
@@ -87,6 +87,55 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
 <!-- /ko -->
 
 <!-- /ko -->
+
+<tr><th colspan="5">Income Data</th></tr>
+
+<!-- ko foreach:income_indicators -->
+
+<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
+<tr>
+<td> <span data-bind="text:pretty_label"></span>
+</td>
+<td data-bind="text:percent_change_indicator_value"></td>
+
+<!-- ko foreach:$parents[1].observable_timestamps_census -->
+<td><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+<span data-bind="if:$parent.indicator_CV"><span data-bind="if:
+$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
+<span data-bind="text:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
+)</span></span> </td>
+<!-- /ko --> <!-- closes inner for loop -->
+
+</tr>
+
+<!-- /ko -->
+
+<!-- /ko -->
+
+<tr><th colspan="5">Poverty Data</th></tr>
+
+<!-- ko foreach:poverty_indicators -->
+
+<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
+<tr>
+<td> <span data-bind="text:pretty_label"></span>
+</td>
+<td data-bind="text:percent_change_indicator_value"></td>
+
+<!-- ko foreach:$parents[1].observable_timestamps_census -->
+<td><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+<span data-bind="if:$parent.indicator_CV"><span data-bind="if:
+$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
+<span data-bind="text:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
+)</span></span> </td>
+<!-- /ko --> <!-- closes inner for loop -->
+
+</tr>
+
+<!-- /ko -->
+
+<!-- /ko -->
+
 
 
 
