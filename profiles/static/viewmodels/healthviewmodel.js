@@ -21,12 +21,14 @@ function HealthViewModel (data) {
     };
 
     /* This should also include the order we want to display */
-    self.indicator_titles = ['res_occ', '_res_occ',
-        'hsg_den', 'f',
-        'shf',
-        'distress', '_distress',
-        'ntal_sales', '_ntal_sales',
-        'med_ntal_price'];
+    self.indicator_titles = ['mort_rate2009','infmort_rate2009', 'le2009',
+        '_ebll_c'];
+
+    self.indicator_titles_extra_formatting = {
+        'infmort_rate2009':'*', 'mort_rate2009':'**',
+        '_ebll_c':'&#9768;'
+    }
+
 
     self.indicators = ko.observableArray([]);
 
@@ -35,7 +37,10 @@ function HealthViewModel (data) {
             self.look_up_indicator_complete);
     });
 
-    console.log(self.parentvm);
+    self.extra_formatting = function(title){
+        return self.indicator_titles_extra_formatting[title];
+    };
+
 
     self.observable_timestamps = ko.observableArray([]);
 

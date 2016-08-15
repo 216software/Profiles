@@ -105,4 +105,8 @@ profiles:
 
     csv_data_files_folder: /home/rob/checkouts/Profiles/datafiles/csvfiles
 
+google:
+    google_maps_API_key:    AIzaSyBigZQyl666oFxkCvg6WM9vBW9-1F8-Hho
+
+
 # vim: set filetype=yaml :

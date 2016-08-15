@@ -22,6 +22,7 @@
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
 <td> <span data-bind="text:pretty_label"></span>
+<span data-bind="html:$parents[1].extra_formatting(title())"></span>
 </td>
 <td data-bind="text:percent_change_indicator_value"></td>
 
@@ -38,4 +39,22 @@
 </tbody>
 
 </table>
+
+<p class="small">
+Sources:  U.S. Census Bureau - 2008-2012 ACS 5-year estimates; Ohio
+Department of Health Vital Statistics Divisions<br />
+Note: This study includes data provided by the Ohio Department of Health
+which should not be considered an endorsement of this study or its
+conclusions.
+</p>
+<p class="small">
+&#9768; Lead data provided by Ohio Department of Health. This should not be
+considered an endorsement of this study or these conclusions by the ODH</br>
+*Rate per 1,000 births<br />
+**Rate per 1,000 population<br />
+Life expectancy is calculated using the Life Expectancy Calculator
+created by Daniel Eayres published in the South East Public Health
+Observatory (SEPHO) website.
+</p>
+
 

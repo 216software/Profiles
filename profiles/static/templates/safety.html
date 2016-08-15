@@ -1,5 +1,57 @@
 
 <h2>Safety Metrics</h2>
+<h5>Note: data only available for neighborhoods, not CDCs</h5>
 
-<p>Table of data goes here for a given location -- see CSV </p>
+<div data-bind="with:parentvm.selected_location()">
+<h4> Now viewing data for <span data-bind="text:title"></h4>
+</div>
+
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Indicator</th>
+<th>% change</th>
+<!-- ko foreach:observable_timestamps -->
+    <th data-bind="text:$data.format('YYYY')"></th>
+<!-- /ko -->
+</tr>
+</thead>
+<tbody>
+<!-- ko foreach:indicator_titles -->
+
+<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
+<tr>
+<td> <span data-bind="text:description"></span>
+</td>
+<td data-bind="text:percent_change_indicator_value"></td>
+
+<!-- ko foreach:$parents[1].observable_timestamps -->
+<td><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+</td>
+<!-- /ko --> <!-- closes inner for loop -->
+
+</tr>
+
+<!-- /ko -->
+
+<!-- /ko -->
+</tbody>
+
+</table>
+
+<p class="small">
+Sources: Cleveland Police Department. Data not available for Cuyahoga
+County.<br />
+<strong>Part I</strong> crimes include violent crimes and property crimes.
+<br />
+Violent crimes include homicide, rape, robbery and aggravated assault
+<br />
+Property crimes include burglary, larceny-theft, auto theft and arson
+<br />
+<strong>Part II</strong> crimes include everything else such as non-aggravated assaults,
+forgery, fraud, embezzlement, receiving stolen property, vandalism,
+weapons violations, prostitution, drug violations, family offenses,
+disorderly conduct, kidnapping and all others.
+</p>
+
 

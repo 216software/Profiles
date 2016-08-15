@@ -172,4 +172,7 @@ class ConfigWrapper(configwrapper.ConfigWrapper):
 
         return self.config_dictionary["profiles"]["csv_data_files_folder"]
 
+    @property
+    def google_maps_API_key(self):
+        return self.config_dictionary["google"]["google_maps_API_key"]
 

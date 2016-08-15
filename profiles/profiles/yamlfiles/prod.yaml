@@ -161,16 +161,9 @@ logging:
 
                 format: "%(log_color)s%(asctime)-22s [%(process)d] %(name)-30s %(lineno)-5d %(levelname)-8s %(message)s"
 
-rackspace:
-    username:   stratqor
-    apikey:     f8a7b492c4ac40b5a877f79116aaae91
-    region:     ORD
-    # get temp key like this:
-    # pyrax.cloudfiles._manager.api.get_temp_url_key()
-    tempurlkey: d85808a843541fc72c5ab0a1a1a00d46
-    # get management key like this:
-    # pyrax.cloudfiles._manager.api.management_url
-    mgmt_url:   https://storage101.iad3.clouddrive.com/v1/MossoCloudFS_949731
+google:
+    google_maps_API_key:    AIzaSyBigZQyl666oFxkCvg6WM9vBW9-1F8-Hho
+
 
 # This is stuff just for this project
 profiles:

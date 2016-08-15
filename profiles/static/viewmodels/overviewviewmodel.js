@@ -8,7 +8,7 @@
    data-bind="executeOnEnter: sendMessage, button : buttonSelector"
 */
 
-function ProgressMetricsViewModel (data) {
+function OverViewModel (data) {
 
     var self = this;
 
@@ -24,13 +24,11 @@ function ProgressMetricsViewModel (data) {
     /* Do a separate look up for census */
     self.census_indicator_titles = ['_grent', 'cashrent', 'cvcashrent', '_medinc',
         'hhincls10k', 'hhinc10to15k', 'cvhhincls10k', 'cvhhinc10to15k',
-        'hhinc15to25k', 'hhinc25to35k', 'cvhhinc15to25k', 'cvhhinc25to35k',
-        'hhinc35to50k', 'hhinc50to75k',  'cvhhinc35to50k', 'cvhhinc50to75k',
-        'hhinc75to100k', 'hhinc100to150k', 'cvhhinc75to100k', 'cvhhinc100to150k',
-        'hhinc150to200k', 'hhinc200kp',  'cvhhinc150to200k', 'cvhhinc200kp',
-        'bpv', 'tpv', 'mbpv_samehou', 'mbpv_diffhou',
+        'hinc15to25k', 'hinc25to35',
+        'hhinc35to50k', 'hhinc50to75k', 'hhinc75to100k', 'hhinc100to150k',
+        'hhinc150to200k', 'hhinc200kp', 'bpv', 'tpv', 'mbpv_samehou', 'mbpv_diffhou',
         '_hhincls10k', '_hhinc10to15k',
-        '_hhinc15to25k', '_hhinc25to35k',
+        '_hinc15to25k', '_hinc25to35k',
         '_hhinc35to50k', '_hhinc50to75k', '_hhinc75to100k', '_hhinc100to150k',
         '_hhinc150to200k', '_hhinc200kp',
         'bpv','_bpv', 'tpv', '_tpv',
@@ -45,8 +43,8 @@ function ProgressMetricsViewModel (data) {
 
     self.income_indicators= ['_medinc', 'hhincls10k', '_hhincls10k',
         'hhinc10to15k', '_hhinc10to15k',
-        'hhinc15to25k','_hhinc15to25k',
-        'hhinc25to35k','_hhinc25to35k',
+        'hinc15to25k','_hinc15to25k',
+        'hinc25to35','_hinc25to35',
         'hhinc35to50k','_hhinc35to50k',
         'hhinc50to75k','_hhinc50to75k',
         'hhinc75to100k','_hhinc75to100k',
@@ -58,15 +56,7 @@ function ProgressMetricsViewModel (data) {
 
     self.indicator_cv_pairings = {'cashrent':'cvcashrent',
      'hhincls10k': 'cvhhincls10k',
-     'hhinc10to15k': 'cvhhinc10to15k',
-     'hhinc15to25k': 'cvhhinc15to25k',
-     'hhinc25to35k':'cvhhinc25to35k',
-     'hhinc35to50k': 'cvhhinc35to50k',
-     'hhinc50to75k': 'cvhhinc50to75k',
-     'hhinc75to100k': 'cvhhinc75to100k',
-     'hhinc100to150k': 'cvhhinc100to150k',
-     'hhinc150to200k': 'cvhhinc150to200k',
-     'hhinc200kp':  'cvhhinc200kp'};
+     'hhinc10to15k': 'cvhhinc10to15k'};
 
     self.indicators = ko.observableArray([]);
 

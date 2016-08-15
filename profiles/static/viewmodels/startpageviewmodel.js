@@ -25,7 +25,9 @@ function StartPageViewModel (data) {
     self.location_uuid = ko.observable(data.location_uuid);
 
     self.selected_location = ko.observable(new Location({rootvm:data.rootvm}));
+
     self.selector_location = ko.observable();
+
     self.selected_location_type = ko.observable();
 
     self.filtered_locations = ko.computed(function(){
@@ -70,12 +72,23 @@ function StartPageViewModel (data) {
     self.workforcevm = new WorkforceViewModel({'rootvm':data.rootvm,
         'parentvm':self});
 
-
     self.educationvm = new EducationViewModel({'rootvm':data.rootvm,
         'parentvm':self});
 
     self.healthvm = new HealthViewModel({'rootvm':data.rootvm,
         'parentvm':self});
+
+    self.safetyvm= new SafetyViewModel({'rootvm':data.rootvm,
+        'parentvm':self});
+
+    self.populationvm = new PopulationViewModel({'rootvm':data.rootvm,
+        'parentvm':self});
+
+    self.progressmetricsvm = new ProgressMetricsViewModel({'rootvm':data.rootvm,
+        'parentvm':self});
+
+
+
 
     self.initialize = function(){
 
@@ -244,9 +257,11 @@ function StartPageViewModel (data) {
             type: "GET",
             dataType: "json",
             processData: true,
+
             data: {'location_uuid':self.selected_location().location_uuid(),
                    'indicators':indicators
                    },
+
             complete: function () {
                 self.rootvm.is_busy(false);
             },
@@ -269,6 +284,120 @@ function StartPageViewModel (data) {
                 }
             }
         });
+    };
+
+    self.address_to_geocode = ko.observable();
+
+    self.geocode_results = ko.observableArray([]);
+
+    self.geocode_finished_callback = function (geocode_results, geocode_status) {
+
+        self.geocode_results(geocode_results);
+
+        self.rootvm.is_busy(false);
+
+    };
+
+    self.geocode_address = function () {
+
+        if (!self.address_to_geocode()
+            || self.address_to_geocode() < 5) {
+
+            toastr.error("Sorry, I need a longer address!")
+
+        } else {
+
+            self.rootvm.syslog("Geocoding address " + self.address_to_geocode());
+            self.rootvm.is_busy(true);
+
+            var geocoder = new google.maps.Geocoder();
+
+            geocoder.geocode(
+                {address: self.address_to_geocode()},
+                self.geocode_finished_callback);
+        }
+
+    };
+
+    self.google_maps_api_loaded = ko.observable(false);
+
+    self.mark_google_maps_api_loaded = function () {
+        self.google_maps_api_loaded(true);
+    };
+
+    self.containing_neighborhoods = ko.observableArray([]);
+
+    self.find_containing_neighborhood = function (geocode_result) {
+
+        var lat = geocode_result.geometry.location.lat();
+        var lng = geocode_result.geometry.location.lng();
+
+        return $.ajax({
+            url: "/api/find-containing-neighborhoods",
+            type: "GET",
+
+            data: {
+                lat: geocode_result.geometry.location.lat(),
+                lng: geocode_result.geometry.location.lng()
+            },
+
+            dataType: "json",
+
+            complete: function (o, s) {
+
+                if (s != "success") {
+                    toastr.error("Sorry, something went wrong!");
+                }
+            },
+
+            success: function (data) {
+
+                if (data.success) {
+
+                    self.rootvm.syslog(data.message);
+
+                    self.containing_neighborhoods(
+                        ko.utils.arrayMap(
+                            data.containing_neighborhoods,
+
+                        function (loc) {
+                            loc.rootvm = self.rootvm;
+                            return new Location(loc);
+                        }));
+                }
+
+                else {
+                    toastr.error(data.message);
+                }
+            }
+        });
+
+    };
+
+    self.center_map_here = function (geocode_result) {
+
+        var lat = geocode_result.geometry.location.lat();
+        var lng = geocode_result.geometry.location.lng();
+
+        self.map.setView([lat, lng], 14);
+        L.marker([lat, lng]).addTo(self.map);
+
+    };
+
+    self.set_selected_location = function (loc) {
+
+        self.selected_location_type(loc.location_type());
+
+        self.selector_location(ko.utils.arrayFirst(
+            self.filtered_locations(),
+            function (filtered_loc) {
+                return filtered_loc.title() == loc.title();
+            }));
+
+        self.address_to_geocode(null);
+        self.geocode_results([]);
+        self.containing_neighborhoods([]);
+
     };
 
 };
