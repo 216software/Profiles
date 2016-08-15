@@ -54,7 +54,7 @@ function ProgressMetricsViewModel (data) {
         'hhinc150to200k', '_hhinc150to200k',
         'hhinc200kp','_hhinc200kp'];
 
-    self.poverty_indicators = ['bpv', 'tpv', 'mbpv_samehou', 'mbpv_diffhou'];
+    self.poverty_indicators = ['bpv', '_bpv', 'tpv', 'mbpv_samehou', 'mbpv_diffhou'];
 
     self.indicator_cv_pairings = {'cashrent':'cvcashrent',
      'hhincls10k': 'cvhhincls10k',
@@ -67,6 +67,9 @@ function ProgressMetricsViewModel (data) {
      'hhinc100to150k': 'cvhhinc100to150k',
      'hhinc150to200k': 'cvhhinc150to200k',
      'hhinc200kp':  'cvhhinc200kp'};
+
+    self.overview_indicators_sales = ['med_al_price', '_grent'];
+    self.overview_indicators_income = ['_medinc', 'bpv'];
 
     self.indicators = ko.observableArray([]);
 

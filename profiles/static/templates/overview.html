@@ -8,14 +8,11 @@
 </div>
 
 
-
-<!--
-<h4>Progress Indicators</h4>
-
 <table class="table table-striped">
 <thead>
 <tr>
-<th>Progress Metrics</th>
+<th><a data-bind="page-href:'//progress'">
+Progress Metrics</a></th>
 <th>5 year change</th>
 </tr>
 <tr>
@@ -23,14 +20,40 @@
 </thead>
 <tbody>
 
+<!-- ko with:progressmetricsvm-->
+<!-- ko foreach:overview_indicators_sales -->
+<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
-<td>Population </td>
-<td><td></tr>
+<td> <span data-bind="text:pretty_label"></span>
+</td>
+<td data-bind="text:percent_change_indicator_value"></td>
+</tr>
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->
+
+
+
+<!-- ko with:progressmetricsvm-->
+
+<tr>
 <tr><th colspan ="2">Income</th></tr>
 
+<!-- ko foreach:overview_indicators_income -->
+<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
+<tr>
+<td> <span data-bind="text:pretty_label"></span>
+</td>
+<td data-bind="text:percent_change_indicator_value"></td>
+</tr>
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->
 </tbody>
 </table>
--->
+
+
+
 
 <table class="table table-striped">
 <thead>
