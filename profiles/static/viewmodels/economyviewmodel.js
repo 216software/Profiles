@@ -15,6 +15,8 @@ function EconomyViewModel (data) {
     /* This should also include the order we want to display */
     self.indicator_titles = ['alljobs' ,'_bus_occ'];
 
+    self.overview_indicators = ['alljobs'];
+
     self.indicators = ko.observableArray([]);
 
     self.parentvm.selected_location.subscribe(function(){
