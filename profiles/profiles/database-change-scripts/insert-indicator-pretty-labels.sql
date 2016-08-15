@@ -133,6 +133,7 @@ update indicators set pretty_label = '% income $200,000+' where title = '_hhinc2
 
 
 update indicators set pretty_label = 'Poverty Rate' where title = 'bpv';
+update indicators set pretty_label = '% Poverty Rate' where title = '_bpv';
 update indicators set pretty_label = 'Population for whom poverty status is determined' where title = 'tpv';
 
 update indicators set pretty_label = 'Persons aged 1+  living below poverty level in same house 1 year ago' where title = 'mbpv_samehou';
