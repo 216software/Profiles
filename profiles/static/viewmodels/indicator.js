@@ -35,6 +35,11 @@ function Indicator (data) {
 
     });
 
+    self.most_recent_value = ko.computed(function(){
+        var val = self.indicator_values_sorted_asc()[self.indicator_values().length - 1]
+        return val.value;
+    });
+
     self.percent_change_indicator_value = ko.computed(function(){
         var first = self.indicator_values_sorted_asc()[0].value()
         var last = self.indicator_values_sorted_asc()[self.indicator_values().length - 1].value();

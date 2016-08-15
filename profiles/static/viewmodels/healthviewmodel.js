@@ -29,6 +29,8 @@ function HealthViewModel (data) {
         '_ebll_c':'&#9768;'
     }
 
+    self.overview_indicators = ['le2009'];
+
 
     self.indicators = ko.observableArray([]);
 

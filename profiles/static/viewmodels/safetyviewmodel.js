@@ -24,6 +24,8 @@ function SafetyViewModel (data) {
     self.indicator_titles = ['Ia', '_Ia',
         'v', '_v', 'p', '_p', 'II', '_II'];
 
+    self.overview_indicators = ['Ia', 'II'];
+
     self.indicators = ko.observableArray([]);
 
     self.parentvm.selected_location.subscribe(function(){

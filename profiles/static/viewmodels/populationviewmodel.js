@@ -29,6 +29,9 @@ function PopulationViewModel (data) {
     self.indicators_population = ['nhw' ,'_nhw', 'nhb', '_nhb',
         'nhapi', '_nhapi', 'nho', '_nho', 'hisp', '_hisp'];
 
+    self.indicators_population_overview = ['nhw' ,'nhb',
+        'nhapi', 'nho', 'hisp'];
+
     self.indicator_cv_pairings = {'pop':'cvpop',
         'nhw':'cvnhw', 'nhb':'cvnhb',
         'nhapi':'cvnhapi', 'nho':'cvnho',

@@ -1,8 +1,139 @@
 
 <h2>Overview</h2>
 
-<div data-bind="with:parentvm.selected_location()">
+<div data-bind="with:selected_location">
 
-<h4>Now viewing data for <span data-bind="text:title"></h4>
+<h4> Now viewing data for <span data-bind="text:title"></h4>
 
 </div>
+
+
+
+<!--
+<h4>Progress Indicators</h4>
+
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Progress Metrics</th>
+<th>5 year change</th>
+</tr>
+<tr>
+<th colspan="2">Property</th>
+</thead>
+<tbody>
+
+<tr>
+<td>Population </td>
+<td><td></tr>
+<tr><th colspan ="2">Income</th></tr>
+
+</tbody>
+</table>
+-->
+
+<table class="table table-striped">
+<thead>
+<tr>
+<th>Progress Drivers</th>
+<th>5 year change</th>
+</tr>
+<tr>
+<th colspan="2">Population</th>
+</tr>
+</thead>
+
+<tbody>
+<!-- ko with:populationvm -->
+
+<!-- ko foreach:total_population -->
+<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
+<tr>
+<td data-bind="text:pretty_label"></td>
+<td data-bind="text:percent_change_indicator_value"></td>
+</tr>
+<!-- /ko -->
+<!-- /ko -->
+
+<tr>
+<th colspan ="2">Racial Ethnic Diversity</th>
+</tr>
+
+<!-- ko foreach:indicators_population_overview -->
+<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
+<tr>
+<td> <span data-bind="text:pretty_label"></span>
+</td>
+<td data-bind="text:percent_change_indicator_value"></td>
+</tr>
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->
+
+<tr>
+<th colspan="2">Safety</th>
+</tr>
+<!-- ko with:safetyvm -->
+<!-- ko foreach:overview_indicators -->
+<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
+<tr>
+<td> <span data-bind="text:description"></span>
+</td>
+<td data-bind="text:percent_change_indicator_value"></td>
+</tr>
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->
+
+
+<tr>
+<th colspan="2">Stabilization</th>
+</tr>
+<!-- ko with:stabilizationvm -->
+<!-- ko foreach:overview_indicators -->
+<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
+<tr>
+<td> <span data-bind="text:pretty_label"></span>
+</td>
+<td data-bind="text:percent_change_indicator_value"></td>
+</tr>
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->
+
+
+<tr>
+<th colspan="2">Mortality/ Life Expectency</th>
+</tr>
+<!-- ko with:healthvm -->
+<!-- ko foreach:overview_indicators -->
+<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
+<tr>
+<td> <span data-bind="text:pretty_label"></span>
+</td>
+<td data-bind="text:most_recent_value().formatted"></td>
+</tr>
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->
+
+<tr>
+<th colspan="2">Reading</th>
+</tr>
+<!-- ko with:educationvm-->
+<!-- ko foreach:overview_indicators -->
+<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
+<tr>
+<td> <span data-bind="text:pretty_label"></span>
+</td>
+<td data-bind="text:percent_change_indicator_value"></td>
+</tr>
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->
+
+
+
+
+</tbody>
+</table>

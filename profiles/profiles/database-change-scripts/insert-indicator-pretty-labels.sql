@@ -140,3 +140,9 @@ update indicators set pretty_label = 'Persons aged 1+  living below poverty leve
 update indicators set pretty_label = 'Persons aged 1+  living below poverty level in different house 1 year ago' where title = 'mbpv_diffhou';
 
 
+/* Education */
+update indicators set pretty_label = '3rd Grade Reading Comprehension' where title = 'rpass50';
+
+update indicators set pretty_label = '3rd Grade Math Proficiency' where title = 'mpass50';
+
+
