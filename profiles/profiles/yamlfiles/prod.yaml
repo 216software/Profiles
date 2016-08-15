@@ -172,4 +172,10 @@ rackspace:
     # pyrax.cloudfiles._manager.api.management_url
     mgmt_url:   https://storage101.iad3.clouddrive.com/v1/MossoCloudFS_949731
 
+# This is stuff just for this project
+profiles:
+
+    csv_data_files_folder: /home/communityprofiles/checkouts/Profiles/datafiles/csvfiles
+
+
 # vim: set filetype=yaml :

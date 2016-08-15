@@ -31,6 +31,8 @@ else
     sudo -u postgres psql --quiet --no-psqlrc -d $DBNAME -c "create extension postgis;"
     sudo -u postgres psql --quiet --no-psqlrc -d $DBNAME -c "create extension postgis_topology;"
 
+    sudo -u postgres psql -d $DBNAME -c "alter database $DBNAME set timezone to 'US/Eastern';"
+
     echo "Now run profiles-upgrade-database $1"
 
 fi
