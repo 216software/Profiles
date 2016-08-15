@@ -39,7 +39,9 @@
 <th>5 year change</th>
 </tr>
 <tr>
-<th colspan="2">Population</th>
+<th colspan="2">
+<a data-bind="page-href:'//population'">
+Population</a></th>
 </tr>
 </thead>
 
@@ -56,7 +58,9 @@
 <!-- /ko -->
 
 <tr>
-<th colspan ="2">Racial Ethnic Diversity</th>
+<th colspan ="2">
+<a data-bind="page-href:'//population'">
+Racial Ethnic Diversity</a></th>
 </tr>
 
 <!-- ko foreach:indicators_population_overview -->
@@ -71,7 +75,10 @@
 <!-- /ko -->
 
 <tr>
-<th colspan="2">Safety</th>
+<th colspan="2"><a data-bind="page-href:'//safety'">
+Safety</a></th>
+
+
 </tr>
 <!-- ko with:safetyvm -->
 <!-- ko foreach:overview_indicators -->
@@ -87,7 +94,9 @@
 
 
 <tr>
-<th colspan="2">Stabilization</th>
+<th colspan="2"><a data-bind="page-href:'//stabilization'">
+Stabilization</a></th>
+
 </tr>
 <!-- ko with:stabilizationvm -->
 <!-- ko foreach:overview_indicators -->
@@ -103,7 +112,9 @@
 
 
 <tr>
-<th colspan="2">Mortality/ Life Expectency</th>
+<th colspan="2"><a data-bind="page-href:'//health'">
+Health</a></th>
+
 </tr>
 <!-- ko with:healthvm -->
 <!-- ko foreach:overview_indicators -->
@@ -118,9 +129,40 @@
 <!-- /ko -->
 
 <tr>
-<th colspan="2">Reading</th>
-</tr>
+<th colspan="2"><a data-bind="page-href:'//education'">
+Education</a></th></tr>
 <!-- ko with:educationvm-->
+<!-- ko foreach:overview_indicators -->
+<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
+<tr>
+<td> <span data-bind="text:pretty_label"></span>
+</td>
+<td data-bind="text:percent_change_indicator_value"></td>
+</tr>
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->
+
+
+<tr>
+<th colspan="2"><a data-bind="page-href:'//workforce'">
+Workforce</a></th></tr></tr>
+<!-- ko with:workforcevm-->
+<!-- ko foreach:overview_indicators -->
+<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
+<tr>
+<td> <span data-bind="text:pretty_label"></span>
+</td>
+<td data-bind="text:percent_change_indicator_value"></td>
+</tr>
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->
+
+<tr>
+<th colspan="2"><a data-bind="page-href:'//economy'">
+Economy</a></th></tr></tr></tr>
+<!-- ko with:economyvm-->
 <!-- ko foreach:overview_indicators -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>

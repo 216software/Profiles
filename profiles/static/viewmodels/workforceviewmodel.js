@@ -43,6 +43,8 @@ function WorkforceViewModel (data) {
         }
 
 
+    self.overview_indicators = ['emp'];
+
     self.indicators = ko.observableArray([]);
 
     self.parentvm.selected_location.subscribe(function(){
