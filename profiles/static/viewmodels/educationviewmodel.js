@@ -31,6 +31,9 @@ function EducationViewModel (data) {
 
     self.other_indicators = ['qslots', '_attend']
 
+    self.overview_indicators = ['rpass50', 'mpass50'];
+
+
 
     self.indicator_titles = (self.reading_indicator_titles.concat(
         self.math_indicator_titles)).concat(self.kindergarten_readiness_titles).concat(

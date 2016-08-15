@@ -25,6 +25,8 @@ function StabilizationViewModel (data) {
         'ntal_sales':'***'
     }
 
+    self.overview_indicators = ['res_occ']
+
     self.indicators = ko.observableArray([]);
 
     self.extra_formatting = function(title){
