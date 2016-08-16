@@ -7,13 +7,13 @@
 
 </div>
 
-<table class="table table-striped">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>Indicator</th>
-<th>% change</th>
+<th style="text-align:right">% change</th>
 <!-- ko foreach:observable_timestamps -->
-    <th data-bind="text:$data.format('YYYY')"></th>
+    <th style="text-align:right"  data-bind="text:$data.format('YYYY')"></th>
 <!-- /ko -->
 </tr>
 </thead>
@@ -25,10 +25,10 @@
 <td> <span data-bind="text:pretty_label"></span>
 <span data-bind="text:$parents[1].extra_formatting(title())"></span>
 </td>
-<td data-bind="text:percent_change_indicator_value"></td>
+<td style="text-align:right" data-bind="text:percent_change_indicator_value"></td>
 
 <!-- ko foreach:$parents[1].observable_timestamps -->
-<td><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+<td style="text-align:right"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 </td>
 <!-- /ko --> <!-- closes inner for loop -->
 

@@ -6,11 +6,11 @@
 <h4> Now viewing data for <span data-bind="text:title"></h4>
 </div>
 
-<table class="table table-striped">
+<table class="table table-striped table-bordered">
 <thead>
 <tr>
 <th>Indicator</th>
-<th>% change</th>
+<th style="text-align:right">% change</th>
 <!-- ko foreach:observable_timestamps -->
     <th data-bind="text:$data.format('YYYY')"></th>
 <!-- /ko -->
@@ -23,10 +23,10 @@
 <tr>
 <td> <span data-bind="text:description"></span>
 </td>
-<td data-bind="text:percent_change_indicator_value"></td>
+<td style="text-align:right" data-bind="text:percent_change_indicator_value"></td>
 
 <!-- ko foreach:$parents[1].observable_timestamps -->
-<td><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+<td style="text-align:right"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 </td>
 <!-- /ko --> <!-- closes inner for loop -->
 
