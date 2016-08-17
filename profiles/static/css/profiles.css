@@ -96,6 +96,16 @@ border-bottom: 0px solid #ddd;
 .table .table-header{
 }
 
+tr.rate_data{
+    font-style:italic;
+}
+
+tr.rate_data td:first-child{
+    padding-left:2em;
+    font-size:95%;
+}
+
+
 .denominator-row{
     background-color: #f9f9f9;
     font-style:italic;

@@ -67,6 +67,21 @@ function Indicator (data) {
             return {};
         }
     };
+
+    /* If we're a rate, we should display italicized unless
+     * we're a not rate, in which case we should not */
+    var not_rate_variables = ['_medinc',
+        '_grent'];
+
+    self.is_a_rate = ko.computed(function(){
+        if(self.title() && self.title().length > 0 &&
+            not_rate_variables.indexOf(self.title()) == -1){
+            return self.title()[0] == '_';
+        }
+        else{
+            return false;
+        }
+    });
 };
 
 

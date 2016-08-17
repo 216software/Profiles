@@ -26,7 +26,7 @@
 <!-- ko foreach:total_population -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
-<tr>
+<tr data-bind="css: {rate_data: is_a_rate() }">
 <td> <span data-bind="text:pretty_label"></span>
 </td>
 <td style="text-align:right" data-bind="text:percent_change_indicator_value"></td>
@@ -53,7 +53,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
 <!-- ko foreach:indicators_population -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
-<tr>
+<tr data-bind="css: {rate_data: is_a_rate() }">
 <td> <span data-bind="text:pretty_label"></span>
 </td>
 <td style="text-align:right" data-bind="text:percent_change_indicator_value"></td>
