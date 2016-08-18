@@ -22,12 +22,11 @@ function ProgressMetricsViewModel (data) {
 
     self.initialize = function(){
 
-        console.log('location uuid param ', self.location_uuid());
+        console.log('progress metrics init');
 
         if(self.location_uuid()){
             self.parentvm.location_uuid(self.location_uuid());
         }
-
     };
 
     /* This should also include the order we want to display */

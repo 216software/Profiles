@@ -94,6 +94,8 @@ function StartPageViewModel (data) {
 
     self.initialize = function(){
 
+        console.log('start page initing');
+
         self.get_all_location_types().then(self.get_all_locations).
             then(self.selected_location_initialize);
     };
@@ -183,6 +185,7 @@ function StartPageViewModel (data) {
     self.change_location_click = function(){
         // Set selected to location to the one that has been selected
         self.selected_location(self.selector_location());
+        self.location_uuid(self.selected_location().location_uuid());
         self.change_location();
     }
 
@@ -229,6 +232,13 @@ function StartPageViewModel (data) {
 
     }
 
+
+    /* There's a certain assumption about this function:
+     * namely, if a sub page is opened, then it's initialize
+     * function will be called, setting the location_uuid on
+     * our own startpage before we get here. That way the look
+     * up will work correctly...
+     */
     self.selected_location_initialize = function(){
 
         if(self.location_uuid() != undefined){
@@ -236,7 +246,7 @@ function StartPageViewModel (data) {
                 return self.location_uuid() == loc.location_uuid();
             }));
 
-            console.log('sl loc_uuid ', self.selected_location().location_uuid());
+            self.selector_location(self.selected_location());
 
             // Also, we want our map layer to be updated accordingly
             self.change_location();

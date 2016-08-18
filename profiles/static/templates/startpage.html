@@ -118,22 +118,24 @@ containing locations</strong>
     id: 'economy',
     source: '/static/templates/economy.html',
     with: economyvm,
-    afterShow: economyvm.initialize
+    afterShow: economyvm.initialize,
+    params: ['location_uuid']
 }"></div>
 
 <div data-bind="page: {
     id: 'education',
     source: '/static/templates/education.html',
     with: educationvm,
-    afterShow: educationvm.initialize
+    afterShow: educationvm.initialize,
+    params: ['location_uuid']
 }"></div>
 
 <div data-bind="page: {
     id: 'health',
     source: '/static/templates/health.html',
     with: healthvm,
-    afterShow: healthvm.initialize
-
+    afterShow: healthvm.initialize,
+    params: ['location_uuid']
 }"></div>
 
 <div data-bind="page: {
@@ -149,27 +151,31 @@ containing locations</strong>
     source: '/static/templates/safety.html',
     with: safetyvm,
     afterShow: safetyvm.initialize,
+    params: ['location_uuid']
 }"></div>
 
 <div data-bind="page: {
     id: 'stabilization',
     source: '/static/templates/stabilization.html',
     with: stabilizationvm,
-    afterShow: stabilizationvm.initialize
+    afterShow: stabilizationvm.initialize,
+    params: ['location_uuid']
 }"></div>
 
 <div data-bind="page: {
     id: 'workforce',
     source: '/static/templates/workforce.html',
     with: workforcevm,
-    aftershow: workforcevm.initialize
+    aftershow: workforcevm.initialize,
+    params: ['location_uuid']
 }"></div>
 
 <div data-bind="page: {
     id: 'population',
     source: '/static/templates/population.html',
     with: populationvm,
-    aftershow: populationvm.initialize
+    aftershow: populationvm.initialize,
+    params: ['location_uuid']
 }"></div>
 
 
