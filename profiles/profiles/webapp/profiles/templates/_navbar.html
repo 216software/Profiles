@@ -48,14 +48,17 @@
                   data-content="Use the category tabs along the top to browse through the information available. <button type='button' class='btn btn-warning pull-right tour_btn' onclick='tour()'>Next</button>" id="tour_exp">
             </span>
 
-            <li class="domain" data-bind="css: {active : active_tab() =='start'}">
-            <a href="#"  data-bind="page-href:'//start'"
+            <li class="domain" data-bind="css: {active : active_tab() =='overview' || active_tab() == ''}">
+            <a href="#"  data-bind="page-href:'//overview'"
                 class="sub-nav">Overview</a></li>
 
 
             <li class="domain" data-bind="css: {active : active_tab() =='progress'}">
-            <a href="#"  data-bind="page-href:'//progress'"
-                class="sub-nav">Progress Metrics</a></li>
+            <a href="#" data-bind="page-href : {
+                path : '//progress',
+                params : {location_uuid:startpagevm.location_uuid()}}"
+                class="sub-nav">Progress Metrics</a>
+            </li>
 
             <li class="domain" data-bind="css: {active : active_tab() =='population'}">
             <a href="#"  data-bind="page-href:'//population'"

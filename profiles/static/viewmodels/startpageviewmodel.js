@@ -22,7 +22,9 @@ function StartPageViewModel (data) {
     self.location_types = ko.observableArray([]);
 
     /* We might have a selected location from the parameter line */
-    self.location_uuid = ko.observable(data.location_uuid);
+    self.location_uuid = ko.observable();
+
+    self.test = ko.observable("hello");
 
     self.selected_location = ko.observable(new Location({rootvm:data.rootvm}));
 
@@ -178,14 +180,17 @@ function StartPageViewModel (data) {
 
     };
 
+    self.change_location_click = function(){
+        // Set selected to location to the one that has been selected
+        self.selected_location(self.selector_location());
+        self.change_location();
+    }
+
 
     self.change_location = function(){
 
         /* Updates the map and then looks up values for
          * a given location */
-
-        // Set selected to location to the one that has been selected
-        self.selected_location(self.selector_location());
 
         // Remove any old layers:
         for (var index in self.added_map_layers){
@@ -198,6 +203,9 @@ function StartPageViewModel (data) {
 
         /* Also -- look up data for this location */
         //self.look_up_indicator_and_values();
+        //
+        // Make sure we put the location in the QS
+        pager.navigate('/' + pager.activePage$().id() + '?location_uuid=' + self.selected_location().location_uuid());
     }
 
     /* Makes an outline of an area on the map*/
@@ -227,6 +235,8 @@ function StartPageViewModel (data) {
             self.selected_location(ko.utils.arrayFirst(self.locations(), function(loc){
                 return self.location_uuid() == loc.location_uuid();
             }));
+
+            console.log('sl loc_uuid ', self.selected_location().location_uuid());
 
             // Also, we want our map layer to be updated accordingly
             self.change_location();

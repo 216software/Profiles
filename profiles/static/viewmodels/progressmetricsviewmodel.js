@@ -16,6 +16,20 @@ function ProgressMetricsViewModel (data) {
     self.rootvm = data.rootvm;
     self.parentvm = data.parentvm;
 
+    // Parameter location uuid -- set this on
+    // the start page vm
+    self.location_uuid = ko.observable();
+
+    self.initialize = function(){
+
+        console.log('location uuid param ', self.location_uuid());
+
+        if(self.location_uuid()){
+            self.parentvm.location_uuid(self.location_uuid());
+        }
+
+    };
+
     /* This should also include the order we want to display */
     self.indicator_titles = ['med_al_price', 'med_sfprice',
         'med_mfprice', 'med_cdprice', 'al_sales', 'sfsale',
@@ -126,8 +140,6 @@ function ProgressMetricsViewModel (data) {
      * census values -- probably could filter in javascript land
      * but this seems faster */
     self.look_up_census_indicator_complete = function(data){
-
-        console.log('got the census stuff');
 
         self.observable_timestamps_census(ko.utils.arrayMap(
             data.distinct_observable_timestamps || [],

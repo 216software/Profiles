@@ -3,7 +3,6 @@
 <div class="col-md-3">
 
 <!-- Navbar type thing here -->
-
 <div class="form-group">
     <label>
     Location Type
@@ -25,7 +24,8 @@
 
 
 <div class="form-group">
-    <button class="form-control btn btn-primary" data-bind="click:change_location,
+    <button class="form-control btn btn-primary"
+    data-bind="click:change_location_click,
     disable:selected_location() == undefined">
 Change Location</button>
 </div> <!-- closes form-group -->
@@ -103,8 +103,10 @@ containing locations</strong>
 <!-- all of our sub page tabs go here ? -->
 
 <div data-bind="page: {
-    id: 'start',
+    id: 'overview',
+    role: 'start',
     source: '/static/templates/overview.html',
+    params: ['location_uuid'],
 }"></div>
 
 <div data-bind="page: {
@@ -138,7 +140,8 @@ containing locations</strong>
     id: 'progress',
     source: '/static/templates/progress-metrics.html',
     with: progressmetricsvm,
-    afterShow: progressmetricsvm.initialize
+    afterShow: progressmetricsvm.initialize,
+    params: ['location_uuid']
 }"></div>
 
 <div data-bind="page: {
