@@ -19,6 +19,18 @@
 ">
 </div>
 
+<div data-bind="page: {
+    id: 'indicator-comparison',
+    source: '/static/templates/indicatorcomparison.html',
+    with: indicatorcomparisonvm,
+    afterShow: indicatorcomparisonvm.initialize,
+    params: ['indicator_uuid'],
+    }
+">
+</div>
+
+
+
 
 {% endblock main %}
 
@@ -45,6 +57,7 @@
 <script type="text/javascript" src="/static/viewmodels/progressmetricsviewmodel.js"></script>
 <script type="text/javascript" src="/static/viewmodels/overviewviewmodel.js"></script>
 
+<script type="text/javascript" src="/static/viewmodels/indicatorcomparisonviewmodel.js"></script>
 
 
 <script type="text/javascript">

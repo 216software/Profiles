@@ -191,6 +191,63 @@ class Indicator(object):
             self.__class__.__name__,
             self.title)
 
+
+    def distinct_observation_timestamps(self, pgconn):
+
+        """
+        Give us the distinct observable_timestamps for a given
+        indicator
+
+        """
+        cursor = pgconn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+
+        cursor.execute(textwrap.dedent("""
+
+                select distinct observation_timestamp
+                from indicator_location_values
+                where indicator_uuid = %(indicator_uuid)s
+                order by observation_timestamp asc;
+
+        """), dict(indicator_uuid=self.indicator_uuid))
+
+        for row in cursor.fetchall():
+            yield row
+
+
+    def all_indicator_location_values(self, pgconn):
+
+        """
+        Give us all the values for a given indicator
+        across all times and locations
+
+        """
+
+        cursor = pgconn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+
+        cursor.execute(textwrap.dedent("""
+
+            select (l.*)::locations as location,
+            array_to_json(array_agg((ilv.*)::indicator_location_values))
+            as indicator_location_values
+
+            from indicator_location_values ilv
+            join locations l on l.location_uuid = ilv.location_uuid
+
+            where indicator_uuid = %(indicator_uuid)s
+
+            and l.display_me = true
+
+            group by l.location_uuid
+            order by l.title asc
+
+        """), dict(indicator_uuid=self.indicator_uuid))
+
+        for row in cursor.fetchall():
+            yield row
+
+
+
+
 def all_indicator_categories(pgconn):
 
     cursor = pgconn.cursor()
