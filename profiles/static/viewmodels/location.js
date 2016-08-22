@@ -13,6 +13,22 @@ function Location (data) {
 
     self.indicator_values = ko.observableArray([]);
 
+    self.indicator_value_by_year = function(year){
+        item = ko.utils.arrayFirst(this.indicator_values(), function(iv) {
+            return iv.observation_timestamp_year() == year;
+        });
+
+        if (item)
+        {
+            return item.value;
+        }
+        else{
+            return {};
+        }
+    };
+
+
+
     self.short_location_type = ko.computed(function(){
         if(self.location_type() == 'community development corporation'){
             return 'cdc';
