@@ -1,5 +1,7 @@
 "use strict";
 
+var geojson;
+
 function IndicatorComparisonViewModel (data) {
 
     var self = this;
@@ -226,47 +228,81 @@ function IndicatorComparisonViewModel (data) {
      * so that we can instantiate the map here */
     self.sourceLoaded = function(){
 
-        self.map = L.map("mapid").setView([41.49, -81.69], 10);
+        self.map = L.map("comparisonMap").setView([41.49, -81.69], 10);
         L.esri.basemapLayer("Streets").addTo(self.map);
 
         self.rootvm.is_busy(true);
 
-        /* Look up map location */
+    };
+
+    self.add_location_outlines = function(){
+
+        var geoToAdd = []
+
+        ko.utils.arrayForEach(self.location_search_filtered(), function(loc){
+            geoToAdd.push(loc.leaflet_feature('2011'));
+        });
+
+        var featureCollection = {"type": "FeatureCollection", "features":geoToAdd};
+
+        console.log(featureCollection);
+
+        geojson = L.geoJson(featureCollection,{
+            style: makeStyle,
+            onEachFeature:makeOnEachFeature}).addTo(self.map);
+
+
+
+        mapInfo.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+            this.update();
+            return this._div;
+        };
+
+        // method that we will use to update the control based on feature properties passed
+        mapInfo.update = function (props) {
+            console.log(props);
+            this._div.innerHTML = '<h4>' + self.selected_indicator().pretty_label() +
+                '</h4>' +
+                (props ?
+                '<b>' + props.name + '</b><br />' + props.indicator_value.formatted()
+                : 'Hover over a state');
+        };
+
+        mapInfo.addTo(self.map);
 
         /*
-        return $.ajax({
-            url: "/api/location",
-            type: "GET",
-            dataType: "json",
-            complete: function () {
-                self.rootvm.is_busy(false);
-            },
-            success: function (data) {
-                if (data.success) {
-                    self.create_feature_layer(new Location(data['location']))
-                }
-                else {
-                    toastr.error(data.message);
-                }
-            }
-        });
-        */
+        var geoToAdd = [L.geoJson(layer_coordinates,
+            {style:
+                {color:"#444",
+                 opacity:.4,
+                 fillColor:"#72B5F2",
+                 weight:1,
+                 fillOpacity:0.6}})];
+
+            */
 
     };
 
     /* Makes an outline of an area on the map*/
     self.create_feature_layer = function(new_location){
 
-        console.log(new_location.location_shape_json());
-
         var layer_coordinates = new_location.location_shape_json();
+
+
 
         /*
         for (var layer in layer_coordinates){
             layers.push(L.geoJson(layer))
         }*/
 
-        var geoToAdd = [L.geoJson(layer_coordinates, {style: {color:"#444", opacity:.4, fillColor:"#72B5F2", weight:1, fillOpacity:0.6}})];
+        var geoToAdd = [L.geoJson(layer_coordinates,
+            {style:
+                {color:"#444",
+                 opacity:.4,
+                 fillColor:"#72B5F2",
+                 weight:1,
+                 fillOpacity:0.6}})];
 
         var fg = L.featureGroup(geoToAdd)
         fg.addTo(self.map);
@@ -275,4 +311,48 @@ function IndicatorComparisonViewModel (data) {
 
     }
 
+
+    /* These are mapping things */
 };
+var mapInfo = L.control();
+
+function makeStyle(feature) {
+    return {
+        fillColor: '#FC4E2A', //getColor(feature.properties.density),
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    };
+}
+
+function highlightFeature(e) {
+    var layer = e.target;
+
+    layer.setStyle({
+        weight: 5,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+
+    mapInfo.update(layer.feature.properties);
+    if (!L.Browser.ie && !L.Browser.opera) {
+        layer.bringToFront();
+    }
+
+
+}
+
+function resetHighlight(e) {
+    geojson.resetStyle(e.target);
+    mapInfo.update();
+}
+
+function makeOnEachFeature(feature, layer) {
+    layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight,
+    });
+}

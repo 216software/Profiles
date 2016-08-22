@@ -18,6 +18,8 @@ function Location (data) {
             return iv.observation_timestamp_year() == year;
         });
 
+        console.log('item found' , item);
+
         if (item)
         {
             return item.value;
@@ -88,6 +90,16 @@ function Location (data) {
                 }
             });
         }
+    };
+
+    self.leaflet_feature = function(year){
+
+        return {'type':'Feature',
+            'properties':{'name':self.title(), 'year':year,
+                'indicator_value': self.indicator_value_by_year(year)
+            },
+            'geometry': self.location_shape_json()
+        };
     };
 
     // Away to see my various indicator values?
