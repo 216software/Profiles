@@ -1,16 +1,21 @@
 "use strict";
 
-var geojson;
 
 function IndicatorComparisonViewModel (data) {
 
     var self = this;
+
 
     self.type = "IndicatorComparisonViewModel";
     self.rootvm = data.rootvm;
 
     self.map = undefined;
     self.added_map_layers = [];
+    self.geojson = undefined;
+    self.mapInfo = undefined;
+    self.mapInfo_div = undefined;
+    self.map_divisions = undefined;
+
 
     self.locations = ko.observableArray([]);
     self.location_types = ko.observableArray([]);
@@ -34,9 +39,10 @@ function IndicatorComparisonViewModel (data) {
 
     self.initialize = function(){
 
-        console.log('indicator comparison initing');
-
-        console.log('look up indicator_uuid ', self.indicator_uuid());
+        //We gotta refresh the map
+        if(self.map){
+            self.map.invalidateSize();
+        }
 
         self.selected_indicator().indicator_uuid(self.indicator_uuid());
 
@@ -61,8 +67,6 @@ function IndicatorComparisonViewModel (data) {
     });
 
     self.location_search_filtered = ko.computed(function(){
-
-       console.log('self.location_search ', self.location_search());
 
        if(self.location_search()){
             return ko.utils.arrayFilter(self.location_type_filtered(), function(item){
@@ -96,8 +100,6 @@ function IndicatorComparisonViewModel (data) {
    }
 
     self.year_click_sort = function(moment_year){
-
-        console.log('clicked ', moment_year.year());
 
         self.sort_column(moment_year.year());
 
@@ -227,74 +229,100 @@ function IndicatorComparisonViewModel (data) {
     /* We need to do this after the source is loaded and part of the DOM
      * so that we can instantiate the map here */
     self.sourceLoaded = function(){
-
-        self.map = L.map("comparisonMap").setView([41.49, -81.69], 10);
+        self.map = L.map("comparisonMap").setView([41.49, -81.69], 11);
         L.esri.basemapLayer("Streets").addTo(self.map);
+        self.mapInfo = L.control();
 
-        self.rootvm.is_busy(true);
+    };
 
+    self.clear_map = function(){
+        self.map.removeLayer(self.geojson);
+        //self.map.removeLayer(self.mapInfo);
     };
 
     self.add_location_outlines = function(){
 
+        // First clear map if it's got sstuff on it
+        if(self.geojson != undefined){
+            self.clear_map();
+        }
+
         var geoToAdd = []
+        var geoValues = []
+
+
 
         ko.utils.arrayForEach(self.location_search_filtered(), function(loc){
-            geoToAdd.push(loc.leaflet_feature('2011'));
+            var leaf_feature = loc.leaflet_feature('2011');
+            geoToAdd.push(leaf_feature);
+            geoValues.push(leaf_feature.properties.indicator_value());
         });
+
+        // Sort geo to add by value asc
+
+        geoValues.sort(function(a, b){
+            return a-b;
+        });
+
+
+        console.log(geoValues[0])
+        console.log(geoValues[geoValues.length-1]);
+        console.log(geoValues.length);
+
+        //Make divisions
+        self.map_divisions = []
+
+        if (geoValues.length >= 5)
+        {
+            self.map_divisions = [Math.floor(geoValues[0]),
+                Math.floor(geoValues[Math.floor(geoValues.length / 4)]),
+                Math.floor(geoValues[Math.floor(geoValues.length / 2)]),
+                Math.floor(geoValues[Math.floor(geoValues.length * .75)]),
+                Math.floor(geoValues[geoValues.length - 1])];
+        }
+        else{
+            self.map_divisions[geoValues[0], geoValues[geoValues.length-1]]
+        }
+
+        console.log(self.map_divisions);
+
+        // get 3 separate points, if we have it
 
         var featureCollection = {"type": "FeatureCollection", "features":geoToAdd};
 
-        console.log(featureCollection);
+        self.geojson = L.geoJson(featureCollection,{
+            style: self.makeStyle,
+            onEachFeature:self.makeOnEachFeature}).addTo(self.map);
 
-        geojson = L.geoJson(featureCollection,{
-            style: makeStyle,
-            onEachFeature:makeOnEachFeature}).addTo(self.map);
+        self.mapInfo.onAdd = function (map) {
 
-
-
-        mapInfo.onAdd = function (map) {
-            this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-            this.update();
-            return this._div;
+            if(self.mapInfo_div == undefined){
+                // create a div with a class "info"
+                self.mapInfo_div = L.DomUtil.create('div', 'info');
+                this._div = self.mapInfo_div;
+                this.update();
+                return this._div;
+            }
+            else{
+                return self.mapInfo_div;
+            }
         };
 
         // method that we will use to update the control based on feature properties passed
-        mapInfo.update = function (props) {
-            console.log(props);
+        self.mapInfo.update = function (props) {
             this._div.innerHTML = '<h4>' + self.selected_indicator().pretty_label() +
-                '</h4>' +
-                (props ?
+                (props ? ' - ' + props.year + '</h4>' +
                 '<b>' + props.name + '</b><br />' + props.indicator_value.formatted()
-                : 'Hover over a state');
+                :'</h4>' + 'Hover over a location');
         };
 
-        mapInfo.addTo(self.map);
-
-        /*
-        var geoToAdd = [L.geoJson(layer_coordinates,
-            {style:
-                {color:"#444",
-                 opacity:.4,
-                 fillColor:"#72B5F2",
-                 weight:1,
-                 fillOpacity:0.6}})];
-
-            */
-
+        self.mapInfo.addTo(self.map);
     };
 
     /* Makes an outline of an area on the map*/
     self.create_feature_layer = function(new_location){
 
         var layer_coordinates = new_location.location_shape_json();
-
-
-
-        /*
-        for (var layer in layer_coordinates){
-            layers.push(L.geoJson(layer))
-        }*/
 
         var geoToAdd = [L.geoJson(layer_coordinates,
             {style:
@@ -313,46 +341,65 @@ function IndicatorComparisonViewModel (data) {
 
 
     /* These are mapping things */
-};
-var mapInfo = L.control();
 
-function makeStyle(feature) {
-    return {
-        fillColor: '#FC4E2A', //getColor(feature.properties.density),
-        weight: 2,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.7
-    };
-}
 
-function highlightFeature(e) {
-    var layer = e.target;
 
-    layer.setStyle({
-        weight: 5,
-        color: '#666',
-        dashArray: '',
-        fillOpacity: 0.7
-    });
+    self.makeStyle = function (feature) {
 
-    mapInfo.update(layer.feature.properties);
-    if (!L.Browser.ie && !L.Browser.opera) {
-        layer.bringToFront();
+        return {
+            fillColor: self.get_location_color(feature.properties.indicator_value()),
+            weight: 2,
+            opacity: 1,
+            color: 'white',
+            dashArray: '3',
+            fillOpacity: 0.7
+        };
+    }
+
+    self.highlightFeature = function (e) {
+        var layer = e.target;
+
+        layer.setStyle({
+            weight: 5,
+            color: '#666',
+            dashArray: '',
+            fillOpacity: 0.7
+        });
+
+        self.mapInfo.update(layer.feature.properties);
+        if (!L.Browser.ie && !L.Browser.opera) {
+            layer.bringToFront();
+        }
+
+
+    }
+
+    self.resetHighlight = function (e) {
+        self.geojson.resetStyle(e.target);
+        self.mapInfo.update();
+    }
+
+    self.makeOnEachFeature = function(feature, layer) {
+        layer.on({
+            mouseover: self.highlightFeature,
+            mouseout: self.resetHighlight,
+        });
     }
 
 
-}
+    self.get_location_color = function(value){
 
-function resetHighlight(e) {
-    geojson.resetStyle(e.target);
-    mapInfo.update();
-}
+        if(self.map_divisions.length == 5){
+            return value > self.map_divisions[4]  ? '#006d2c' :
+               value > self.map_divisions[3]   ? '#31a354' :
+               value > self.map_divisions[2]  ?  '#74c476' :
+               value > self.map_divisions[1]  ? '#bae4b3' :
+               '#edf8e9';
+        }
+        else{
+            return '#006d2c';
+        }
+    }
 
-function makeOnEachFeature(feature, layer) {
-    layer.on({
-        mouseover: highlightFeature,
-        mouseout: resetHighlight,
-    });
-}
+};
+

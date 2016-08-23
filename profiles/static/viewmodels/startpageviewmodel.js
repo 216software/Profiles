@@ -95,6 +95,10 @@ function StartPageViewModel (data) {
     self.initialize = function(){
 
         console.log('start page initing');
+        //We gotta refresh the map
+        if(self.map){
+            self.map.invalidateSize();
+        }
 
         self.get_all_location_types().then(self.get_all_locations).
             then(self.selected_location_initialize);
@@ -156,29 +160,6 @@ function StartPageViewModel (data) {
 
         self.map = L.map("mapid").setView([41.49, -81.69], 10);
         L.esri.basemapLayer("Streets").addTo(self.map);
-
-        self.rootvm.is_busy(true);
-
-        /* Look up map location */
-
-        /*
-        return $.ajax({
-            url: "/api/location",
-            type: "GET",
-            dataType: "json",
-            complete: function () {
-                self.rootvm.is_busy(false);
-            },
-            success: function (data) {
-                if (data.success) {
-                    self.create_feature_layer(new Location(data['location']))
-                }
-                else {
-                    toastr.error(data.message);
-                }
-            }
-        });
-        */
 
     };
 
