@@ -10,7 +10,10 @@
 
 <ul class="nav nav-tabs">
   <li role="presentation" class="active"><a href="#">Table</a></li>
-  <li role="presentation"><a href="#">Map</a></li>
+  <li role="presentation">
+  <a href="#" data-bind="page-href: {path : '/indicator-map',
+       params: {indicator_uuid: selected_indicator().indicator_uuid}}">Map</a></li>
+
 </ul>
 </div> <!-- closes col-md-9 -->
 
@@ -101,57 +104,7 @@ data-bind="text:short_location_type"></span>)</td>
 </table>
 
 
-
-<div class="row" style="margin-top:30px">
-
-<div class="col-md-3">
-<h4>Comparison Map</h4>
-<p>
-View comparison data on the map. Please select a type of location
-(neighborhood, CDC, etc) and also a year. Then click 'Update Map' to
-view the data for each location.
-</p>
-
-<div class="form-group">
-    <label>
-    Choose a level
-    </label>
-    <select class="form-control" data-bind="options: location_types,
-                                 optionsCaption: 'all',
-                                 value:map_selected_level"></select>
-</div> <!-- closes form-group -->
-
-<div class="form-group">
-    <label>
-    Choose a year
-    </label>
-    <select class="form-control" data-bind="options: observable_timestamps,
-                                 optionsCaption: 'Choose...',
-                                 optionsValue: function(item){return item.year()},
-                                 optionsText: function(item){return item.year()},
-                                 value:map_selected_year"></select>
-</div> <!-- closes form-group -->
-
-
-
-<div class="form-group">
-    <button class="form-control btn btn-primary"
-    data-bind="click:update_map">
-Update map</button>
-</div> <!-- closes form-group -->
-
-
-</div> <!-- closes col-md-3 -->
-
-<div class="col-md-9">
-<div id="comparisonMap" style="height:500px">
-
-</div> <!-- closes comparisonMap -->
-</div> <!-- closes col-md-8 -->
-
-</div><!-- closes sub-row -->
-
-</div> <!-- closes col-md-12 -->
+</div> <!-- closes col-md-9 -->
 
 
 

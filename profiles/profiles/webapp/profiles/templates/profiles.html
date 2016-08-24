@@ -20,15 +20,27 @@
 ">
 </div>
 
+
 <div data-bind="page: {
-    id: 'indicator-comparison',
-    source: '/static/templates/indicatorcomparison.html',
+    id: 'indicator-table',
+    source: '/static/templates/indicatorcomparison-table.html',
+    with: indicatorcomparisonvm,
+    afterShow: indicatorcomparisonvm.initialize,
+    params: ['indicator_uuid'],
+    }
+"></div>
+
+<div data-bind="page: {
+    id: 'indicator-map',
+    source: '/static/templates/indicatorcomparison-map.html',
     with: indicatorcomparisonvm,
     afterShow: indicatorcomparisonvm.initialize,
     sourceLoaded: indicatorcomparisonvm.sourceLoaded,
     params: ['indicator_uuid'],
     }
 ">
+
+
 </div>
 
 

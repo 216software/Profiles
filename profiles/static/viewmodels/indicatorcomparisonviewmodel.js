@@ -19,6 +19,9 @@ function IndicatorComparisonViewModel (data) {
     self.map_legend_div = undefined;
 
 
+    self.map_selected_year = ko.observable();
+
+
     self.locations = ko.observableArray([]);
     self.location_types = ko.observableArray([]);
 
@@ -244,9 +247,21 @@ function IndicatorComparisonViewModel (data) {
         //self.map.removeLayer(self.mapInfo);
     };
 
-    self.add_location_outlines = function(){
+    self.update_map_button_disable = ko.computed(function(){
 
-        // First clear map if it's got sstuff on it
+        if(self.selected_location_type() != undefined &&
+            self.map_selected_year() != undefined){
+            return false;
+        }
+        else{
+            return true;
+        }
+
+    });
+
+    self.update_map = function(){
+
+        // First clear map if it's got stuff on it
         if(self.geojson != undefined){
             self.clear_map();
         }
@@ -257,7 +272,7 @@ function IndicatorComparisonViewModel (data) {
 
 
         ko.utils.arrayForEach(self.location_search_filtered(), function(loc){
-            var leaf_feature = loc.leaflet_feature('2011');
+            var leaf_feature = loc.leaflet_feature(self.map_selected_year());
             geoToAdd.push(leaf_feature);
             geoValues.push(leaf_feature.properties.indicator_value());
         });
@@ -348,10 +363,13 @@ function IndicatorComparisonViewModel (data) {
 
     }
 
+
+    /* These are mapping things */
+
     self.create_legend = function(map){
         console.log('creating legend');
-        var div, grades = [0, 10, 20, 50, 100, 200, 500, 1000],
-        labels = [];
+        var div;
+        var labels = [];
 
 
         if(self.map_legend_div == undefined){
@@ -362,22 +380,23 @@ function IndicatorComparisonViewModel (data) {
         else{
             div = self.map_legend_div;
         }
+        // If we redraw map, clear out the div
 
-        // loop through our density intervals and generate a label with a colored square for each interval
         $(div).empty();
-        for (var i = 0; i < grades.length; i++) {
-            div.innerHTML += '<i style="background:' + self.get_location_color(grades[i] + 1) + '"></i> ' +
-                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+        // loop through our density intervals and
+        // generate a label with a colored square for each interval
+        for (var i = 0; i < self.map_divisions.length; i++) {
+            div.innerHTML += '<i style="background:' +
+                            self.get_location_color(self.map_divisions[i] + 1) +
+                            '"></i> ' +
+                            self.map_divisions[i] +
+                            (self.map_divisions[i + 1] ? '&ndash;' +
+                            self.map_divisions[i + 1] +
+                            '<br>' : '+');
         }
 
         return div;
     };
-
-
-
-
-    /* These are mapping things */
-
 
 
     self.makeStyle = function (feature) {
@@ -424,16 +443,15 @@ function IndicatorComparisonViewModel (data) {
 
 
     self.get_location_color = function(value){
-
         if(self.map_divisions.length == 5){
-            return value > self.map_divisions[4]  ? '#006d2c' :
-               value > self.map_divisions[3]   ? '#31a354' :
-               value > self.map_divisions[2]  ?  '#74c476' :
-               value > self.map_divisions[1]  ? '#bae4b3' :
-               '#edf8e9';
+            return value > self.map_divisions[4]  ? '#00441b' :
+               value > self.map_divisions[3]   ? '#006d2c' :
+               value > self.map_divisions[2]  ?  '#238b45' :
+               value > self.map_divisions[1]  ? '#41ab5d' :
+               '#74c476';
         }
         else{
-            return '#006d2c';
+            return '#238b45';
         }
     }
 
