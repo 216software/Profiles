@@ -16,13 +16,19 @@ function SafetyViewModel (data) {
     self.rootvm = data.rootvm;
 
     self.parentvm = data.parentvm;
+    self.location_uuid = ko.observable();
     self.initialize = function(){
         console.log('initing ', self.type);
+        if(self.location_uuid()){
+            self.parentvm.location_uuid(self.location_uuid());
+        }
     };
 
     /* This should also include the order we want to display */
     self.indicator_titles = ['Ia', '_Ia',
         'v', '_v', 'p', '_p', 'II', '_II'];
+
+    self.overview_indicators = ['Ia', 'II'];
 
     self.indicators = ko.observableArray([]);
 

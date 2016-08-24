@@ -76,6 +76,51 @@ class AllLocations(Handler):
             success=True,
             locations=locations))
 
+class IndicatorDetails(Handler):
+
+    route_strings = set(["GET /api/indicator-details"])
+    route = Handler.check_route_strings
+
+    def handle(self, req):
+
+        indicator = pg.indicators.Indicator.by_indicator_uuid(self.cw.get_pgconn(),
+            req.wz_req.args['indicator_uuid'])
+
+        return Response.json(dict(
+            message="Found this indicator {0}".\
+                format(indicator),
+            reply_timestamp=datetime.datetime.now(),
+            success=True,
+            indicator=indicator))
+
+
+class IndicatorValuesByIndicator(Handler):
+
+    route_strings = set(["GET /api/indicator-values-by-indicator"])
+    route = Handler.check_route_strings
+
+    def handle(self, req):
+
+        indicator = pg.indicators.Indicator.by_indicator_uuid(self.cw.get_pgconn(),
+            req.wz_req.args['indicator_uuid'])
+
+        ivs =  [x for x in \
+            indicator.all_indicator_location_values(self.cw.get_pgconn())]
+
+        distinct_observable_timestamps = [x for x in \
+            indicator.distinct_observation_timestamps(self.cw.get_pgconn())]
+
+
+        return Response.json(dict(
+            message="Found this indicator {0}".\
+                format(indicator),
+            reply_timestamp=datetime.datetime.now(),
+            success=True,
+            indicatorvalues=ivs,
+            distinct_observable_timestamps=distinct_observable_timestamps))
+
+
+
 class IndicatorValuesByLocation(Handler):
 
     route_strings = set(["GET /api/indicators-by-location"])

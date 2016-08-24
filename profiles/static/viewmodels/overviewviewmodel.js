@@ -8,26 +8,13 @@
    data-bind="executeOnEnter: sendMessage, button : buttonSelector"
 */
 
-function ProgressMetricsViewModel (data) {
+function OverViewModel (data) {
 
     var self = this;
 
     self.type = "ProgressMetricsViewModel";
     self.rootvm = data.rootvm;
     self.parentvm = data.parentvm;
-
-    // Parameter location uuid -- set this on
-    // the start page vm
-    self.location_uuid = ko.observable();
-
-    self.initialize = function(){
-
-        console.log('progress metrics init');
-
-        if(self.location_uuid()){
-            self.parentvm.location_uuid(self.location_uuid());
-        }
-    };
 
     /* This should also include the order we want to display */
     self.indicator_titles = ['med_al_price', 'med_sfprice',
@@ -37,22 +24,13 @@ function ProgressMetricsViewModel (data) {
     /* Do a separate look up for census */
     self.census_indicator_titles = ['_grent', 'cashrent', 'cvcashrent', '_medinc',
         'hhincls10k', 'hhinc10to15k', 'cvhhincls10k', 'cvhhinc10to15k',
-        'hhinc15to25k', 'hhinc25to35k', 'cvhhinc15to25k', 'cvhhinc25to35k',
-        'hhinc35to50k', 'hhinc50to75k',  'cvhhinc35to50k', 'cvhhinc50to75k',
-        'hhinc75to100k', 'hhinc100to150k', 'cvhhinc75to100k', 'cvhhinc100to150k',
-        'hhinc150to200k', 'hhinc200kp',  'cvhhinc150to200k', 'cvhhinc200kp',
-        'bpv', 'tpv', 'mbpv_samehou', 'mbpv_diffhou',
+        'hinc15to25k', 'hinc25to35',
+        'hhinc35to50k', 'hhinc50to75k', 'hhinc75to100k', 'hhinc100to150k',
+        'hhinc150to200k', 'hhinc200kp', 'bpv', 'tpv', 'mbpv_samehou', 'mbpv_diffhou',
         '_hhincls10k', '_hhinc10to15k',
-        '_hhinc15to25k', '_hhinc25to35k',
+        '_hinc15to25k', '_hinc25to35k',
         '_hhinc35to50k', '_hhinc50to75k', '_hhinc75to100k', '_hhinc100to150k',
         '_hhinc150to200k', '_hhinc200kp',
-
-        'cv_hhincls10k', 'cv_hhinc10to15k',
-        'cv_hhinc15to25k', 'cv_hhinc25to35k',
-        'cv_hhinc35to50k', 'cv_hhinc50to75k',
-        'cv_hhinc75to100k', 'cv_hhinc100to150k',
-        'cv_hhinc150to200k', 'cv_hhinc200kp',
-
         'bpv','_bpv', 'tpv', '_tpv',
         'mbpv_samehou', 'mbpv_diffhou'
         ];
@@ -65,8 +43,8 @@ function ProgressMetricsViewModel (data) {
 
     self.income_indicators= ['_medinc', 'hhincls10k', '_hhincls10k',
         'hhinc10to15k', '_hhinc10to15k',
-        'hhinc15to25k','_hhinc15to25k',
-        'hhinc25to35k','_hhinc25to35k',
+        'hinc15to25k','_hinc15to25k',
+        'hinc25to35','_hinc25to35',
         'hhinc35to50k','_hhinc35to50k',
         'hhinc50to75k','_hhinc50to75k',
         'hhinc75to100k','_hhinc75to100k',
@@ -74,33 +52,11 @@ function ProgressMetricsViewModel (data) {
         'hhinc150to200k', '_hhinc150to200k',
         'hhinc200kp','_hhinc200kp'];
 
-    self.poverty_indicators = ['bpv', '_bpv', 'tpv', 'mbpv_samehou', 'mbpv_diffhou'];
+    self.poverty_indicators = ['bpv', 'tpv', 'mbpv_samehou', 'mbpv_diffhou'];
 
     self.indicator_cv_pairings = {'cashrent':'cvcashrent',
      'hhincls10k': 'cvhhincls10k',
-     'hhinc10to15k': 'cvhhinc10to15k',
-     'hhinc15to25k': 'cvhhinc15to25k',
-     'hhinc25to35k':'cvhhinc25to35k',
-     'hhinc35to50k': 'cvhhinc35to50k',
-     'hhinc50to75k': 'cvhhinc50to75k',
-     'hhinc75to100k': 'cvhhinc75to100k',
-     'hhinc100to150k': 'cvhhinc100to150k',
-     'hhinc150to200k': 'cvhhinc150to200k',
-     'hhinc200kp':  'cvhhinc200kp',
-     '_hhincls10k':'cv_hhincls10k',
-     '_hhinc10to15k':'cv_hhinc10to15k',
-     '_hhinc15to25k':'cv_hhinc15to25k',
-     '_hhinc25to35k':'cv_hhinc25to35k',
-     '_hhinc35to50k':'cv_hhinc35to50k',
-     '_hhinc50to75k':'cv_hhinc50to75k',
-     '_hhinc75to100k':'cv_hhinc75to100k',
-     '_hhinc100to150k':'cv_hhinc100to150k',
-     '_hhinc150to200k':'cv_hhinc150to200k',
-     '_hhinc200kp':'cv_hhinc200kp',
-     };
-
-    self.overview_indicators_sales = ['med_al_price', '_grent'];
-    self.overview_indicators_income = ['_medinc', 'bpv'];
+     'hhinc10to15k': 'cvhhinc10to15k'};
 
     self.indicators = ko.observableArray([]);
 
@@ -139,6 +95,8 @@ function ProgressMetricsViewModel (data) {
      * census values -- probably could filter in javascript land
      * but this seems faster */
     self.look_up_census_indicator_complete = function(data){
+
+        console.log('got the census stuff');
 
         self.observable_timestamps_census(ko.utils.arrayMap(
             data.distinct_observable_timestamps || [],

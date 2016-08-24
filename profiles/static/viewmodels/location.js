@@ -11,7 +11,37 @@ function Location (data) {
     self.location_shape_json = ko.observable(data.location_shape_json);
     self.display_me = data.display_me;
 
-    self.category_indicator_values = ko.observableArray([]);
+    self.indicator_values = ko.observableArray([]);
+
+    self.indicator_value_by_year = function(year){
+        item = ko.utils.arrayFirst(this.indicator_values(), function(iv) {
+            return iv.observation_timestamp_year() == year;
+        });
+
+        console.log('item found' , item);
+
+        if (item)
+        {
+            return item.value;
+        }
+        else{
+            return {};
+        }
+    };
+
+
+
+    self.short_location_type = ko.computed(function(){
+        if(self.location_type() == 'community development corporation'){
+            return 'cdc';
+        }
+        else if(self.location_type() == 'neighborhood'){
+            return 'nbhd';
+        }
+        else{
+            return self.location_type();
+        }
+    });
 
     self.look_up_indicator_and_values = function(){
 
@@ -21,9 +51,9 @@ function Location (data) {
 
         // only do this if we need to:
         //
-        // console.log(self.category_indicator_values().length == 0);
+        // console.log(self.indicator_values().length == 0);
 
-        if(self.category_indicator_values() == 0){
+        if(self.indicator_values() == 0){
 
             self.rootvm.is_busy(true);
 
@@ -46,8 +76,8 @@ function Location (data) {
                          * category [ indicators [indicator_values, ..], ..  ]
                          **/
 
-                        self.category_indicator_values(ko.utils.arrayMap(
-                            data.category_indicator_values || [],
+                        self.indicator_values(ko.utils.arrayMap(
+                            data.indicator_values || [],
                             function (x) {
                                 x.rootvm = self.rootvm;
                                 return new IndicatorCategory(x);
@@ -60,6 +90,16 @@ function Location (data) {
                 }
             });
         }
+    };
+
+    self.leaflet_feature = function(year){
+
+        return {'type':'Feature',
+            'properties':{'name':self.title(), 'year':year,
+                'indicator_value': self.indicator_value_by_year(year)
+            },
+            'geometry': self.location_shape_json()
+        };
     };
 
     // Away to see my various indicator values?

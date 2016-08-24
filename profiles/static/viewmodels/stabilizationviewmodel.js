@@ -8,8 +8,14 @@ function StabilizationViewModel (data) {
     self.rootvm = data.rootvm;
     self.parentvm = data.parentvm;
 
+
+    self.location_uuid = ko.observable();
+
     self.initialize = function(){
         console.log('initing ', self.type);
+        if(self.location_uuid()){
+            self.parentvm.location_uuid(self.location_uuid());
+        }
     };
 
     /* This should also include the order we want to display */
@@ -24,6 +30,8 @@ function StabilizationViewModel (data) {
         'hsg_den':'*', 'distress':'**',
         'ntal_sales':'***'
     }
+
+    self.overview_indicators = ['res_occ']
 
     self.indicators = ko.observableArray([]);
 

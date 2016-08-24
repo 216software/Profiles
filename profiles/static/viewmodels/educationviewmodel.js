@@ -8,8 +8,13 @@ function EducationViewModel (data) {
     self.rootvm = data.rootvm;
 
     self.parentvm = data.parentvm;
+
+    self.location_uuid = ko.observable();
     self.initialize = function(){
         console.log('initing ', self.type);
+        if(self.location_uuid()){
+            self.parentvm.location_uuid(self.location_uuid());
+        }
     };
 
     self.reading_indicator_titles =  ['rpass50', '_rpass50',
@@ -30,6 +35,9 @@ function EducationViewModel (data) {
         'meanscore', ];
 
     self.other_indicators = ['qslots', '_attend']
+
+    self.overview_indicators = ['rpass50', 'mpass50'];
+
 
 
     self.indicator_titles = (self.reading_indicator_titles.concat(

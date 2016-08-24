@@ -15,8 +15,23 @@
     source: '/static/templates/startpage.html',
     with: startpagevm,
     afterShow: startpagevm.initialize,
-    sourceLoaded: startpagevm.sourceLoaded}">
+    sourceLoaded: startpagevm.sourceLoaded,
+    }
+">
 </div>
+
+<div data-bind="page: {
+    id: 'indicator-comparison',
+    source: '/static/templates/indicatorcomparison.html',
+    with: indicatorcomparisonvm,
+    afterShow: indicatorcomparisonvm.initialize,
+    sourceLoaded: indicatorcomparisonvm.sourceLoaded,
+    params: ['indicator_uuid'],
+    }
+">
+</div>
+
+
 
 
 {% endblock main %}
@@ -42,12 +57,14 @@
 <script type="text/javascript" src="/static/viewmodels/safetyviewmodel.js"></script>
 <script type="text/javascript" src="/static/viewmodels/populationviewmodel.js"></script>
 <script type="text/javascript" src="/static/viewmodels/progressmetricsviewmodel.js"></script>
+<script type="text/javascript" src="/static/viewmodels/overviewviewmodel.js"></script>
 
+<script type="text/javascript" src="/static/viewmodels/indicatorcomparisonviewmodel.js"></script>
 
 
 <script type="text/javascript">
 
-var kpvm;
+var pvm;
 
 $(document).ready(function () {
 

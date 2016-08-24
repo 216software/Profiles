@@ -16,8 +16,12 @@ function PopulationViewModel (data) {
     self.rootvm = data.rootvm;
 
     self.parentvm = data.parentvm;
+    self.location_uuid = ko.observable();
     self.initialize = function(){
         console.log('initing ', self.type);
+        if(self.location_uuid()){
+            self.parentvm.location_uuid(self.location_uuid());
+        }
     };
 
     /* This should also include the order we want to display*/
@@ -28,6 +32,9 @@ function PopulationViewModel (data) {
 
     self.indicators_population = ['nhw' ,'_nhw', 'nhb', '_nhb',
         'nhapi', '_nhapi', 'nho', '_nho', 'hisp', '_hisp'];
+
+    self.indicators_population_overview = ['nhw' ,'nhb',
+        'nhapi', 'nho', 'hisp'];
 
     self.indicator_cv_pairings = {'pop':'cvpop',
         'nhw':'cvnhw', 'nhb':'cvnhb',

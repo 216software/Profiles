@@ -94,7 +94,56 @@ update indicators set pretty_label = 'Condo parcel sales' where title = 'cdsale'
 
 update indicators set pretty_label = '# of arms-length sales of single parcels' where title = 'al_sales';
 
+update indicators set pretty_label = 'Median gross rent' where title = '_grent';
+update indicators set pretty_label = '# of renter households' where title = 'cashrent';
+
+update indicators set pretty_label = 'Median Household Income' where title = '_medinc';
 
 
+update indicators set pretty_label = 'Number of households with income less than $10,000' where title = 'hhincls10k';
+
+update indicators set pretty_label = 'Number of households with income $10,000-14,999' where title = 'hhinc10to15k';
+update indicators set pretty_label = 'Number of households with income $15,000-24,999' where title = 'hhinc15to25k';
+update indicators set pretty_label = 'Number of households with income $25,000-34,999' where title = 'hhinc25to35k';
+
+update indicators set pretty_label = 'Number of households with income $35,000-49,999' where title = 'hhinc35to50k';
+update indicators set pretty_label = 'Number of households with income $50,000-74,999' where title = 'hhinc50to75k';
+update indicators set pretty_label = 'Number of households with income $75,000-99,999' where title = 'hhinc75to100k';
+update indicators set pretty_label = 'Number of households with income $100,000-149,999' where title = 'hhinc100to150k';
+update indicators set pretty_label = 'Number of households with income $150,000-199,999' where title = 'hhinc150to200k';
+update indicators set pretty_label = 'Number of households with income $200,000+' where title = 'hhinc200kp';
+
+
+update indicators set pretty_label = '% income less than $10,000' where title = '_hhincls10k';
+
+update indicators set pretty_label = '% income $10,000-14,999' where title = '_hhinc10to15k';
+update indicators set pretty_label = '% income $15,000-24,999' where title = '_hhinc15to25k';
+update indicators set pretty_label = '% income $25,000-34,999' where title = '_hhinc25to35k';
+
+update indicators set pretty_label = '% income $35,000-49,999' where title = '_hhinc35to50k';
+update indicators set pretty_label = '% income $50,000-74,999' where title = '_hhinc50to75k';
+update indicators set pretty_label = '% income $75,000-99,999' where title = '_hhinc75to100k';
+update indicators set pretty_label = '% income $100,000-149,999' where title = '_hhinc100to150k';
+update indicators set pretty_label = '% income $150,000-199,999' where title = '_hhinc150to200k';
+update indicators set pretty_label = '% income $200,000+' where title = '_hhinc200kp';
+
+
+
+
+
+
+update indicators set pretty_label = 'Poverty Rate' where title = 'bpv';
+update indicators set pretty_label = '% Poverty Rate' where title = '_bpv';
+update indicators set pretty_label = 'Population for whom poverty status is determined' where title = 'tpv';
+
+update indicators set pretty_label = 'Persons aged 1+  living below poverty level in same house 1 year ago' where title = 'mbpv_samehou';
+
+update indicators set pretty_label = 'Persons aged 1+  living below poverty level in different house 1 year ago' where title = 'mbpv_diffhou';
+
+
+/* Education */
+update indicators set pretty_label = '3rd Grade Reading Comprehension' where title = 'rpass50';
+
+update indicators set pretty_label = '3rd Grade Math Proficiency' where title = 'mpass50';
 
 
