@@ -15,6 +15,8 @@ function IndicatorComparisonViewModel (data) {
     self.mapInfo = undefined;
     self.mapInfo_div = undefined;
     self.map_divisions = undefined;
+    self.map_legend = undefined;
+    self.map_legend_div = undefined;
 
 
     self.locations = ko.observableArray([]);
@@ -232,11 +234,13 @@ function IndicatorComparisonViewModel (data) {
         self.map = L.map("comparisonMap").setView([41.49, -81.69], 11);
         L.esri.basemapLayer("Streets").addTo(self.map);
         self.mapInfo = L.control();
-
+        self.legend = L.control({position: 'bottomleft'});
+        self.legend.onAdd = self.create_legend;
     };
 
     self.clear_map = function(){
         self.map.removeLayer(self.geojson);
+        self.map.removeLayer(self.legend);
         //self.map.removeLayer(self.mapInfo);
     };
 
@@ -247,9 +251,9 @@ function IndicatorComparisonViewModel (data) {
             self.clear_map();
         }
 
+
         var geoToAdd = []
         var geoValues = []
-
 
 
         ko.utils.arrayForEach(self.location_search_filtered(), function(loc){
@@ -317,6 +321,11 @@ function IndicatorComparisonViewModel (data) {
         };
 
         self.mapInfo.addTo(self.map);
+
+        self.legend.addTo(self.map);
+
+
+
     };
 
     /* Makes an outline of an area on the map*/
@@ -338,6 +347,33 @@ function IndicatorComparisonViewModel (data) {
         self.added_map_layers.push(fg);
 
     }
+
+    self.create_legend = function(map){
+        console.log('creating legend');
+        var div, grades = [0, 10, 20, 50, 100, 200, 500, 1000],
+        labels = [];
+
+
+        if(self.map_legend_div == undefined){
+            // create a div with a class "info"
+            var div = L.DomUtil.create('div', 'info legend');
+            self.map_legend_div = div;
+        }
+        else{
+            div = self.map_legend_div;
+        }
+
+        // loop through our density intervals and generate a label with a colored square for each interval
+        $(div).empty();
+        for (var i = 0; i < grades.length; i++) {
+            div.innerHTML += '<i style="background:' + self.get_location_color(grades[i] + 1) + '"></i> ' +
+                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+        }
+
+        return div;
+    };
+
+
 
 
     /* These are mapping things */
@@ -400,6 +436,7 @@ function IndicatorComparisonViewModel (data) {
             return '#006d2c';
         }
     }
+
 
 };
 
