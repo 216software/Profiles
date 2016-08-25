@@ -17,9 +17,6 @@ function Location (data) {
         item = ko.utils.arrayFirst(this.indicator_values(), function(iv) {
             return iv.observation_timestamp_year() == year;
         });
-
-        console.log('item found' , item);
-
         if (item)
         {
             return item.value;

@@ -55,6 +55,11 @@ function IndicatorComparisonViewModel (data) {
         self.get_all_location_types().then(self.get_all_locations);
 
         self.get_all_indicator_values();
+
+        // Reset Sort
+        self.asc(true);
+        self.sort_column(undefined);
+
     };
 
     self.location_type_filtered = ko.computed(function(){
@@ -106,19 +111,29 @@ function IndicatorComparisonViewModel (data) {
 
     self.year_click_sort = function(moment_year){
 
-        self.sort_column(moment_year.year());
-
         var year = moment_year.year();
+        self.sort_column(year);
+
 
         // now we need to do the actual sort by year here
         // of indicator_locations
         self.indicator_locations.sort(function(left, right){
 
             var sort_mult = self.asc() ? -1 : 1;
-
             // need to get in to indicator values and year
-            return left.indicator_value_by_year(year)()>right.indicator_value_by_year(year)()
-                ? 1 * sort_mult : -1 * sort_mult;
+            //
+            var left_value = left.indicator_value_by_year(year);
+            var right_value = right.indicator_value_by_year(year);
+
+            if (typeof(left_value) == 'function' && typeof(right_value) == 'function')
+            {
+                  return left_value() > right_value() ? 1 * sort_mult : -1 * sort_mult;
+            }
+
+           return typeof(left_value) != 'function' && typeof(right_value) != 'function' ? 0 :
+                  typeof(right_value) != 'function' ? 1 * sort_mult :
+                  -1 * sort_mult;
+
 
         });
 
