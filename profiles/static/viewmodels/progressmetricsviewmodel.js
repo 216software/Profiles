@@ -16,6 +16,19 @@ function ProgressMetricsViewModel (data) {
     self.rootvm = data.rootvm;
     self.parentvm = data.parentvm;
 
+    // Parameter location uuid -- set this on
+    // the start page vm
+    self.location_uuid = ko.observable();
+
+    self.initialize = function(){
+
+        console.log('progress metrics init');
+
+        if(self.location_uuid()){
+            self.parentvm.location_uuid(self.location_uuid());
+        }
+    };
+
     /* This should also include the order we want to display */
     self.indicator_titles = ['med_al_price', 'med_sfprice',
         'med_mfprice', 'med_cdprice', 'al_sales', 'sfsale',
@@ -33,6 +46,13 @@ function ProgressMetricsViewModel (data) {
         '_hhinc15to25k', '_hhinc25to35k',
         '_hhinc35to50k', '_hhinc50to75k', '_hhinc75to100k', '_hhinc100to150k',
         '_hhinc150to200k', '_hhinc200kp',
+
+        'cv_hhincls10k', 'cv_hhinc10to15k',
+        'cv_hhinc15to25k', 'cv_hhinc25to35k',
+        'cv_hhinc35to50k', 'cv_hhinc50to75k',
+        'cv_hhinc75to100k', 'cv_hhinc100to150k',
+        'cv_hhinc150to200k', 'cv_hhinc200kp',
+
         'bpv','_bpv', 'tpv', '_tpv',
         'mbpv_samehou', 'mbpv_diffhou'
         ];
@@ -66,7 +86,18 @@ function ProgressMetricsViewModel (data) {
      'hhinc75to100k': 'cvhhinc75to100k',
      'hhinc100to150k': 'cvhhinc100to150k',
      'hhinc150to200k': 'cvhhinc150to200k',
-     'hhinc200kp':  'cvhhinc200kp'};
+     'hhinc200kp':  'cvhhinc200kp',
+     '_hhincls10k':'cv_hhincls10k',
+     '_hhinc10to15k':'cv_hhinc10to15k',
+     '_hhinc15to25k':'cv_hhinc15to25k',
+     '_hhinc25to35k':'cv_hhinc25to35k',
+     '_hhinc35to50k':'cv_hhinc35to50k',
+     '_hhinc50to75k':'cv_hhinc50to75k',
+     '_hhinc75to100k':'cv_hhinc75to100k',
+     '_hhinc100to150k':'cv_hhinc100to150k',
+     '_hhinc150to200k':'cv_hhinc150to200k',
+     '_hhinc200kp':'cv_hhinc200kp',
+     };
 
     self.overview_indicators_sales = ['med_al_price', '_grent'];
     self.overview_indicators_income = ['_medinc', 'bpv'];
@@ -108,8 +139,6 @@ function ProgressMetricsViewModel (data) {
      * census values -- probably could filter in javascript land
      * but this seems faster */
     self.look_up_census_indicator_complete = function(data){
-
-        console.log('got the census stuff');
 
         self.observable_timestamps_census(ko.utils.arrayMap(
             data.distinct_observable_timestamps || [],

@@ -3,7 +3,6 @@
 <div class="col-md-3">
 
 <!-- Navbar type thing here -->
-
 <div class="form-group">
     <label>
     Location Type
@@ -25,7 +24,8 @@
 
 
 <div class="form-group">
-    <button class="form-control btn btn-primary" data-bind="click:change_location,
+    <button class="form-control btn btn-primary"
+    data-bind="click:change_location_click,
     disable:selected_location() == undefined">
 Change Location</button>
 </div> <!-- closes form-group -->
@@ -65,7 +65,7 @@ look up the containing neighborhood for that address.</p>
 
 <button class="btn btn-default btn-block"
     data-bind="click: $parent.find_containing_neighborhood">Find
-containing neighborhoods
+containing locations
 </button>
 
 <button class="btn btn-default btn-block"
@@ -103,8 +103,10 @@ containing locations</strong>
 <!-- all of our sub page tabs go here ? -->
 
 <div data-bind="page: {
-    id: 'start',
+    id: 'overview',
+    role: 'start',
     source: '/static/templates/overview.html',
+    params: ['location_uuid'],
 }"></div>
 
 <div data-bind="page: {
@@ -116,29 +118,32 @@ containing locations</strong>
     id: 'economy',
     source: '/static/templates/economy.html',
     with: economyvm,
-    afterShow: economyvm.initialize
+    afterShow: economyvm.initialize,
+    params: ['location_uuid']
 }"></div>
 
 <div data-bind="page: {
     id: 'education',
     source: '/static/templates/education.html',
     with: educationvm,
-    afterShow: educationvm.initialize
+    afterShow: educationvm.initialize,
+    params: ['location_uuid']
 }"></div>
 
 <div data-bind="page: {
     id: 'health',
     source: '/static/templates/health.html',
     with: healthvm,
-    afterShow: healthvm.initialize
-
+    afterShow: healthvm.initialize,
+    params: ['location_uuid']
 }"></div>
 
 <div data-bind="page: {
     id: 'progress',
     source: '/static/templates/progress-metrics.html',
     with: progressmetricsvm,
-    afterShow: progressmetricsvm.initialize
+    afterShow: progressmetricsvm.initialize,
+    params: ['location_uuid']
 }"></div>
 
 <div data-bind="page: {
@@ -146,27 +151,31 @@ containing locations</strong>
     source: '/static/templates/safety.html',
     with: safetyvm,
     afterShow: safetyvm.initialize,
+    params: ['location_uuid']
 }"></div>
 
 <div data-bind="page: {
     id: 'stabilization',
     source: '/static/templates/stabilization.html',
     with: stabilizationvm,
-    afterShow: stabilizationvm.initialize
+    afterShow: stabilizationvm.initialize,
+    params: ['location_uuid']
 }"></div>
 
 <div data-bind="page: {
     id: 'workforce',
     source: '/static/templates/workforce.html',
     with: workforcevm,
-    aftershow: workforcevm.initialize
+    aftershow: workforcevm.initialize,
+    params: ['location_uuid']
 }"></div>
 
 <div data-bind="page: {
     id: 'population',
     source: '/static/templates/population.html',
     with: populationvm,
-    aftershow: populationvm.initialize
+    aftershow: populationvm.initialize,
+    params: ['location_uuid']
 }"></div>
 
 

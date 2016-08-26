@@ -1,0 +1,73 @@
+<div class="row">
+
+<div class="col-md-3">
+<p style="font-size:18px">Viewing comparison data for
+<span class="strong" data-bind="text:selected_indicator().pretty_label"></span>
+</p>
+</div> <!-- closes col-md-9 -->
+
+<div class="col-md-9">
+
+<ul class="nav nav-tabs">
+  <li role="presentation">
+    <a href="#" data-bind="page-href: {path : '/indicator-table',
+       params: {indicator_uuid: selected_indicator().indicator_uuid}}">Table</a></li>
+  <li role="presentation" class="active"><a href="#">Map</a></li>
+</ul>
+</div> <!-- closes col-md-9 -->
+
+</div> <!-- closes row -->
+
+<div class="row">
+
+<div class="col-md-3">
+<p>
+View comparison data on the map. Please select a type of location
+(neighborhood, CDC, etc) and also a year. Then click 'Update Map' to
+view the data for each location.
+</p>
+
+<div class="form-group">
+    <label>
+    Choose a level
+    </label>
+    <select class="form-control" data-bind="options: location_types,
+                                 optionsCaption: 'Choose...',
+                                 value:selected_location_type"></select>
+</div> <!-- closes form-group -->
+
+<div class="form-group">
+    <label>
+    Choose a year
+    </label>
+    <select class="form-control" data-bind="options: observable_timestamps,
+                                 optionsCaption: 'Choose...',
+                                 optionsValue: function(item){return item.year()},
+                                 optionsText: function(item){return item.year()},
+                                 value:map_selected_year"></select>
+</div> <!-- closes form-group -->
+
+
+
+<div class="form-group">
+    <button class="form-control btn btn-primary"
+    data-bind="disable:update_map_button_disable, click:update_map">
+Update Map</button>
+</div> <!-- closes form-group -->
+
+
+</div> <!-- closes col-md-3 -->
+
+<div class="col-md-9">
+<div id="comparisonMap" style="height:500px">
+
+</div> <!-- closes comparisonMap -->
+</div> <!-- closes col-md-8 -->
+
+</div><!-- closes sub-row -->
+
+</div> <!-- closes col-md-12 -->
+
+
+
+</div> <!-- closes row -->

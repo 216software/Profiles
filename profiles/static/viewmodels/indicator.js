@@ -15,6 +15,44 @@ function Indicator (data) {
 
     self.indicator_category = ko.observable(data.indicator_category);
 
+    self.update_self = function(data){
+        self.title(data.title);
+        self.pretty_label(data.pretty_label);
+        self.description(data.description);
+        self.indicator_value_format(data.indicator_value_format);
+
+        /* And if we have values, put em here */
+    };
+
+
+    self.indicator_category = ko.observable(data.indicator_category);
+
+
+    self.look_up_details = function(){
+
+        if(self.indicator_uuid()){
+            console.log('not looking up details, no indicator uuid');
+        }
+
+        return $.ajax({
+            url: "/api/indicator-details",
+            type: "GET",
+            data: {'indicator_uuid':self.indicator_uuid()},
+            dataType: "json",
+            complete: function () {
+
+            },
+            success: function (data) {
+                if (data.success) {
+                    self.update_self(data.indicator);
+                }
+                else {
+                    toastr.error(data.message);
+                }
+            }
+        });
+    };
+
     // If this indicator has a Coefficient Variation associated with it
     self.indicator_CV = ko.observable();
 
@@ -36,20 +74,24 @@ function Indicator (data) {
     });
 
     self.most_recent_value = ko.computed(function(){
-        var val = self.indicator_values_sorted_asc()[self.indicator_values().length - 1]
-        return val.value;
+        if(self.indicator_values().length > 0){
+            var val = self.indicator_values_sorted_asc()[self.indicator_values().length - 1];
+            return val.value;
+        }
     });
 
     self.percent_change_indicator_value = ko.computed(function(){
-        var first = self.indicator_values_sorted_asc()[0].value()
-        var last = self.indicator_values_sorted_asc()[self.indicator_values().length - 1].value();
+        if(self.indicator_values().length > 0){
+            var first = self.indicator_values_sorted_asc()[0].value()
+            var last = self.indicator_values_sorted_asc()[self.indicator_values().length - 1].value();
 
-        if (first == 0){
-            return 0;
-        }
-        else{
-            result = ((last - first) / first) * 100;
-            return format_value(result, 'percent');
+            if (first == 0){
+                return 0;
+            }
+            else{
+                result = ((last - first) / first) * 100;
+                return format_value(result, 'percent');
+            }
         }
 
     });
@@ -67,6 +109,21 @@ function Indicator (data) {
             return {};
         }
     };
+
+    /* If we're a rate, we should display italicized unless
+     * we're a not rate, in which case we should not */
+    var not_rate_variables = ['_medinc',
+        '_grent', '_attend'];
+
+    self.is_a_rate = ko.computed(function(){
+        if(self.title() && self.title().length > 0 &&
+            not_rate_variables.indexOf(self.title()) == -1){
+            return self.title()[0] == '_';
+        }
+        else{
+            return false;
+        }
+    });
 };
 
 
@@ -83,6 +140,7 @@ Indicator.indicator_by_title = function(indicators, title){
     return {};
 
 }
+
 
 function IndicatorValue(data){
     var self = this;

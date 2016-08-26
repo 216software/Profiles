@@ -1,0 +1,158 @@
+<div class="row">
+
+<div class="col-md-3">
+<p style="font-size:18px">Viewing comparison data for
+<span class="strong" data-bind="text:selected_indicator().pretty_label"></span>
+</p>
+</div> <!-- closes col-md-9 -->
+
+<div class="col-md-9">
+
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="#">Table</a></li>
+  <li role="presentation"><a href="#">Map</a></li>
+</ul>
+</div> <!-- closes col-md-9 -->
+
+</div> <!-- closes row -->
+
+<div class="row">
+
+<div class="col-md-3">
+
+
+
+<div class="form-group">
+    <label>
+    Location type
+    </label>
+    <select class="form-control" data-bind="options: location_types,
+                                 optionsCaption: 'all',
+                                 value:selected_location_type"></select>
+</div> <!-- closes form-group -->
+
+
+<div class="form-group">
+    <label>
+    Search
+    </label>
+    <input class="form-control" data-bind="textInput:location_search" />
+</div> <!-- closes form-group -->
+
+
+</div> <!-- closes col-md-3 -->
+
+<div class="col-md-9">
+
+<div class="row"> <!-- sub row -->
+
+<div class="col-md-8">
+<p>
+Click on table headings to sort. Use the filter selector
+to filter by location type, or to search for a specific location.
+</p>
+</div> <!-- closes col-md-8 -->
+
+</div> <!-- closes sub-row -->
+
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th style="cursor:pointer" data-bind="click:location_click_sort">
+   <span data-bind="visible:asc() && sort_column() == 'location'"
+         class="glyphicon glyphicon-chevron-up"></span>
+   <span data-bind="visible:!asc() && sort_column() == 'location'"
+         class="glyphicon glyphicon-chevron-down"></span>
+   Location (type)
+</th>
+<!-- ko foreach:observable_timestamps -->
+  <th style="text-align:right; cursor:pointer"> <span data-bind="text:$data.format('YYYY'),
+    click:$parent.year_click_sort"></span>
+   <span data-bind="visible:$parent.asc() && $parent.sort_column() == $data.year()"
+         class="glyphicon glyphicon-chevron-up"></span>
+   <span data-bind="visible:!$parent.asc() && $parent.sort_column() == $data.year()"
+         class="glyphicon glyphicon-chevron-down"></span>
+  </th>
+<!-- /ko -->
+
+</tr>
+</thead>
+
+<tbody>
+<!-- ko foreach: location_search_filtered -->
+<tr>
+<td> <span data-bind="text:title"></span> (<span
+data-bind="text:short_location_type"></span>)</td>
+
+<!-- ko foreach: indicator_values -->
+<td style="text-align:right" data-bind="text:value.formatted"></td>
+<!-- /ko -->
+
+
+</tr>
+
+
+
+
+<!-- /ko -->
+
+</tbody>
+
+</table>
+
+
+
+<div class="row" style="margin-top:30px">
+
+<div class="col-md-3">
+<h4>Comparison Map</h4>
+<p>
+View comparison data on the map. Please select a type of location
+(neighborhood, CDC, etc) and also a year. Then click 'Update Map' to
+view the data for each location.
+</p>
+
+<div class="form-group">
+    <label>
+    Choose a level
+    </label>
+    <select class="form-control" data-bind="options: location_types,
+                                 optionsCaption: 'all',
+                                 value:map_selected_level"></select>
+</div> <!-- closes form-group -->
+
+<div class="form-group">
+    <label>
+    Choose a year
+    </label>
+    <select class="form-control" data-bind="options: observable_timestamps,
+                                 optionsCaption: 'Choose...',
+                                 optionsValue: function(item){return item.year()},
+                                 optionsText: function(item){return item.year()},
+                                 value:map_selected_year"></select>
+</div> <!-- closes form-group -->
+
+
+
+<div class="form-group">
+    <button class="form-control btn btn-primary"
+    data-bind="click:update_map">
+Update map</button>
+</div> <!-- closes form-group -->
+
+
+</div> <!-- closes col-md-3 -->
+
+<div class="col-md-9">
+<div id="comparisonMap" style="height:500px">
+
+</div> <!-- closes comparisonMap -->
+</div> <!-- closes col-md-8 -->
+
+</div><!-- closes sub-row -->
+
+</div> <!-- closes col-md-12 -->
+
+
+
+</div> <!-- closes row -->

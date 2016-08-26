@@ -48,43 +48,68 @@
                   data-content="Use the category tabs along the top to browse through the information available. <button type='button' class='btn btn-warning pull-right tour_btn' onclick='tour()'>Next</button>" id="tour_exp">
             </span>
 
-            <li class="domain" data-bind="css: {active : active_tab() =='start'}">
-            <a href="#"  data-bind="page-href:'//start'"
-                class="sub-nav">Overview</a></li>
+            <li class="domain" data-bind="css: {active : active_tab() =='overview' || active_tab() == ''}">
+            <a href="#" data-bind="page-href : {
+                path : '//overview',
+                params : {location_uuid:startpagevm.location_uuid()}}"
+                class="sub-nav">Overview</a>
+            </li>
 
 
             <li class="domain" data-bind="css: {active : active_tab() =='progress'}">
-            <a href="#"  data-bind="page-href:'//progress'"
-                class="sub-nav">Progress Metrics</a></li>
+            <a href="#" data-bind="page-href : {
+                path : '//progress',
+                params : {location_uuid:startpagevm.location_uuid()}}"
+                class="sub-nav">Progress Metrics</a>
+            </li>
 
             <li class="domain" data-bind="css: {active : active_tab() =='population'}">
-            <a href="#"  data-bind="page-href:'//population'"
+            <a href="#" data-bind="page-href : {
+                path : '//population',
+                params : {location_uuid:startpagevm.location_uuid()}}"
                          class="sub-nav">Population</a></li>
 
             <li class="domain" data-bind="css: {active : active_tab() =='safety'}">
-            <a href="#" data-bind="page-href:'//safety'"  class="sub-nav">Safety</a></li>
+            <a href="#" data-bind="page-href : {
+                path : '//safety',
+                params : {location_uuid:startpagevm.location_uuid()}}"
+                class="sub-nav">Safety</a></li>
 
             <li class="domain" data-bind="css: {active : active_tab() =='stabilization'}">
-            <a href="#" data-bind="page-href:'//stabilization'" class="sub-nav">
+            <a href="#" data-bind="page-href : {
+                path : '//stabilization',
+                params : {location_uuid:startpagevm.location_uuid()}}"
+            class="sub-nav">
             Stabilization</a></li>
 
             <li class="domain" data-bind="css: {active : active_tab() =='community'}">
-            <a href="#"  data-bind="page-href:'//community'"
+            <a href="#" data-bind="page-href : {
+                path : '//community',
+                params : {location_uuid:startpagevm.location_uuid()}}"
                 class="sub-nav">Community</a></li>
 
             <li class="domain" data-bind="css: {active : active_tab() =='health'}">
-            <a href="#"  data-bind="page-href:'//health'" class="sub-nav">Health</a></li>
+            <a href="#" data-bind="page-href : {
+                path : '//health',
+                params : {location_uuid:startpagevm.location_uuid()}}"
+            class="sub-nav">Health</a></li>
 
             <li class="domain" data-bind="css: {active : active_tab() =='education'}">
-            <a href="#"  data-bind="page-href:'//education'"
+            <a href="#" data-bind="page-href : {
+                path : '//education',
+                params : {location_uuid:startpagevm.location_uuid()}}"
                 class="sub-nav">Education</a></li>
 
             <li class="domain" data-bind="css: {active : active_tab() =='workforce'}">
-            <a href="#" data-bind="page-href:'//workforce'"
+            <a href="#" data-bind="page-href : {
+                path : '//workforce',
+                params : {location_uuid:startpagevm.location_uuid()}}"
                class="sub-nav">Workforce</a></li>
 
             <li class="domain" data-bind="css: {active : active_tab() =='economy'}">
-            <a href="#" data-bind="page-href:'//economy'"
+            <a href="#" data-bind="page-href : {
+                path : '//economy',
+                params : {location_uuid:startpagevm.location_uuid()}}"
                                    class="sub-nav">Economy</a></li>
            </ul>
         </div><!-- /.navbar-collapse -->

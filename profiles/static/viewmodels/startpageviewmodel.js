@@ -22,7 +22,9 @@ function StartPageViewModel (data) {
     self.location_types = ko.observableArray([]);
 
     /* We might have a selected location from the parameter line */
-    self.location_uuid = ko.observable(data.location_uuid);
+    self.location_uuid = ko.observable();
+
+    self.test = ko.observable("hello");
 
     self.selected_location = ko.observable(new Location({rootvm:data.rootvm}));
 
@@ -92,6 +94,12 @@ function StartPageViewModel (data) {
 
     self.initialize = function(){
 
+        console.log('start page initing');
+        //We gotta refresh the map
+        if(self.map){
+            self.map.invalidateSize();
+        }
+
         self.get_all_location_types().then(self.get_all_locations).
             then(self.selected_location_initialize);
     };
@@ -153,39 +161,20 @@ function StartPageViewModel (data) {
         self.map = L.map("mapid").setView([41.49, -81.69], 10);
         L.esri.basemapLayer("Streets").addTo(self.map);
 
-        self.rootvm.is_busy(true);
-
-        /* Look up map location */
-
-        /*
-        return $.ajax({
-            url: "/api/location",
-            type: "GET",
-            dataType: "json",
-            complete: function () {
-                self.rootvm.is_busy(false);
-            },
-            success: function (data) {
-                if (data.success) {
-                    self.create_feature_layer(new Location(data['location']))
-                }
-                else {
-                    toastr.error(data.message);
-                }
-            }
-        });
-        */
-
     };
+
+    self.change_location_click = function(){
+        // Set selected to location to the one that has been selected
+        self.selected_location(self.selector_location());
+        self.location_uuid(self.selected_location().location_uuid());
+        self.change_location();
+    }
 
 
     self.change_location = function(){
 
         /* Updates the map and then looks up values for
          * a given location */
-
-        // Set selected to location to the one that has been selected
-        self.selected_location(self.selector_location());
 
         // Remove any old layers:
         for (var index in self.added_map_layers){
@@ -198,6 +187,9 @@ function StartPageViewModel (data) {
 
         /* Also -- look up data for this location */
         //self.look_up_indicator_and_values();
+        //
+        // Make sure we put the location in the QS
+        pager.navigate('/' + pager.activePage$().id() + '?location_uuid=' + self.selected_location().location_uuid());
     }
 
     /* Makes an outline of an area on the map*/
@@ -221,12 +213,21 @@ function StartPageViewModel (data) {
 
     }
 
+
+    /* There's a certain assumption about this function:
+     * namely, if a sub page is opened, then it's initialize
+     * function will be called, setting the location_uuid on
+     * our own startpage before we get here. That way the look
+     * up will work correctly...
+     */
     self.selected_location_initialize = function(){
 
         if(self.location_uuid() != undefined){
             self.selected_location(ko.utils.arrayFirst(self.locations(), function(loc){
                 return self.location_uuid() == loc.location_uuid();
             }));
+
+            self.selector_location(self.selected_location());
 
             // Also, we want our map layer to be updated accordingly
             self.change_location();

@@ -96,6 +96,16 @@ border-bottom: 0px solid #ddd;
 .table .table-header{
 }
 
+tr.rate_data{
+    font-style:italic;
+}
+
+tr.rate_data td:first-child{
+    padding-left:2em;
+    font-size:95%;
+}
+
+
 .denominator-row{
     background-color: #f9f9f9;
     font-style:italic;
@@ -160,10 +170,6 @@ border-bottom: 0px solid #ddd;
     left: -54px;
     top: 5px;
 }
-
-/*.table td, .table th{
-    text-align:right;
-}*/
 
 .table caption{
     font-size:16px;
@@ -459,21 +465,7 @@ select.form-control{
 
 }
 
-.info.label{
-    padding:1px;
-}
 
-.info.legend{
-    padding:7px;
-}
-
-.info.legend i{
-    width: 18px;
-    height: 18px;
-    margin-right: 5px;
-    position:relative;
-    top:5px;
-}
 
 
 .panel-heading.sub-domain{
@@ -882,4 +874,45 @@ padding: 0px;
 }
 .tableview-number{
    cursor: pointer;
+}
+
+
+// For leaflet js mapping
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
+.legend {
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
+.info.label{
+    padding:1px;
+}
+
+.info.legend{
+    padding:7px;
+}
+
+.info.legend i{
+    width: 18px;
+    height: 18px;
+    position:relative;
 }

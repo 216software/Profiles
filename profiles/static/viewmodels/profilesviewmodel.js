@@ -28,6 +28,7 @@ function ProfilesViewModel (data) {
     };
 
     self.startpagevm = new StartPageViewModel({rootvm:self});
+    self.indicatorcomparisonvm = new IndicatorComparisonViewModel({rootvm:self});
 
     /* For update of tabs at the top of the page, subscribe to afterShow
      */

@@ -4,18 +4,17 @@
 <div data-bind="with:parentvm.selected_location()">
 
 <h4>Now viewing data for <span data-bind="text:title"></h4>
-
 </div>
 
 
-<table class="table table-striped">
+<table class="table table-striped table-bordered">
 <thead>
 <tr><th>Sales Data</th></tr>
 <tr>
 <th>Indicator</th>
-<th>% change</th>
+<th style="text-align:right">% change</th>
 <!-- ko foreach:observable_timestamps -->
-    <th data-bind="text:$data.format('YYYY')"></th>
+    <th  style="text-align:right" data-bind="text:$data.format('YYYY')"></th>
 <!-- /ko -->
 </tr>
 </thead>
@@ -23,13 +22,15 @@
 <!-- ko foreach:sales_indicators -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
-<tr>
+<tr data-bind="css: {rate_data: is_a_rate() }">
 <td> <span data-bind="text:pretty_label"></span>
+<a href="#" class="small" data-bind="page-href: {path : '/indicator-table',
+       params: {indicator_uuid: indicator_uuid}}">Compare</a>
 </td>
-<td data-bind="text:percent_change_indicator_value"></td>
+<td style="text-align:right" data-bind="text:percent_change_indicator_value"></td>
 
 <!-- ko foreach:$parents[1].observable_timestamps -->
-<td><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+<td style="text-align:right"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
 $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
 <span data-bind="text:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
@@ -49,18 +50,18 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
 </table>
 
 
-<table class="table table-striped">
+<table class="table table-striped table-bordered">
 <thead>
 <tr><th>Rental Data</th></tr>
 <tr>
 <th>Indicator</th>
-<th>% change</th>
+<th style="text-align:right">% change</th>
 <!-- ko foreach:observable_timestamps_census -->
     <!-- ko if:($index() == 0) -->
-    <th data-bind="text:$data.format('YYYY')"></th>
+    <th  style="text-align:right" data-bind="text:$data.format('YYYY')"></th>
     <!-- /ko -->
     <!-- ko if:($index() != 0) -->
-    <th>2009 - <span data-bind="text:$data.year() - 1"></span> (CV*)</th>
+    <th style="text-align:right">2010 - <span data-bind="text:$data.year()"></span> (CV*)</th>
     <!-- /ko -->
 <!-- /ko -->
 </tr>
@@ -69,13 +70,15 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
 <!-- ko foreach:rental_indicators -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
-<tr>
+<tr data-bind="css: {rate_data: is_a_rate() }">
 <td> <span data-bind="text:pretty_label"></span>
+<a href="#" class="small" data-bind="page-href: {path : '/indicator-table',
+       params: {indicator_uuid: indicator_uuid}}">Compare</a>
 </td>
-<td data-bind="text:percent_change_indicator_value"></td>
+<td style="text-align:right" data-bind="text:percent_change_indicator_value"></td>
 
 <!-- ko foreach:$parents[1].observable_timestamps_census -->
-<td><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+<td style="text-align:right"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
 $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
 <span data-bind="text:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
@@ -93,13 +96,15 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
 <!-- ko foreach:income_indicators -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
-<tr>
+<tr data-bind="css: {rate_data: is_a_rate() }">
 <td> <span data-bind="text:pretty_label"></span>
+<a href="#" class="small" data-bind="page-href: {path : '/indicator-table',
+       params: {indicator_uuid: indicator_uuid}}">Compare</a>
 </td>
-<td data-bind="text:percent_change_indicator_value"></td>
+<td style="text-align:right" data-bind="text:percent_change_indicator_value"></td>
 
 <!-- ko foreach:$parents[1].observable_timestamps_census -->
-<td><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+<td style="text-align:right"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
 $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
 <span data-bind="text:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
@@ -117,13 +122,15 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
 <!-- ko foreach:poverty_indicators -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
-<tr>
+<tr data-bind="css: {rate_data: is_a_rate() }">
 <td> <span data-bind="text:pretty_label"></span>
+<a href="#" class="small" data-bind="page-href: {path : '/indicator-table',
+       params: {indicator_uuid: indicator_uuid}}">Compare</a>
 </td>
-<td data-bind="text:percent_change_indicator_value"></td>
+<td style="text-align:right" data-bind="text:percent_change_indicator_value"></td>
 
 <!-- ko foreach:$parents[1].observable_timestamps_census -->
-<td><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+<td style="text-align:right"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
 $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
 <span data-bind="text:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
@@ -145,8 +152,8 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
 
 
 <p class="small">
-Source: 2000 Decennial Census, 2009-2013 American Community Survey 5-year estimates, Cuyahoga County Fiscal Office.
-Note: Information from 2009-2013 ACS 5 year estimates are estimates with a margin of error.
+Source: 2000 Decennial Census, 2010-2014 American Community Survey 5-year estimates, Cuyahoga County Fiscal Office.
+Note: Information from 2010-2014 ACS 5 year estimates are estimates with a margin of error.
 Arm's length sales include all property sales except those transferred at Sheriff sale, purchased by a bank, financial institution, GSE or local government, or recorded with a zero price. Bulk sales and self-sales are also excluded.
 Median sales price of residential parcels includes only residential single family, multi-family, and condominium parcels.
 </p>
