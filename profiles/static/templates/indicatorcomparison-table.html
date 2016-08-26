@@ -86,9 +86,9 @@ to filter by location type, or to search for a specific location.
 <tr>
 <td> <span data-bind="text:title"></span> (<span
 data-bind="text:short_location_type"></span>)</td>
-
-<!-- ko foreach: indicator_values -->
-<td style="text-align:right" data-bind="text:value.formatted"></td>
+<!-- ko foreach:$parent.observable_timestamps -->
+<td style="text-align:right">
+<span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span></td>
 <!-- /ko -->
 
 

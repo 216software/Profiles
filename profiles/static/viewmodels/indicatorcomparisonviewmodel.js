@@ -178,6 +178,7 @@ function IndicatorComparisonViewModel (data) {
                                     function (x) {
                                         x.rootvm = self.rootvm;
                                         x.indicator = self.selected_indicator();
+                                        x.indicator_value_format= self.selected_indicator().indicator_value_format();
                                         return new IndicatorValue(x);
                                     }
                             ));
