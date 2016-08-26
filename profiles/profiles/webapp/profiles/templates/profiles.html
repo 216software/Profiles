@@ -85,6 +85,12 @@ $(document).ready(function () {
     pager.extendWithPage(pvm);
     ko.applyBindings(pvm);
     pager.start();
+
+    /* Initialize Pop overs */
+    $('[data-toggle="popover"]').popover({
+        placement : 'top',
+        trigger : 'hover'
+    });
 });
 
 

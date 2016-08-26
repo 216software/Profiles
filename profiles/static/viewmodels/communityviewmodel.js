@@ -8,11 +8,11 @@
    data-bind="executeOnEnter: sendMessage, button : buttonSelector"
 */
 
-function PopulationViewModel (data) {
+function CommunityViewModel (data) {
 
     var self = this;
 
-    self.type = "PopulationViewModel";
+    self.type = "CommunityViewModel";
     self.rootvm = data.rootvm;
 
     self.map = undefined;

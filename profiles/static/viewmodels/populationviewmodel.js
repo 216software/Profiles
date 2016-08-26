@@ -16,17 +16,23 @@ function PopulationViewModel (data) {
     self.rootvm = data.rootvm;
 
     self.parentvm = data.parentvm;
+
     self.location_uuid = ko.observable();
+
     self.initialize = function(){
         console.log('initing ', self.type);
+        console.log('location uuid is ', self.location_uuid());
         if(self.location_uuid()){
             self.parentvm.location_uuid(self.location_uuid());
         }
     };
 
     /* This should also include the order we want to display*/
-    self.indicator_titles = ['pop', 'cvpop', 'nhw' ,'_nhw', 'cvnhw', 'nhb', '_nhb', 'cvnhb',
-        'nhapi', '_nhapi','cvnhapi','nho', '_nho', 'cvnho', 'hisp', '_hisp', 'cvhisp'];
+    self.indicator_titles = ['pop', 'cvpop', 'mpop',
+        'nhw' ,'_nhw', 'cvnhw', 'mnhw', 'nhb', '_nhb', 'cvnhb', 'mnhb',
+        'nhapi', '_nhapi','cvnhapi', 'mnhapi',
+        'nho', '_nho', 'cvnho', 'mnho',
+        'hisp', '_hisp', 'cvhisp', 'mhisp'];
 
     self.total_population = ['pop'];
 
@@ -38,9 +44,16 @@ function PopulationViewModel (data) {
 
     self.indicator_cv_pairings = {'pop':'cvpop',
         'nhw':'cvnhw', 'nhb':'cvnhb',
-        'nhapi':'cvnhapi', 'nho':'cvnho',
+        'nhapi':'cvnhapi',
         'nho':'cvnho', 'hisp':'cvhisp',
         }
+
+    self.indicator_moe_pairings = {'pop':'mpop',
+        'nhw':'mnhw', 'nhb':'mnhb',
+        'nhapi':'mnhapi', 'nho':'mnho',
+        'hisp':'mhisp',
+        }
+
 
 
     self.indicators = ko.observableArray([]);
@@ -79,6 +92,10 @@ function PopulationViewModel (data) {
             var ind_cv = Indicator.indicator_by_title(self.indicators(),
                 self.indicator_cv_pairings[indicator_key])
             ind.indicator_CV(ind_cv);
+            var ind_moe = Indicator.indicator_by_title(self.indicators(),
+                self.indicator_moe_pairings[indicator_key])
+            ind.indicator_MOE(ind_moe);
         }
+
     }
 };

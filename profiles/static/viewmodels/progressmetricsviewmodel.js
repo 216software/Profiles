@@ -35,12 +35,21 @@ function ProgressMetricsViewModel (data) {
         'mfsale', 'cdsale'];
 
     /* Do a separate look up for census */
-    self.census_indicator_titles = ['_grent', 'cashrent', 'cvcashrent', '_medinc',
+    self.census_indicator_titles = ['_grent', 'cashrent', 'cvcashrent',  'mcashrent',
+        '_medinc',
         'hhincls10k', 'hhinc10to15k', 'cvhhincls10k', 'cvhhinc10to15k',
         'hhinc15to25k', 'hhinc25to35k', 'cvhhinc15to25k', 'cvhhinc25to35k',
         'hhinc35to50k', 'hhinc50to75k',  'cvhhinc35to50k', 'cvhhinc50to75k',
         'hhinc75to100k', 'hhinc100to150k', 'cvhhinc75to100k', 'cvhhinc100to150k',
         'hhinc150to200k', 'hhinc200kp',  'cvhhinc150to200k', 'cvhhinc200kp',
+
+        'mhhincls10k', 'mhhinc10to15k',
+        'mhhinc15to25k', 'mhhinc25to35k',
+        'mhhinc35to50k', 'mhhinc50to75k',
+        'mhhinc75to100k', 'mhhinc100to150k',
+        'mhhinc150to200k', 'mhhinc200kp',
+
+
         'bpv', 'tpv', 'mbpv_samehou', 'mbpv_diffhou',
         '_hhincls10k', '_hhinc10to15k',
         '_hhinc15to25k', '_hhinc25to35k',
@@ -52,6 +61,13 @@ function ProgressMetricsViewModel (data) {
         'cv_hhinc35to50k', 'cv_hhinc50to75k',
         'cv_hhinc75to100k', 'cv_hhinc100to150k',
         'cv_hhinc150to200k', 'cv_hhinc200kp',
+
+        'm_hhincls10k', 'm_hhinc10to15k',
+        'm_hhinc15to25k', 'm_hhinc25to35k',
+        'm_hhinc35to50k', 'm_hhinc50to75k',
+        'm_hhinc75to100k', 'm_hhinc100to150k',
+        'm_hhinc150to200k', 'm_hhinc200kp',
+
 
         'bpv','_bpv', 'tpv', '_tpv',
         'mbpv_samehou', 'mbpv_diffhou'
@@ -97,6 +113,29 @@ function ProgressMetricsViewModel (data) {
      '_hhinc100to150k':'cv_hhinc100to150k',
      '_hhinc150to200k':'cv_hhinc150to200k',
      '_hhinc200kp':'cv_hhinc200kp',
+     };
+
+    self.indicator_moe_pairings = {'cashrent':'mcashrent',
+     'hhincls10k': 'mhhincls10k',
+     'hhinc10to15k': 'mhhinc10to15k',
+     'hhinc15to25k': 'mhhinc15to25k',
+     'hhinc25to35k':'mhhinc25to35k',
+     'hhinc35to50k': 'mhhinc35to50k',
+     'hhinc50to75k': 'mhhinc50to75k',
+     'hhinc75to100k': 'mhhinc75to100k',
+     'hhinc100to150k': 'mhhinc100to150k',
+     'hhinc150to200k': 'mhhinc150to200k',
+     'hhinc200kp':  'mhhinc200kp',
+     '_hhincls10k':'m_hhincls10k',
+     '_hhinc10to15k':'m_hhinc10to15k',
+     '_hhinc15to25k':'m_hhinc15to25k',
+     '_hhinc25to35k':'m_hhinc25to35k',
+     '_hhinc35to50k':'m_hhinc35to50k',
+     '_hhinc50to75k':'m_hhinc50to75k',
+     '_hhinc75to100k':'m_hhinc75to100k',
+     '_hhinc100to150k':'m_hhinc100to150k',
+     '_hhinc150to200k':'m_hhinc150to200k',
+     '_hhinc200kp':'m_hhinc200kp',
      };
 
     self.overview_indicators_sales = ['med_al_price', '_grent'];
@@ -160,6 +199,11 @@ function ProgressMetricsViewModel (data) {
             var ind_cv = Indicator.indicator_by_title(self.indicators(),
                 self.indicator_cv_pairings[indicator_key])
             ind.indicator_CV(ind_cv);
+
+            var ind_moe = Indicator.indicator_by_title(self.indicators(),
+                self.indicator_moe_pairings[indicator_key])
+            ind.indicator_MOE(ind_moe);
+
         }
 
     };

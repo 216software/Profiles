@@ -31,10 +31,15 @@
 
 <!-- ko foreach:$parents[1].observable_timestamps -->
 <td style="text-align:right"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
-$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
-<span data-bind="text:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
-)</span></span> </td>
+$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
+<button type="button" class="btn btn-xs btn-info"
+        data-toggle="popover"
+        title="CV &amp; MOE"
+        data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
+        CV &amp; MOE</button>
+</span></span> </td>
 <!-- /ko --> <!-- closes inner for loop -->
 
 </tr>
@@ -61,7 +66,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
     <th  style="text-align:right" data-bind="text:$data.format('YYYY')"></th>
     <!-- /ko -->
     <!-- ko if:($index() != 0) -->
-    <th style="text-align:right">2010 - <span data-bind="text:$data.year()"></span> (CV*)</th>
+    <th style="text-align:right">2010 - <span data-bind="text:$data.year()"></span></th>
     <!-- /ko -->
 <!-- /ko -->
 </tr>
@@ -79,10 +84,16 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
 
 <!-- ko foreach:$parents[1].observable_timestamps_census -->
 <td style="text-align:right"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
-$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
-<span data-bind="text:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
-)</span></span> </td>
+$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
+<button type="button" class="btn btn-xs btn-info"
+        data-toggle="popover"
+        title="CV &amp; MOE"
+        data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
+        CV &amp; MOE</button>
+</span></span>
+</td>
 <!-- /ko --> <!-- closes inner for loop -->
 
 </tr>
@@ -105,10 +116,17 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
 
 <!-- ko foreach:$parents[1].observable_timestamps_census -->
 <td style="text-align:right"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
-$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
-<span data-bind="text:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
-)</span></span> </td>
+$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
+<button type="button" class="btn btn-xs btn-info"
+        data-toggle="popover"
+        title="CV &amp; MOE"
+        data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
+        CV &amp; MOE</button>
+</span></span>
+</td>
+
 <!-- /ko --> <!-- closes inner for loop -->
 
 </tr>
@@ -131,10 +149,17 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
 
 <!-- ko foreach:$parents[1].observable_timestamps_census -->
 <td style="text-align:right"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
-$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
-<span data-bind="text:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
-)</span></span> </td>
+$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
+<button type="button" class="btn btn-xs btn-info"
+        data-toggle="popover"
+        title="CV &amp; MOE"
+        data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
+        CV &amp; MOE</button>
+</span></span>
+</td>
+
 <!-- /ko --> <!-- closes inner for loop -->
 
 </tr>
