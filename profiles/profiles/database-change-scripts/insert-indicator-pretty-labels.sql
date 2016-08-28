@@ -146,4 +146,7 @@ update indicators set pretty_label = '3rd Grade Reading Comprehension' where tit
 
 update indicators set pretty_label = '3rd Grade Math Proficiency' where title = 'mpass50';
 
+/* All others, update pretty label to description */
+update indicators set pretty_label = description where pretty_label is null;
+
 

@@ -23,6 +23,8 @@
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
 <td> <span data-bind="text:pretty_label"></span>
+<a href="#" class="small" data-bind="page-href: {path : '/indicator-table',
+       params: {indicator_uuid: indicator_uuid}}">Compare</a>
 </td>
 <td style="text-align:right" data-bind="text:percent_change_indicator_value"></td>
 

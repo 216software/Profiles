@@ -55,6 +55,7 @@ function Indicator (data) {
 
     // If this indicator has a Coefficient Variation associated with it
     self.indicator_CV = ko.observable();
+    self.indicator_MOE = ko.observable();
 
     self.indicator_values = ko.observableArray(ko.utils.arrayMap(
                             data.indicator_values || [],
@@ -110,10 +111,39 @@ function Indicator (data) {
         }
     };
 
+    self.CV_css_mapping = function(value){
+
+        return value > 65 ? 'text-danger' :
+            value > 15 ? 'text-warning' :
+            'text-success';
+    }
+
+    self.pretty_CV_and_MOE = function(year){
+
+        var output = '';
+        if(self.indicator_CV() != undefined){
+
+            ind_value = self.indicator_CV().indicator_value_by_year(year);
+            output = 'CV: <span class="' + self.CV_css_mapping(ind_value()) + '">' +
+                ind_value.formatted() + '</span><br />';
+
+        }
+
+        if(self.indicator_MOE() != undefined){
+
+            ind_value = self.indicator_MOE().indicator_value_by_year(year);
+            output += 'MOE: <span class="' + self.CV_css_mapping(ind_value()) + '">' +
+                ind_value.formatted() + '</span>';
+        }
+
+        return output
+
+    };
+
     /* If we're a rate, we should display italicized unless
      * we're a not rate, in which case we should not */
     var not_rate_variables = ['_medinc',
-        '_grent'];
+        '_grent', '_attend'];
 
     self.is_a_rate = ko.computed(function(){
         if(self.title() && self.title().length > 0 &&

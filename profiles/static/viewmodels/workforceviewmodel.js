@@ -26,14 +26,16 @@ function WorkforceViewModel (data) {
     };
 
     /* This should also include the order we want to display */
-    self.indicator_titles = ['lf' ,'_lf', 'cvlf', '_cvlf',
-        'emp', '_emp', 'cvemp', 'pop25p', 'cvpop25p', 'hsls9', '_hsls9', 'cvhsls9',
-        'hs9to12', '_hs9to12', 'cvhs9to12',
-        'hsgrad', '_hsgrad', 'cvhsgrad',
-        'somecoll', '_somecoll' , 'cvsomecoll',
-        'assoc', '_assoc', 'cvassoc',
-        'bs', '_bs', 'cvbs',
-        'prof', '_prof', 'cvprof'];
+    self.indicator_titles = ['lf' ,'_lf', 'cvlf', '_cvlf', 'mlf',
+        'emp', '_emp', 'cvemp', 'memp',
+        'pop25p', 'cvpop25p', 'mpop25',
+        'hsls9', '_hsls9', 'cvhsls9', 'mhsls9',
+        'hs9to12', '_hs9to12', 'cvhs9to12', 'mhs9to12',
+        'hsgrad', '_hsgrad', 'cvhsgrad', 'mhsgrad',
+        'somecoll', '_somecoll' , 'cvsomecoll', 'msomecoll',
+        'assoc', '_assoc', 'cvassoc', 'massoc',
+        'bs', '_bs', 'cvbs', 'mbs',
+        'prof', '_prof', 'cvprof', 'mprof'];
 
     self.indicators_employment = ['emp', 'lf'];
     self.indicators_pop_by_ed_attainment = ['pop25', 'hsls9', 'hs9to12',
@@ -45,6 +47,14 @@ function WorkforceViewModel (data) {
         'somecoll':'cvsomecoll',
         'assoc':'cvassoc',
         'bs':'cvbs', 'prof':'cvprof'
+        }
+
+    self.indicator_moe_pairings = {'lf':'mlf', 'emp':'memp',
+        'pop25p':'mpop25p', 'hsls9':'mhsls9',
+        'hs9to12':'mhs9to12', 'hsgrad':'mhsgrad',
+        'somecoll':'msomecoll',
+        'assoc':'massoc',
+        'bs':'mbs', 'prof':'mprof'
         }
 
 
@@ -86,6 +96,10 @@ function WorkforceViewModel (data) {
             var ind_cv = Indicator.indicator_by_title(self.indicators(),
                 self.indicator_cv_pairings[indicator_key])
             ind.indicator_CV(ind_cv);
+            var ind_moe = Indicator.indicator_by_title(self.indicators(),
+                self.indicator_moe_pairings[indicator_key])
+            ind.indicator_MOE(ind_moe);
+
         }
     }
 };

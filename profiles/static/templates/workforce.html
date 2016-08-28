@@ -17,7 +17,7 @@
     <th style="text-align:right" data-bind="text:$data.format('YYYY')"></th>
     <!-- /ko -->
     <!-- ko if:($index() != 0) -->
-    <th style="text-align:right">2010 - <span data-bind="text:$data.year()"></span> (CV*)</th>
+    <th style="text-align:right">2010 - <span data-bind="text:$data.year()"></span></th>
     <!-- /ko -->
 <!-- /ko -->
 </tr>
@@ -28,15 +28,23 @@
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
 <td> <span data-bind="text:pretty_label"></span>
+<a href="#" class="small" data-bind="page-href: {path : '/indicator-table',
+       params: {indicator_uuid: indicator_uuid}}">Compare</a>
 </td>
 <td style="text-align:right" data-bind="text:percent_change_indicator_value"></td>
 
 <!-- ko foreach:$parents[1].observable_timestamps -->
 <td style="text-align:right"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
-$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
-<span data-bind="text:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
-)</span></span> </td>
+$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
+<button type="button" class="btn btn-xs btn-info"
+        data-toggle="popover"
+        title="CV &amp; MOE"
+        data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
+        CV &amp; MOE</button>
+</span></span> </td>
+
+
 <!-- /ko --> <!-- closes inner for loop -->
 
 </tr>
@@ -53,16 +61,22 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
 <td> <span data-bind="text:pretty_label"></span>
+<a href="#" class="small" data-bind="page-href: {path : '/indicator-table',
+       params: {indicator_uuid: indicator_uuid}}">Compare</a>
 </td>
 <td style="text-align:right" data-bind="text:percent_change_indicator_value"></td>
 
 <!-- ko foreach:$parents[1].observable_timestamps -->
 <td style="text-align:right"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
-
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
-$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">(
-<span data-bind="text:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
-)</span></span> </td>
+$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
+<button type="button" class="btn btn-xs btn-info"
+        data-toggle="popover"
+        title="CV &amp; MOE"
+        data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
+        CV &amp; MOE</button>
+</span></span> </td>
+
 <!-- /ko --> <!-- closes inner for loop -->
 
 </tr>

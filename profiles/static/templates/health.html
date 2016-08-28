@@ -23,6 +23,9 @@
 <tr>
 <td> <span data-bind="text:pretty_label"></span>
 <span data-bind="html:$parents[1].extra_formatting(title())"></span>
+<a href="#" class="small" data-bind="page-href: {path : '/indicator-table',
+       params: {indicator_uuid: indicator_uuid}}">Compare</a>
+
 </td>
 <td style="text-align:right" data-bind="text:percent_change_indicator_value"></td>
 

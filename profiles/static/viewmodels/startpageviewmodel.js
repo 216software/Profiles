@@ -268,7 +268,6 @@ function StartPageViewModel (data) {
             },
             success: function (data) {
                 if (data.success) {
-                    console.log(data);
 
                     success_callback(data);
 
@@ -278,6 +277,14 @@ function StartPageViewModel (data) {
                             x.rootvm = self.rootvm;
                             return new Indicator(x);
                         }));
+
+                    $('[data-toggle="popover"]').popover({
+                        placement : 'top',
+                        trigger : 'focus',
+                        html:true,
+                    });
+
+
 
                 }
                 else {

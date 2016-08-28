@@ -165,4 +165,10 @@ google:
     google_maps_API_key:    AIzaSyBigZQyl666oFxkCvg6WM9vBW9-1F8-Hho
 
 
+# This is stuff just for this project
+profiles:
+
+    csv_data_files_folder: /home/communityprofiles/checkouts/Profiles/datafiles/csvfiles
+
+
 # vim: set filetype=yaml :
