@@ -23,7 +23,11 @@
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr data-bind="css: {rate_data: is_a_rate() }">
 <td> <span data-bind="text:pretty_label"></span>
-<span data-bind="text:$parents[1].extra_formatting(title())"></span>
+<button class="btn btn-sm pull-right"
+        data-toggle="popover"
+        data-bind="visible:$parents[1].extra_formatting(title()),
+                   attr: {'data-content' : $parents[1].extra_formatting(title())}">
+        *</button>
 <a href="#" class="small" data-bind="page-href: {path : '/indicator-table',
        params: {indicator_uuid: indicator_uuid}}">Compare</a>
 </td>
