@@ -1,6 +1,13 @@
 
 <h2>Overview</h2>
 
+<div data-bind="visible:selected_location().location_uuid() == undefined">
+<h4>Please select a location from the left to begin.</h4>
+</div> <!-- closes visible:selected_location().location_uuid() == undefined"> -->
+
+
+<div data-bind="visible:selected_location().location_uuid() != undefined">
+
 <div data-bind="with:selected_location">
 
 <h4> Now viewing data for <span data-bind="text:title"></h4>
@@ -202,3 +209,5 @@ Economy</a></th></tr></tr></tr>
 
 </tbody>
 </table>
+
+</div> <!-- closes visible:selected_location().location_uuid() != undefined -->

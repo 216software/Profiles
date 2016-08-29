@@ -3,9 +3,19 @@
 <div class="col-md-3">
 
 <!-- Navbar type thing here -->
+
+<div class="well">
+<h3>Select a Location</h3>
+<div data-bind="with:selected_location,
+visible:selected_location().location_uuid() != undefined">
+<p>Selected
+<span class="text-success" data-bind="text:title"></span>
+<span class="text-muted" data-bind="text:location_type"></span>
+</p>
+</div>
 <div class="form-group">
     <label>
-    Location Type
+    Level
     </label>
     <select class="form-control" data-bind="options: location_types,
                                  optionsCaption: 'all',
@@ -29,7 +39,7 @@
     disable:selected_location() == undefined">
 Change Location</button>
 </div> <!-- closes form-group -->
-
+</div>
 <div class="form-group"
     data-bind="visible: google_maps_api_loaded">
 
