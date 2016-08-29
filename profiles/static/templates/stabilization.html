@@ -11,9 +11,9 @@
 <thead>
 <tr>
 <th>Indicator</th>
-<th style="text-align:right">% change</th>
+<th class="data">% change</th>
 <!-- ko foreach:observable_timestamps -->
-    <th style="text-align:right"  data-bind="text:$data.format('YYYY')"></th>
+    <th class="data"  data-bind="text:$data.format('YYYY')"></th>
 <!-- /ko -->
 </tr>
 </thead>
@@ -27,10 +27,10 @@
 <a href="#" class="small" data-bind="page-href: {path : '/indicator-table',
        params: {indicator_uuid: indicator_uuid}}">Compare</a>
 </td>
-<td style="text-align:right" data-bind="text:percent_change_indicator_value"></td>
+<td class="data" data-bind="text:percent_change_indicator_value"></td>
 
 <!-- ko foreach:$parents[1].observable_timestamps -->
-<td style="text-align:right"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+<td class="data"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 </td>
 <!-- /ko --> <!-- closes inner for loop -->
 

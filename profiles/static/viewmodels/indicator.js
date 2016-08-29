@@ -132,8 +132,7 @@ function Indicator (data) {
         if(self.indicator_MOE() != undefined){
 
             ind_value = self.indicator_MOE().indicator_value_by_year(year);
-            output += 'MOE: <span class="' + self.CV_css_mapping(ind_value()) + '">' +
-                ind_value.formatted() + '</span>';
+            output += 'MOE (+/-): ' + ind_value.formatted();
         }
 
         return output

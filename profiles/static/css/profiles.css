@@ -96,6 +96,15 @@ border-bottom: 0px solid #ddd;
 .table .table-header{
 }
 
+.table>tbody>tr>td.data{
+    text-align: right;
+}
+
+.table>tbody>tr>td{
+    vertical-align:middle;
+}
+
+
 tr.rate_data{
     font-style:italic;
 }

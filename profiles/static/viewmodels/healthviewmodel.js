@@ -29,8 +29,10 @@ function HealthViewModel (data) {
         '_ebll_c'];
 
     self.indicator_titles_extra_formatting = {
-        'infmort_rate2009':'*', 'mort_rate2009':'**',
-        '_ebll_c':'&#9768;'
+        'infmort_rate2009':'Rate per 1,000 births',
+        'mort_rate2009':'Rate per 1,000 population',
+        '_ebll_c':'Lead data provided by Ohio Department of Health. This should not be considered an endorsement of this study or these conclusions by the ODH.',
+        'le2009': 'Life expectancy is calculated using the Life Expectancy Calculator created by Daniel Eayres published in the South East Public Health Observatory (SEPHO) website.'
     }
 
     self.overview_indicators = ['le2009'];

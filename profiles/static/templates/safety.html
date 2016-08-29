@@ -1,6 +1,14 @@
 
 <h2>Safety Metrics</h2>
+
+<div data-bind="if: indicators().length <= 0">
+No data found.
 <h5>Note: data only available for neighborhoods, not CDCs</h5>
+
+</div> <!-- closes if: indicators.length <= 0 -->
+
+
+<div data-bind="if:indicators().length > 0">
 
 <div data-bind="with:parentvm.selected_location()">
 <h4> Now viewing data for <span data-bind="text:title"></h4>
@@ -10,7 +18,7 @@
 <thead>
 <tr>
 <th>Indicator</th>
-<th style="text-align:right">% change</th>
+<th class="data">% change</th>
 <!-- ko foreach:observable_timestamps -->
     <th data-bind="text:$data.format('YYYY')"></th>
 <!-- /ko -->
@@ -25,10 +33,10 @@
 <a href="#" class="small" data-bind="page-href: {path : '/indicator-table',
        params: {indicator_uuid: indicator_uuid}}">Compare</a>
 </td>
-<td style="text-align:right" data-bind="text:percent_change_indicator_value"></td>
+<td class="data" data-bind="text:percent_change_indicator_value"></td>
 
 <!-- ko foreach:$parents[1].observable_timestamps -->
-<td style="text-align:right"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+<td class="data"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 </td>
 <!-- /ko --> <!-- closes inner for loop -->
 
@@ -55,5 +63,5 @@ forgery, fraud, embezzlement, receiving stolen property, vandalism,
 weapons violations, prostitution, drug violations, family offenses,
 disorderly conduct, kidnapping and all others.
 </p>
-
+</div> <!-- if:indicators.length > 0 -->
 
