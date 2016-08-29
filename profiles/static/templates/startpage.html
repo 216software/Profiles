@@ -36,7 +36,7 @@ Change Location</button>
 <label>Look up neighborhood using address</label>
 
 <input type="text" class="form-control"
-    data-bind="value: address_to_geocode"
+    data-bind="textInput: address_to_geocode"
     placeholder="Type an address here" />
 
 </div><!-- closes form-group -->
@@ -97,8 +97,7 @@ containing locations:</strong>
 
 </div><!-- closes visible geocode_results -->
 
-
-<div id="mapid" style="height:300px;"></div>
+<div id="mapid" style="margin-top: 10px; height:300px;"></div>
 
 </div> <!-- closes col-md-4 -->
 
