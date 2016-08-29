@@ -50,6 +50,11 @@ if __name__ == "__main__":
         os.mkdir(cw.pdf_files_directory)
         log.info("Created pdf files directory")
 
+    pdf_kit_options = {
+
+
+    }
+
     for loc in pg.locations.Location.select_all(pgconn):
 
         for tab_name in tab_names:
@@ -67,7 +72,8 @@ if __name__ == "__main__":
 
             pdfkit.from_url(
                 html_url,
-                pdf_file_path)
+                pdf_file_path,
+                pdf_kit_options)
 
             log.info("Wrote {0}".format(pdf_file_path))
 
