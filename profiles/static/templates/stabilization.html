@@ -26,17 +26,19 @@
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr data-bind="css: {rate_data: is_a_rate() }">
-<td> <span data-bind="text:pretty_label"></span>
-<button class="btn btn-sm btn-primary pull-right"
+<td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>
+<button class="btn btn-sm btn-primary hide-from-print"
         data-toggle="popover"
         data-bind="visible:$parents[1].extra_formatting(title()),
                    attr: {'data-content' : $parents[1].extra_formatting(title())}">
-        <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
 </button>
-        </button>
-<a href="#" class="btn btn-success btn-sm pull-right" data-bind="page-href: {path : '/indicator-table',
+<span class="pull-right">
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="page-href: {path : '/indicator-map',
        params: {indicator_uuid: indicator_uuid}}">
-        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a>
+        Map</a>
+</span>
 </td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
