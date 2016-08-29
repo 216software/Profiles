@@ -27,7 +27,7 @@
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr data-bind="css: {rate_data: is_a_rate() }">
 <td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>
-<button class="btn btn-sm btn-primary hide-from-print"
+<button class="btn btn-xs btn-primary hide-from-print"
         data-toggle="popover"
         data-bind="visible:$parents[1].extra_formatting(title()),
                    attr: {'data-content' : $parents[1].extra_formatting(title())}">
