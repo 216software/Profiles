@@ -23,13 +23,16 @@
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr data-bind="css: {rate_data: is_a_rate() }">
 <td> <span data-bind="text:pretty_label"></span>
-<button class="btn btn-sm pull-right"
+<button class="btn btn-sm btn-primary pull-right"
         data-toggle="popover"
         data-bind="visible:$parents[1].extra_formatting(title()),
                    attr: {'data-content' : $parents[1].extra_formatting(title())}">
-        *</button>
-<a href="#" class="small" data-bind="page-href: {path : '/indicator-table',
-       params: {indicator_uuid: indicator_uuid}}">Compare</a>
+        <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+</button>
+        </button>
+<a href="#" class="btn btn-success btn-sm pull-right" data-bind="page-href: {path : '/indicator-table',
+       params: {indicator_uuid: indicator_uuid}}">
+        <span class="glyphicon glyphicon-globe" aria-hidden="true"></span></a>
 </td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
