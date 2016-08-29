@@ -24,6 +24,7 @@ def set_up_args():
     return ap.parse_args()
 
 tab_names = [
+    "overview",
     "progress",
     "stabilization",
     "safety",

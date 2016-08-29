@@ -10,6 +10,7 @@ function Location (data) {
     self.location_type = ko.observable(data.location_type);
     self.location_shape_json = ko.observable(data.location_shape_json);
     self.display_me = data.display_me;
+    self.print_friendly_name = data.print_friendly_name;
 
     self.indicator_values = ko.observableArray([]);
 
