@@ -323,9 +323,10 @@ function StartPageViewModel (data) {
             geocoder.geocode(
                 {
                     address: self.address_to_geocode(),
+
                     componentRestrictions: {
                         country: "US",
-                        locality: "Cleveland"
+                        administrativeArea: "OH"
                     }
 
                 },
