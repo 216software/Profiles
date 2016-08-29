@@ -1,5 +1,5 @@
 #! /bin/bash -e
-
+x
 # If you get an error like "profiles-config not found", then you either
 # need to install profiles globally, or activate the virtualenv where you
 # installed profiles.

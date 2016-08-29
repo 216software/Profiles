@@ -1,0 +1,73 @@
+#! /usr/bin/env python
+
+# vim: set expandtab ts=4 sw=4 filetype=python fileencoding=utf8:
+
+import argparse
+import collections
+import logging
+import os
+
+import pdfkit
+
+from profiles import configwrapper
+from profiles import pg
+
+log = logging.getLogger("profiles.scripts.make_pdf_locations")
+
+def set_up_args():
+
+    ap = argparse.ArgumentParser(
+        description="Write out PDF files for all screens x locations")
+
+    ap.add_argument("yaml_file_name")
+
+    return ap.parse_args()
+
+tab_names = [
+    "progress",
+    "stabilization",
+    "safety",
+    "stabilization",
+    "community",
+    "health",
+    "education",
+    "workforce",
+    "economy",
+]
+
+if __name__ == "__main__":
+
+    args = set_up_args()
+
+    cw = configwrapper.ConfigWrapper.load_yaml(args.yaml_file_name)
+
+    cw.configure_logging("script")
+
+    pgconn = cw.get_pgconn()
+
+    if not os.path.isdir(cw.pdf_files_directory):
+        os.mkdir(cw.pdf_files_directory)
+        log.info("Created pdf files directory")
+
+    for loc in pg.locations.Location.select_all(pgconn):
+
+        for tab_name in tab_names:
+
+            html_url = "{web_host}/#/{tab_name}?location_uuid={loc_uuid}".format(
+                web_host=cw.web_host,
+                tab_name=tab_name,
+                loc_uuid=loc.location_uuid)
+
+            pdf_file_path = os.path.join(
+                cw.pdf_files_directory,
+                "{0}-{1}.pdf".format(
+                    tab_name,
+                    loc.print_friendly_name))
+
+            pdfkit.from_url(
+                html_url,
+                pdf_file_path)
+
+            log.info("Wrote {0}".format(pdf_file_path))
+
+    log.info("All done writing PDF files!")
