@@ -321,7 +321,14 @@ function StartPageViewModel (data) {
             var geocoder = new google.maps.Geocoder();
 
             geocoder.geocode(
-                {address: self.address_to_geocode()},
+                {
+                    address: self.address_to_geocode(),
+                    componentRestrictions: {
+                        country: "US",
+                        locality: "Cleveland"
+                    }
+
+                },
                 self.geocode_finished_callback);
         }
 

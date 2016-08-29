@@ -81,8 +81,10 @@ containing locations</strong>
 
 <button class="btn btn-default btn-block"
     data-bind="click: $root.startpagevm.set_selected_location">
-<span data-bind="text: title"></span>
-<small>(type=<span data-bind="text: location_type"></span>)</small>
+
+<p data-bind="text: title"></p>
+<p class="small">(<span data-bind="text: location_type"></span>)</p>
+
 </button>
 
 </div><!-- closes foreach containing_neighborhoods -->
