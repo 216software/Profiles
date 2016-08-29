@@ -2,6 +2,7 @@
 
 import copy
 import logging
+import re
 import textwrap
 
 import psycopg2.extras
@@ -57,8 +58,12 @@ class Location(object):
     def __jsondata__(self):
 
         d = copy.copy(self.__dict__)
+
         # We don't want to return the actual shape, just the json
         del d['location_shape']
+
+        d["print_friendly_name"] = self.print_friendly_name
+
         return d
 
 
@@ -85,7 +90,7 @@ class Location(object):
             select (locations.*)::locations as x
             from locations
 
-            order by location_type
+            order by location_type, title
             """)
 
         cursor = pgconn.cursor()
@@ -367,6 +372,34 @@ class Location(object):
 
         for row in cursor:
             yield row.loc
+
+    @property
+    def print_friendly_location_type(self):
+
+        if self.location_type == "community development corporation":
+            return "cdc"
+
+        else:
+            return self.location_type.lower()
+
+    @property
+    def print_friendly_name(self):
+
+        def clean(s):
+
+            s2 = s.lower().strip().strip(".")
+
+            # Replace these characters with a dash.
+            s3 = re.sub("([.-]| )+", "-", s2)
+
+            # Just remove these.
+            s4 = re.sub("[,_']+", "", s3)
+
+            return s4
+
+        return "{0}-{1}".format(
+            clean(self.print_friendly_location_type),
+            clean(self.title))
 
 class LocationTypeFactory(psycopg2.extras.CompositeCaster):
 

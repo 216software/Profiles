@@ -169,6 +169,7 @@ google:
 profiles:
 
     csv_data_files_folder: /home/communityprofiles/checkouts/Profiles/datafiles/csvfiles
+    pdf_files_directory: /tmp/profiles-pdf-files
 
 
 # vim: set filetype=yaml :

@@ -1,6 +1,6 @@
 <div class="row" style="margin-bottom:15px">
 
-<div class="col-md-3">
+<div class="col-md-3 hide-from-print">
 
 <!-- Navbar type thing here -->
 
@@ -14,6 +14,7 @@ visible:selected_location().location_uuid() != undefined">
 </p>
 </div>
 <div class="form-group">
+
     <label>
     Level
     </label>
@@ -46,7 +47,7 @@ Change Location</button>
 <label>Look up neighborhood using address</label>
 
 <input type="text" class="form-control"
-    data-bind="value: address_to_geocode"
+    data-bind="textInput: address_to_geocode"
     placeholder="Type an address here" />
 
 </div><!-- closes form-group -->
@@ -83,16 +84,20 @@ containing locations
 
 <div data-bind="visible: $parent.containing_neighborhoods().length">
 
+<p>
 <strong>We found
 <span data-bind="text: $parent.containing_neighborhoods().length"></span>
-containing locations</strong>
+containing locations:</strong>
+</p>
 
 <div data-bind="foreach: $parent.containing_neighborhoods">
 
 <button class="btn btn-default btn-block"
     data-bind="click: $root.startpagevm.set_selected_location">
-<span data-bind="text: title"></span>
-<small>(type=<span data-bind="text: location_type"></span>)</small>
+
+<p data-bind="text: title"></p>
+<p class="small">(<span data-bind="text: location_type"></span>)</p>
+
 </button>
 
 </div><!-- closes foreach containing_neighborhoods -->
@@ -103,8 +108,7 @@ containing locations</strong>
 
 </div><!-- closes visible geocode_results -->
 
-
-<div id="mapid" style="height:300px;"></div>
+<div id="mapid" style="margin-top: 10px; height:300px;"></div>
 
 </div> <!-- closes col-md-4 -->
 

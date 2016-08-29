@@ -321,7 +321,15 @@ function StartPageViewModel (data) {
             var geocoder = new google.maps.Geocoder();
 
             geocoder.geocode(
-                {address: self.address_to_geocode()},
+                {
+                    address: self.address_to_geocode(),
+
+                    componentRestrictions: {
+                        country: "US",
+                        administrativeArea: "OH"
+                    }
+
+                },
                 self.geocode_finished_callback);
         }
 
@@ -402,9 +410,13 @@ function StartPageViewModel (data) {
                 return filtered_loc.title() == loc.title();
             }));
 
+        /*
         self.address_to_geocode(null);
         self.geocode_results([]);
         self.containing_neighborhoods([]);
+        */
+
+        self.change_location_click();
 
     };
 
