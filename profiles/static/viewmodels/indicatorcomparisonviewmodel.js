@@ -310,10 +310,6 @@ function IndicatorComparisonViewModel (data) {
         });
 
 
-        console.log(geoValues[0])
-        console.log(geoValues[geoValues.length-1]);
-        console.log(geoValues.length);
-
         //Make divisions
         self.map_divisions = []
 
@@ -328,8 +324,6 @@ function IndicatorComparisonViewModel (data) {
         else{
             self.map_divisions[geoValues[0], geoValues[geoValues.length-1]]
         }
-
-        console.log(self.map_divisions);
 
         // get 3 separate points, if we have it
 
@@ -393,7 +387,6 @@ function IndicatorComparisonViewModel (data) {
     /* These are mapping things */
 
     self.create_legend = function(map){
-        console.log('creating legend');
         var div;
         var labels = [];
 

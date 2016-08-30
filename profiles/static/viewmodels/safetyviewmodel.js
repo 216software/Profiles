@@ -52,7 +52,6 @@ function SafetyViewModel (data) {
             function (x) {
                 x.indicator.rootvm = self.rootvm;
                 x.indicator.indicator_values = x.indicator_values;
-                console.log(x.indicator);
                 return new Indicator(x.indicator);
             }));
 

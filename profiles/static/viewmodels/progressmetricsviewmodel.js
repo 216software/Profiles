@@ -22,8 +22,6 @@ function ProgressMetricsViewModel (data) {
 
     self.initialize = function(){
 
-        console.log('progress metrics init');
-
         if(self.location_uuid()){
             self.parentvm.location_uuid(self.location_uuid());
         }

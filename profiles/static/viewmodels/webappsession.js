@@ -568,7 +568,6 @@ function Person (data) {
                 if (data.success) {
 
                     toastr.success(data.message);
-                    console.log("new person uuid ", data.person_uuid)
 
                     pager.navigate('/');
                 }

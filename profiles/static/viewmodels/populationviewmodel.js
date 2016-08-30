@@ -20,8 +20,6 @@ function PopulationViewModel (data) {
     self.location_uuid = ko.observable();
 
     self.initialize = function(){
-        console.log('initing ', self.type);
-        console.log('location uuid is ', self.location_uuid());
         if(self.location_uuid()){
             self.parentvm.location_uuid(self.location_uuid());
         }
@@ -67,10 +65,6 @@ function PopulationViewModel (data) {
 
     self.look_up_indicator_complete = function(data){
 
-        console.log('look_up_indicator complete');
-
-        console.log(data);
-
         self.observable_timestamps(ko.utils.arrayMap(
             data.distinct_observable_timestamps || [],
             function(x){
@@ -83,7 +77,6 @@ function PopulationViewModel (data) {
             function (x) {
                 x.indicator.rootvm = self.rootvm;
                 x.indicator.indicator_values = x.indicator_values;
-                console.log(x.indicator);
                 return new Indicator(x.indicator);
             }));
 

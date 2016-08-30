@@ -307,8 +307,6 @@ function PhotoCollection(data) {
 
     self.start_ajax_upload = function (me, evt) {
 
-        console.log('starting ajax upload');
-
         self.rootvm.is_busy(true);
         self.show_upload_picker(false);
 
@@ -475,7 +473,6 @@ function PhotoCollection(data) {
                         if(!item.title && item.author){
                             item.title = 'Photo: ' + item.author
                             item.author = undefined
-                            console.log(3);
                         }
 
                         if(!item.title && !item.author) {

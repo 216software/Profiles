@@ -48,8 +48,6 @@ function CommunityViewModel (data) {
 
     self.get_all_location_types = function(){
 
-        console.log('location types');
-
         /* Look up the different location_types */
 
         return $.ajax({
@@ -71,8 +69,6 @@ function CommunityViewModel (data) {
     }
 
     self.get_all_locations = function(){
-
-        console.log('locations');
 
         return $.ajax({
             url: "/api/all-locations",
@@ -103,8 +99,6 @@ function CommunityViewModel (data) {
     /* We need to do this after the source is loaded and part of the DOM
      * so that we can instantiate the map here */
     self.sourceLoaded = function(){
-
-        console.log('source loaded function in ', self.type);
 
         self.map = L.map("popmapid").setView([41.49, -81.69], 10);
         L.esri.basemapLayer("Streets").addTo(self.map);
@@ -140,10 +134,8 @@ function CommunityViewModel (data) {
 
         // Remove any old layers:
         for (var index in self.added_map_layers){
-            console.log('removing layer' , self.added_map_layers[index]);
             self.map.removeLayer(self.added_map_layers[index]);
         }
-        console.log('changing location on map');
 
         self.create_feature_layer(self.selected_location());
 
@@ -157,7 +149,6 @@ function CommunityViewModel (data) {
     /* Makes an outline of an area on the map*/
     self.create_feature_layer = function(new_location){
 
-        console.log(new_location.location_shape_json());
 
         var layer_coordinates = new_location.location_shape_json();
 

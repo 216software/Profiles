@@ -30,10 +30,6 @@ function Indicator (data) {
 
     self.look_up_details = function(){
 
-        if(self.indicator_uuid()){
-            console.log('not looking up details, no indicator uuid');
-        }
-
         return $.ajax({
             url: "/api/indicator-details",
             type: "GET",

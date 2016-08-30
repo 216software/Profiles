@@ -94,7 +94,6 @@ function StartPageViewModel (data) {
 
     self.initialize = function(){
 
-        console.log('start page initing');
         //We gotta refresh the map
         if(self.map){
             self.map.invalidateSize();
@@ -178,10 +177,8 @@ function StartPageViewModel (data) {
 
         // Remove any old layers:
         for (var index in self.added_map_layers){
-            console.log('removing layer' , self.added_map_layers[index]);
             self.map.removeLayer(self.added_map_layers[index]);
         }
-        console.log('changing location on map');
 
         self.create_feature_layer(self.selected_location());
 
@@ -194,8 +191,6 @@ function StartPageViewModel (data) {
 
     /* Makes an outline of an area on the map*/
     self.create_feature_layer = function(new_location){
-
-        console.log(new_location.location_shape_json());
 
         var layer_coordinates = new_location.location_shape_json();
 

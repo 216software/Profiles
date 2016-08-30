@@ -11,7 +11,6 @@ function EducationViewModel (data) {
 
     self.location_uuid = ko.observable();
     self.initialize = function(){
-        console.log('initing ', self.type);
         if(self.location_uuid()){
             self.parentvm.location_uuid(self.location_uuid());
         }
@@ -52,15 +51,10 @@ function EducationViewModel (data) {
             self.look_up_indicator_complete);
     });
 
-    console.log(self.parentvm);
 
     self.observable_timestamps = ko.observableArray([]);
 
     self.look_up_indicator_complete = function(data){
-
-        console.log('look_up_indicator complete');
-
-        console.log(data);
 
         self.observable_timestamps(ko.utils.arrayMap(
             data.distinct_observable_timestamps || [],

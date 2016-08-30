@@ -96,8 +96,6 @@ function OverViewModel (data) {
      * but this seems faster */
     self.look_up_census_indicator_complete = function(data){
 
-        console.log('got the census stuff');
-
         self.observable_timestamps_census(ko.utils.arrayMap(
             data.distinct_observable_timestamps || [],
             function(x){

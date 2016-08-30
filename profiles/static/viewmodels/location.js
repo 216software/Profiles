@@ -49,7 +49,6 @@ function Location (data) {
 
         // only do this if we need to:
         //
-        // console.log(self.indicator_values().length == 0);
 
         if(self.indicator_values() == 0){
 
@@ -66,7 +65,6 @@ function Location (data) {
                 success: function (data) {
                     if (data.success) {
 
-                        // console.log(data);
 
                         /* Data is mapped categories, to indicator to
                          * values
