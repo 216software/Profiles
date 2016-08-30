@@ -60,6 +60,11 @@ function IndicatorComparisonViewModel (data) {
         self.asc(true);
         self.sort_column(undefined);
 
+        // When we hit the page again, clear out the map
+        if(self.map != undefined){
+            self.clear_map();
+        }
+
     };
 
     self.location_type_filtered = ko.computed(function(){
@@ -259,8 +264,13 @@ function IndicatorComparisonViewModel (data) {
 
     self.clear_map = function(){
         self.map.removeLayer(self.geojson);
-        self.map.removeLayer(self.legend);
-        //self.map.removeLayer(self.mapInfo);
+
+        if(self.legend._map != null){
+            self.map.removeControl(self.legend);
+        }
+        if(self.mapInfo._map != null){
+            self.map.removeControl(self.mapInfo);
+        }
     };
 
     self.update_map_button_disable = ko.computed(function(){
