@@ -144,8 +144,7 @@ logging:
                 fromaddr: pyprofiles@*host
 
                 toaddrs:
-                    - matt@216software.com
-                    # - robert.heinen@gmail.com
+                    - info@216software.com
 
                 subject: production error
 

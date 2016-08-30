@@ -51,8 +51,7 @@ if __name__ == "__main__":
         log.info("Created pdf files directory")
 
     pdf_kit_options = {
-
-
+        'javascript-delay': 2000,
     }
 
     for loc in pg.locations.Location.select_all(pgconn):
