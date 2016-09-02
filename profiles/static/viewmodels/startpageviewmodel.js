@@ -134,6 +134,11 @@ function StartPageViewModel (data) {
             complete: function () {
 
             },
+            statusCode: {
+                500: function(){
+                    console.log('server returned an error');
+                }
+            },
             success: function (data) {
                 if (data.success) {
 
