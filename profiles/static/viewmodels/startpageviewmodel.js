@@ -90,8 +90,6 @@ function StartPageViewModel (data) {
         'parentvm':self});
 
 
-
-
     self.initialize = function(){
 
         //We gotta refresh the map
@@ -233,7 +231,15 @@ function StartPageViewModel (data) {
             self.change_location();
         }
         else{
-            return false;
+            // Let's set Cleveland City as the default location
+            self.selected_location(ko.utils.arrayFirst(self.locations(), function(loc){
+                return 'Cleveland City' == loc.title();
+            }));
+
+            self.selector_location(self.selected_location());
+
+            // Also, we want our map layer to be updated accordingly
+            self.change_location();
         }
     };
 
