@@ -17,17 +17,53 @@ statements.
 
 Run the following two commands::
 
-    shp2pgsql -s 4326 area_cdc_rev27Jan2016_region.shp area_cdc postgres > area_cdc.sql
+    shp2pgsql -s 4326 area_cdc_rev27Jan2016_region.shp area_cdc locations > area_cdc.sql
 
 and::
 
-     shp2pgsql -s 4326 clev_spa2010_region.shp clev_spa2010 postgres > clev_spa2010.sql
+     shp2pgsql -s 4326 clev_spa2010_region.shp clev_spa2010 locations > clev_spa2010.sql
+
+for cleveland city::
+
+    shp2pgsql -G -s 3734:4326 cleMSA_mcities.shp locations > msa_city.sql
 
 
 Then, when you open the sql files, you'll be able to find the insert
 statments for the given areas. Use these how you will (either by
 creating the tables the sql files will create, or by copying iand
 pasting the parts you need into your own insert scripts).
+
+
+NOTE
+----
+
+To determine the SRID, you might have to do something like, open the
+shape files .prj file. You should see something like this::
+
+    PROJCS["NAD_1983_StatePlane_Ohio_North_FIPS_3401_Feet",
+    GEOGCS["GCS_North_American_1983",
+    DATUM["D_North_American_1983",
+    SPHEROID["GRS_1980",6378137.0,298.257222101]],
+    PRIMEM["Greenwich",0.0],
+    UNIT["Degree",0.0174532925199433]],
+    PROJECTION["Lambert_Conformal_Conic"],
+    PARAMETER["False_Easting",1968500.0],
+    PARAMETER["False_Northing",0.0],
+    PARAMETER["Central_Meridian",-82.5],
+    PARAMETER["Standard_Parallel_1",40.43333333333333],
+    PARAMETER["Standard_Parallel_2",41.7],
+    PARAMETER["Latitude_Of_Origin",39.66666666666666],
+    UNIT["Foot_US",0.3048006096012192]]
+
+
+You can then search on either the PROJCS or the GEOGCS in order to
+determine the srid. The table to query is spatial_ref_sys::
+
+    select srid, srtext, proj4text from spatial_ref_sys where srtext ILIKE
+    '%Ohio%';
+
+This might yield multiple results. Pick the one that matches your projcs
+and geogcs.
 
 
 

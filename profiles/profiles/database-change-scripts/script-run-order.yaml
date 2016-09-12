@@ -28,3 +28,4 @@ script_order:
 -   insert-indicator-pretty-labels.sql
 -   clean-up-locations.sql
 -   add-index-to-locations.sql
+-   add-cle-city-shape.sql
