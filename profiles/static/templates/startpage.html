@@ -40,11 +40,10 @@ visible:selected_location().location_uuid() != undefined">
     disable:selected_location() == undefined">
 Change Location</button>
 </div> <!-- closes form-group -->
-</div>
 <div class="form-group"
     data-bind="visible: google_maps_api_loaded">
 
-<label>Look up neighborhood using address</label>
+<label>or look up neighborhood using address</label>
 
 <input type="text" class="form-control"
     data-bind="textInput: address_to_geocode"
@@ -95,7 +94,7 @@ containing locations:</strong>
 <button class="btn btn-default btn-block"
     data-bind="click: $root.startpagevm.set_selected_location">
 
-<p data-bind="text: title"></p>
+<p data-bind="text: title" style="white-space:normal"></p>
 <p class="small">(<span data-bind="text: location_type"></span>)</p>
 
 </button>
@@ -107,6 +106,8 @@ containing locations:</strong>
 </div><!-- closes foreach -->
 
 </div><!-- closes visible geocode_results -->
+
+</div> <!-- closes well -->
 
 <div id="mapid" style="margin-top: 10px; height:300px;"></div>
 

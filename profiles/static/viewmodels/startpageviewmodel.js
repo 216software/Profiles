@@ -160,7 +160,7 @@ function StartPageViewModel (data) {
      * so that we can instantiate the map here */
     self.sourceLoaded = function(){
 
-        self.map = L.map("mapid").setView([41.49, -81.69], 10);
+        self.map = L.map("mapid").setView([41.49, -81.69], 9);
         L.esri.basemapLayer("Streets").addTo(self.map);
 
     };

@@ -22,13 +22,13 @@
 <table class="table table-striped table-bordered">
 <thead>
 <tr>
-<th><a data-bind="page-href: '//progress'">
-Progress Metrics</a></th>
-<th class="data">5 year change</th>
+<th colspan="2">Progress Metrics <a class="small" data-bind="page-href: '//progress'">
+view more details</a></th>
+
 </tr>
 <tr>
-<th colspan="2">Property</th>
-</thead>
+<th>Property</th>
+<th class="data">5 year change</th></thead>
 <tbody>
 
 <!-- ko with:progressmetricsvm-->
@@ -74,8 +74,8 @@ Progress Metrics</a></th>
 </tr>
 <tr>
 <th colspan="2">
-<a data-bind="page-href:'//population'">
-Population</a></th>
+Population <a class="small " data-bind="page-href:'//population'">
+view more details</a></th>
 </tr>
 </thead>
 
@@ -93,8 +93,8 @@ Population</a></th>
 
 <tr>
 <th colspan ="2">
-<a data-bind="page-href:'//population'">
-Racial Ethnic Diversity</a></th>
+Racial Ethnic Diversity <a class="small " data-bind="page-href:'//population'">
+view more details</a></th>
 </tr>
 
 <!-- ko foreach:indicators_population_overview -->
@@ -109,8 +109,9 @@ Racial Ethnic Diversity</a></th>
 <!-- /ko -->
 
 <tr>
-<th colspan="2"><a data-bind="page-href:'//safety'">
-Safety</a></th>
+<th colspan="2">
+Safety <a class="small " data-bind="page-href:'//safety'">
+view more details</a></th>
 
 
 </tr>
@@ -128,8 +129,9 @@ Safety</a></th>
 
 
 <tr>
-<th colspan="2"><a data-bind="page-href:'//stabilization'">
-Stabilization</a></th>
+<th colspan="2">
+Stabilization <a class="small " data-bind="page-href:'//stabilization'">
+view more details</a></th>
 
 </tr>
 <!-- ko with:stabilizationvm -->
@@ -146,8 +148,9 @@ Stabilization</a></th>
 
 
 <tr>
-<th colspan="2"><a data-bind="page-href:'//health'">
-Health</a></th>
+<th colspan="2">
+Health <a class="small " data-bind="page-href:'//health'">
+view more details</a></th>
 
 </tr>
 <!-- ko with:healthvm -->
@@ -163,8 +166,9 @@ Health</a></th>
 <!-- /ko -->
 
 <tr>
-<th colspan="2"><a data-bind="page-href:'//education'">
-Education</a></th></tr>
+<th colspan="2">
+Education<a class="small " data-bind="page-href:'//education'">
+view more details</a></th></tr>
 <!-- ko with:educationvm-->
 <!-- ko foreach:overview_indicators -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
@@ -179,8 +183,9 @@ Education</a></th></tr>
 
 
 <tr>
-<th colspan="2"><a data-bind="page-href:'//workforce'">
-Workforce</a></th></tr></tr>
+<th colspan="2">
+Workforce<a class="small " data-bind="page-href:'//workforce'">
+view more details</a></th></tr></tr>
 <!-- ko with:workforcevm-->
 <!-- ko foreach:overview_indicators -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
@@ -194,8 +199,9 @@ Workforce</a></th></tr></tr>
 <!-- /ko -->
 
 <tr>
-<th colspan="2"><a data-bind="page-href:'//economy'">
-Economy</a></th></tr></tr></tr>
+<th colspan="2">
+Economy<a class="small " data-bind="page-href:'//economy'">
+view more details</a></th></tr></tr></tr>
 <!-- ko with:economyvm-->
 <!-- ko foreach:overview_indicators -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
