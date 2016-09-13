@@ -29,31 +29,65 @@ function WorkforceViewModel (data) {
         'emp', '_emp', 'cvemp', 'memp',
         'pop25p', 'cvpop25p', 'mpop25',
         'hsls9', '_hsls9', 'cvhsls9', 'mhsls9',
-        'hs9to12', '_hs9to12', 'cvhs9to12', 'mhs9to12',
+        'cv_hsls9', 'm_hsls9',
+        'hs9to12', '_hs9to12',
+        'cvhs9to12', 'mhs9to12',
+        'cv_hs9to12', 'm_hs9to12',
         'hsgrad', '_hsgrad', 'cvhsgrad', 'mhsgrad',
+        'cv_hsgrad', 'm_hsgrad',
         'somecoll', '_somecoll' , 'cvsomecoll', 'msomecoll',
+        'cv_somecoll', 'm_somecoll',
         'assoc', '_assoc', 'cvassoc', 'massoc',
+        'cv_assoc', 'm_assoc',
         'bs', '_bs', 'cvbs', 'mbs',
-        'prof', '_prof', 'cvprof', 'mprof'];
+        'cv_bs', 'm_bs',
+        'prof', '_prof', 'cvprof', 'mprof',
+        'cv_prof', 'm_prof'
+        ];
 
     self.indicators_employment = ['emp', 'lf'];
-    self.indicators_pop_by_ed_attainment = ['pop25', 'hsls9', 'hs9to12',
-        'hsgrad', 'somecoll', 'assoc', 'bs', 'prof'];
+
+
+    self.indicators_pop_by_ed_attainment = ['pop25', 'hsls9', '_hsls9',
+        'hs9to12', '_hs9to12',
+        'hsgrad', '_hsgrad',
+        'somecoll', '_somecoll',
+        'assoc', '_assoc',
+        'bs', '_bs',
+        'prof', '_prof'];
 
     self.indicator_cv_pairings = {'lf':'cvlf', 'emp':'cvemp',
-        'pop25p':'cvpop25p', 'hsls9':'cvhsls9',
-        'hs9to12':'cvhs9to12', 'hsgrad':'cvhsgrad',
+        'pop25p':'cvpop25p',
+        'hsls9':'cvhsls9',
+        '_hsls9':'cv_hsls9',
+        'hs9to12':'cvhs9to12',
+        '_hs9to12':'cv_hs9to12',
+        'hsgrad':'cvhsgrad',
+        '_hsgrad':'cv_hsgrad',
         'somecoll':'cvsomecoll',
+        '_somecoll':'cv_somecoll',
         'assoc':'cvassoc',
-        'bs':'cvbs', 'prof':'cvprof'
+        '_assoc':'cv_assoc',
+        'bs':'cvbs', '_bs':'cv_bs',
+        'prof':'cvprof',
+        '_prof':'cv_prof'
         }
 
     self.indicator_moe_pairings = {'lf':'mlf', 'emp':'memp',
         'pop25p':'mpop25p', 'hsls9':'mhsls9',
-        'hs9to12':'mhs9to12', 'hsgrad':'mhsgrad',
+        '_hsls9':'m_hsls9',
+        'hs9to12':'mhs9to12',
+        '_hs9to12':'m_hs9to12',
+        'hsgrad':'mhsgrad',
+        '_hsgrad':'m_hsgrad',
         'somecoll':'msomecoll',
+        '_somecoll':'m_somecoll',
         'assoc':'massoc',
-        'bs':'mbs', 'prof':'mprof'
+        '_assoc':'m_assoc',
+        'bs':'mbs',
+        '_bs':'m_bs',
+        'prof':'mprof',
+        '_prof':'m_prof'
         }
 
 

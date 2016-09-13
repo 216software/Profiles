@@ -30,10 +30,14 @@
 <!-- ko foreach:indicators_employment -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
-<tr>
+<tr data-bind="css: {rate_data: is_a_rate() }">
 <td> <span data-bind="text:pretty_label"></span>
-<a href="#" class="small" data-bind="page-href: {path : '/indicator-table',
-       params: {indicator_uuid: indicator_uuid}}">Compare</a>
+<span class="pull-right" style="padding-left:5px">
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="page-href: {path : '/indicator-map',
+       params: {indicator_uuid: indicator_uuid}}">
+        Map</a>
+</span>
 </td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
@@ -46,7 +50,8 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
         title="CV &amp; MOE"
         data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
         +/-</button>
-</span></span> </td>
+</span></span>
+</td>
 
 
 <!-- /ko --> <!-- closes inner for loop -->
@@ -63,11 +68,18 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <!-- ko foreach:indicators_pop_by_ed_attainment -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
-<tr>
-<td> <span data-bind="text:pretty_label"></span>
-<a href="#" class="small" data-bind="page-href: {path : '/indicator-table',
-       params: {indicator_uuid: indicator_uuid}}">Compare</a>
+<tr data-bind="css: {rate_data: is_a_rate() }">
+<td>
+<span data-bind="text:pretty_label"></span>
+<span class="pull-right" style="padding-left:5px">
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="page-href: {path : '/indicator-map',
+       params: {indicator_uuid: indicator_uuid}}">
+        Map</a>
+</span>
 </td>
+
+
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
 <!-- ko foreach:$parents[1].observable_timestamps -->
