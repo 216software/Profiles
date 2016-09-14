@@ -26,16 +26,18 @@
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
 <td> <span data-bind="text:pretty_label"></span>
-<button class="btn btn-sm pull-right"
+<span class="pull-right" style="padding-left:5px">
+<button class="btn btn-sm btn-primary hide-from-print"
         data-toggle="popover"
         data-bind="visible:$parents[1].extra_formatting(title()),
                    attr: {'data-content' : $parents[1].extra_formatting(title())}">
-        *</button>
-
-
-<a href="#" class="small" data-bind="page-href: {path : '/indicator-table',
-       params: {indicator_uuid: indicator_uuid}}">Compare</a>
-
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+</button>
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="page-href: {path : '/indicator-map',
+       params: {indicator_uuid: indicator_uuid}}">
+        Map</a>
+</span>
 </td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
