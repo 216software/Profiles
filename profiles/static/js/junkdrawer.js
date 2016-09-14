@@ -1,6 +1,10 @@
 // Global formatter
 var format_value  = function(newValue, format, fixed_digits){
 
+    if(fixed_digits == undefined && format == 'percent'){
+        fixed_digits = 1;
+    }
+
     newValueAsNum = isNaN(newValue) ? 0 : +newValue,
     valueToWrite = (newValueAsNum.toFixed(fixed_digits || 0).replace(/(\d)(?=(\d{3})+$)/g, '$1,'));
 
