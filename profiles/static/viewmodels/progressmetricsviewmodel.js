@@ -48,7 +48,6 @@ function ProgressMetricsViewModel (data) {
         'mhhinc150to200k', 'mhhinc200kp',
 
 
-        'bpv', 'tpv', 'mbpv_samehou', 'mbpv_diffhou',
         '_hhincls10k', '_hhinc10to15k',
         '_hhinc15to25k', '_hhinc25to35k',
         '_hhinc35to50k', '_hhinc50to75k', '_hhinc75to100k', '_hhinc100to150k',
@@ -68,7 +67,9 @@ function ProgressMetricsViewModel (data) {
 
 
         'bpv','_bpv', 'tpv', '_tpv',
-        'mbpv_samehou', 'mbpv_diffhou'
+        'bpv_samehou', 'bpv_diffhou',
+        'mbpv_samehou', 'mbpv_diffhou',
+        'cvbpv_samehou', 'cvbpv_diffhou'
         ];
 
     self.sales_indicators = ['med_al_price', 'med_sfprice',
@@ -88,7 +89,7 @@ function ProgressMetricsViewModel (data) {
         'hhinc150to200k', '_hhinc150to200k',
         'hhinc200kp','_hhinc200kp'];
 
-    self.poverty_indicators = ['bpv', '_bpv', 'tpv', 'mbpv_samehou', 'mbpv_diffhou'];
+    self.poverty_indicators = ['bpv', '_bpv', 'tpv', 'bpv_samehou', 'bpv_diffhou'];
 
     self.indicator_cv_pairings = {'cashrent':'cvcashrent',
      'hhincls10k': 'cvhhincls10k',
@@ -111,6 +112,8 @@ function ProgressMetricsViewModel (data) {
      '_hhinc100to150k':'cv_hhinc100to150k',
      '_hhinc150to200k':'cv_hhinc150to200k',
      '_hhinc200kp':'cv_hhinc200kp',
+     'bpv_samehou':'cvbpv_samehou',
+     'bpv_diffhou':'cvbpv_diffhou',
      };
 
     self.indicator_moe_pairings = {'cashrent':'mcashrent',
@@ -134,6 +137,9 @@ function ProgressMetricsViewModel (data) {
      '_hhinc100to150k':'m_hhinc100to150k',
      '_hhinc150to200k':'m_hhinc150to200k',
      '_hhinc200kp':'m_hhinc200kp',
+     'bpv_samehou':'mbpv_samehou',
+     'bpv_diffhou':'mbpv_diffhou',
+
      };
 
     self.overview_indicators_sales = ['med_al_price', '_grent'];
