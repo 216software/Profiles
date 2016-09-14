@@ -299,8 +299,12 @@ function IndicatorComparisonViewModel (data) {
 
         ko.utils.arrayForEach(self.location_search_filtered(), function(loc){
             var leaf_feature = loc.leaflet_feature(self.map_selected_year());
-            geoToAdd.push(leaf_feature);
-            geoValues.push(leaf_feature.properties.indicator_value());
+
+            // only add if we have a value
+            if(typeof(leaf_feature.properties.indicator_value) == 'function'){
+                geoToAdd.push(leaf_feature);
+                geoValues.push(leaf_feature.properties.indicator_value());
+            }
         });
 
         // Sort geo to add by value asc

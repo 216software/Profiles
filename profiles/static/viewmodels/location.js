@@ -91,8 +91,9 @@ function Location (data) {
     self.leaflet_feature = function(year){
 
         return {'type':'Feature',
-            'properties':{'name':self.title(), 'year':year,
-                'indicator_value': self.indicator_value_by_year(year)
+                'properties':{'name':self.title(),
+                              'year':year,
+                              'indicator_value': self.indicator_value_by_year(year)
             },
             'geometry': self.location_shape_json()
         };
