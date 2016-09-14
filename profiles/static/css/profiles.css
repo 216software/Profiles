@@ -98,7 +98,14 @@ border-bottom: 0px solid #ddd;
 
 .table>tbody>tr>td.data{
     text-align: right;
+    white-space:nowrap;
 }
+
+.table>tbody>tr>td.data button{
+    text-align: right;
+    white-space:nowrap;
+}
+
 
 .table>tbody>tr>td{
     vertical-align:middle;
