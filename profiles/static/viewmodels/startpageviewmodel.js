@@ -288,6 +288,7 @@ function StartPageViewModel (data) {
                         placement : 'top',
                         trigger : 'focus',
                         html:true,
+                        container: 'body',
                     });
 
 

@@ -128,9 +128,12 @@ function Indicator (data) {
         if(self.indicator_MOE() != undefined){
 
             ind_value = self.indicator_MOE().indicator_value_by_year(year);
-            output += 'MOE (+/-): ' + ind_value.formatted();
+            output += 'MOE (+/-): ' + ind_value.formatted() + '<br />';
         }
 
+        if(output){
+            output += '<p class="small"><a href="/#about/data-sources">More info on CV &amp; MOE</a></p>';
+        }
         return output
 
     };
