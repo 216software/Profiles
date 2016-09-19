@@ -17,7 +17,7 @@
 <th>Indicator</th>
 <th style="text-align:right">% change</th>
 <!-- ko foreach:observable_timestamps -->
-    <th style="text-align:right" data-bind="text:$data.format('YYYY')"></th>
+    <th class="data" data-bind="text:$data.format('YYYY')"></th>
 <!-- /ko -->
 </tr>
 </thead>
@@ -34,7 +34,7 @@
         Map</a>
 </span>
 </td>
-<td style="text-align:right" data-bind="text:percent_change_indicator_value"></td>
+<td class="data" data-bind="text:percent_change_indicator_value"></td>
 
 <!-- ko foreach:$parents[1].observable_timestamps -->
 <td style="text-align:right"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>

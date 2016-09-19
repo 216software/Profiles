@@ -101,9 +101,14 @@ border-bottom: 0px solid #ddd;
     white-space:nowrap;
 }
 
+
 .table>tbody>tr>td.data button{
     text-align: right;
     white-space:nowrap;
+}
+
+.table>thead>tr>th.data{
+    text-align: center;
 }
 
 

@@ -25,7 +25,7 @@ No data found.
 <th>Indicator</th>
 <th class="data">% change</th>
 <!-- ko foreach:observable_timestamps -->
-    <th data-bind="text:$data.format('YYYY')"></th>
+    <th class="data" data-bind="text:$data.format('YYYY')"></th>
 <!-- /ko -->
 </tr>
 </thead>
@@ -35,8 +35,12 @@ No data found.
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
 <td> <span data-bind="text:description"></span>
-<a href="#" class="small" data-bind="page-href: {path : '/indicator-table',
-       params: {indicator_uuid: indicator_uuid}}">Compare</a>
+<span class="pull-right" style="padding-left:5px">
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="page-href: {path : '/indicator-map',
+       params: {indicator_uuid: indicator_uuid}}">
+        Map</a>
+</span>
 </td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
