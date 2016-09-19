@@ -52,6 +52,7 @@ if __name__ == "__main__":
 
     pdf_kit_options = {
         'javascript-delay': 2000,
+        'print-media-type': ''
     }
 
     for loc in pg.locations.Location.select_all(pgconn):
