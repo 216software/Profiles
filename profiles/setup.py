@@ -22,7 +22,7 @@ setup(
         "profiles/scripts/profiles-yaml-example",
         "profiles/scripts/profiles-load-dump",
         "profiles/scripts/xls2csv",
-        "profiles/scripts/make-pdf-files"
+        "profiles/scripts/make-pdf-files",
     ],
 
 )

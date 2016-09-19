@@ -126,4 +126,19 @@ copy the supervisor conf in the upstart directory
 
 edit to point to correct virtual environment
 
+PDF Generation
+==============
+
+To make pdfs of the data, we use the pdfkit python library.
+
+pdfkit has requirement - wkhtmltopdf and can be installed as detailed here::
+    https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+
+We've included the binary in external-code. It should be installed when
+you run::
+
+    pip install -r requirments -e .
+
+
+
 .. vim: set syntax=rst:

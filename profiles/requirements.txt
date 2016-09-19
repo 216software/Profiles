@@ -17,3 +17,4 @@ colorlog==2.4.0
 pillow==2.9.0
 pyrax==1.9.7
 openpyxl==2.3.5
+pdfkit==0.5.0

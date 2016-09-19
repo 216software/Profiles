@@ -104,6 +104,8 @@ rackspace:
 profiles:
 
     csv_data_files_folder: /home/rob/checkouts/Profiles/datafiles/csvfiles
+    pdf_files_directory: /tmp/profiles-pdf-files
+
 
 google:
     google_maps_API_key:    AIzaSyBigZQyl666oFxkCvg6WM9vBW9-1F8-Hho
