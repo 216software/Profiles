@@ -1,8 +1,15 @@
+/* Display: none unless we're printing */
+.show-only-print {
+    display:none;
+}
+
 @media print {
 
     .hide-from-print {
         display: none;
     }
-
+    .show-only-print{
+        display:unset;
+    }
 }
 

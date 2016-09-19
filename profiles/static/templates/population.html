@@ -21,7 +21,7 @@
     <th class="data" data-bind="text:$data.format('YYYY')"></th>
     <!-- /ko -->
     <!-- ko if:($index() != 0) -->
-    <th class="data">2010 - <span data-bind="text:$data.year()"></span> (CV*)</th>
+    <th class="data">2010 - <span data-bind="text:$data.year()"></span></th>
     <!-- /ko -->
 <!-- /ko -->
 </tr>
@@ -48,11 +48,16 @@
 
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
 $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
-<button class="btn btn-xs"
+<button class="btn btn-xs hide-from-print"
         data-toggle="popover"
         title="CV &amp; MOE"
         data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
         +/-</button>
+
+    <span class="show-only-print" style="font-size:8px"
+          data-bind="html:$parent.print_friendly_CV_and_MOE($data.year())"></span>
+
+
 </span></span> </td>
 <!-- /ko --> <!-- closes inner for loop -->
 
@@ -86,11 +91,16 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
 $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
-<button class="btn btn-xs"
+<button class="btn btn-xs hide-from-print"
         data-toggle="popover"
         title="CV &amp; MOE"
         data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
         +/-</button>
+
+    <span class="show-only-print" style="font-size:8px"
+          data-bind="html:$parent.print_friendly_CV_and_MOE($data.year())"></span>
+
+
 </span></span> </td>
 
 
@@ -106,22 +116,29 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 </table>
 
-<p class="small">
-Source: 2000 Decennial Census and 2010-2014 American Community Survey
-5-year estimates.<br />
-Note: Information from 2010-2014 ACS 5 year estimates are estimates with
-a margin of error.<br />
-</p>
+<div class="show-only-print">
+    <div class="small">
+    <p>
+    Source: 2000 Decennial Census and 2010-2014 American Community Survey
+    5-year estimates.<br />
+    Note: Information from 2010-2014 ACS 5 year estimates are estimates with
+    a margin of error.<br />
+    </p>
 
-<p class="small">
-* The Coefficient of Variation is a measure of reliability of the ACS
-estimate. The Census provides the following guidelines for determining
-the reliatiliby of the estimate:
-<ul class="small">
-<li>Coefficient of Variance &lt;15% - Good</li>
-<li>Coefficient of Variance &gt;15% and &lt; 61% - Fair</li>
-Coefficient of Variance &gt;&eq; 61% - Poor</li>
-</ul>
+    <p><strong>Margin of Error (MOE):</strong> The MOE,
+    reported along with an estimate, means
+    that one can be 90 percent confident that the true value is the
+    estimated value, plus or minus the MOE. More information here.</p>
 
-</p>
+    <p><strong>Coefficient of Variation (CV):</strong> a measure of reliability of the ACS
+    estimate. The Census provides the following guidelines for determining
+    the reliability of the estimate:</p>
+    <p>
+    Coefficient of Variance &lt;15&#37; - Good<br />
+    Coefficient of Variance &gt;15&#37; and &lt; 61&#37; - Fair<br />
+    Coefficient of Variance &gt;&#61; 61&#37; - Poor<br />
+    </p>
 
+    </div> <!-- closes class small -->
+
+</div> <!-- closes show-only-print -->

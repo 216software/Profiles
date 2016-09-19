@@ -27,10 +27,12 @@ function PopulationViewModel (data) {
 
     /* This should also include the order we want to display*/
     self.indicator_titles = ['pop', 'cvpop', 'mpop',
-        'nhw' ,'_nhw', 'cvnhw', 'mnhw', 'nhb', '_nhb', 'cvnhb', 'mnhb',
-        'nhapi', '_nhapi','cvnhapi', 'mnhapi',
-        'nho', '_nho', 'cvnho', 'mnho',
-        'hisp', '_hisp', 'cvhisp', 'mhisp'];
+        'nhw' ,'_nhw', 'cvnhw', 'mnhw', 'cv_nhw', 'm_nhw',
+        'nhb', '_nhb', 'cvnhb', 'mnhb', 'cv_nhb', 'm_nhb',
+        'nhapi', '_nhapi','cvnhapi', 'mnhapi', 'cv_nhapi', 'm_nhapi',
+        'nho', '_nho', 'cvnho', 'mnho', 'cv_nho', 'm_nho',
+        'hisp', '_hisp', 'cvhisp', 'mhisp', 'cv_hisp', 'm_hisp'
+        ];
 
     self.total_population = ['pop'];
 
@@ -44,12 +46,23 @@ function PopulationViewModel (data) {
         'nhw':'cvnhw', 'nhb':'cvnhb',
         'nhapi':'cvnhapi',
         'nho':'cvnho', 'hisp':'cvhisp',
+
+        '_nhw':'cv_nhw',
+        '_nhb':'cv_nhb',
+        '_nhapi':'cv_nhapi',
+        '_nho':'cv_nho',
+        '_hisp':'cv_hisp',
         }
 
     self.indicator_moe_pairings = {'pop':'mpop',
         'nhw':'mnhw', 'nhb':'mnhb',
         'nhapi':'mnhapi', 'nho':'mnho',
         'hisp':'mhisp',
+        '_nhw':'m_nhw',
+        '_nhb':'m_nhb',
+        '_nhapi':'mnh_api',
+        '_nho':'m_nho',
+        '_hisp':'m_hisp',
         }
 
 

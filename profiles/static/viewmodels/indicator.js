@@ -114,6 +114,23 @@ function Indicator (data) {
             'text-success';
     }
 
+    self.print_friendly_CV_and_MOE = function(year){
+        var output = '';
+        if(self.indicator_CV() != undefined){
+
+            ind_value = self.indicator_CV().indicator_value_by_year(year);
+            output = '<br />CV: ' + ind_value.formatted() + ', ';
+
+        }
+
+        if(self.indicator_MOE() != undefined){
+            ind_value = self.indicator_MOE().indicator_value_by_year(year);
+            output += '<br />MOE ' + ind_value.formatted() + '';
+        }
+        return output
+    };
+
+
     self.pretty_CV_and_MOE = function(year){
 
         var output = '';

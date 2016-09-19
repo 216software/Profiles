@@ -3,7 +3,7 @@
 
 <div data-bind="with:parentvm.selected_location()">
 
-<h4> Now viewing data for <span data-bind="text:title"></span></h4>
+<h4>Now viewing data for <span data-bind="text:title"></span></h4>
 
 <p class="hide-from-print text-info small">
 <a target="_blank" data-bind="attr: {href: '/pdf/economy-' + print_friendly_name + '.pdf'}">Download as PDF</a>
@@ -50,8 +50,13 @@
 
 </table>
 
+<div class="show-only-print">
+
 <p class="small">
 Sources: Longitudinal Employer-Household Dynamics, United States Postal
 Service vacancy data.
 </p>
+</div><!-- closes show-only-print -->
+
+
 

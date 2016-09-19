@@ -42,11 +42,16 @@
 
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
 $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
-<button class="btn btn-xs"
+<button class="btn btn-xs hide-from-print"
         data-toggle="popover"
         title="CV &amp; MOE"
         data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
         +/-</button>
+
+    <span class="show-only-print" style="font-size:8px"
+          data-bind="html:$parent.print_friendly_CV_and_MOE($data.year())"></span>
+
+
 </span></span> </td>
 <!-- /ko --> <!-- closes inner for loop -->
 
@@ -99,11 +104,15 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
 $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
-<button class="btn btn-xs"
+<button class="btn btn-xs hide-from-print"
         data-toggle="popover"
         title="CV &amp; MOE"
         data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
         +/-</button>
+    <span class="show-only-print" style="font-size:8px"
+          data-bind="html:$parent.print_friendly_CV_and_MOE($data.year())"></span>
+
+
 </span></span>
 </td>
 <!-- /ko --> <!-- closes inner for loop -->
@@ -135,11 +144,16 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
 $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
-<button class="btn btn-xs"
+<button class="btn btn-xs hide-from-print"
         data-toggle="popover"
         title="CV &amp; MOE"
         data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
         +/-</button>
+
+    <span class="show-only-print" style="font-size:8px"
+          data-bind="html:$parent.print_friendly_CV_and_MOE($data.year())"></span>
+
+
 </span></span>
 </td>
 
@@ -172,11 +186,15 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
 $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
-<button class="btn btn-xs"
+<button class="btn btn-xs hide-from-print"
         data-toggle="popover"
         title="CV &amp; MOE"
         data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
         +/-</button>
+    <span class="show-only-print" style="font-size:8px"
+          data-bind="html:$parent.print_friendly_CV_and_MOE($data.year())"></span>
+
+
 </span></span>
 </td>
 
@@ -195,23 +213,28 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 </table>
 
+<div class="show-only-print">
+    <div class="small">
+    <p>Source: 2000 Decennial Census, 2010-2014 American Community Survey 5-year estimates, Cuyahoga County Fiscal Office.
+    Note: Information from 2010-2014 ACS 5 year estimates are estimates with a margin of error.
+    Arm's length sales include all property sales except those transferred at Sheriff sale, purchased by a bank, financial institution, GSE or local government, or recorded with a zero price. Bulk sales and self-sales are also excluded.
+    Median sales price of residential parcels includes only residential single family, multi-family, and condominium parcels.
+    </p>
 
-<p class="small">
-Source: 2000 Decennial Census, 2010-2014 American Community Survey 5-year estimates, Cuyahoga County Fiscal Office.
-Note: Information from 2010-2014 ACS 5 year estimates are estimates with a margin of error.
-Arm's length sales include all property sales except those transferred at Sheriff sale, purchased by a bank, financial institution, GSE or local government, or recorded with a zero price. Bulk sales and self-sales are also excluded.
-Median sales price of residential parcels includes only residential single family, multi-family, and condominium parcels.
-</p>
+    <p><strong>Margin of Error (MOE):</strong> The MOE,
+    reported along with an estimate, means
+    that one can be 90 percent confident that the true value is the
+    estimated value, plus or minus the MOE. More information here.</p>
 
-<p class="small">
-* The Coefficient of Variation is a measure of reliability of the ACS
-estimate. The Census provides the following guidelines for determining
-the reliatiliby of the estimate:
-<ul class="small">
-<li>Coefficient of Variance &lt;15% - Good</li>
-<li>Coefficient of Variance &gt;15% and &lt; 61% - Fair</li>
-<li>Coefficient of Variance &gt;&eq; 61% - Poor</li>
-</ul>
+    <p><strong>Coefficient of Variation (CV):</strong> a measure of reliability of the ACS
+    estimate. The Census provides the following guidelines for determining
+    the reliability of the estimate:</p>
+    <p>
+    Coefficient of Variance &lt;15&#37; - Good<br />
+    Coefficient of Variance &gt;15&#37; and &lt; 61&#37; - Fair<br />
+    Coefficient of Variance &gt;&#61; 61&#37; - Poor<br />
+    </p>
 
-</p>
+    </div> <!-- closes class small -->
 
+</div> <!-- closes show-only-print -->
