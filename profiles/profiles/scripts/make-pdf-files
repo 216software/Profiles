@@ -77,4 +77,27 @@ if __name__ == "__main__":
 
             log.info("Wrote {0}".format(pdf_file_path))
 
+    # Write Indicator table pdf files
+
+    for ind in pg.indicators.Indicator.select_all(pgconn):
+
+        html_url = "{web_host}/#indicator-table?indicator_uuid={ind_uuid}".\
+            format(web_host = cw.web_host,
+            ind_uuid=ind.indicator_uuid)
+
+        pdf_file_path = os.path.join(
+            cw.pdf_files_directory,
+            "Indicator-Values-{0}.pdf".format(
+                ind.title))
+
+        pdfkit.from_url(
+            html_url,
+            pdf_file_path,
+            pdf_kit_options)
+
+        log.info("Wrote {0}".format(pdf_file_path))
+
+
     log.info("All done writing PDF files!")
+
+
