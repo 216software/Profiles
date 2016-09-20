@@ -65,7 +65,6 @@ class Indicator(object):
             select (indicators.*)::indicators as x
             from indicators
 
-            order by indicator_type
             """)
 
         cursor = pgconn.cursor()
