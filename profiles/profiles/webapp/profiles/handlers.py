@@ -121,7 +121,7 @@ class IndicatorValuesByIndicator(Handler):
 
 
 
-class IndicatorValuesByLocation(Handler):
+class IndicatorValuesByLocationOld(Handler):
 
     route_strings = set(["GET /api/indicators-by-location"])
     route = Handler.check_route_strings
