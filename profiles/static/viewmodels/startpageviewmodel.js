@@ -249,6 +249,19 @@ function StartPageViewModel (data) {
 
     self.indicators = ko.observableArray([]);
 
+    self.look_up_indicator_csv = function(indicators, success_callback){
+
+        /* At some point, we're going to need the tab we're on
+         * so that we only return the correct info -- unless
+         * that's computed on the HTML / js side */
+
+        // only do this if we need to:
+        //
+        self.rootvm.is_busy(false);
+
+    };
+
+
     self.look_up_indicator_and_values = function(indicators, success_callback){
 
         /* At some point, we're going to need the tab we're on

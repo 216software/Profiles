@@ -1,11 +1,13 @@
 # vim: set expandtab ts=4 sw=4 filetype=python:
 
+import csv
 import datetime
 import json
 import logging
 import os
 import pprint
 import re
+import tempfile
 import textwrap
 import urllib
 import urlparse
@@ -13,6 +15,8 @@ import uuid
 
 import psycopg2.extras
 from PIL import Image, ImageOps
+
+from dateutil import parser
 
 from profiles.junkdrawer import photofun
 
@@ -168,6 +172,63 @@ class IndicatorValuesByLocation(Handler):
             success=True,
             indicator_values=category_indicator_values,
             distinct_observable_timestamps=distinct_observable_timestamps))
+
+class GenerateCSVForIndicatorsByLocation(Handler):
+
+    route_strings = set(["GET /api/indicator-categories-with-values-by-location-csv"])
+    route = Handler.check_route_strings
+
+    def handle(self, req):
+
+        location = pg.locations.Location.by_location_uuid(self.cw.get_pgconn(),
+            req.wz_req.args['location_uuid'])
+
+        indicators = req.wz_req.args.getlist('indicators[]')
+
+        category_indicator_values = [x for x in \
+            location.indicators_with_values_by_location(self.cw.get_pgconn(),
+                indicators)]
+
+        distinct_observable_timestamps = [x for x in \
+            location.distinct_observation_timestamp_for_indicators(self.cw.get_pgconn(),
+                indicators)]
+
+        tf = tempfile.NamedTemporaryFile()
+        tf.close()
+
+        tf = open(tf.name, 'w')
+
+        headers = [x['observation_timestamp'].year for x in distinct_observable_timestamps]
+        headers.insert(0, 'indicator')
+        headers.insert(1, 'format')
+
+        writer = csv.DictWriter(tf, headers)
+        writer.writeheader()
+
+        for v in category_indicator_values:
+
+            indicator_pl = v['indicator'].pretty_label
+            row_to_write = dict(indicator=indicator_pl)
+            if v['indicator'].indicator_value_format:
+                row_to_write['format'] = v['indicator'].indicator_value_format
+
+
+            for ivs in v['indicator_values']:
+
+                year = parser.parse(ivs['observation_timestamp']).year
+
+                row_to_write['indicator'] = indicator_pl
+                row_to_write[year] = ivs['value']
+
+            writer.writerow(row_to_write)
+
+        tf.close()
+        tf = open(tf.name, 'r')
+
+        return Response.csv_file(
+            filelike=tf,
+            filename='csv-data',
+            FileWrap=req.environ['wsgi.file_wrapper'])
 
 
 class LocationTypes(Handler):

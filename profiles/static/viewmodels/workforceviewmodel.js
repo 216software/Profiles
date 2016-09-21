@@ -98,6 +98,10 @@ function WorkforceViewModel (data) {
     self.parentvm.selected_location.subscribe(function(){
         self.parentvm.look_up_indicator_and_values(self.indicator_titles,
             self.look_up_indicator_complete);
+
+        self.parentvm.look_up_indicator_csv(self.indicator_titles,
+            function(){console.log('hi')});
+
     });
 
     self.observable_timestamps = ko.observableArray([]);
