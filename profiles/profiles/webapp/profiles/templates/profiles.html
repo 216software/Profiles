@@ -98,9 +98,16 @@ $(document).ready(function () {
         placement : 'top',
         trigger : 'hover'
     });
+
+
+
 });
 
+$(window).load(function() {
+    // We want to hide feedback widget when printing
+    $('#webklipper-publisher-widget-container').addClass('hide-from-print');
 
+});
 
 </script>
 
