@@ -67,6 +67,16 @@ function IndicatorComparisonViewModel (data) {
 
     };
 
+    self.csv_link =  ko.computed(function(){
+
+        var base_url= "/api/indicator-values-by-indicator-csv";
+
+        base_url += '?indicator_uuid=' + self.selected_indicator().indicator_uuid();
+        return base_url;
+
+    });
+
+
     self.location_type_filtered = ko.computed(function(){
 
        if(self.selected_location_type() != undefined){

@@ -43,7 +43,9 @@ function SafetyViewModel (data) {
 
         base_url += '?location_uuid=' + self.location_uuid();
 
-        for(var i = 0; i<self.indicator_titles.length; i++)
+        base_url += '&page_title=Safety';
+
+        for(var i = 0; i < self.indicator_titles.length; i++)
         {
             base_url += '&indicators[]=' + self.indicator_titles[i];
         };

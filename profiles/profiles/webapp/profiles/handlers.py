@@ -123,6 +123,57 @@ class IndicatorValuesByIndicator(Handler):
             indicatorvalues=ivs,
             distinct_observable_timestamps=distinct_observable_timestamps))
 
+class IndicatorValuesByIndicatorCSV(Handler):
+
+    route_strings = set(["GET /api/indicator-values-by-indicator-csv"])
+    route = Handler.check_route_strings
+
+    def handle(self, req):
+
+        indicator = pg.indicators.Indicator.by_indicator_uuid(self.cw.get_pgconn(),
+            req.wz_req.args['indicator_uuid'])
+
+        ivs =  [x for x in \
+            indicator.all_indicator_location_values(self.cw.get_pgconn())]
+
+        distinct_observable_timestamps = [x for x in \
+            indicator.distinct_observation_timestamps(self.cw.get_pgconn())]
+
+
+        tf = tempfile.NamedTemporaryFile()
+        tf.close()
+
+        tf = open(tf.name, 'w')
+
+        headers = [x['observation_timestamp'].year for x in distinct_observable_timestamps]
+        headers.insert(0, 'location')
+
+        writer = csv.DictWriter(tf, headers)
+        writer.writeheader()
+
+        for v in ivs:
+
+            location_title = v['location'].title
+
+            row_to_write = dict(location=location_title)
+
+            for ilv in v['indicator_location_values']:
+
+                year = parser.parse(ilv['observation_timestamp']).year
+
+                row_to_write[year] = ilv['value']
+
+            writer.writerow(row_to_write)
+
+        tf.close()
+        tf = open(tf.name, 'r')
+
+        return Response.csv_file(
+            filelike=tf,
+            filename=indicator.pretty_label + '-all-locations.csv',
+            FileWrap=req.environ['wsgi.file_wrapper'])
+
+
 
 
 class IndicatorValuesByLocationOld(Handler):
@@ -183,6 +234,8 @@ class GenerateCSVForIndicatorsByLocation(Handler):
         location = pg.locations.Location.by_location_uuid(self.cw.get_pgconn(),
             req.wz_req.args['location_uuid'])
 
+        page_title = req.wz_req.args['page_title']
+
         indicators = req.wz_req.args.getlist('indicators[]')
 
         category_indicator_values = [x for x in \
@@ -227,7 +280,7 @@ class GenerateCSVForIndicatorsByLocation(Handler):
 
         return Response.csv_file(
             filelike=tf,
-            filename='csv-data',
+            filename=page_title + '-' + location.title + '.csv',
             FileWrap=req.environ['wsgi.file_wrapper'])
 
 

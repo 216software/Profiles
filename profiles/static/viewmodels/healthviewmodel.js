@@ -43,6 +43,7 @@ function HealthViewModel (data) {
 
         var base_url= "/api/indicator-categories-with-values-by-location-csv";
         base_url += '?location_uuid=' + self.location_uuid();
+        base_url += '&page_title=Health';
 
         for(var i = 0; i<self.indicator_titles.length; i++)
         {

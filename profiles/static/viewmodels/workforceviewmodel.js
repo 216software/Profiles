@@ -99,6 +99,7 @@ function WorkforceViewModel (data) {
 
         var base_url= "/api/indicator-categories-with-values-by-location-csv";
         base_url += '?location_uuid=' + self.location_uuid();
+        base_url += '&page_title=Workforce';
 
         for(var i = 0; i<self.indicator_titles.length; i++)
         {
@@ -112,10 +113,6 @@ function WorkforceViewModel (data) {
     self.parentvm.selected_location.subscribe(function(){
         self.parentvm.look_up_indicator_and_values(self.indicator_titles,
             self.look_up_indicator_complete);
-
-        self.parentvm.look_up_indicator_csv(self.indicator_titles,
-            function(){console.log('hi')});
-
     });
 
     self.observable_timestamps = ko.observableArray([]);

@@ -33,8 +33,11 @@ function ProgressMetricsViewModel (data) {
         'mfsale', 'cdsale'];
 
     /* Do a separate look up for census */
-    self.census_indicator_titles = ['_grent', 'cashrent', 'cvcashrent',  'mcashrent',
+    self.census_indicator_titles = ['_grent',
+        'cashrent', 'cvcashrent',  'mcashrent',
         '_medinc',
+
+
         'hhincls10k', 'hhinc10to15k', 'cvhhincls10k', 'cvhhinc10to15k',
         'hhinc15to25k', 'hhinc25to35k', 'cvhhinc15to25k', 'cvhhinc25to35k',
         'hhinc35to50k', 'hhinc50to75k',  'cvhhinc35to50k', 'cvhhinc50to75k',
@@ -151,10 +154,16 @@ function ProgressMetricsViewModel (data) {
 
         var base_url= "/api/indicator-categories-with-values-by-location-csv";
         base_url += '?location_uuid=' + self.location_uuid();
+        base_url += '&page_title=ProgressMetrics';
 
         for(var i = 0; i<self.indicator_titles.length; i++)
         {
             base_url += '&indicators[]=' + self.indicator_titles[i];
+        };
+
+        for(var i = 0; i<self.census_indicator_titles.length; i++)
+        {
+            base_url += '&indicators[]=' + self.census_indicator_titles[i];
         };
         return base_url;
     });
