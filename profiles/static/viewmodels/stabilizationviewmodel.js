@@ -35,6 +35,20 @@ function StabilizationViewModel (data) {
 
     self.indicators = ko.observableArray([]);
 
+    self.csv_link =  ko.computed(function(){
+
+        var base_url= "/api/indicator-categories-with-values-by-location-csv";
+        base_url += '?location_uuid=' + self.location_uuid();
+
+        for(var i = 0; i<self.indicator_titles.length; i++)
+        {
+            base_url += '&indicators[]=' + self.indicator_titles[i];
+        };
+        return base_url;
+    });
+
+
+
     self.extra_formatting = function(title){
         return self.indicator_titles_extra_formatting[title];
     };

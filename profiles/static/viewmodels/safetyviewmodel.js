@@ -37,7 +37,7 @@ function SafetyViewModel (data) {
 
     });
 
-    self.page_csv_url =  ko.computed(function(){
+    self.csv_link =  ko.computed(function(){
 
         var base_url= "/api/indicator-categories-with-values-by-location-csv";
 
