@@ -1,4 +1,4 @@
-# vim: set expandtab ts=4 sw=4 filetype=python:
+#/ vim: set expandtab ts=4 sw=4 filetype=python:
 
 import csv
 import datetime
@@ -72,13 +72,53 @@ class AllLocations(Handler):
     def handle(self, req):
 
         locations = \
-            [x for x in pg.locations.Location.select_all(self.cw.get_pgconn())]
+            [x.__jsondata_without_shape__ for x
+                in pg.locations.Location.select_all(self.cw.get_pgconn())]
 
         return Response.json(dict(
             message="Found this location",
             reply_timestamp=datetime.datetime.now(),
             success=True,
             locations=locations))
+
+class AllLocationsWithShapeData(Handler):
+
+    route_strings = set(["GET /api/all-locations-with-shape-data"])
+    route = Handler.check_route_strings
+
+    def handle(self, req):
+
+        locations = \
+            [x for x
+                in pg.locations.Location.select_all(self.cw.get_pgconn())]
+
+        return Response.json(dict(
+            message="Found this location",
+            reply_timestamp=datetime.datetime.now(),
+            success=True,
+            locations=locations))
+
+class LocationShapeJSON(Handler):
+    """
+
+    Look up a locations shape json
+
+    """
+    route_strings = set(["GET /api/location-shape-json"])
+    route = Handler.check_route_strings
+
+    def handle(self, req):
+
+        location = pg.locations.Location.by_location_uuid(self.cw.get_pgconn(),
+            req.wz_req.args['location_uuid'])
+
+
+        return Response.json(dict(
+            message="Found this location shape json",
+            reply_timestamp=datetime.datetime.now(),
+            success=True,
+            location_shape_json=location.location_shape_json))
+
 
 class IndicatorDetails(Handler):
 

@@ -62,9 +62,24 @@ class Location(object):
         # We don't want to return the actual shape, just the json
         del d['location_shape']
 
+
         d["print_friendly_name"] = self.print_friendly_name
 
         return d
+
+    @property
+    def __jsondata_without_shape__(self):
+
+        d = copy.copy(self.__dict__)
+
+        # We don't want to return the actual shape, just the json
+        del d['location_shape']
+        del d['location_shape_json']
+
+        d["print_friendly_name"] = self.print_friendly_name
+
+        return d
+
 
 
     @classmethod

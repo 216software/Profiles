@@ -237,7 +237,7 @@ function IndicatorComparisonViewModel (data) {
     self.get_all_locations = function(){
 
         return $.ajax({
-            url: "/api/all-locations",
+            url: "/api/all-locations-with-shape-data",
             type: "GET",
             dataType: "json",
             complete: function () {

@@ -88,6 +88,29 @@ function Location (data) {
         }
     };
 
+    self.look_up_shape_json = function(){
+
+        return $.ajax({
+            url: "/api/location-shape-json",
+            type: "GET",
+            dataType: "json",
+            data: {'location_uuid':self.location_uuid()},
+            complete: function () {
+                self.rootvm.is_busy(false);
+            },
+            success: function (data) {
+                if (data.success) {
+
+                    self.location_shape_json(data.location_shape_json);
+                }
+                else {
+                    toastr.error(data.message);
+                }
+            }
+        });
+
+    };
+
     self.leaflet_feature = function(year){
 
         return {'type':'Feature',

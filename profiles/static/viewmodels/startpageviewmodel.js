@@ -175,6 +175,12 @@ function StartPageViewModel (data) {
 
     self.change_location = function(){
 
+        //First do this and then recursively call this method
+        if(self.selected_location().location_shape_json() == undefined){
+            self.selected_location().look_up_shape_json().then(self.change_location);
+            return;
+        }
+
         /* Updates the map and then looks up values for
          * a given location */
 
