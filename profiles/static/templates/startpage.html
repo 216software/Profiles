@@ -109,7 +109,7 @@ containing locations:</strong>
 
 </div> <!-- closes well -->
 
-<div id="mapid" style="margin-top: 10px; height:300px;"></div>
+<div id="mapid" style="margin-top: 10px; margin-bottom:15px; height:300px;"></div>
 
 </div> <!-- closes col-md-4 -->
 
@@ -118,8 +118,15 @@ containing locations:</strong>
 <!-- all of our sub page tabs go here ? -->
 
 <div data-bind="page: {
-    id: 'overview',
+    id: 'intro',
     role: 'start',
+    source: '/static/templates/intro.html',
+    params: ['location_uuid']
+}"></div>
+
+
+<div data-bind="page: {
+    id: 'overview',
     source: '/static/templates/overview.html',
     params: ['location_uuid'],
 }"></div>

@@ -1,8 +1,15 @@
 <h2>Health Metrics</h2>
 
+<p class="lead">
+Our environment directly impacts our health outcomes—from the air we
+breathe to the quality of the home we live in. Here, we seek to
+understand those health outcomes by looking at several factors:
+mortality, life expectancy, and elevated blood lead levels.
+</p>
+
 <div data-bind="with:parentvm.selected_location()">
 
-<h4> Now viewing data for <span data-bind="text:title"></h4>
+<h4>Now viewing data for <span data-bind="text:title"></h4>
 
 <p class="hide-from-print text-info small">
 <a target="_blank" data-bind="attr: {href: '/pdf/health-' + print_friendly_name + '.pdf'}">Download as PDF</a>
