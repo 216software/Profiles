@@ -374,6 +374,7 @@ class Location(object):
         cursor = pgconn.cursor()
 
         # I don't know what the 4326 parameter means.
+        # I believe 4326 is the map projection
         cursor.execute(textwrap.dedent("""
             select (locations.*)::locations as loc
             from locations
