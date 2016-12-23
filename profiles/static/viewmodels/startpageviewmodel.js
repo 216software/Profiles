@@ -296,9 +296,7 @@ function StartPageViewModel (data) {
                         trigger : 'focus',
                         html:true,
                         container: 'body',
-                    });
-
-
+                    }).on('click', function(e){e.preventDefault()});
 
                 }
                 else {

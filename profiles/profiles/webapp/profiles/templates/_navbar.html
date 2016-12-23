@@ -14,7 +14,7 @@
             </div>
             <div class="navbar-right search-form">
                 <ul class="nav navbar-nav navbar-left about-faq">
-                <li><a data-bind="page-href: 'about'" href="#"
+                <li><a data-bind="page-href: '/'" href="#"
                        style="color: #fff; font-size: small;padding-top:7px;">About</a>
                 </li></ul>
                 <ul class="nav navbar-nav navbar-left"><li style="color:#fff;font-family: cursive;font-size: xx-large; font-weight: bold; top:-18px">.</li></ul>
@@ -48,7 +48,7 @@
                   data-content="Use the category tabs along the top to browse through the information available. <button type='button' class='btn btn-warning pull-right tour_btn' onclick='tour()'>Next</button>" id="tour_exp">
             </span>
 
-            <li class="domain" data-bind="css: {active : active_tab() =='overview' || active_tab() == ''}">
+            <li class="domain" data-bind="css: {active : active_tab() =='overview'}">
             <a href="#" data-bind="page-href : {
                 path : '//overview',
                 params : {location_uuid:startpagevm.location_uuid()}}"

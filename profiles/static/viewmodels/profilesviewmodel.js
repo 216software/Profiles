@@ -35,4 +35,55 @@ function ProfilesViewModel (data) {
     pager.afterShow.add(function(){
         self.active_tab(pager.getActivePage().currentId);
     });
+
+    // Utility function -- takes an ko observable array of indicators
+    // and returns indicator when title is found
+    self.indicator_by_title = function(indicators_array, title){
+        return ko.utils.arrayFirst(indicators_array(), function(item) {
+              return item.title() == title;
+        });
+
+    }
+
+    self.indicator_extra_info = function(indicator){
+        /*
+        Indicator: [variable description]
+        Definition: [variable definition ]
+        Universe: [universe]
+        Limitations: [limitation]
+        Notes: [note]
+        Source: [source]
+        Data as of: [data as of]
+        Numerator tables: [numerator tables]
+        Denominator tables: [denominator tables]
+        */
+
+        var extra_info = 'Indicator: ' + indicator.pretty_label() +
+            '<br />Definition: ' + indicator.definition();
+
+        if(indicator.universe()){
+            extra_info += '<br />Universe: ' + indicator.universe()
+        }
+        if(indicator.limitations()){
+            extra_info += '<br />Limitations: ' + indicator.limitations()
+        }
+        if(indicator.notes()){
+            extra_info += '<br />Notes: ' + indicator.notes()
+        }
+        if(indicator.source()){
+            extra_info += '<br />Source: ' + indicator.source()
+        }
+        if(indicator.data_as_of()){
+            extra_info += '<br />Data as of: ' + indicator.data_as_of()
+        }
+        if(indicator.numerator_tables()){
+            extra_info += '<br />Numerator Tables: ' + indicator.numerator_tables()
+        }
+        if(indicator.denominator_tables()){
+            extra_info += '<br />Denominator Tables: ' + indicator.denominator_tables()
+        }
+
+        return extra_info;
+
+    }
 };

@@ -50,9 +50,15 @@ function StabilizationViewModel (data) {
 
 
 
-    self.extra_formatting = function(title){
+    self.extra_formatting_old = function(title){
         return self.indicator_titles_extra_formatting[title];
     };
+
+    self.extra_formatting = function(title){
+
+        return extra_info;
+
+    }
 
     self.parentvm.selected_location.subscribe(function(){
         self.parentvm.look_up_indicator_and_values(self.indicator_titles,

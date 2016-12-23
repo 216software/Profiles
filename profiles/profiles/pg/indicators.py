@@ -20,7 +20,11 @@ class Indicator(object):
 
     def __init__(self, indicator_uuid, title, description,
         pretty_label, indicator_value_format, indicator_category, source_document,
-        sas_variable, formula, extra_notes, inserted, updated):
+        sas_variable, formula, extra_notes,
+        definition, universe, limitations, note, data_source,
+        data_as_of, numerator_tables, denominator_tables,
+
+        inserted, updated):
 
         self.indicator_uuid = indicator_uuid
         self.title = title
@@ -32,6 +36,17 @@ class Indicator(object):
         self.sas_variable = sas_variable
         self.formula = formula
         self.extra_notes = extra_notes
+
+        self.definition = definition
+        self.universe = universe
+        self.limitations = limitations
+        self.note = note
+        self.data_source = data_source
+        self.data_as_of = data_as_of
+        self.numerator_tables = numerator_tables
+        self.denominator_tables = denominator_tables
+
+
         self.inserted = inserted
         self.updated = updated
 
@@ -182,6 +197,55 @@ class Indicator(object):
 
         else:
             raise KeyError("Could not find indicator {0}!".format(title))
+
+
+    @classmethod
+    def update_extra_details_by_title(cls, pgconn, title, description,
+        definition,
+        universe, limitations, note, data_source, data_as_of,
+        numerator_tables, denominator_tables):
+
+        """
+        Use the title to find this indicator.  Then update
+        with extra information.  Then return the updated indicator.
+        """
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+            update indicators
+
+            set description = %(description)s,
+            pretty_label = %(description)s,
+            definition = %(definition)s,
+            universe = %(universe)s,
+            limitations = %(limitations)s,
+            note = %(note)s,
+            data_source = %(data_source)s,
+            data_as_of = %(data_as_of)s,
+            numerator_tables = %(numerator_tables)s,
+            denominator_tables = %(denominator_tables)s
+
+            where title = %(title)s
+
+            returning (indicators.*)::indicators as updated_ind
+            """), locals())
+
+        if cursor.rowcount:
+
+            updated_ind = cursor.fetchone().updated_ind
+
+            log.info("Updated extra details on {0} {1}".format(
+                updated_ind, updated_ind.universe))
+
+
+            return updated_ind
+
+        else:
+            raise KeyError("Could not find indicator {0}!".format(title))
+
+
+
 
     def __repr__(self):
 

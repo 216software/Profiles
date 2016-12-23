@@ -39,12 +39,13 @@ indicators of distress.
 <tr data-bind="css: {rate_data: is_a_rate() }">
 <td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>
 <span class="pull-right" style="padding-left:5px">
-<button class="btn btn-sm btn-primary hide-from-print"
+<a href="#" class="info-link hide-from-print"
         data-toggle="popover"
-        data-bind="visible:$parents[1].extra_formatting(title()),
-                   attr: {'data-content' : $parents[1].extra_formatting(title())}">
+        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
+                   attr: {'data-content' :
+                          $parents[1].rootvm.indicator_extra_info($data)}">
         <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-</button>
+</a>
 <a href="#" class="btn btn-primary btn-sm hide-from-print"
       data-bind="page-href: {path : '/indicator-map',
        params: {indicator_uuid: indicator_uuid}}">
@@ -80,11 +81,13 @@ indicators of distress.
 
     <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 
-    <p> <p data-bind="visible:$parents[1].extra_formatting(title())">
+    <p> <p data-bind="visible:$parents[1].rootvm.indicator_extra_info($data) ">
         *<span data-bind="text:pretty_label"></span>:
         <span data-bind="text:
-              $parents[1].extra_formatting(title())"></span>
+              $parents[1].rootvm.indicator_extra_info($data)"></span>
     </p>
+
+
 
     <!-- /ko -->
 

@@ -31,13 +31,40 @@ function PopulationViewModel (data) {
         'nhb', '_nhb', 'cvnhb', 'mnhb', 'cv_nhb', 'm_nhb',
         'nhapi', '_nhapi','cvnhapi', 'mnhapi', 'cv_nhapi', 'm_nhapi',
         'nho', '_nho', 'cvnho', 'mnho', 'cv_nho', 'm_nho',
-        'hisp', '_hisp', 'cvhisp', 'mhisp', 'cv_hisp', 'm_hisp'
+        'hisp', '_hisp', 'cvhisp', 'mhisp', 'cv_hisp', 'm_hisp',
+        'popls5', '_popls5', 'cvpopls5', 'mpopls5', 'cv_popls5', 'm_popls5',
+        'pop5to9', '_pop5to9', 'cvpop5to9', 'mpop5to9', 'cv_pop5to9', 'm_pop5to9',
+        'pop10to14', '_pop10to14', 'cvpop10to14', 'mpop10to14', 'cv_pop10to14',
+        'm_pop10to14',
+        'pop15to19', '_pop15to19', 'cvpop15to19', 'mpop15to19', 'cv_pop15to19',
+        'm_pop15to19',
+        'pop20to24', '_pop20to24', 'cvpop20to24', 'mpop20to24', 'cv_pop20to24',
+        'm_pop20to24',
+        'pop25to34', '_pop25to34', 'cvpop25to34', 'mpop25to34', 'cv_pop25to34', 'm_pop25to34',
+        'pop35to44', '_pop35to44', 'cvpop35to44', 'mpop35to44', 'cv_pop35to44', 'm_pop35to44',
+        'pop45to54', '_pop45to54', 'cvpop45to54', 'mpop45to54', 'cv_pop45to54', 'm_pop45to54',
+        'pop55to59', '_pop55to59', 'cvpop55to59', 'mpop55to59', 'cv_pop55to59', 'm_pop55to59',
+        'pop60to64', '_pop60to64', 'cvpop60to64', 'mpop60to64', 'cv_pop60to64', 'm_pop60to64',
+        'pop65to74', '_pop65to74', 'cvpop65to74', 'mpop65to74', 'cv_pop65to74', 'm_pop65to74',
+        'pop75to84', '_pop75to84', 'cvpop75to84', 'mpop75to84', 'cv_pop75to84', 'm_pop75to84 ',
+        'pop85p', '_pop85p', 'cvpop85p', 'mpop85p', 'cv_pop85p', 'm_pop85p'
+
         ];
 
     self.total_population = ['pop'];
 
     self.indicators_population = ['nhw' ,'_nhw', 'nhb', '_nhb',
         'nhapi', '_nhapi', 'nho', '_nho', 'hisp', '_hisp'];
+
+    self.indicators_age_population = [
+        'popls5',  '_popls5',  'pop5to9',  '_pop5to9',
+        'pop10to14',  '_pop10to14',  'pop15to19',  '_pop15to19',
+        'pop20to24',  '_pop20to24',  'pop25to34',  '_pop25to34',
+        'pop35to44',  '_pop35to44',  'pop45to54',  '_pop45to54',
+        'pop55to59',  '_pop55to59',  'pop60to64',  '_pop60to64',
+        'pop65to74',  '_pop65to74',  'pop75to84',  '_pop75to84',
+        'pop85p', '_pop85p'];
+
 
     self.indicators_population_overview = ['nhw' ,'nhb',
         'nhapi', 'nho', 'hisp'];

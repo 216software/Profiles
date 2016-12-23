@@ -37,8 +37,15 @@ data, as well as more information about household income or poverty.
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr data-bind="css: {rate_data: is_a_rate() }">
-<td> <span data-bind="text:pretty_label"></span>
+<td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>
 <span class="pull-right" style="padding-left:5px">
+<a href="#" class="info-link hide-from-print"
+        data-toggle="popover"
+        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
+                   attr: {'data-content' :
+                          $parents[1].rootvm.indicator_extra_info($data)}">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+</a>
 <a href="#" class="btn btn-primary btn-sm hide-from-print"
       data-bind="page-href: {path : '/indicator-map',
        params: {indicator_uuid: indicator_uuid}}">
@@ -99,8 +106,15 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr data-bind="css: {rate_data: is_a_rate() }">
-<td> <span data-bind="text:pretty_label"></span>
+<td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>
 <span class="pull-right" style="padding-left:5px">
+<a href="#" class="info-link hide-from-print"
+        data-toggle="popover"
+        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
+                   attr: {'data-content' :
+                          $parents[1].rootvm.indicator_extra_info($data)}">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+</a>
 <a href="#" class="btn btn-primary btn-sm hide-from-print"
       data-bind="page-href: {path : '/indicator-map',
        params: {indicator_uuid: indicator_uuid}}">
@@ -139,8 +153,15 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr data-bind="css: {rate_data: is_a_rate() }">
-<td> <span data-bind="text:pretty_label"></span>
+<td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>
 <span class="pull-right" style="padding-left:5px">
+<a href="#" class="info-link hide-from-print"
+        data-toggle="popover"
+        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
+                   attr: {'data-content' :
+                          $parents[1].rootvm.indicator_extra_info($data)}">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+</a>
 <a href="#" class="btn btn-primary btn-sm hide-from-print"
       data-bind="page-href: {path : '/indicator-map',
        params: {indicator_uuid: indicator_uuid}}">
@@ -181,8 +202,15 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr data-bind="css: {rate_data: is_a_rate() }">
-<td> <span data-bind="text:pretty_label"></span>
+<td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>
 <span class="pull-right" style="padding-left:5px">
+<a href="#" class="info-link hide-from-print"
+        data-toggle="popover"
+        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
+                   attr: {'data-content' :
+                          $parents[1].rootvm.indicator_extra_info($data)}">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+</a>
 <a href="#" class="btn btn-primary btn-sm hide-from-print"
       data-bind="page-href: {path : '/indicator-map',
        params: {indicator_uuid: indicator_uuid}}">

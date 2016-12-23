@@ -41,14 +41,21 @@ make-up.
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr data-bind="css: {rate_data: is_a_rate() }">
-<td> <span data-bind="text:pretty_label"></span>
-
+<td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>
 <span class="pull-right" style="padding-left:5px">
+<a href="#" class="info-link hide-from-print"
+        data-toggle="popover"
+        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
+                   attr: {'data-content' :
+                          $parents[1].rootvm.indicator_extra_info($data)}">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+</a>
 <a href="#" class="btn btn-primary btn-sm hide-from-print"
       data-bind="page-href: {path : '/indicator-map',
        params: {indicator_uuid: indicator_uuid}}">
         Map</a>
 </span>
+
 </td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
@@ -85,13 +92,75 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr data-bind="css: {rate_data: is_a_rate() }">
-<td> <span data-bind="text:pretty_label"></span>
+<td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>
 <span class="pull-right" style="padding-left:5px">
+<a href="#" class="info-link hide-from-print"
+        data-toggle="popover"
+        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
+                   attr: {'data-content' :
+                          $parents[1].rootvm.indicator_extra_info($data)}">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+</a>
 <a href="#" class="btn btn-primary btn-sm hide-from-print"
       data-bind="page-href: {path : '/indicator-map',
        params: {indicator_uuid: indicator_uuid}}">
         Map</a>
 </span>
+
+</td></td>
+<td class="data" data-bind="text:percent_change_indicator_value"></td>
+
+<!-- ko foreach:$parents[1].observable_timestamps -->
+<td class="data"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+
+<span data-bind="if:$parent.indicator_CV"><span data-bind="if:
+$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
+<button class="btn btn-xs hide-from-print"
+        data-toggle="popover"
+        title="CV &amp; MOE"
+        data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
+        +/-</button>
+
+    <span class="show-only-print" style="font-size:8px"
+          data-bind="html:$parent.print_friendly_CV_and_MOE($data.year())"></span>
+
+
+</span></span> </td>
+
+
+<!-- /ko --> <!-- closes inner for loop -->
+
+</tr>
+
+<!-- /ko -->
+
+<!-- /ko -->
+
+
+<tr>
+<th colspan = "4">Population by age</th>
+</tr>
+
+
+<!-- ko foreach:indicators_age_population -->
+
+<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
+<tr data-bind="css: {rate_data: is_a_rate() }">
+<td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>
+<span class="pull-right" style="padding-left:5px">
+<a href="#" class="info-link hide-from-print"
+        data-toggle="popover"
+        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
+                   attr: {'data-content' :
+                          $parents[1].rootvm.indicator_extra_info($data)}">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+</a>
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="page-href: {path : '/indicator-map',
+       params: {indicator_uuid: indicator_uuid}}">
+        Map</a>
+</span>
+
 </td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
@@ -120,6 +189,9 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <!-- /ko -->
 
 <!-- /ko -->
+
+
+
 
 </tbody>
 

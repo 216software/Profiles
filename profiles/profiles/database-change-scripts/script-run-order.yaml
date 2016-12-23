@@ -29,3 +29,4 @@ script_order:
 -   clean-up-locations.sql
 -   add-index-to-locations.sql
 -   add-cle-city-shape.sql
+-   add-indicator-extra-data-columns.sql

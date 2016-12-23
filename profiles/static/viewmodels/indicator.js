@@ -12,6 +12,16 @@ function Indicator (data) {
     self.description = ko.observable(data.description);
     self.indicator_value_format = ko.observable(data.indicator_value_format);
 
+    self.definition = ko.observable(data.definition);
+    self.universe = ko.observable(data.universe);
+    self.limitations = ko.observable(data.limitations);
+    self.notes = ko.observable(data.notes);
+    self.source = ko.observable(data.data_source);
+    self.data_as_of = ko.observable(data.data_as_of);
+    self.numerator_tables = ko.observable(data.numerator_tables);
+    self.denominator_tables = ko.observable(data.denominator_tables);
+
+
 
     self.indicator_category = ko.observable(data.indicator_category);
 

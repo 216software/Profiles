@@ -26,16 +26,53 @@ income or poverty-levels.</p>
 neighborhood dynamics and may not capture all of the factors that
 influence housing or economic mobility. Thus, the Progress Drivers seek
 to further illustrate the many factors driving neighborhood vitality and
-success. This includes: <a data-bind="page-href:/population">population
+success. This includes:
+<a href="#" data-bind="page-href : {
+    path : '//population',
+    params : {location_uuid:location_uuid()}}">population
 trends and diversity</a>,
-safety,
-housing
-stability,
-community perception and well-being,
-health,
-educational attainment,
-workforce participation,
-and local economy. These numbers
+
+<a href="#" data-bind="page-href : {
+    path : '//safety',
+    params :
+{location_uuid:location_uuid()}}">safety</a>,
+
+<a href="#" data-bind="page-href : {
+    path : '//progress',
+    params :
+{location_uuid:location_uuid()}}">housing</a>,
+
+<a href="#" data-bind="page-href : {
+    path : '//stabilization',
+    params :
+{location_uuid:location_uuid()}}">stability</a>,
+
+<a href="#" data-bind="page-href : {
+    path : '//community',
+    params :
+{location_uuid:location_uuid()}}">community perception and
+well-being</a>,
+
+
+<a href="#" data-bind="page-href : {
+    path : '//health',
+    params :
+{location_uuid:location_uuid()}}">health</a>,
+
+<a href="#" data-bind="page-href : {
+    path : '//education',
+    params :
+{location_uuid:location_uuid()}}">educational attainment</a>,
+
+<a href="#" data-bind="page-href : {
+    path : '//workforce',
+    params : {location_uuid:location_uuid()}}">workforce
+participation</a>, and
+
+<a href="#" data-bind="page-href : {
+    path : '//economy',
+    params : {location_uuid:location_uuid()}}">local economy</a>.
+These numbers
 affect both the sale price of homes and people’s decisions to purchase
 them, and help us better understand the experiences of those living in
 Cleveland neighborhoods.
