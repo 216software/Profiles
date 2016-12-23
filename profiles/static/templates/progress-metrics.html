@@ -146,9 +146,26 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <!-- /ko -->
 
 <!-- /ko -->
+</tbody><table>
 
-<tr><th colspan="5">Income Data</th></tr>
 
+<table class="table table-striped table-bordered">
+<thead>
+<tr><th>Income Data</th></tr>
+<tr>
+<th>Indicator</th>
+<th class="data">% change</th>
+<!-- ko foreach:observable_timestamps_census -->
+    <!-- ko if:($index() == 0) -->
+    <th  class="data" data-bind="text:$data.format('YYYY')"></th>
+    <!-- /ko -->
+    <!-- ko if:($index() != 0) -->
+    <th class="data">2010 - <span data-bind="text:$data.year()"></span></th>
+    <!-- /ko -->
+<!-- /ko -->
+</tr>
+</thead>
+<tbody>
 <!-- ko foreach:income_indicators -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
@@ -196,8 +213,26 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 <!-- /ko -->
 
-<tr><th colspan="5">Poverty Data</th></tr>
+</tbody><table>
 
+
+<table class="table table-striped table-bordered">
+<thead>
+<tr><th>Poverty Data</th></tr>
+<tr>
+<th>Indicator</th>
+<th class="data">% change</th>
+<!-- ko foreach:observable_timestamps_census -->
+    <!-- ko if:($index() == 0) -->
+    <th  class="data" data-bind="text:$data.format('YYYY')"></th>
+    <!-- /ko -->
+    <!-- ko if:($index() != 0) -->
+    <th class="data">2010 - <span data-bind="text:$data.year()"></span></th>
+    <!-- /ko -->
+<!-- /ko -->
+</tr>
+</thead>
+<tbody>
 <!-- ko foreach:poverty_indicators -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
