@@ -27,6 +27,11 @@ function HealthViewModel (data) {
     self.indicator_titles = ['mort_rate2009','infmort_rate2009', 'le2009',
         '_ebll_c'];
 
+    self.ind_twonine = ['le2009', 'mort_rate2009' , 'infmort_rate2009'];
+    self.ind_twoten= ['_ebll_c'];
+
+
+
     self.indicator_titles_extra_formatting = {
         'infmort_rate2009':'Rate per 1,000 births',
         'mort_rate2009':'Rate per 1,000 population',

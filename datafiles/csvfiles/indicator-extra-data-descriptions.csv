@@ -1,0 +1,270 @@
+Category,Variable Name Prefix,Variable Description,Definition,Universe,Limitations,Note,Source,Data as of,Numerator Tables,Denominator Tables
+Progress Metrics,med_al_price,Median sales price of residential parcels,Median sales price of residential parcels,Arms-length sales,"Only arms-length sales of residential single family, multi-family, and condominium parcels are included","Armslength sales include all property sales except those transferred at Sheriff sale, purchased by a bank, financial institution, GSE or local government,  or recorded with a zero price.   Bulk sales and self-sales are also excluded.",Cuyahoga County Fiscal Office,"December 31, 2015",,
+Progress Metrics,med_sfprice,Median sales price: single-family,Median sales price of single-family parcels,Arms-length sales,"Only arms-length sales of residential single family, multi-family, and condominium parcels are included","Armslength sales include all property sales except those transferred at Sheriff sale, purchased by a bank, financial institution, GSE or local government,  or recorded with a zero price.   Bulk sales and self-sales are also excluded.",Cuyahoga County Fiscal Office,"December 31, 2015",,
+Progress Metrics,med_mfprice,Median sales price: multi-family ,Median sales price of multi-family (2 to 4-family) parcels,Arms-length sales,"Only arms-length sales of residential single family, multi-family, and condominium parcels are included","Armslength sales include all property sales except those transferred at Sheriff sale, purchased by a bank, financial institution, GSE or local government,  or recorded with a zero price.   Bulk sales and self-sales are also excluded.",Cuyahoga County Fiscal Office,"December 31, 2015",,
+Progress Metrics,med_cdprice,Median sales price: condo parcels ,Median sales price of condo parcels ,Arms-length sales,"Only arms-length sales of residential single family, multi-family, and condominium parcels are included","Armslength sales include all property sales except those transferred at Sheriff sale, purchased by a bank, financial institution, GSE or local government,  or recorded with a zero price.   Bulk sales and self-sales are also excluded.",Cuyahoga County Fiscal Office,"December 31, 2015",,
+Progress Metrics,al_sales,# of arms-length sales of parcels,Number of arms-length sales of parcels,Arms-length sales,"Only arms-length sales of residential single family, multi-family, and condominium parcels are included","Armslength sales include all property sales except those transferred at Sheriff sale, purchased by a bank, financial institution, GSE or local government,  or recorded with a zero price.   Bulk sales and self-sales are also excluded.",Cuyahoga County Fiscal Office,"December 31, 2015",,
+Progress Metrics,sfsale,Single-family sales,Number of arms-length sales of single-family parcels,Arms-length sales,"Only arms-length sales of residential single family, multi-family, and condominium parcels are included","Armslength sales include all property sales except those transferred at Sheriff sale, purchased by a bank, financial institution, GSE or local government,  or recorded with a zero price.   Bulk sales and self-sales are also excluded.",Cuyahoga County Fiscal Office,"December 31, 2015",,
+Progress Metrics,mfsale,Multi-family sales,Number of arms-length sales of multi-family (2 to 4-family) parcels,Arms-length sales,"Only arms-length sales of residential single family, multi-family, and condominium parcels are included","Armslength sales include all property sales except those transferred at Sheriff sale, purchased by a bank, financial institution, GSE or local government,  or recorded with a zero price.   Bulk sales and self-sales are also excluded.",Cuyahoga County Fiscal Office,"December 31, 2015",,
+Progress Metrics,cdsale,Condo parcel sales,Number of arms-length sales of condominium parcels,Arms-length sales,"Only arms-length sales of residential single family, multi-family, and condominium parcels are included","Armslength sales include all property sales except those transferred at Sheriff sale, purchased by a bank, financial institution, GSE or local government,  or recorded with a zero price.   Bulk sales and self-sales are also excluded.",Cuyahoga County Fiscal Office,"December 31, 2015",,
+Progress Metrics,_grent,Median gross rent,Median gross rent,Renter-occupied housing units paying cash rent,,,U.S. Census Bureau,"December 31, 2014","2000:  P053
+2010-2014:  B25064",
+Progress Metrics,rent_den,# of renter households,Number of renter-occupied housing units,,,,U.S. Census Bureau,"December 31, 2014","2000:  H062
+2010-2014:  B25063",
+Progress Metrics,_medinc,Median Household Income,Median household income,Total households,,,U.S. Census Bureau,"December 31, 2014","2000:  P052
+2010-2014:  B19001",
+Progress Metrics,hhincls10k,"Number of households with income less than $10,000","Number of households with income less than $10,000",Total households,,,U.S. Census Bureau,"December 31, 2014","2000:  P052
+2010-2014:  B19001",
+Progress Metrics,_hhincls10k,"% income less than $10,000","Percent of households with income less than $10,000",Total households,,,U.S. Census Bureau,"December 31, 2014","2000:  P052
+2010-2014:  B19001","2000:  P052
+2010-2014:  B19001"
+Progress Metrics,hhinc10to15k,"Number of households with income $10,000-14,999","Number of households with income $10,000-14,999",Total households,,,U.S. Census Bureau,"December 31, 2014","2000:  P052
+2010-2014:  B19001",
+Progress Metrics,_hhinc10to15k,"% income $10,000-14,999","Percent of households with income $10,000-14,999",Total households,,,U.S. Census Bureau,"December 31, 2014","2000:  P052
+2010-2014:  B19001","2000:  P052
+2010-2014:  B19001"
+Progress Metrics,hhinc15to25k,"Number of households with income $15,000-24,999","Number of households with income $15,000-24,999",Total households,,,U.S. Census Bureau,"December 31, 2014","2000:  P052
+2010-2014:  B19001",
+Progress Metrics,_hhinc15to25k,"% income $15,000-24,999","Percent of households with income $15,000-24,999",Total households,,,U.S. Census Bureau,"December 31, 2014","2000:  P052
+2010-2014:  B19001","2000:  P052
+2010-2014:  B19001"
+Progress Metrics,hhinc25to35k,"Number of households with income $25,000-34,999","Number of households with income $25,000-34,999",Total households,,,U.S. Census Bureau,"December 31, 2014","2000:  P052
+2010-2014:  B19001",
+Progress Metrics,_hhinc25to35k,"% income $25,000-34,999","Percent of households with income $25,000-34,999",Total households,,,U.S. Census Bureau,"December 31, 2014","2000:  P052
+2010-2014:  B19001","2000:  P052
+2010-2014:  B19001"
+Progress Metrics,hhinc35to50k,"Number of households with income $35,000-49,999","Number of households with income $35,000-49,999",Total households,,,U.S. Census Bureau,"December 31, 2014","2000:  P052
+2010-2014:  B19001",
+Progress Metrics,_hhinc35to50k,"% income $35,000-49,999","Percent of households with income $35,000-49,999",Total households,,,U.S. Census Bureau,"December 31, 2014","2000:  P052
+2010-2014:  B19001","2000:  P052
+2010-2014:  B19001"
+Progress Metrics,hhinc50to75k,"Number of households with income $50,000-74,999","Number of households with income $50,000-74,999",Total households,,,U.S. Census Bureau,"December 31, 2014","2000:  P052
+2010-2014:  B19001",
+Progress Metrics,_hhinc50to75k,"% income $50,000-74,999","Percent of households with income $50,000-74,999",Total households,,,U.S. Census Bureau,"December 31, 2014","2000:  P052
+2010-2014:  B19001","2000:  P052
+2010-2014:  B19001"
+Progress Metrics,hhinc75to100k,"Number of households with income $75,000-99,999","Number of households with income $75,000-99,999",Total households,,,U.S. Census Bureau,"December 31, 2014","2000:  P052
+2010-2014:  B19001",
+Progress Metrics,_hhinc75to100k,"% income $75,000-99,999","Percent of households with income $75,000-99,999",Total households,,,U.S. Census Bureau,"December 31, 2014","2000:  P052
+2010-2014:  B19001","2000:  P052
+2010-2014:  B19001"
+Progress Metrics,hhinc100to150k,"Number of households with income $100,000-149,999","Number of households with income $100,000-149,999",Total households,,,U.S. Census Bureau,"December 31, 2014","2000:  P052
+2010-2014:  B19001",
+Progress Metrics,_hhinc100to150k,"% income $100,000-149,999","Percent of households with income $100,000-149,999",Total households,,,U.S. Census Bureau,"December 31, 2014","2000:  P052
+2010-2014:  B19001","2000:  P052
+2010-2014:  B19001"
+Progress Metrics,hhinc150to200k,"Number of households with income $150,000-199,999","Number of households with income $150,000-199,999",Total households,,,U.S. Census Bureau,"December 31, 2014","2000:  P052
+2010-2014:  B19001",
+Progress Metrics,_hhinc150to200k,"% income $150,000-199,999","Percent of households with income $150,000-199,999",Total households,,,U.S. Census Bureau,"December 31, 2014","2000:  P052
+2010-2014:  B19001","2000:  P052
+2010-2014:  B19001"
+Progress Metrics,hhinc200kp,"Number of households with income $200,000+","Number of households with income $200,000+",Total households,,,U.S. Census Bureau,"December 31, 2014","2000:  P052
+2010-2014:  B19001",
+Progress Metrics,_hhinc200kp,"% income $200,000+","Percent of households with income $200,000+",Total households,,,U.S. Census Bureau,"December 31, 2014","2000:  P052
+2010-2014:  B19001","2000:  P052
+2010-2014:  B19001"
+Progress Metrics,bpv,Population living below poverty level,Count of population living below poverty level,Population for whom poverty status is determined,,,U.S. Census Bureau,"December 31, 2014","2000:  P087
+2010-2014:  C17002",
+Progress Metrics,_bpv,Poverty Rate,Percent of population living below poverty level,Population for whom poverty status is determined,,,U.S. Census Bureau,"December 31, 2014","2000:  P087
+2010-2014:  C17002","2000:  P087
+2010-2014:  C17002"
+Progress Metrics,tpv,Population for whom poverty status is determined,Count of population for whom poverty status is determined,,,,U.S. Census Bureau,"December 31, 2014","2000:  P087
+2010-2014:  C17002",
+Progress Metrics,bpv_samehou,Persons aged 1+ living below poverty level in same house 1 year ago,Count of population aged 1+ living below poverty level in same house one year ago,Population age 1+ for whom poverty status is determined,,,U.S. Census Bureau,"December 31, 2014","2000:  NA
+2010-2014:  B07012",
+Progress Metrics,_bpv_samehou,% Persons aged 1+ living below poverty level in same house 1 year ago,Percent of population aged 1+ living below poverty level in same house one year ago,Population age 1+ for whom poverty status is determined,,,U.S. Census Bureau,"December 31, 2014","2000:  NA
+2010-2014:  B07012","2000:  Not available
+2010-2014:  B07012"
+Progress Metrics,bpv_diffhou,Persons aged 1+ living below poverty level in different house 1 year ago,Count of population aged 1+ living below poverty level in different house one year ago,Population age 1+ for whom poverty status is determined,,,U.S. Census Bureau,"December 31, 2014","2000:  NA
+2010-2014:  B07012",
+Progress Metrics,_bpv_diffhou,% Persons aged 1+ living below poverty level in different house 1 year ago,Percent of population aged 1+ living below poverty level in different house one year ago,Population age 1+ for whom poverty status is determined,,,U.S. Census Bureau,"December 31, 2014","2000:  NA
+2010-2014:  B07012","2000:  Not available
+2010-2014:  B07012"
+Population,pop,Total population,Count of the total population,,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001",
+Population,nhw,Non-hispanic white,Count of the non-hispanic white population,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P008
+2010-2014:  B03002",
+Population,_nhw,% Non-hispanic white,Percent of the non-hispanic white population,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P008
+2010-2014:  B03002","2000:  P012
+2010-2014:  B01001"
+Population,nhb,Non-hispanic black,Count of the non-hispanic black population,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P008
+2010-2014:  B03002",
+Population,_nhb,% Non-hispanic black,Percent of the non-hispanic black population,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P008
+2010-2014:  B03002","2000:  P012
+2010-2014:  B01001"
+Population,nhapi,Non-hispanic Asian/Pacific Islander,Count of the non-hispanic Asian/Pacific Islander population,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P008
+2010-2014:  B03002",
+Population,_nhapi,% Non-hispanic Asian/Pacific Islander,Percent of the non-hispanic Asian/Pacific Islander population,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P008
+2010-2014:  B03002","2000:  P012
+2010-2014:  B01001"
+Population,nho,Non-hispanic other,Count of the other non-hispanic population,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P008
+2010-2014:  B03002",
+Population,_nho,% Non-hispanic other,Percent of the other non-hispanic population,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P008
+2010-2014:  B03002","2000:  P012
+2010-2014:  B01001"
+Population,hisp,Hispanic,Count of the hispanic population,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P008
+2010-2014:  B03002",
+Population,_hisp,% Hispanic,Percent of the hispanic population,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P008
+2010-2014:  B03002","2000:  P012
+2010-2014:  B01001"
+Population,popls5,Persons aged under 5,Count of the population age under 5,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001",
+Population,_popls5,% Persons aged under 5,Percent of the population age under 5,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001","2000:  P012
+2010-2014:  B01001"
+Population,pop5to9,Persons aged 5 to 9,Count of the population age 5 to 9,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001",
+Population,_pop5to9,% Persons aged 5 to 9,Percent of the population age 5 to 9,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001","2000:  P012
+2010-2014:  B01001"
+Population,pop10to14,Persons aged 10 to 14,Count of the population age 10 to 14,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001",
+Population,_pop10to14,% Persons aged 10 to 14,Percent of the population age 10 to 14,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001","2000:  P012
+2010-2014:  B01001"
+Population,pop15to19,Persons aged 15 to 19,Count of the population age 15 to 19,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001",
+Population,_pop15to19,% Persons aged 15 to 19,Percent of the population age 15 to 19,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001","2000:  P012
+2010-2014:  B01001"
+Population,pop20to24,Persons aged 20 to 24,Count of the population age 20 to 24,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001",
+Population,_pop20to24,% Persons aged 20 to 24,Percent of the population age 20 to 24,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001","2000:  P012
+2010-2014:  B01001"
+Population,pop25to34,Persons aged 25 to 34,Count of the population age 25 to 34,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001",
+Population,_pop25to34,% Persons aged 25 to 34,Percent of the population age 25 to 34,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001","2000:  P012
+2010-2014:  B01001"
+Population,pop35to44,Persons aged 35 to 44,Count of the population age 35 to 44,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001",
+Population,_pop35to44,% Persons aged 35 to 44,Percent of the population age 35 to 44,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001","2000:  P012
+2010-2014:  B01001"
+Population,pop45to54,Persons aged 45 to 54,Count of the population age 45 to 54,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001",
+Population,_pop45to54,% Persons aged 45 to 54,Percent of the population age 45 to 54,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001","2000:  P012
+2010-2014:  B01001"
+Population,pop55to59,Persons aged 55 to 59,Count of the population age 55 to 59,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001",
+Population,_pop55to59,% Persons aged 55 to 59,Percent of the population age 55 to 59,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001","2000:  P012
+2010-2014:  B01001"
+Population,pop60to64,Persons aged 60 to 64,Count of the population age 60 to 64,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001",
+Population,_pop60to64,% Persons aged 60 to 64,Percent of the population age 60 to 64,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001","2000:  P012
+2010-2014:  B01001"
+Population,pop65to74,Persons aged 65 to 74,Count of the population age 65 to 74,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001",
+Population,_pop65to74,% Persons aged 65 to 74,Percent of the population age 65 to 74,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001","2000:  P012
+2010-2014:  B01001"
+Population,pop75to84,Persons aged 75 to 84,Count of the population age 75 to 84,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001",
+Population,_pop75to84,% Persons aged 75 to 84,Percent of the population age 75 to 84,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001","2000:  P012
+2010-2014:  B01001"
+Population,pop85p,Persons aged 85 and over,Count of the population age 85 and over,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001",
+Population,_pop85p,% Persons aged 85 and over,Percent of the population age 85 and over,Total population,,,U.S. Census Bureau,"December 31, 2014","2000:  P012
+2010-2014:  B01001","2000:  P012
+2010-2014:  B01001"
+Safety,Ia,Part I crimes,"Total count of Part I crimes.  Part I crimes include violent crimes (homicide, rape, robbery and aggravated assaults) and property crimes (burglary, larceny-theft, auto theft and arson).",Total population,Data is not available for Cuyahoga County,,Cleveland Police Department,"December 31, 2014",,
+Safety,_Ia,"Part I crimes per 100,000 population","Part I crimes rate per 100,000 population",Total population,Data is not available for Cuyahoga County,Population used in the calculation of crime rates is based on the population proportion from the 2010 Census and benchmarked it to the American Community Sruvey (ACS) 1-year estimates population.,Cleveland Police Department,"December 31, 2014",,
+Safety,v,Violent crimes,"Total count of violent crimes.  Violent crimes include four offenses: homicide, rape, robbery, and aggravated assault.",Total population,Data is not available for Cuyahoga County,,Cleveland Police Department,"December 31, 2014",,
+Safety,_v,"Violent crimes per 100,000 population","Violent crimes rate per 100,000 population",Total population,Data is not available for Cuyahoga County,Population used in the calculation of crime rates is based on the population proportion from the 2010 Census and benchmarked it to the American Community Sruvey (ACS) 1-year estimates population.,Cleveland Police Department,"December 31, 2014",,
+Safety,p,Property crimes,"Total count of property crimes.  Property crimes include the offenses of burglary, larceny-theft, motor vehicle theft, and arson. The offenses involve the taking of money or property, with no force or threat of force against the victims.",Total population,Data is not available for Cuyahoga County,,Cleveland Police Department,"December 31, 2014",,
+Safety,_p,"Property crimes per 100,000 population","Property crimes rate per 100,000 population",Total population,Data is not available for Cuyahoga County,Population used in the calculation of crime rates is based on the population proportion from the 2010 Census and benchmarked it to the American Community Sruvey (ACS) 1-year estimates population.,Cleveland Police Department,"December 31, 2014",,
+Safety,II,Part II crimes,"Total count of Part II crimes.  Part II crimes include everything else such as non-aggravated assaults, forgery, fraud, embezzlement, receiving stolen property, vandalism,  weapons violations, prostitution, drug violations, family offenses, disorderly conduct, kidnapping and all others. ",Total population,Data is not available for Cuyahoga County,,Cleveland Police Department,"December 31, 2014",,
+Safety,_II,"Part II crimes per 100,000 population","Part II crimes rate per 100,000 population",Total population,Data is not available for Cuyahoga County,Population used in the calculation of crime rates is based on the population proportion from the 2010 Census and benchmarked it to the American Community Sruvey (ACS) 1-year estimates population.,Cleveland Police Department,"December 31, 2014",,
+Stabilization,res_occ,Residential Occupancy,Count of residential occupancy,Total residential addresses,,,HUD / USPS,"December 31, 2015",,
+Stabilization,_res_occ,Residential Occupancy Rate,Percent of residential occupancy,Total residential addresses,,,HUD / USPS,"December 31, 2015",,
+Stabilization,hsg_den,Housing Density per square mile,Count of residential structures per square mile,,"Only residential single family, multi-family, and condominium parcels are included",,Cuyahoga County Fiscal Office,"December 31, 2015",,
+Stabilization,f,Foreclosure filings,"Count of foreclosure filings. Foreclosure filings represent the beginning of the foreclosure process in Ohio, when a lender files a complaint about a delinquent homeowner.",Residential structures,"Only residential single family, multi-family, and condominium parcels are included","Parcels are unduplicated, meaning a given parcel is only counted once, even if there are more than one foreclosure filings on that parcel during a given year.",Cuyahoga County Common Pleas Court,"December 31, 2015",,
+Stabilization,_f,% Foreclosure filings,Percent of foreclosure filings,Residential structures,"Only residential single family, multi-family, and condominium parcels are included","Foreclosure filings as a percent of residential single family, multi-family, and condominium parcels during a given year.",Cuyahoga County Common Pleas Court,"December 31, 2015",,
+Stabilization,shf,Sheriff's sales ,"Count of sheriff deeds.  Sheriff deeds represent the end of the foreclosure process.  A sheriff deed is granted when a foreclosure has been filed on a property, the homeowner is found in breech of contract, the home is ordered to be sold at sheriff sale and is purchased.",Residential structures,"Only residential single family, multi-family, and condominium parcels are included",,Cuyahoga County Sheriff's Department,"December 31, 2015",,
+Stabilization,_shf,% Sheriff's sales ,Percent of sheriff deeds,Residential structures,"Only residential single family, multi-family, and condominium parcels are included","Sheriff's sales as a percent of residential single family, multi-family, and condominium parcels during a given year.",Cuyahoga County Sheriff's Department,"December 31, 2015",,
+Stabilization,distress,Distressed sales,"Count of distressed sales.  Distressed sales are arms-length transactions for $10,000 or less.",Arms-length sales,"Only arms-length sales of residential single family, multi-family, and condominium parcels are included","Armslength sales include all property sales except those transferred at Sheriff sale, purchased by a bank, financial institution, GSE or local government,  or recorded with a zero price.   Bulk sales and self-sales are also excluded.",Cuyahoga County Fiscal Office,"December 31, 2015",,
+Stabilization,_distress,% Distressed sales,Percent of distressed sales,Arms-length sales,"Only arms-length sales of residential single family, multi-family, and condominium parcels are included","Armslength sales include all property sales except those transferred at Sheriff sale, purchased by a bank, financial institution, GSE or local government,  or recorded with a zero price.   Bulk sales and self-sales are also excluded.",Cuyahoga County Fiscal Office,"December 31, 2015",,
+Stabilization,ntal_sales,"Sales, parcels with no history of foreclosure",Count of sales of parcels with no history of foreclosure.  ,Arms-length sales,"Arms-length transactions with no history of foreclosure. Includes only arms-length sales of residential single family, multi-family, and condominium parcels. Excludes sales with a sheriff's deed prior to the sale. Sheriff's deed considered from 1995 onward. ","Armslength sales include all property sales except those transferred at Sheriff sale, purchased by a bank, financial institution, GSE or local government,  or recorded with a zero price.   Bulk sales and self-sales are also excluded.",Cuyahoga County Fiscal Office,"December 31, 2015",,
+Stabilization,_ntal_sales,"% Sales, parcels with no history of foreclosure",Percent of sales of parcels with no history of foreclosure. ,Arms-length sales,"Arms-length transactions with no history of foreclosure. Includes only arms-length sales of residential single family, multi-family, and condominium parcels. Excludes sales with a sheriff's deed prior to the sale. Sheriff's deed considered from 1995 onward. ","Armslength sales include all property sales except those transferred at Sheriff sale, purchased by a bank, financial institution, GSE or local government,  or recorded with a zero price.   Bulk sales and self-sales are also excluded.",Cuyahoga County Fiscal Office,"December 31, 2015",,
+Stabilization,med_ntal_price,"Median sales price, parcels with no history of foreclosure",Median sales price of parcels with no history of foreclosure,Arms-length sales of parcels with no history of foreclosure,"Arms-length transactions with no history of foreclosure. Includes only arms-length sales of residential single family, multi-family, and condominium parcels. Excludes sales with a sheriff's deed prior to the sale. Sheriff's deed considered from 1995 onward. ","Armslength sales include all property sales except those transferred at Sheriff sale, purchased by a bank, financial institution, GSE or local government,  or recorded with a zero price.   Bulk sales and self-sales are also excluded.",Cuyahoga County Fiscal Office,"December 31, 2015",,
+Education,rpass50,Children proficient in reading (Grade 3),Number of Grade 3 students who are proficient in reading,Grade 3 students who took the reading test,Cleveland Metropolitan School District students only. Data is not available for Cuyahoga County,"In the 2014-15 School Year, Partnership for Assessment of Readiness for College and Careers (PARCC) tests replaced the Ohio Achievement Assessments (OAA).  PARCC testing will not be continued.  It will be replaced by American Institutes of Research (AIR) tests in the 2015-16 school year.  Since PARCC passage rates cannot be compared with OAA passage rates in the previous years and the AIR passage rates in the forthcoming years, proficiency data for Grades 3, 4 and 6 will not be updated this year.",Cleveland Metropolitan School District (CMSD),"May 29, 2014",,
+Education,_rpass50,% Children proficient in reading (Grade 3),Percent of Grade 3 students who are proficient in reading,Grade 3 students who took the reading test,Cleveland Metropolitan School District students only. Data is not available for Cuyahoga County,"In the 2014-15 School Year, Partnership for Assessment of Readiness for College and Careers (PARCC) tests replaced the Ohio Achievement Assessments (OAA).  PARCC testing will not be continued.  It will be replaced by American Institutes of Research (AIR) tests in the 2015-16 school year.  Since PARCC passage rates cannot be compared with OAA passage rates in the previous years and the AIR passage rates in the forthcoming years, proficiency data for Grades 3, 4 and 6 will not be updated this year.",Cleveland Metropolitan School District (CMSD),"May 29, 2014",,
+Education,rpass10,Children proficient in reading (Grade 4),Number of Grade 4 students who are proficient in reading,Grade 4 students who took the reading test,Cleveland Metropolitan School District students only. Data is not available for Cuyahoga County,"In the 2014-15 School Year, Partnership for Assessment of Readiness for College and Careers (PARCC) tests replaced the Ohio Achievement Assessments (OAA).  PARCC testing will not be continued.  It will be replaced by American Institutes of Research (AIR) tests in the 2015-16 school year.  Since PARCC passage rates cannot be compared with OAA passage rates in the previous years and the AIR passage rates in the forthcoming years, proficiency data for Grades 3, 4 and 6 will not be updated this year.",Cleveland Metropolitan School District (CMSD),"May 29, 2014",,
+Education,_rpass10,% Children proficient in reading (Grade 4),Percent of Grade 4 students who are proficient in reading,Grade 4 students who took the reading test,Cleveland Metropolitan School District students only. Data is not available for Cuyahoga County,"In the 2014-15 School Year, Partnership for Assessment of Readiness for College and Careers (PARCC) tests replaced the Ohio Achievement Assessments (OAA).  PARCC testing will not be continued.  It will be replaced by American Institutes of Research (AIR) tests in the 2015-16 school year.  Since PARCC passage rates cannot be compared with OAA passage rates in the previous years and the AIR passage rates in the forthcoming years, proficiency data for Grades 3, 4 and 6 will not be updated this year.",Cleveland Metropolitan School District (CMSD),"May 29, 2014",,
+Education,rpass20,Children proficient in reading (Grade 6),Number of Grade 6 students who are proficient in reading,Grade 6 students who took the reading test,Cleveland Metropolitan School District students only. Data is not available for Cuyahoga County,"In the 2014-15 School Year, Partnership for Assessment of Readiness for College and Careers (PARCC) tests replaced the Ohio Achievement Assessments (OAA).  PARCC testing will not be continued.  It will be replaced by American Institutes of Research (AIR) tests in the 2015-16 school year.  Since PARCC passage rates cannot be compared with OAA passage rates in the previous years and the AIR passage rates in the forthcoming years, proficiency data for Grades 3, 4 and 6 will not be updated this year.",Cleveland Metropolitan School District (CMSD),"May 29, 2014",,
+Education,_rpass20,% Children proficient in reading (Grade 6),Percent of Grade 6 students who are proficient in reading,Grade 6 students who took the reading test,Cleveland Metropolitan School District students only. Data is not available for Cuyahoga County,"In the 2014-15 School Year, Partnership for Assessment of Readiness for College and Careers (PARCC) tests replaced the Ohio Achievement Assessments (OAA).  PARCC testing will not be continued.  It will be replaced by American Institutes of Research (AIR) tests in the 2015-16 school year.  Since PARCC passage rates cannot be compared with OAA passage rates in the previous years and the AIR passage rates in the forthcoming years, proficiency data for Grades 3, 4 and 6 will not be updated this year.",Cleveland Metropolitan School District (CMSD),"May 29, 2014",,
+Education,rpass41,Children proficient in reading (Grade 10),Number of Grade 10 students who are proficient in reading,Grade 10 students who took the reading test,Cleveland Metropolitan School District students only. Data is not available for Cuyahoga County,,Cleveland Metropolitan School District (CMSD),"May 22, 2015",,
+Education,_rpass41,% Children proficient in reading (Grade 10),Percent of Grade 10 students who are proficient in reading,Grade 10 students who took the reading test,Cleveland Metropolitan School District students only. Data is not available for Cuyahoga County,,Cleveland Metropolitan School District (CMSD),"May 22, 2015",,
+Education,mpass50,Children proficient in math (Grade 3),Number of Grade 3 students who are proficient in math,Grade 3 students who took the math test,Cleveland Metropolitan School District students only. Data is not available for Cuyahoga County,"In the 2014-15 School Year, Partnership for Assessment of Readiness for College and Careers (PARCC) tests replaced the Ohio Achievement Assessments (OAA).  PARCC testing will not be continued.  It will be replaced by American Institutes of Research (AIR) tests in the 2015-16 school year.  Since PARCC passage rates cannot be compared with OAA passage rates in the previous years and the AIR passage rates in the forthcoming years, proficiency data for Grades 3, 4 and 6 will not be updated this year.",Cleveland Metropolitan School District (CMSD),"May 29, 2014",,
+Education,_mpass50,% Children proficient in math (Grade 3),Percent of Grade 3 students who are proficient in math,Grade 3 students who took the math test,Cleveland Metropolitan School District students only. Data is not available for Cuyahoga County,"In the 2014-15 School Year, Partnership for Assessment of Readiness for College and Careers (PARCC) tests replaced the Ohio Achievement Assessments (OAA).  PARCC testing will not be continued.  It will be replaced by American Institutes of Research (AIR) tests in the 2015-16 school year.  Since PARCC passage rates cannot be compared with OAA passage rates in the previous years and the AIR passage rates in the forthcoming years, proficiency data for Grades 3, 4 and 6 will not be updated this year.",Cleveland Metropolitan School District (CMSD),"May 29, 2014",,
+Education,mpass10,Children proficient in math (Grade 4),Number of Grade 4 students who are proficient in math,Grade 4 students who took the math test,Cleveland Metropolitan School District students only. Data is not available for Cuyahoga County,"In the 2014-15 School Year, Partnership for Assessment of Readiness for College and Careers (PARCC) tests replaced the Ohio Achievement Assessments (OAA).  PARCC testing will not be continued.  It will be replaced by American Institutes of Research (AIR) tests in the 2015-16 school year.  Since PARCC passage rates cannot be compared with OAA passage rates in the previous years and the AIR passage rates in the forthcoming years, proficiency data for Grades 3, 4 and 6 will not be updated this year.",Cleveland Metropolitan School District (CMSD),"May 29, 2014",,
+Education,_mpass10,% Children proficient in math (Grade 4),Percent of Grade 4 students who are proficient in math,Grade 4 students who took the math test,Cleveland Metropolitan School District students only. Data is not available for Cuyahoga County,"In the 2014-15 School Year, Partnership for Assessment of Readiness for College and Careers (PARCC) tests replaced the Ohio Achievement Assessments (OAA).  PARCC testing will not be continued.  It will be replaced by American Institutes of Research (AIR) tests in the 2015-16 school year.  Since PARCC passage rates cannot be compared with OAA passage rates in the previous years and the AIR passage rates in the forthcoming years, proficiency data for Grades 3, 4 and 6 will not be updated this year.",Cleveland Metropolitan School District (CMSD),"May 29, 2014",,
+Education,mpass20,Children proficient in math (Grade 6),Number of Grade 6 students who are proficient in math,Grade 6 students who took the math test,Cleveland Metropolitan School District students only. Data is not available for Cuyahoga County,"In the 2014-15 School Year, Partnership for Assessment of Readiness for College and Careers (PARCC) tests replaced the Ohio Achievement Assessments (OAA).  PARCC testing will not be continued.  It will be replaced by American Institutes of Research (AIR) tests in the 2015-16 school year.  Since PARCC passage rates cannot be compared with OAA passage rates in the previous years and the AIR passage rates in the forthcoming years, proficiency data for Grades 3, 4 and 6 will not be updated this year.",Cleveland Metropolitan School District (CMSD),"May 29, 2014",,
+Education,_mpass20,% Children proficient in math (Grade 6),Percent of Grade 6 students who are proficient in math,Grade 6 students who took the math test,Cleveland Metropolitan School District students only. Data is not available for Cuyahoga County,"In the 2014-15 School Year, Partnership for Assessment of Readiness for College and Careers (PARCC) tests replaced the Ohio Achievement Assessments (OAA).  PARCC testing will not be continued.  It will be replaced by American Institutes of Research (AIR) tests in the 2015-16 school year.  Since PARCC passage rates cannot be compared with OAA passage rates in the previous years and the AIR passage rates in the forthcoming years, proficiency data for Grades 3, 4 and 6 will not be updated this year.",Cleveland Metropolitan School District (CMSD),"May 29, 2014",,
+Education,mpass41,Children proficient in math (Grade 10),Number of Grade 10 students who are proficient in math,Grade 10 students who took the math test,Cleveland Metropolitan School District students only. Data is not available for Cuyahoga County,,Cleveland Metropolitan School District (CMSD),"May 22, 2015",,
+Education,_mpass41,% Children proficient in math (Grade 10),Percent of Grade 10 students who are proficient in math,Grade 10 students who took the math test,Cleveland Metropolitan School District students only. Data is not available for Cuyahoga County,,Cleveland Metropolitan School District (CMSD),"May 22, 2015",,
+Education,band1,Kindergarten Readiness Assessment Level (KRA-L) - Band 1,"Number of students in Band 1 (scored 0-13 points prior to 2014-15 school year, scored 1-16 points for new KRA)",Kindergarten students who took the KRA-L test ,Data is not available for Cuyahoga County,,Cleveland Metropolitan School District (CMSD),"May 22, 2015",,
+Education,pctband1,% Kindergarten Readiness Assessment Level (KRA-L) - Band 1,"Percent of students in Band 1 (scored 0-13 points prior to 2014-15 school year, scored 1-16 points for new KRA)",Kindergarten students who took the KRA-L test ,Data is not available for Cuyahoga County,,Cleveland Metropolitan School District (CMSD),"May 22, 2015",,
+Education,band2,Kindergarten Readiness Assessment Level (KRA-L) - Band 2,"Number of students in Band 2 (scored 14-23 points prior to 2014-15 school year, scored 17-29 points for new KRA)",Kindergarten students who took the KRA-L test ,Data is not available for Cuyahoga County,,Cleveland Metropolitan School District (CMSD),"May 22, 2015",,
+Education,pctband2,% Kindergarten Readiness Assessment Level (KRA-L) - Band 2,"Percent of students in Band 2 (scored 14-23 points prior to 2014-15 school year, scored 17-29 points for new KRA)",Kindergarten students who took the KRA-L test ,Data is not available for Cuyahoga County,,Cleveland Metropolitan School District (CMSD),"May 22, 2015",,
+Education,band3,Kindergarten Readiness Assessment Level (KRA-L) - Band 3,"Number of students in Band 3 (scored 24-29 points prior to 2014-15 school year, scored 30-39 points for new KRA)",Kindergarten students who took the KRA-L test ,Data is not available for Cuyahoga County,,Cleveland Metropolitan School District (CMSD),"May 22, 2015",,
+Education,pctband3,Kindergarten Readiness Assessment Level (KRA-L) - Band 3,"Percent of students in Band 3 (scored 24-29 points prior to 2014-15 school year, scored 30-39 points for new KRA)",Kindergarten students who took the KRA-L test ,Data is not available for Cuyahoga County,,Cleveland Metropolitan School District (CMSD),"May 22, 2015",,
+Education,meanscore,Kindergarten Readiness Assessment Level (KRA-L) - Mean Score,Average KRA-L score,Kindergarten students who took the KRA-L test ,Data is not available for Cuyahoga County,,Cleveland Metropolitan School District (CMSD),"May 22, 2015",,
+Education,,Number of quality pre-school slots,Number of quality pre-school slots,,Data is not available for Cuyahoga County,"Number of preschool slots (ages 3-5) in high quality programs, including Step Up to Quality, Gold Seal Family Child Care Homes, and Universal Pre-Kindergarten (UPK).  ",Cleveland Metropolitan School District (CMSD),"December 31, 2015",,
+Education,,HS graduation rates,High school graduation rate,Graduating class provided by CMSD,Data is not available for Cuyahoga County,,Cleveland Metropolitan School District (CMSD),"May 22, 2015",,
+Education,,Attendance,Attendance rate,,Data is not available for Cuyahoga County,Attendance rate is calculated as: (Number of school days attended / Total number of valid school days) X 100,Cleveland Metropolitan School District (CMSD),"May 22, 2015",,
+Workforce,emp,Employment,Count of population age 16+ who were employed,Civilian labor force age 16+,,,U.S. Census Bureau,"December 31, 2015","2000:  P043
+2010-2014:  B23025",
+Workforce,_emp,Employment rate,Percent of population age 16+ who were employed,Civilian labor force age 16+,,,U.S. Census Bureau,"December 31, 2015",,"2000:  P043
+2010-2014:  B23025"
+Workforce,lf,Labor force participation,Count of population age 16+ in the labor force (Includes members of the armed forces).,Population age 16+,,,U.S. Census Bureau,"December 31, 2015","2000:  P043
+2010-2014:  B23025",
+Workforce,_lf,Labor force participation rate,Percent of population age 16+ in the labor force (Includes members of the armed forces).,Population age 16+,,,U.S. Census Bureau,"December 31, 2015","2000:  P043
+2010-2014:  B23025","2000:  P043
+2010-2014:  B23025"
+Workforce,hsls9,Less than 9th grade,Count of the population age 25+ who have less than 9th grade of education,Population age 25+,,,U.S. Census Bureau,"December 31, 2015","2000:  P037
+2010-2014:  B15002",
+Workforce,_hsls9,% of population less than 9th grade,Percent of the population age 25+ who have less than 9th grade of education,Population age 25+,,,U.S. Census Bureau,"December 31, 2015","2000:  P037
+2010-2014:  B15002","2000:  P037
+2010-2014:  B15002"
+Workforce,hs9to12,"9th to 12th grade, no diploma",Count of the population age 25+ who have 9th to 12th grade of education  (no high school diploma),Population age 25+,,,U.S. Census Bureau,"December 31, 2015","2000:  P037
+2010-2014:  B15002",
+Workforce,_hs9to12,"% of population 9th to 12th grade, no diploma",Percent of the population age 25+ who have 9th to 12th grade of education (no high school diploma),Population age 25+,,,U.S. Census Bureau,"December 31, 2015","2000:  P037
+2010-2014:  B15002","2000:  P037
+2010-2014:  B15002"
+Workforce,hsgrad,High school graduate (includes equivalency),Count of the population age 25+ who have attained a high school degree or obtained high school equivalency.,Population age 25+,,,U.S. Census Bureau,"December 31, 2015","2000:  P037
+2010-2014:  B15002",
+Workforce,_hsgrad,% of population high school graduate,Percent of the population age 25+ who have attained a high school degree or obtained high school equivalency.,Population age 25+,,,U.S. Census Bureau,"December 31, 2015","2000:  P037
+2010-2014:  B15002","2000:  P037
+2010-2014:  B15002"
+Workforce,somecoll,"Some college, no degree",Count of the population age 25+ who have some college education but do not have a college degree.,Population age 25+,,,U.S. Census Bureau,"December 31, 2015","2000:  P037
+2010-2014:  B15002",
+Workforce,_somecoll,% of population some college,Percent of the population age 25+ who have some college education but do not have a college degree.,Population age 25+,,,U.S. Census Bureau,"December 31, 2015","2000:  P037
+2010-2014:  B15002","2000:  P037
+2010-2014:  B15002"
+Workforce,assoc,Associate's Degree,Count of the population age 25+ who have obtained an associate degree,Population age 25+,,,U.S. Census Bureau,"December 31, 2015","2000:  P037
+2010-2014:  B15002",
+Workforce,_assoc,% of associate's degree,Percent of the population age 25+ who have obtained an associate degree,Population age 25+,,,U.S. Census Bureau,"December 31, 2015","2000:  P037
+2010-2014:  B15002","2000:  P037
+2010-2014:  B15002"
+Workforce,bs,Bachelor's Degree,Count of the population age 25+ who have obtained a bachelor's degree,Population age 25+,,,U.S. Census Bureau,"December 31, 2015","2000:  P037
+2010-2014:  B15002",
+Workforce,_bs,% of bachelor's degree,Percent of the population age 25+ who have obtained a bachelor's degree,Population age 25+,,,U.S. Census Bureau,"December 31, 2015","2000:  P037
+2010-2014:  B15002","2000:  P037
+2010-2014:  B15002"
+Workforce,prof,Graduate or professional degree,Count of the population age 25+ who have obtained a graduate or professional degree,Population age 25+,,,U.S. Census Bureau,"December 31, 2015","2000:  P037
+2010-2014:  B15002",
+Workforce,_prof,% of grad or professional degree,Percent of the population age 25+ who have obtained a graduate or professional degree,Population age 25+,,,U.S. Census Bureau,"December 31, 2015","2000:  P037
+2010-2014:  B15002","2000:  P037
+2010-2014:  B15002"
+Economy,alljobs,Jobs in neighborhood,Jobs in neighborhood,,,,Longitudinal Employer-Household Dynamics,"December 31, 2013",,
+Economy,_bus_occ,% Commercial occupancy,Percent of commercial occupancy,Total commercial addresses,,,HUD / USPS,"December 31, 2015",,
+Health,mort_rate2009,Mortality rate,"Total deaths per 1,000 population (2009-2013 Five-year average) ",Total population (2009-2013 Five-year average),,Death provided by Ohio Department of Health.  This should not be considered an endorsement of this study or these conclusions by the ODH.,Ohio Department of Health and U.S. Census Bureau,2009-2013:  B01001
+Health,infmort_rate2009,Infant mortality rate,"Infant deaths within the first year of life per 1,000 live births (2009-2013 Five-year average) ",Total births (2009-2013 Five-year average),,Death and birth data provided by Ohio Department of Health.  This should not be considered an endorsement of this study or these conclusions by the ODH.,Ohio Department of Health,
+Health,le2009,Life Expectancy,The average time a person at birth is expected to live (in year),,,Life expectancy is calculated using the Life Expectancy Calculator created by Daniel Eayres published in the South East Public Health Observatory (SEPHO) website.,Life Expectancy Calculator by Daniel Eayres,
+Health,_ebll_c,Blood Lead Levels,Percent of children under age 6 with elevated blood lead levels (confirmed tests with 5ug/dl or above) from 2010 to 2014 (Five-year average),All children under age 6 who were tested from 2010 to 2014 (Five-year average),,Lead data provided by Ohio Department of Health (ODH).  This should not be considered an endorsement of this study or these conclusions by the ODH.,Ohio Department of Health,

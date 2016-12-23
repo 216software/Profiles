@@ -24,14 +24,11 @@ mortality, life expectancy, and elevated blood lead levels.
 <thead>
 <tr>
 <th>Indicator</th>
-<th class="data">% change</th>
-<!-- ko foreach:observable_timestamps -->
-  <th class="data" data-bind="text:$data.format('YYYY')"></th>
-<!-- /ko -->
+<th class="data">Average (2009-2013)</th>
 </tr>
 </thead>
 <tbody>
-<!-- ko foreach:indicator_titles -->
+<!-- ko foreach:ind_twonine-->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
@@ -50,18 +47,44 @@ mortality, life expectancy, and elevated blood lead levels.
         Map</a>
 </span>
 </td>
-<td class="data" data-bind="text:percent_change_indicator_value"></td>
-
-<!-- ko foreach:$parents[1].observable_timestamps -->
-<td class="data"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
-</td>
-<!-- /ko --> <!-- closes inner for loop -->
+<td class="data" data-bind="text:average_indicator_value"></td>
 
 </tr>
 
 <!-- /ko -->
 
 <!-- /ko -->
+
+<tr>
+<th></th>
+<th class="data">Average (2010-2014)</th>
+</tr>
+<!-- ko foreach:ind_twoten -->
+
+<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
+<tr>
+<td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>
+<span class="pull-right" style="padding-left:5px">
+<a href="#" class="info-link hide-from-print"
+        data-toggle="popover"
+        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
+                   attr: {'data-content' :
+                          $parents[1].rootvm.indicator_extra_info($data)}">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+</a>
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="page-href: {path : '/indicator-map',
+       params: {indicator_uuid: indicator_uuid}}">
+        Map</a>
+</span>
+</td>
+<td class="data" data-bind="text:average_indicator_value"></td>
+</tr>
+
+<!-- /ko -->
+
+<!-- /ko -->
+
 </tbody>
 
 </table>

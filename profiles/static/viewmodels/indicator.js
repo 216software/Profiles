@@ -103,6 +103,20 @@ function Indicator (data) {
 
     });
 
+    self.average_indicator_value = ko.computed(function(){
+        if(self.indicator_values().length > 0){
+            var total = 0;
+            ko.utils.arrayForEach(self.indicator_values(), function(ind){
+                // only add if we have a value
+                total += ind.value()
+            });
+            result = total / self.indicator_values().length;
+            return format_value(result, self.indicator_value_format());
+        }
+    });
+
+
+
     self.indicator_value_by_year = function(year){
         item = ko.utils.arrayFirst(this.indicator_values(), function(iv) {
             return iv.observation_timestamp_year() == year;
