@@ -148,12 +148,19 @@ class IndicatorValuesByIndicator(Handler):
         indicator = pg.indicators.Indicator.by_indicator_uuid(self.cw.get_pgconn(),
             req.wz_req.args['indicator_uuid'])
 
-        ivs =  [x for x in \
-            indicator.all_indicator_location_values(self.cw.get_pgconn())]
+        order_by_area = req.wz_req.args.get('order_by_area', False)
+
+        ivs = []
+        for x in \
+            indicator.all_indicator_location_values(self.cw.get_pgconn(),
+            order_by_area=order_by_area):
+
+            x['location'].area = x['location_area']
+            ivs.append(x)
+
 
         distinct_observable_timestamps = [x for x in \
             indicator.distinct_observation_timestamps(self.cw.get_pgconn())]
-
 
         return Response.json(dict(
             message="Found this indicator {0}".\

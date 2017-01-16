@@ -942,10 +942,14 @@ padding: 0px;
     padding:7px;
 }
 
-.info.legend i{
+.info i{
     width: 18px;
     height: 18px;
     position:relative;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+
 }
 
 a.info-link{

@@ -277,7 +277,7 @@ class Indicator(object):
             yield row
 
 
-    def all_indicator_location_values(self, pgconn):
+    def all_indicator_location_values(self, pgconn, order_by_area=False):
 
         """
         Give us all the values for a given indicator
@@ -287,9 +287,15 @@ class Indicator(object):
 
         cursor = pgconn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
-        cursor.execute(textwrap.dedent("""
+        if order_by_area:
+            order_by_clause = "order by st_area(l.location_shape) desc"
+        else:
+            order_by_clause = "order by l.title asc"
+
+        qry = textwrap.dedent("""
 
             select (l.*)::locations as location,
+            st_area(l.location_shape) as location_area,
             array_to_json(array_agg((ilv.*)::indicator_location_values))
             as indicator_location_values
 
@@ -301,9 +307,14 @@ class Indicator(object):
             and l.display_me = true
 
             group by l.location_uuid
-            order by l.title asc
 
-        """), dict(indicator_uuid=self.indicator_uuid))
+            {order_by_clause}
+
+        """)
+
+        qry = qry.format(order_by_clause=order_by_clause)
+
+        cursor.execute(qry, dict(indicator_uuid=self.indicator_uuid))
 
         for row in cursor.fetchall():
             yield row

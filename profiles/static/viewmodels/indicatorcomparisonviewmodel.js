@@ -78,9 +78,7 @@ function IndicatorComparisonViewModel (data) {
 
 
     self.location_type_filtered = ko.computed(function(){
-
        if(self.selected_location_type() != undefined){
-
             return ko.utils.arrayFilter(self.indicator_locations(), function(item){
                 return item.location_type() == self.selected_location_type();
             });
@@ -97,12 +95,10 @@ function IndicatorComparisonViewModel (data) {
             return ko.utils.arrayFilter(self.location_type_filtered(), function(item){
                 return item.title().indexOf(self.location_search()) >= 0;
             });
-
         }
         else{
             return self.location_type_filtered();
         }
-
     });
 
 
@@ -168,6 +164,7 @@ function IndicatorComparisonViewModel (data) {
             processData: true,
 
             data: {'indicator_uuid':self.selected_indicator().indicator_uuid(),
+                    'order_by_area':true
                    },
 
             complete: function () {
@@ -313,14 +310,14 @@ function IndicatorComparisonViewModel (data) {
             // only add if we have a value
             if(typeof(leaf_feature.properties.indicator_value) == 'function'){
                 geoToAdd.push(leaf_feature);
-                geoValues.push(leaf_feature.properties.indicator_value());
+                geoValues.push(leaf_feature.properties.indicator_value);
             }
         });
 
         // Sort geo to add by value asc
 
         geoValues.sort(function(a, b){
-            return a-b;
+            return a()-b();
         });
 
 
@@ -329,20 +326,18 @@ function IndicatorComparisonViewModel (data) {
 
         if (geoValues.length >= 5)
         {
-            self.map_divisions = [Math.floor(geoValues[0]),
-                Math.floor(geoValues[Math.floor(geoValues.length / 4)]),
-                Math.floor(geoValues[Math.floor(geoValues.length / 2)]),
-                Math.floor(geoValues[Math.floor(geoValues.length * .75)]),
-                Math.floor(geoValues[geoValues.length - 1])];
+            self.map_divisions = [geoValues[0],
+                geoValues[Math.floor(geoValues.length / 4)],
+                geoValues[Math.floor(geoValues.length / 2)],
+                geoValues[Math.floor(geoValues.length * .75)],
+                geoValues[geoValues.length - 1]];
         }
         else{
             self.map_divisions[geoValues[0], geoValues[geoValues.length-1]]
         }
 
-        // get 3 separate points, if we have it
-
+        // This adds the actual layers to the map
         var featureCollection = {"type": "FeatureCollection", "features":geoToAdd};
-
         self.geojson = L.geoJson(featureCollection,{
             style: self.makeStyle,
             onEachFeature:self.makeOnEachFeature}).addTo(self.map);
@@ -365,12 +360,14 @@ function IndicatorComparisonViewModel (data) {
         self.mapInfo.update = function (props) {
             this._div.innerHTML = '<h4>' + self.selected_indicator().pretty_label() +
                 (props ? ' - ' + props.year + '</h4>' +
-                '<b>' + props.name + '</b><br />' + props.indicator_value.formatted()
-                :'</h4>' + 'Hover over a location');
+                '<b>' + props.name + '</b><br />' +
+                '<i style="background:' +
+                self.get_location_color(props.indicator_value()) + '"></i>' +
+                props.indicator_value.formatted()
+                :'</h4>' + 'Hover over a location or click on a marker');
         };
 
         self.mapInfo.addTo(self.map);
-
         self.legend.addTo(self.map);
 
 
@@ -394,7 +391,6 @@ function IndicatorComparisonViewModel (data) {
         fg.addTo(self.map);
 
         self.added_map_layers.push(fg);
-
     }
 
 
@@ -418,13 +414,13 @@ function IndicatorComparisonViewModel (data) {
         $(div).empty();
         // loop through our density intervals and
         // generate a label with a colored square for each interval
-        for (var i = 0; i < self.map_divisions.length; i++) {
+        for (var i = 0; i < self.map_divisions.length - 1; i++) {
             div.innerHTML += '<i style="background:' +
-                            self.get_location_color(self.map_divisions[i] + 1) +
+                            self.get_location_color(self.map_divisions[i]() + 1) +
                             '"></i> ' +
-                            self.map_divisions[i] +
-                            (self.map_divisions[i + 1] ? '&ndash;' +
-                            self.map_divisions[i + 1] +
+                            self.map_divisions[i].formatted() +
+                            (self.map_divisions[i + 1].formatted() ? '&ndash;' +
+                            self.map_divisions[i + 1].formatted() +
                             '<br>' : '+');
         }
 
@@ -444,8 +440,15 @@ function IndicatorComparisonViewModel (data) {
         };
     }
 
-    self.highlightFeature = function (e) {
-        var layer = e.target;
+    self.layers_highlighted = [];
+
+    self.highlightFeature = function (e, args) {
+
+        if(self.layers_highlighted.length > 0){
+            self.resetAllHighlights();
+        }
+
+        var layer = (e.layer == undefined ? e.target.layer : e.target)
 
         layer.setStyle({
             weight: 5,
@@ -459,11 +462,25 @@ function IndicatorComparisonViewModel (data) {
             layer.bringToFront();
         }
 
+        // Add to all layers that we've highlighted
+        self.layers_highlighted.push(layer);
+    }
 
+    self.resetAllHighlights = function(){
+
+        // clear out all highlighted layers
+        while(self.layers_highlighted.length > 0){
+            self.resetHighlight(self.layers_highlighted.pop());
+        }
     }
 
     self.resetHighlight = function (e) {
-        self.geojson.resetStyle(e.target);
+
+        // Gonna reeset all highlights
+
+        var layer = (e.target != undefined ? e.target : e);
+
+        self.geojson.resetStyle(layer);
         self.mapInfo.update();
     }
 
@@ -472,15 +489,26 @@ function IndicatorComparisonViewModel (data) {
             mouseover: self.highlightFeature,
             mouseout: self.resetHighlight,
         });
+
+        var bounds = layer.getBounds();
+        // Get center of bounds
+        var center = bounds.getCenter();
+        // Use center to put marker on map
+        var marker = L.marker(center)
+
+        marker.layer = layer
+        marker.on('click',
+            self.highlightFeature).addTo(self.map);
     }
 
 
     self.get_location_color = function(value){
+
         if(self.map_divisions.length == 5){
-            return value > self.map_divisions[4]  ? '#00441b' :
-               value > self.map_divisions[3]   ? '#006d2c' :
-               value > self.map_divisions[2]  ?  '#238b45' :
-               value > self.map_divisions[1]  ? '#41ab5d' :
+            return value > self.map_divisions[4]()  ? '#00441b' :
+               value > self.map_divisions[3]()   ? '#006d2c' :
+               value > self.map_divisions[2]()  ?  '#238b45' :
+               value > self.map_divisions[1]()  ? '#41ab5d' :
                '#74c476';
         }
         else{

@@ -35,6 +35,10 @@ class Location(object):
         self.inserted = inserted
         self.updated = updated
 
+        # Look these up
+
+        self.area = None
+
     @classmethod
     def insert(cls, pgconn, location_type, title, description,
         location_shape, location_shape_json):
@@ -114,6 +118,29 @@ class Location(object):
 
         for row in cursor:
             yield row.x
+
+
+    def look_up_area(self, pgconn):
+
+        """
+        Look up the area as described by this locations
+        location_shape_
+
+        """
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+            select st_area(location_shape)
+
+            from locations where location_uuid = %(location_uuid)s
+
+        """), dict(location_uuid=self.location_uuid))
+
+        if cursor.rowcount:
+            self.area = cursor.fetchone().st_area
+
+        return self
 
     def look_up_indicators(self, pgconn):
 
