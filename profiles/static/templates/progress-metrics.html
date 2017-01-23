@@ -30,6 +30,8 @@ data, as well as more information about household income or poverty.
 <!-- ko foreach:observable_timestamps -->
     <th  class="data" data-bind="text:$data.format('YYYY')"></th>
 <!-- /ko -->
+<th class="show-only-print">CV</th>
+<th class="show-only-print">MOE (+/-)</th>
 </tr>
 </thead>
 <tbody>
@@ -65,11 +67,26 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
         data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
         +/-</button>
 
-    <span class="show-only-print" style="font-size:8px"
-          data-bind="html:$parent.print_friendly_CV_and_MOE($data.year())"></span>
-
 
 </span></span> </td>
+
+
+<!-- ko if:$parent.indicator_CV -->
+<!-- ko if:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted -->
+<td class="show-only-print data" data-bind="if:$parent.indicator_CV">
+<span class="show-only-print"
+     data-bind="text: $parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
+</td>
+<td class="show-only-print data" data-bind="if:$parent.indicator_MOE">
+<span class="show-only-print"
+     data-bind="text:$parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
+
+</td>
+<!-- /ko -->
+<!-- /ko -->
+
+
+
 <!-- /ko --> <!-- closes inner for loop -->
 
 </tr>
@@ -99,6 +116,10 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
     <th class="data">2010 - <span data-bind="text:$data.year()"></span></th>
     <!-- /ko -->
 <!-- /ko -->
+
+<th class="show-only-print">CV</th>
+<th class="show-only-print">MOE (+/-)</th>
+
 </tr>
 </thead>
 <tbody>
@@ -133,12 +154,26 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
         title="CV &amp; MOE"
         data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
         +/-</button>
-    <span class="show-only-print" style="font-size:8px"
-          data-bind="html:$parent.print_friendly_CV_and_MOE($data.year())"></span>
-
 
 </span></span>
 </td>
+
+<!-- ko if:$parent.indicator_CV -->
+<!-- ko if:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted -->
+<td class="show-only-print data" data-bind="if:$parent.indicator_CV">
+<span class="show-only-print"
+     data-bind="text: $parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
+</td>
+<td class="show-only-print data" data-bind="if:$parent.indicator_MOE">
+<span class="show-only-print"
+     data-bind="text:$parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
+
+</td>
+<!-- /ko -->
+<!-- /ko -->
+
+
+
 <!-- /ko --> <!-- closes inner for loop -->
 
 </tr>
@@ -163,6 +198,9 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
     <th class="data">2010 - <span data-bind="text:$data.year()"></span></th>
     <!-- /ko -->
 <!-- /ko -->
+<th class="show-only-print">CV</th>
+<th class="show-only-print">MOE (+/-)</th>
+
 </tr>
 </thead>
 <tbody>
@@ -198,12 +236,24 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
         data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
         +/-</button>
 
-    <span class="show-only-print" style="font-size:8px"
-          data-bind="html:$parent.print_friendly_CV_and_MOE($data.year())"></span>
-
-
 </span></span>
 </td>
+
+<!-- ko if:$parent.indicator_CV -->
+<!-- ko if:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted -->
+<td class="show-only-print data" data-bind="if:$parent.indicator_CV">
+<span class="show-only-print"
+     data-bind="text: $parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
+</td>
+<td class="show-only-print data" data-bind="if:$parent.indicator_MOE">
+<span class="show-only-print"
+     data-bind="text:$parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
+
+</td>
+<!-- /ko -->
+<!-- /ko -->
+
+
 
 <!-- /ko --> <!-- closes inner for loop -->
 
@@ -230,7 +280,10 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
     <th class="data">2010 - <span data-bind="text:$data.year()"></span></th>
     <!-- /ko -->
 <!-- /ko -->
+<th class="show-only-print">CV</th>
+<th class="show-only-print">MOE (+/-)</th>
 </tr>
+
 </thead>
 <tbody>
 <!-- ko foreach:poverty_indicators -->
@@ -264,12 +317,25 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
         title="CV &amp; MOE"
         data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
         +/-</button>
-    <span class="show-only-print" style="font-size:8px"
-          data-bind="html:$parent.print_friendly_CV_and_MOE($data.year())"></span>
 
 
 </span></span>
 </td>
+<!-- ko if:$parent.indicator_CV -->
+<!-- ko if:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted -->
+<td class="show-only-print data" data-bind="if:$parent.indicator_CV">
+<span class="show-only-print"
+     data-bind="text: $parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
+</td>
+<td class="show-only-print data" data-bind="if:$parent.indicator_MOE">
+<span class="show-only-print"
+     data-bind="text:$parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
+
+</td>
+<!-- /ko -->
+<!-- /ko -->
+
+
 
 <!-- /ko --> <!-- closes inner for loop -->
 
@@ -288,10 +354,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 <div class="show-only-print">
     <div class="small">
-    <p>Source: 2000 Decennial Census, 2010-2014 American Community Survey 5-year estimates, Cuyahoga County Fiscal Office.
-    Note: Information from 2010-2014 ACS 5 year estimates are estimates with a margin of error.
-    Arm's length sales include all property sales except those transferred at Sheriff sale, purchased by a bank, financial institution, GSE or local government, or recorded with a zero price. Bulk sales and self-sales are also excluded.
-    Median sales price of residential parcels includes only residential single family, multi-family, and condominium parcels.
+    <p>Source: U.S. Census Bureau, Cuyahoga County Fiscal Office.
     </p>
 
     <p><strong>Margin of Error (MOE):</strong> The MOE,

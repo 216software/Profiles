@@ -92,27 +92,10 @@ mortality, life expectancy, and elevated blood lead levels.
 <div class="show-only-print">
     <div class="small">
     <p>
-    Sources:  U.S. Census Bureau - 2008-2012 ACS 5-year estimates; Ohio
-    Department of Health Vital Statistics Divisions<br />
-    Note: This study includes data provided by the Ohio Department of Health
-    which should not be considered an endorsement of this study or its
-    conclusions.
+    Sources:  Life Expectancy Calculator by Daniel Eayres, Ohio
+    Department of Health and U.S. Census Bureau.
     </p>
 
-    <h5>Extra Indicator Details</h5>
-    <!-- ko foreach:indicator_titles -->
-
-    <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
-
-    <p> <p data-bind="visible:$parents[1].rootvm.indicator_extra_info($data) ">
-        *<span data-bind="text:pretty_label"></span>:
-        <span data-bind="text:
-              $parents[1].rootvm.indicator_extra_info($data)"></span>
-    </p>
-
-    <!-- /ko -->
-
-    <!-- /ko -->
    </div> <!-- closes class small -->
 
 

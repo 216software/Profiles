@@ -33,6 +33,8 @@ make-up.
     <th class="data">2010 - <span data-bind="text:$data.year()"></span></th>
     <!-- /ko -->
 <!-- /ko -->
+<th class="show-only-print">CV</th>
+<th class="show-only-print">MOE (+/-)</th>
 </tr>
 </thead>
 <tbody>
@@ -60,7 +62,8 @@ make-up.
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
 <!-- ko foreach:$parents[1].observable_timestamps -->
-<td class="data"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
+<td class="data">
+<span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
 $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
@@ -69,13 +72,25 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
         title="CV &amp; MOE"
         data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
         +/-</button>
+</span></span></td>
 
-    <span class="show-only-print" style="font-size:8px"
-          data-bind="html:$parent.print_friendly_CV_and_MOE($data.year())"></span>
+<!-- ko if:$parent.indicator_CV -->
+<!-- ko if:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted -->
+<td class="show-only-print data" data-bind="if:$parent.indicator_CV">
+<span class="show-only-print"
+     data-bind="text: $parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
+</td>
+<td class="show-only-print data" data-bind="if:$parent.indicator_MOE">
+<span class="show-only-print"
+     data-bind="text:
+$parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
 
+</td>
+<!-- /ko -->
+<!-- /ko -->
 
-</span></span> </td>
 <!-- /ko --> <!-- closes inner for loop -->
+
 
 </tr>
 
@@ -127,6 +142,19 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 </span></span> </td>
 
+<!-- ko if:$parent.indicator_CV -->
+<!-- ko if:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted -->
+<td class="show-only-print data" data-bind="if:$parent.indicator_CV">
+<span class="show-only-print"
+     data-bind="text: $parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
+</td>
+<td class="show-only-print data" data-bind="if:$parent.indicator_MOE">
+<span class="show-only-print"
+     data-bind="text:$parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
+
+</td>
+<!-- /ko -->
+<!-- /ko -->
 
 <!-- /ko --> <!-- closes inner for loop -->
 
@@ -176,7 +204,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
         +/-</button>
 
     <span class="show-only-print" style="font-size:8px"
-          data-bind="html:$parent.print_friendly_CV_and_MOE($data.year())"></span>
+          data-bind="html:$parent.print_friendly_CV_and_MOE($data.year()).formatted"></span>
 
 
 </span></span> </td>
@@ -200,10 +228,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <div class="show-only-print">
     <div class="small">
     <p>
-    Source: 2000 Decennial Census and 2010-2014 American Community Survey
-    5-year estimates.<br />
-    Note: Information from 2010-2014 ACS 5 year estimates are estimates with
-    a margin of error.<br />
+    Source: U.S. Census Bureau <br />
     </p>
 
     <p><strong>Margin of Error (MOE):</strong> The MOE,

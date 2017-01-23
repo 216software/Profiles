@@ -37,7 +37,11 @@ view more details</a></th>
 <tr>
 <th>Property</th>
 <th class="data">5 year change</th>
-<th class="data">2015 (most recent)</th></thead>
+<th class="data">2015 (most recent)</th>
+<th class="show-only-print">CV</th>
+<th class="show-only-print">MOE (+/-)</th>
+</tr>
+</thead>
 <tbody>
 
 <!-- ko with:progressmetricsvm-->
@@ -47,7 +51,36 @@ view more details</a></th>
 <td> <span data-bind="text:pretty_label"></span>
 </td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
-<td class="data" data-bind="text:most_recent_value().formatted"></td>
+<td class="data" data-bind="text:most_recent_value().formatted">
+
+<span data-bind="if:indicator_CV()">
+<span data-bind="if:indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted">
+<button class="btn btn-xs hide-from-print"
+        data-toggle="popover"
+        title="CV &amp; MOE"
+        data-bind="attr: {'data-content' :
+            $parent.pretty_CV_and_MOE(most_recent_indicator_value().observation_timestamp_year())}">
+        +/-</button>
+
+
+</span></span>
+</td>
+<!-- ko if:indicator_CV -->
+<!-- ko if:indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted -->
+
+<td class="show-only-print data" data-bind="if:indicator_CV">
+<span class="show-only-print"
+     data-bind="text: indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted"></span>
+</td>
+<td class="show-only-print data" data-bind="if:indicator_MOE">
+<span class="show-only-print"
+     data-bind="text:
+indicator_MOE().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted"></span>
+
+</td>
+<!-- /ko -->
+<!-- /ko -->
+
 </tr>
 <!-- /ko -->
 <!-- /ko -->
@@ -66,8 +99,41 @@ view more details</a></th>
 <td> <span data-bind="text:pretty_label"></span>
 </td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
-<td class="data" data-bind="text:most_recent_value().formatted"></td>
+<td class="data"><span data-bind="text:most_recent_value().formatted"></span>
+
+<span data-bind="if:indicator_CV">
+<span data-bind="if:indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted">
+<button class="btn btn-xs hide-from-print"
+        data-toggle="popover"
+        title="CV &amp; MOE"
+        data-bind="attr: {'data-content' :
+            pretty_CV_and_MOE(most_recent_indicator_value().observation_timestamp_year())}">
+        +/-</button>
+
+
+</span></span>
+</td>
+
+<!-- ko if:indicator_CV -->
+<!-- ko if:indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted -->
+
+<td class="show-only-print data" data-bind="if:indicator_CV">
+<span class="show-only-print"
+     data-bind="text: indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted"></span>
+</td>
+<td class="show-only-print data" data-bind="if:indicator_MOE">
+<span class="show-only-print"
+     data-bind="text:
+indicator_MOE().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted"></span>
+
+</td>
+<!-- /ko -->
+<!-- /ko -->
+
 </tr>
+
+
+
 <!-- /ko -->
 <!-- /ko -->
 <!-- /ko -->
@@ -99,7 +165,39 @@ view more details</a></th>
 <tr>
 <td data-bind="text:pretty_label"></td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
-<td class="data" data-bind="text:most_recent_value().formatted"></td>
+<td class="data"> <span data-bind="text:most_recent_value().formatted"></span>
+<span data-bind="if:indicator_CV()">
+<span data-bind="if:indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted">
+
+<span data-bind="if:indicator_CV">
+<span data-bind="if:indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted">
+<button class="btn btn-xs hide-from-print"
+        data-toggle="popover"
+        title="CV &amp; MOE"
+        data-bind="attr: {'data-content' :
+            pretty_CV_and_MOE(most_recent_indicator_value().observation_timestamp_year())}">
+        +/-</button>
+
+
+</span></span>
+</td>
+
+<!-- ko if:indicator_CV -->
+<!-- ko if:indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted -->
+
+<td class="show-only-print data" data-bind="if:indicator_CV">
+<span class="show-only-print"
+     data-bind="text: indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted"></span>
+</td>
+<td class="show-only-print data" data-bind="if:indicator_MOE">
+<span class="show-only-print"
+     data-bind="text:
+indicator_MOE().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted"></span>
+
+</td>
+<!-- /ko -->
+<!-- /ko -->
+
 </tr>
 <!-- /ko -->
 <!-- /ko -->
@@ -113,10 +211,41 @@ view more details</a></th>
 <!-- ko foreach:indicators_population_overview -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
-<td> <span data-bind="text:pretty_label"></span>
+<td data-bind="text:pretty_label"></td>
+<td class="data" data-bind="text:percent_change_indicator_value"></td>
+<td class="data"> <span data-bind="text:most_recent_value().formatted"></span>
+<span data-bind="if:indicator_CV()">
+<span data-bind="if:indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted">
+
+<span data-bind="if:indicator_CV">
+<span data-bind="if:indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted">
+<button class="btn btn-xs hide-from-print"
+        data-toggle="popover"
+        title="CV &amp; MOE"
+        data-bind="attr: {'data-content' :
+            pretty_CV_and_MOE(most_recent_indicator_value().observation_timestamp_year())}">
+        +/-</button>
+
+
+</span></span>
 </td>
-<td  class="data" data-bind="text:percent_change_indicator_value"></td>
-<td class="data" data-bind="text:most_recent_value().formatted"></td>
+
+<!-- ko if:indicator_CV -->
+<!-- ko if:indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted -->
+
+<td class="show-only-print data" data-bind="if:indicator_CV">
+<span class="show-only-print"
+     data-bind="text: indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted"></span>
+</td>
+<td class="show-only-print data" data-bind="if:indicator_MOE">
+<span class="show-only-print"
+     data-bind="text:
+indicator_MOE().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted"></span>
+
+</td>
+<!-- /ko -->
+<!-- /ko -->
+
 </tr>
 <!-- /ko -->
 <!-- /ko -->
@@ -208,10 +337,41 @@ view more details</a></th></tr></tr>
 <!-- ko foreach:overview_indicators -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
-<td> <span data-bind="text:pretty_label"></span>
-</td>
+<td data-bind="text:pretty_label"></td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
-<td class="data" data-bind="text:most_recent_value().formatted"></td>
+<td class="data"> <span data-bind="text:most_recent_value().formatted"></span>
+<span data-bind="if:indicator_CV()">
+<span data-bind="if:indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted">
+
+<span data-bind="if:indicator_CV">
+<span data-bind="if:indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted">
+<button class="btn btn-xs hide-from-print"
+        data-toggle="popover"
+        title="CV &amp; MOE"
+        data-bind="attr: {'data-content' :
+            pretty_CV_and_MOE(most_recent_indicator_value().observation_timestamp_year())}">
+        +/-</button>
+
+
+</span></span>
+</td>
+
+<!-- ko if:indicator_CV -->
+<!-- ko if:indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted -->
+
+<td class="show-only-print data" data-bind="if:indicator_CV">
+<span class="show-only-print"
+     data-bind="text: indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted"></span>
+</td>
+<td class="show-only-print data" data-bind="if:indicator_MOE">
+<span class="show-only-print"
+     data-bind="text:
+indicator_MOE().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted"></span>
+
+</td>
+<!-- /ko -->
+<!-- /ko -->
+
 </tr>
 <!-- /ko -->
 <!-- /ko -->
@@ -225,10 +385,41 @@ view more details</a></th></tr></tr></tr>
 <!-- ko foreach:overview_indicators -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
-<td> <span data-bind="text:pretty_label"></span>
-</td>
+<td data-bind="text:pretty_label"></td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
-<td class="data" data-bind="text:most_recent_value().formatted"></td>
+<td class="data"> <span data-bind="text:most_recent_value().formatted"></span>
+<span data-bind="if:indicator_CV()">
+<span data-bind="if:indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted">
+
+<span data-bind="if:indicator_CV">
+<span data-bind="if:indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted">
+<button class="btn btn-xs hide-from-print"
+        data-toggle="popover"
+        title="CV &amp; MOE"
+        data-bind="attr: {'data-content' :
+            pretty_CV_and_MOE(most_recent_indicator_value().observation_timestamp_year())}">
+        +/-</button>
+
+
+</span></span>
+</td>
+
+<!-- ko if:indicator_CV -->
+<!-- ko if:indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted -->
+
+<td class="show-only-print data" data-bind="if:indicator_CV">
+<span class="show-only-print"
+     data-bind="text: indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted"></span>
+</td>
+<td class="show-only-print data" data-bind="if:indicator_MOE">
+<span class="show-only-print"
+     data-bind="text:
+indicator_MOE().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted"></span>
+
+</td>
+<!-- /ko -->
+<!-- /ko -->
+
 </tr>
 <!-- /ko -->
 <!-- /ko -->

@@ -72,27 +72,10 @@ indicators of distress.
     <div class="small">
     <p>
     Sources: Cuyahoga County Fiscal Office, Cuyahoga County Clerk of Courts,
-    Cuyahoga County Sheriff's Department, United States Postal Service
-    Vacancy data.
+    Cuyahoga County Sheriff's Department, HUD / USPS.
     </p>
 
-    <h5>Extra Indicator Details</h5>
-    <!-- ko foreach:indicator_titles -->
-
-    <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
-
-    <p> <p data-bind="visible:$parents[1].rootvm.indicator_extra_info($data) ">
-        *<span data-bind="text:pretty_label"></span>:
-        <span data-bind="text:
-              $parents[1].rootvm.indicator_extra_info($data)"></span>
-    </p>
-
-
-
-    <!-- /ko -->
-
-    <!-- /ko -->
-   </div> <!-- closes class small -->
+    </div> <!-- closes class small -->
 
 
 </div> <!-- closes show-only-print -->

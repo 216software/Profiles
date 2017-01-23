@@ -7,6 +7,11 @@ help us identify barriers or opportunities to connect residents to jobs,
 job training programs, and other opportunities in order to build wealth.
 </p>
 
+<a href="#" role="button" id="workforceCSVButton"
+data-bind="click:function(event){ console.log(event.currentTarget);
+    rootvm.exportTableToCSV(event, 'no', 'rob-test.csv'); return true;}">
+Export csv</a>
+
 <div data-bind="with:parentvm.selected_location()">
 
 <h4> Now viewing data for <span data-bind="text:title"></h4>
@@ -20,7 +25,7 @@ job training programs, and other opportunities in order to build wealth.
 
 </div>
 
-<table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered" id="workforceTable">
 <thead>
 <tr>
 <th>Indicator</th>
@@ -33,6 +38,8 @@ job training programs, and other opportunities in order to build wealth.
     <th class="data">2010 - <span data-bind="text:$data.year()"></span></th>
     <!-- /ko -->
 <!-- /ko -->
+<th class="show-only-print">CV</th>
+<th class="show-only-print">MOE (+/-)</th>
 </tr>
 </thead>
 <tbody>
@@ -65,12 +72,24 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
         title="CV &amp; MOE"
         data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
         +/-</button>
-    <span class="show-only-print" style="font-size:8px"
-          data-bind="html:$parent.print_friendly_CV_and_MOE($data.year())"></span>
 </span></span>
 </td>
+<!-- ko if:$parent.indicator_CV -->
+<!-- ko if:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted -->
+<td class="show-only-print data" data-bind="if:$parent.indicator_CV">
+<span class="show-only-print"
+     data-bind="text: $parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
+</td>
+<td class="show-only-print data" data-bind="if:$parent.indicator_MOE">
+<span class="show-only-print"
+     data-bind="text:
+$parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
 
+</td>
+<!-- /ko -->
+<!-- /ko -->
 
+</td>
 <!-- /ko --> <!-- closes inner for loop -->
 
 </tr>
@@ -113,10 +132,22 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
         data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
         +/-</button>
 
-    <span class="show-only-print" style="font-size:8px"
-          data-bind="html:$parent.print_friendly_CV_and_MOE($data.year())"></span>
-
 </span></span> </td>
+
+<!-- ko if:$parent.indicator_CV -->
+<!-- ko if:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted -->
+<td class="show-only-print data" data-bind="if:$parent.indicator_CV">
+<span class="show-only-print"
+     data-bind="text: $parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
+</td>
+<td class="show-only-print data" data-bind="if:$parent.indicator_MOE">
+<span class="show-only-print"
+     data-bind="text: $parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
+
+</td>
+<!-- /ko -->
+<!-- /ko -->
+
 
 <!-- /ko --> <!-- closes inner for loop -->
 
@@ -136,10 +167,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <div class="show-only-print">
     <div class="small">
     <p>
-    Source: 2000 Decennial Census and 2010-2014 American Community Survey
-    5-year estimates.<br />
-    Note: Information from 2010-2014 ACS 5 year estimates are estimates with
-    a margin of error.<br />
+    Source: U.S. Census Bureau
     </p>
 
     <p><strong>Margin of Error (MOE):</strong> The MOE,
