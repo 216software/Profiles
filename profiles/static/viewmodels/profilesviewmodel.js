@@ -86,4 +86,102 @@ function ProfilesViewModel (data) {
         return extra_info;
 
     }
+
+
+
+    /* Export a table we've built up to CSV.
+     *
+     * Code based on:
+     * https://gist.github.com/kalebdf/ee7a5e7f44416b2116c0
+    */
+    // Temporary delimiter characters unlikely to be typed by keyboard
+    // This is to avoid accidentally splitting the actual contents
+    self.tmpColDelim = String.fromCharCode(11); // vertical tab character
+    self.tmpRowDelim = String.fromCharCode(0); // null character
+
+    // actual delimiter characters for CSV format
+    self.colDelim = '","';
+    self.rowDelim = '"\r\n"';
+
+    self.exportTableToCSV = function(context, tableIDs, filename) {
+        console.log($table);
+
+        var csv = '"';
+        for (var i = 0; i < tableIDs.length; i++){
+            var $table = $('#' + tableIDs[i]);
+
+            var $headers = $table.find('tr:has(th)')
+                ,$rows = $table.find('tr:has(td)');
+
+            // Grab text from table into CSV formatted string
+            csv += self.formatRows($headers.map(self.grabRow));
+            csv += self.rowDelim;
+            csv += self.formatRows($rows.map(self.grabRow));
+            csv += self.rowDelim;
+
+        }
+
+        csv += '"';
+
+            // Data URI
+        var csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+
+        // For IE (tested 10+)
+        if (window.navigator.msSaveOrOpenBlob) {
+            var blob = new Blob([decodeURIComponent(encodeURI(csv))], {
+                type: "text/csv;charset=utf-8;"
+            });
+            navigator.msSaveBlob(blob, filename);
+        } else {
+            $(event.target)
+                .attr({
+                    'download': filename
+                    ,'href': csvData
+                    //,'target' : '_blank' //if you want it to open in a new window
+            });
+        }
+    };
+
+    //------------------------------------------------------------
+        // Helper Functions
+        //------------------------------------------------------------
+        // Format the output so it has the appropriate delimiters
+    self.formatRows = function(rows){
+        return rows.get().join(self.tmpRowDelim)
+            .split(self.tmpRowDelim).join(self.rowDelim)
+            .split(self.tmpColDelim).join(self.colDelim);
+    };
+    // Grab and format a row from the table
+    self.grabRow = function (i,row){
+
+        var $row = $(row);
+        //for some reason $cols = $row.find('td') || $row.find('th') won't work...
+        var $cols = $row.find('td');
+        if(!$cols.length) $cols = $row.find('th');
+
+        return $cols.map(self.grabCol)
+                    .get().join(self.tmpColDelim);
+    };
+
+    // Grab and format a column from the table
+    self.grabCol = function(j,col){
+        var $col = $(col);
+        var $text = null;
+
+        // We might have a whole bunch of spans
+        if($col.find('strong').length >= 1){
+            $text = $col.find('strong').text()
+        }
+        else if($col.find('span').length > 1){
+            $text = $col.find('span').first().text();
+        }
+        else if($col.find('span.show-only-print').length > 0){
+            $text = $col.find('span').first().text();
+        }
+        else{
+            $text = $col.text();
+        }
+        return $text.replace('"', '""'); // escape double quotes
+
+    };
 };

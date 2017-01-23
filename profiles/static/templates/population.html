@@ -19,12 +19,20 @@ comparison of a given indicator.</h5>
 <p class="hide-from-print text-info small">
 <a target="_blank" data-bind="attr: {href: '/pdf/population-' + print_friendly_name + '.pdf'}">Download as PDF</a>
 |
-<a target="_blank" data-bind="attr: {href: $parent.csv_link() }">Download as CSV</a>
+
+<a href="#"
+    data-bind="click:function(event){ console.log(event.currentTarget);
+    rootvm.exportTableToCSV(event, ['totalPopulationTable',
+      'racePopulationTable', 'agePopulationTable'], 'population.csv');   return true;}">
+Downlad as CSV</a>
+
+
 </p>
 
 </div>
 
-<table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered"
+       id="totalPopulationTable">
 <thead>
 <tr>
 <th>Indicator</th>
@@ -101,10 +109,28 @@ $parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
 <!-- /ko -->
 
 <!-- /ko -->
+</tbody></table>
 
+<table class="table table-striped table-bordered"
+       id="racePopulationTable">
+<thead>
 <tr>
-<th colspan = "4">Population by race ethnicity</th>
+<th>Population by race ethnicity</th>
+<th class="data">% change</th>
+<!-- ko foreach:observable_timestamps -->
+    <!-- ko if:($index() == 0) -->
+    <th class="data" data-bind="text:$data.format('YYYY')"></th>
+    <!-- /ko -->
+    <!-- ko if:($index() != 0) -->
+    <th class="data">2010 - <span data-bind="text:$data.year()"></span></th>
+    <!-- /ko -->
+<!-- /ko -->
+<th class="show-only-print">CV</th>
+<th class="show-only-print">MOE (+/-)</th>
 </tr>
+</thead>
+<tbody>
+
 
 
 <!-- ko foreach:indicators_population -->
@@ -168,10 +194,28 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 <!-- /ko -->
 
+</tbody></table>
 
+
+<table class="table table-striped table-bordered"
+       id="agePopulationTable">
+<thead>
 <tr>
-<th colspan = "4">Population by age</th>
+<th>Population by age</th>
+<th class="data">% change</th>
+<!-- ko foreach:observable_timestamps -->
+    <!-- ko if:($index() == 0) -->
+    <th class="data" data-bind="text:$data.format('YYYY')"></th>
+    <!-- /ko -->
+    <!-- ko if:($index() != 0) -->
+    <th class="data">2010 - <span data-bind="text:$data.year()"></span></th>
+    <!-- /ko -->
+<!-- /ko -->
+<th class="show-only-print">CV</th>
+<th class="show-only-print">MOE (+/-)</th>
 </tr>
+</thead>
+<tbody>
 
 
 <!-- ko foreach:indicators_age_population -->

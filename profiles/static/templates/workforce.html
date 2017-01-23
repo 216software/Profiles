@@ -7,11 +7,6 @@ help us identify barriers or opportunities to connect residents to jobs,
 job training programs, and other opportunities in order to build wealth.
 </p>
 
-<a href="#" role="button" id="workforceCSVButton"
-data-bind="click:function(event){ console.log(event.currentTarget);
-    rootvm.exportTableToCSV(event, 'no', 'rob-test.csv'); return true;}">
-Export csv</a>
-
 <div data-bind="with:parentvm.selected_location()">
 
 <h4> Now viewing data for <span data-bind="text:title"></h4>
@@ -23,7 +18,11 @@ comparison of a given indicator.</h5>
 <p class="hide-from-print text-info small">
 <a target="_blank" data-bind="attr: {href: '/pdf/workforce-' + print_friendly_name + '.pdf'}">Download as PDF</a>
 |
-<a target="_blank" data-bind="attr: {href: $parent.csv_link() }">Download as CSV</a>
+<a href="#"
+    data-bind="click:function(event){ console.log(event.currentTarget);
+    rootvm.exportTableToCSV(event, ['workforceTable'], 'workforce.csv'); return true;}">
+Downlad as CSV</a>
+
 
 </p>
 

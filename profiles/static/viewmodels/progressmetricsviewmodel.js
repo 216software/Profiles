@@ -33,9 +33,9 @@ function ProgressMetricsViewModel (data) {
         'mfsale', 'cdsale'];
 
     /* Do a separate look up for census */
-    self.census_indicator_titles = ['_grent',
+    self.census_indicator_titles = ['_grent', 'm_grent', 'cv_grent',
         'cashrent', 'cvcashrent',  'mcashrent',
-        '_medinc',
+        '_medinc', 'cv_medinc', 'm_medinc',
 
 
         'hhincls10k', 'hhinc10to15k', 'cvhhincls10k', 'cvhhinc10to15k',
@@ -68,9 +68,11 @@ function ProgressMetricsViewModel (data) {
         'm_hhinc75to100k', 'm_hhinc100to150k',
         'm_hhinc150to200k', 'm_hhinc200kp',
 
-
-        'bpv','_bpv', 'tpv', '_tpv',
-        'bpv_samehou', 'bpv_diffhou',
+        'bpv','_bpv', 'cvbpv', 'mbpv', 'cv_bpv',
+        'm_bpv',
+        'tpv', '_tpv', 'cvtpv', 'mtpv', 'm_tpv', 'cv_typv',
+        'bpv_samehou',
+        'bpv_diffhou',
         'mbpv_samehou', 'mbpv_diffhou',
         'cvbpv_samehou', 'cvbpv_diffhou'
         ];
@@ -115,6 +117,11 @@ function ProgressMetricsViewModel (data) {
      '_hhinc100to150k':'cv_hhinc100to150k',
      '_hhinc150to200k':'cv_hhinc150to200k',
      '_hhinc200kp':'cv_hhinc200kp',
+     '_medinc': 'cv_medinc',
+     '_grent': 'cv_grent',
+     'bpv': 'cvbpv',
+     '_bpv': 'cv_bpv',
+     'tpv': 'cvtpv',
      'bpv_samehou':'cvbpv_samehou',
      'bpv_diffhou':'cvbpv_diffhou',
      };
@@ -140,6 +147,11 @@ function ProgressMetricsViewModel (data) {
      '_hhinc100to150k':'m_hhinc100to150k',
      '_hhinc150to200k':'m_hhinc150to200k',
      '_hhinc200kp':'m_hhinc200kp',
+     '_medinc': 'm_medinc',
+     '_grent': 'm_grent',
+     'bpv': 'mbpv',
+     '_bpv': 'm_bpv',
+     'tpv': 'mtpv',
      'bpv_samehou':'mbpv_samehou',
      'bpv_diffhou':'mbpv_diffhou',
 

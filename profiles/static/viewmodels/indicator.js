@@ -87,6 +87,13 @@ function Indicator (data) {
         }
     });
 
+    self.most_recent_indicator_value = ko.computed(function(){
+        if(self.indicator_values().length > 0){
+            var val = self.indicator_values_sorted_asc()[self.indicator_values().length - 1];
+            return val;
+        }
+    });
+
     self.percent_change_indicator_value = ko.computed(function(){
         if(self.indicator_values().length > 0){
             var first = self.indicator_values_sorted_asc()[0].value()
@@ -137,6 +144,7 @@ function Indicator (data) {
             value > 15 ? 'text-warning' :
             'text-success';
     }
+
 
     self.print_friendly_CV_and_MOE = function(year){
         var output = '';

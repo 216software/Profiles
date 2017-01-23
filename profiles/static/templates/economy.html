@@ -20,12 +20,15 @@ comparison of a given indicator.</h5>
 <p class="hide-from-print text-info small">
 <a target="_blank" data-bind="attr: {href: '/pdf/economy-' + print_friendly_name + '.pdf'}">Download as PDF</a>
 |
-<a target="_blank" data-bind="attr: {href: $parent.csv_link() }">Download as CSV</a>
+<a href="#"
+    data-bind="click:function(event){
+    rootvm.exportTableToCSV(event, ['economyTable'], 'economy.csv');   return true;}">
+    Downlad as CSV</a>
 </p>
 
 </div>
 
-<table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered" id="economyTable">
 <thead>
 <tr>
 <th>Indicator</th>
@@ -58,8 +61,7 @@ comparison of a given indicator.</h5>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
 <!-- ko foreach:$parents[1].observable_timestamps -->
-<td style="text-align:right"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
-</td>
+<td style="text-align:right" data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></td>
 <!-- /ko --> <!-- closes inner for loop -->
 
 </tr>

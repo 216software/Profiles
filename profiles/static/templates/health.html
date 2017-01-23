@@ -17,13 +17,17 @@ comparison of a given indicator.</h5>
 <p class="hide-from-print text-info small">
 <a target="_blank" data-bind="attr: {href: '/pdf/health-' + print_friendly_name + '.pdf'}">Download as PDF</a>
 |
-<a target="_blank" data-bind="attr: {href: $parent.csv_link() }">Download as CSV</a>
+<a href="#"
+    data-bind="click:function(event){
+    rootvm.exportTableToCSV(event, ['healthTable'], 'health.csv');   return true;}">
+Downlad as CSV</a>
+
 
 </p>
 
 </div>
 
-<table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered" id="healthTable">
 <thead>
 <tr>
 <th>Indicator</th>
@@ -59,8 +63,8 @@ comparison of a given indicator.</h5>
 <!-- /ko -->
 
 <tr>
-<th></th>
-<th class="data">Average (2010-2014)</th>
+<td></td>
+<td style="text-align:center"><strong>Average (2010-2014)</strong></th>
 </tr>
 <!-- ko foreach:ind_twoten -->
 

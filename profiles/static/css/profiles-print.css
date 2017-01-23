@@ -11,5 +11,12 @@
     .show-only-print{
         display:unset;
     }
+    td.show-only-print{
+        display:table-cell;
+    }
+    th.show-only-print{
+        display:table-cell;
+    }
 }
+
 
