@@ -43,10 +43,10 @@ view the data for each location.
     <label>
     Choose a year
     </label>
-    <select class="form-control" data-bind="options: observable_timestamps,
+    <select class="form-control" data-bind="options:
+                                 observable_timestamp_options,
                                  optionsCaption: 'Choose...',
-                                 optionsValue: function(item){return item.year()},
-                                 optionsText: function(item){return item.year()},
+                                 optionsText: 'text',
                                  value:map_selected_year"></select>
 </div> <!-- closes form-group -->
 

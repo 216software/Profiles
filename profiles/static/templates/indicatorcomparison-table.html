@@ -82,12 +82,12 @@ to filter by location type, or to search for a specific location.
          class="glyphicon glyphicon-chevron-down"></span>
    Location (type)
 </th>
-<!-- ko foreach:observable_timestamps -->
-  <th style="text-align:right; cursor:pointer"> <span data-bind="text:$data.format('YYYY'),
+<!-- ko foreach:observable_timestamp_options -->
+  <th style="text-align:right; cursor:pointer"> <span data-bind="text:$data.text,
     click:$parent.year_click_sort"></span>
-   <span data-bind="visible:$parent.asc() && $parent.sort_column() == $data.year()"
+   <span data-bind="visible:$parent.asc() && $parent.sort_column() == $data.value"
          class="glyphicon glyphicon-chevron-up"></span>
-   <span data-bind="visible:!$parent.asc() && $parent.sort_column() == $data.year()"
+   <span data-bind="visible:!$parent.asc() && $parent.sort_column() == $data.value"
          class="glyphicon glyphicon-chevron-down"></span>
   </th>
 <!-- /ko -->
@@ -107,9 +107,6 @@ data-bind="text:short_location_type"></span>)</td>
 
 
 </tr>
-
-
-
 
 <!-- /ko -->
 

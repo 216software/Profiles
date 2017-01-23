@@ -35,6 +35,38 @@ function IndicatorComparisonViewModel (data) {
     self.indicator_locations = ko.observableArray([]);
     self.observable_timestamps = ko.observableArray([]);
 
+    self.observable_timestamp_options = ko.computed(function(){
+
+        // This is a bit of a hack since we don't exactly handle ranges
+        // the best...
+        var options = [];
+        if(self.observable_timestamps().length > 2){
+            for(var i = 0; i < self.observable_timestamps().length; i++){
+                options.push({'value':self.observable_timestamps()[i].year(),
+                    'text':self.observable_timestamps()[i].year()})
+            }
+
+        }
+        else if(self.observable_timestamps().length == 2){
+
+            // Then our second set of values is really a range
+            options.push({'value':self.observable_timestamps()[0].year(),
+                    'text':self.observable_timestamps()[0].year()})
+            options.push({'value':self.observable_timestamps()[1].year(),
+                    'text':'2010 - ' + self.observable_timestamps()[1].year()})
+
+        }
+
+        else if(self.observable_timestamps().length == 1){
+
+            // Then our second set of values is really a range
+            options.push({'value':self.observable_timestamps()[0].year(),
+                    'text':'Avg. 2009 - ' + self.observable_timestamps()[0].year()})
+        }
+
+        return options;
+    });
+
     self.selector_location = ko.observable();
 
     self.asc = ko.observable(true);
@@ -121,9 +153,10 @@ function IndicatorComparisonViewModel (data) {
         self.asc(!self.asc());
    }
 
-    self.year_click_sort = function(moment_year){
+    self.year_click_sort = function(observable_timestamp_option){
 
-        var year = moment_year.year();
+
+        var year = observable_timestamp_option.value;
         self.sort_column(year);
 
 
@@ -313,7 +346,7 @@ function IndicatorComparisonViewModel (data) {
 
 
         ko.utils.arrayForEach(self.location_search_filtered(), function(loc){
-            var leaf_feature = loc.leaflet_feature(self.map_selected_year());
+            var leaf_feature = loc.leaflet_feature(self.map_selected_year().value);
 
             // only add if we have a value
             if(typeof(leaf_feature.properties.indicator_value) == 'function'){
@@ -367,7 +400,7 @@ function IndicatorComparisonViewModel (data) {
         // method that we will use to update the control based on feature properties passed
         self.mapInfo.update = function (props) {
             this._div.innerHTML = '<h4>' + self.selected_indicator().pretty_label() +
-                (props ? ' - ' + props.year + '</h4>' +
+                (props ? ' - ' + self.map_selected_year().text + '</h4>' +
                 '<b>' + props.name + '</b><br />' +
                 '<i style="background:' +
                 self.get_location_color(props.indicator_value()) + '"></i>' +
