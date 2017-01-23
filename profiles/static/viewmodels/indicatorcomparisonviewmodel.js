@@ -11,6 +11,7 @@ function IndicatorComparisonViewModel (data) {
 
     self.map = undefined;
     self.added_map_layers = [];
+    self.markers = [];
     self.geojson = undefined;
     self.mapInfo = undefined;
     self.mapInfo_div = undefined;
@@ -270,7 +271,14 @@ function IndicatorComparisonViewModel (data) {
     };
 
     self.clear_map = function(){
+
         self.map.removeLayer(self.geojson);
+
+        for ( var index in self.markers){
+            self.map.removeLayer(self.markers[index])
+        }
+
+        self.markers = [];
 
         if(self.legend._map != null){
             self.map.removeControl(self.legend);
@@ -482,6 +490,8 @@ function IndicatorComparisonViewModel (data) {
 
         self.geojson.resetStyle(layer);
         self.mapInfo.update();
+
+
     }
 
     self.makeOnEachFeature = function(feature, layer) {
@@ -497,6 +507,8 @@ function IndicatorComparisonViewModel (data) {
         var marker = L.marker(center)
 
         marker.layer = layer
+        layer.marker = marker
+        self.markers.push(marker);
         marker.on('click',
             self.highlightFeature).addTo(self.map);
     }
