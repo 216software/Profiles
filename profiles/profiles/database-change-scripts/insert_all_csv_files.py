@@ -250,6 +250,7 @@ if __name__ == "__main__":
     load_neighborhood("usps_vac2011to2015_spa2016Jan27.csv")
 
     load_neighborhood("crimedata.csv")
+    load_cdc("crimedata-cdc.csv")
 
     pgconn.commit()
 

@@ -22,6 +22,7 @@ script_order:
 -   create-view-pretty-indicator-location-values.sql
 -   add-sas-variable-to-indicators.sql
 -   add-more-indicator-columns.sql
+-   add-indicator-extra-data-columns.sql
 -   insert_all_csv_files.py
 -   update_indicators_with_descriptions.py
 -   insert-indicator-formatting-based-on-spreadsheet.sql
@@ -29,4 +30,4 @@ script_order:
 -   clean-up-locations.sql
 -   add-index-to-locations.sql
 -   add-cle-city-shape.sql
--   add-indicator-extra-data-columns.sql
+-   make-cleveland-city.sql

@@ -109,6 +109,8 @@ class Location(object):
             select (locations.*)::locations as x
             from locations
 
+            where display_me = true
+
             order by location_type, title
             """)
 
