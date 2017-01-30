@@ -2,7 +2,6 @@
 var format_value  = function(newValue, format, fixed_digits){
 
     if(newValue == 999999){
-        console.log(newValue);
         return 'n/a';
     }
 

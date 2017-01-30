@@ -40,7 +40,16 @@ function IndicatorComparisonViewModel (data) {
         // This is a bit of a hack since we don't exactly handle ranges
         // the best...
         var options = [];
-        if(self.observable_timestamps().length > 2){
+
+        if(self.rootvm.startpagevm.educationvm.indicator_titles.indexOf(
+                self.selected_indicator().title() >= 0)){
+            for(var i = 0; i < self.observable_timestamps().length; i++){
+                options.push({'value':self.observable_timestamps()[i].year(),
+                    'text':self.observable_timestamps()[i].year() + '-' +
+                    (parseInt(self.observable_timestamps()[i].year()) + 1) })
+            }
+        }
+        else if(self.observable_timestamps().length > 2){
             for(var i = 0; i < self.observable_timestamps().length; i++){
                 options.push({'value':self.observable_timestamps()[i].year(),
                     'text':self.observable_timestamps()[i].year()})
