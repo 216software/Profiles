@@ -124,6 +124,16 @@ containing locations:</strong>
     params: ['location_uuid']
 }"></div>
 
+<div data-bind="page: {
+    id: 'faq',
+    source: '/static/templates/faq.html',
+    with: faqvm,
+    params: ['tab'],
+    afterShow: faqvm.initialize
+    }
+"></div>
+
+
 
 <div data-bind="page: {
     id: 'overview',

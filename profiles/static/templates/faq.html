@@ -1,10 +1,182 @@
-<div class="row" style="margin-bottom:15px">
+<h2>Frequently Asked Questions</h2>
 
-<div class="col-md-8 col-md-offset-2">
-<h1>FAQ</h1>
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="panel panel-default">
+  <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+      <a href="#" role="button"
+        data-bind="click:function(){show_tell_me_more(!show_tell_me_more()); return false;}">
+        Tell me more about how to use this website</a>
+  </div>
 
-<p class="lead">FAQ goes here</p>
+  <div class="panel-body" data-bind="slideVisible:show_tell_me_more" id="#tellMeMore">
+    <h4>Choose a geography</h4>
+    <p>In this data portal, data is presented at the neighborhood, CDC service area, city, and county geographic levels. To begin, choose which geography you’re interested in by using the left hand drop-down menus. After choosing a geography, hit “change location.”</p>
 
-</div>
+    <p>If you’re uncertain what geographies you’re interested in, you can use the geography look up feature underneath the drop-down menus. Enter an address and hit “look up by address” to find geographies that contain that address.</p>
+    <h4>Navigate through the data tabs</h4>
+    <p>In this data portal, indicators are grouped into topic areas. You can navigate through the topic areas in the upper menu bar that spans across the top of the site. Navigating through the data tabs will display the indicators for the selected geography.</p>
 
-</div> <!-- closes row -->
+
+    <h4>Map the data</h4>
+    <p>Each indicators is map-able at the geographic level chosen. To map the indicator, click on the “map” button next to the indicator. You will navigate to another page, and will need to select the year you’re interested in mapping, then choose “update map.”</p>
+
+    <h4>View the data cross-geographies</h4>
+    <p>Most of the Progress Index focuses on presenting the indicators for one geography of interest at a time. You can also view one indicator at all of the geographies on one geographic level. To do this, click on the “map” button next to the indicator. You will navigate to another page, and will need to select the year you’re interested in mapping, then choose “update map.” Then, in the upper left portion of the map, choose “table.” You will be presented with a table of the selected indicator for all available geographies.</p>
+
+    <h4>Download data</h4>
+    <p>The data is downloadable in .csv and .pdf forms. You can download the data by topic area (Overview, Progress Metrics, Population, Safety, etc.), and you can also download the data in table view. Download links for .csv and .pdf format are at the top of each table.</p>
+
+    <h4>More information on the indicator</h4>
+    <p>More information on the indicators presented is available by clicking the “I” icon alongside each indicator. Included is the definition of the indicator, the universe, limitations, source, data “as of” data, and numerator and denominator tables where applicable.</p>
+
+    <h4>The “+/-“ bar</h4>
+    <p>Where relevant, indicators display a “+/-“ button. Clicking on the button displays the margin of error and the coefficient of variance. You can read more about the margin of error and coefficient of variance in the data source section below.</p>
+
+    </div> <!-- closes panel-body -->
+</div> <!-- closes panel -->
+
+<div class="panel panel-default">
+  <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+      <a href="#" role="button"
+        data-bind="click:function(){show_data(!show_data()); return false;}">
+        Tell me more about the data</a>
+  </div>
+
+  <div class="panel-body" data-bind="slideVisible:show_data">
+    <h4>Where does the data come from?</h4>
+    <p>The indicators in the Progress Index stem from a variety of data sources. Use the “i” icon next to each indicator to get more information about the data source and calculation methods for that particular indicator. More information on data sources is also available in the “Data Sources” section of this page.</p>
+
+    <p>Each of the indicators are processed by the Center on Urban Poverty and Community Development at the Jack, Joseph and Morton Mandel School of Applied Social Sciences at Case Western Reserve University. You can learn more about our work at http://povertycenter.case.edu.
+    You can access many of the indicators at different geographic levels at http://neocando.case.edu.</p>
+
+    <h4>How did you choose which indicators to include?</h4>
+    <p>Cleveland Neighborhood Progress, a community development funding intermediary in Cleveland, Ohio, seeks to promote the inclusion of relevant, timely data in the strategies and planning of Cleveland’s community development industry (CDCs).  The Progress Index is a way to provide focus in a world where data is everywhere. Indicators were chosen over a two year period where Cleveland Neighborhood Progress facilitated conversations with a variety of community stakeholders. Indicators currently in the Progress Index are both relevant to the work of Cleveland’s CDCs, and currently accessible. As CDC work shifts and as data becomes increasingly accessible, new indicators will be considered and vetted for relevance.</p>
+
+    <h4>How are neighborhoods defined?</h4>
+    <p>Neighborhoods, sometimes referred to as Statistical Planning Areas or SPAs, are defined by the City of Cleveland. Neighborhoods have only been formally defined twice; originally in 2000 and again in 2014.</p>
+
+    <h4>How are CDC service areas defined?</h4>
+    <p>CDC service areas are defined by the City of Cleveland’s Department of Community Development. Yearly, Cleveland Neighborhood Progress facilitates any updates or modifications to the service area definitions.</p>
+
+    <h4>What are “arms-length sales”?</h4>
+    <p>Arm's length sales include all property transfers except those transferred at Sheriff’s sale, purchased by a bank, financial institution, government-sponsored entity (GSE) or local government, or recorded with a zero price. Bulk sales and self-sales are also excluded. The Poverty Center receives data on all property transfers and subsets the data to create the arms-length sales data set.</p>
+
+
+    <h4>It seems like the data isn’t there?</h4>
+    <p>If the data is missing for an indicator at a geography, the table will yield empty cells. If the data is suppressed, that is, not shown due to confidentiality or privacy concerns, the data will be displayed as “N/A."</p>
+    </div> <!-- closes panel-body -->
+</div> <!-- closes panel -->
+
+  <div class="panel panel-default">
+  <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+      <a href="#" role="button"
+        data-bind="click:function(){show_data_sources(!show_data_sources()); return false;}">
+        Tell me more about data sources</a>
+  </div>
+
+  <div class="panel-body" data-bind="slideVisible:show_data_sources">
+
+    <h4>U.S. Census:</h4>
+    <p>According to the U.S. Constitution, the Census Bureau is
+    mandated to collect population data every 10 years. This census includes
+    detailed data on age, sex, households, families, race, and more.
+    </p>
+
+    <p class="small">Source:
+    <a href="http://www.census.gov/" target="_blank">http://www.census.gov/</a>
+    </p>
+
+    <h4>American Community Survey (ACS):</h4>
+    <p> The ACS is an ongoing survey that
+    samples a small percentage of the population on questions regarding
+    family and relationships, income, health insurance, education,
+    employment, and disabilities. The ACS is available for 3 different time
+    periods which are to be selected carefully based on precision and
+    population: 1-year (12 months of collected data) - the smallest sample
+    size, which is less reliable than 3-year or 5-year samples, but contains
+    the most current data.
+    Contains data for areas with populations of
+    65,000+; 3-year (36 months of collected data) - larger sample size than
+    1-year data and is more reliable than 1-year, but less reliable than
+    5-year data. Contains data for areas with populations of 20,000+; *
+    5-year (60 months of collected data) - the largest sample size and the
+    most reliable data, but the least current. Contains data for all areas
+    (including tract and block group). At the neighborhood and CDC service
+    area geographic levels, the 5-year ACS estimates are used.
+    </p>
+
+    <p>Whenever the ACS is used as the data source for an indicator, the Margin
+    of Error and Coefficient of Variation are also calculated to aid in
+    understanding the reliability of the estimates.</p>
+
+    <h4>Margin of Error (MOE):</h4>
+    <p>The MOE, reported along with an estimate, means
+    that one can be 90 percent confident that the true value is the
+    estimated value, plus or minus the MOE. More information here.</p>
+
+    <h4>Coefficient of Variation (CV):</h4>
+    <p> A measure of reliability of the ACS
+    estimate. The Census provides the following guidelines for determining
+    the reliability of the estimate:</p>
+
+
+    <p>
+    Coefficient of Variance &lt;15&#37; - Good<br />
+    Coefficient of Variance &gt;15&#37; and &lt; 61&#37; - Fair<br />
+    Coefficient of Variance &gt;&#61; 61&#37; - Poor<br />
+    </p>
+
+    <p class="small">Source:
+    <a target="_blank" href="https://www.census.gov/programs-surveys/acs/">
+    https://www.census.gov/programs-surveys/acs/</a>
+    </p>
+
+    <h4>Longitudinal Employer-Household Dynamics (LEHD):</h4>
+    <p>
+    The LEHD program is
+    part of the Center for Economic Studies at the U.S. Census Bureau. The
+    LEHD program produces new, cost effective, public-use information
+    combining federal, state and Census Bureau data on employers and
+    employees under the Local Employment Dynamics (LED) Partnership.</p>
+
+    <p class="small">Source:<br />
+    <a target="_blank" href="http://lehd.ces.census.gov/">http://lehd.ces.census.gov/</a></p>
+
+    <h4>Cuyahoga County Fiscal Office</h4>
+    <p>
+    - ADD DESCRIPTION</p>
+
+    <h4>Cuyahoga County Clerk of Courts</h4>
+    <p>
+    - ADD DESCRIPTION</p>
+
+    <h4>Cuyahoga County Sheriff's Department</h4>
+    <p>
+    - ADD DESCRIPTION</p>
+
+    <h4>City of Cleveland Police Department</h4>
+    <p>
+    - ADD DESCRIPTION</p>
+
+    <h4>United States Postal Service</h4>
+    <p>
+    - ADD DESCRIPTION</p>
+
+    <h4>Ohio Department of Health Vital Statistics Divisions</h4>
+    <p>
+    - ADD DESCRIPTION</p>
+
+    <h4>Cleveland Metropolitan School District</h4>
+    <p>
+    - ADD DESCRIPTION</p>
+
+    </div> <!-- closes panel-body -->
+ </div> <!-- closes panel -->
+
+
+</div> <!-- closes panel-group -->
+
+

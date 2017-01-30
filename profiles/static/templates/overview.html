@@ -65,18 +65,20 @@ Downlad as CSV</a>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 <td class="data"> <span data-bind="text:most_recent_value().formatted"></span>
 
-<span data-bind="if:indicator_CV()">
+<span data-bind="if:indicator_CV">
 <span data-bind="if:indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted">
 <button class="btn btn-xs hide-from-print"
         data-toggle="popover"
         title="CV &amp; MOE"
         data-bind="attr: {'data-content' :
-            $parent.pretty_CV_and_MOE(most_recent_indicator_value().observation_timestamp_year())}">
+            pretty_CV_and_MOE(most_recent_indicator_value().observation_timestamp_year())}">
         +/-</button>
 
 
 </span></span>
 </td>
+
+
 <!-- ko if:indicator_CV -->
 <!-- ko if:indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted -->
 

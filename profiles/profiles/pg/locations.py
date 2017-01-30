@@ -224,7 +224,7 @@ class Location(object):
 
                     where l.location_uuid = %(location_uuid)s
                     and i.title = any(%(indicators)s)
-                    and ilv.value != 999999
+                    --and ilv.value != 999999
 
                     order by ilv.observation_timestamp asc
                 )

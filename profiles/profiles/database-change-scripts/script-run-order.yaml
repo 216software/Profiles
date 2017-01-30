@@ -31,3 +31,4 @@ script_order:
 -   add-index-to-locations.sql
 -   add-cle-city-shape.sql
 -   make-cleveland-city.sql
+-   update_indicators_with_extra_details.py

@@ -65,6 +65,9 @@ function StartPageViewModel (data) {
         }
     });
 
+    self.faqvm = new FAQViewModel({'rootvm':data.rootvm,
+        'parentvm':self});
+
     self.stabilizationvm = new StabilizationViewModel({'rootvm':data.rootvm,
         'parentvm':self});
 
@@ -237,9 +240,9 @@ function StartPageViewModel (data) {
             self.change_location();
         }
         else{
-            // Let's set Cleveland City as the default location
+            // Let's set Cleveland as the default location
             self.selected_location(ko.utils.arrayFirst(self.locations(), function(loc){
-                return 'Cleveland City' == loc.title();
+                return 'Cleveland' == loc.title();
             }));
 
             self.selector_location(self.selected_location());

@@ -181,7 +181,7 @@ function Indicator (data) {
         }
 
         if(output){
-            output += '<p class="small"><a href="/#about/data-sources">More info on CV &amp; MOE</a></p>';
+            output += '<p class="small"><a href="/#/faq?tab=datasources">More info on CV &amp; MOE</a></p>';
         }
         return output
 
