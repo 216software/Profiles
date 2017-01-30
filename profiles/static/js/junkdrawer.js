@@ -1,6 +1,11 @@
 // Global formatter
 var format_value  = function(newValue, format, fixed_digits){
 
+    if(newValue == 999999){
+        console.log(newValue);
+        return 'n/a';
+    }
+
     if(fixed_digits == undefined && format == 'percent'){
         fixed_digits = 1;
     }
