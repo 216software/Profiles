@@ -63,7 +63,14 @@ to filter by location type, or to search for a specific location.
 <p class="hide-from-print text-info small">
 <a target="_blank" data-bind="attr: {href: '/pdf/Indicator-Values-' + selected_indicator().title() + '.pdf'}">Download as PDF</a>
 |
-<a target="_blank" data-bind="attr: {href: csv_link() }">Download as CSV</a>
+<a href="#"
+    data-bind="click:function(event){
+    rootvm.exportTableToCSV(event, ['indicatorComparisonTable'],
+'comparison - ' + selected_indicator().title() + '.csv');   return true;}">
+    Downlad as CSV</a>
+</p>
+
+
 </p>
 
 
@@ -72,7 +79,8 @@ to filter by location type, or to search for a specific location.
 
 </div> <!-- closes sub-row -->
 
-<table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered"
+    id="indicatorComparisonTable">
 <thead>
 <tr>
 <th style="cursor:pointer" data-bind="click:location_click_sort">

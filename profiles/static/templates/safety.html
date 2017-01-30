@@ -30,13 +30,15 @@ comparison of a given indicator.</h5>
 <p class="hide-from-print text-info small">
 <a target="_blank" data-bind="attr: {href: '/pdf/safety-' + print_friendly_name + '.pdf'}">Download as PDF</a>
 |
-<a target="_blank" data-bind="attr: {href: $parent.csv_link() }">Download as CSV</a>
-
+<a href="#"
+    data-bind="click:function(event){
+    rootvm.exportTableToCSV(event, ['safetyTable'], 'safety - ' + print_friendly_name + '.csv');   return true;}">
+    Downlad as CSV</a>
 </p>
 
 </div>
 
-<table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered" id="safetyTable">
 <thead>
 <tr>
 <th>Indicator</th>
