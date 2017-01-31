@@ -9,7 +9,7 @@
         display: none;
     }
     .show-only-print{
-        display:unset;
+        display:inline-block;
     }
     td.show-only-print{
         display:table-cell;
