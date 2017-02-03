@@ -9,3 +9,4 @@ update indicator_location_values set location_uuid = (select location_uuid from 
 
 -- We don't want to see the other cleveland
 update locations set display_me = false where title = 'Cleveland City';
+update locations set display_me = false where title = 'Cuyahoga County' and location_type = 'neighborhood';
