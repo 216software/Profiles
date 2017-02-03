@@ -12,7 +12,7 @@ import pdfkit
 from profiles import configwrapper
 from profiles import pg
 
-log = logging.getLogger("profiles.scripts.make_pdf_locations")
+log = logging.getLogger("pyprofiles.scripts.make_pdf_files")
 
 def set_up_args():
 
@@ -34,7 +34,10 @@ tab_names = [
     "education",
     "workforce",
     "economy",
+    "population"
 ]
+
+tab_names = [ "population" ]
 
 if __name__ == "__main__":
 
@@ -42,7 +45,7 @@ if __name__ == "__main__":
 
     cw = configwrapper.ConfigWrapper.load_yaml(args.yaml_file_name)
 
-    cw.configure_logging("script")
+    cw.configure_logging()
 
     pgconn = cw.get_pgconn()
 
@@ -56,6 +59,7 @@ if __name__ == "__main__":
     }
 
     for loc in pg.locations.Location.select_all(pgconn):
+        log.debug('printing pdf for {0}'.format(loc.title))
 
         for tab_name in tab_names:
 
@@ -70,10 +74,20 @@ if __name__ == "__main__":
                     tab_name,
                     loc.print_friendly_name))
 
-            pdfkit.from_url(
-                html_url,
-                pdf_file_path,
-                pdf_kit_options)
+            do_it_again = True
+
+            while do_it_again:
+                try:
+                    pdfkit.from_url(
+                        html_url,
+                        pdf_file_path,
+                        pdf_kit_options)
+                    do_it_again = False
+
+                except Exception as e:
+                    log.info("trying {0}".format(html_url))
+                    log.debug('gotta do it again')
+                    do_it_again = True
 
             log.info("Wrote {0}".format(pdf_file_path))
 
