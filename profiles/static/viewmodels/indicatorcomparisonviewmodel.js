@@ -42,7 +42,8 @@ function IndicatorComparisonViewModel (data) {
         var options = [];
 
         if(self.rootvm.startpagevm.educationvm.indicator_titles.indexOf(
-                self.selected_indicator().title() >= 0)){
+                self.selected_indicator().title()) >= 0){
+
             for(var i = 0; i < self.observable_timestamps().length; i++){
                 options.push({'value':self.observable_timestamps()[i].year(),
                     'text':self.observable_timestamps()[i].year() + '-' +
