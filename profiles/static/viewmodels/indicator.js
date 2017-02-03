@@ -98,14 +98,19 @@ function Indicator (data) {
         if(self.indicator_values().length > 0){
             var first = self.indicator_values_sorted_asc()[0].value()
             var last = self.indicator_values_sorted_asc()[self.indicator_values().length - 1].value();
-
             if (first == 0){
                 return 0;
             }
-            else{
-                result = ((last - first) / first) * 100;
-                return format_value(result, 'percent');
+
+            // if last is suppressed, get the next to last
+            if (last == '999999')
+            {
+                last = self.indicator_values_sorted_asc()[
+                    self.indicator_values().length - 2].value();
             }
+
+            result = ((last - first) / first) * 100;
+            return format_value(result, 'percent');
         }
 
     });
