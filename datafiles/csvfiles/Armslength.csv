@@ -25,4 +25,4 @@ pctchg_medntalprice,Five year percent change -- arms-length median sale price - 
 _sfsale,Percent of arms-length residential parcel sales - single family,(Arms-length residential parcel sales - single-family/Arms-length residential parcel sales) X 100
 _mfsale,Percent arms-length residential parcel sales - multi-family,(Arms-length residential parcel sales - multi-family/Arms-length residential parcel sales) X 100
 _cdsale,Percent of arms-length residential parcel sales - condo,(Arms-length residential parcel sales - condo/Arms-length residential parcel sales) X 100
-_ntalsales,Percent of arms-length residential parcel sales  - non-tainted parcels,(Arms-length residential parcel sales - non-tainted/Arms-length residential parcel sales) X 100
+_ntal_sales,Percent of arms-length residential parcel sales  - non-tainted parcels,(Arms-length residential parcel sales - non-tainted/Arms-length residential parcel sales) X 100
