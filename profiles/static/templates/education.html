@@ -33,7 +33,7 @@ Downlad as CSV</a>
 <th>Indicator</th>
 <th class="data">% change</th>
 <!-- ko foreach:observable_timestamps -->
-    <th> <span data-bind="text:$data.format('YYYY')"></span>-<span data-bind="text:$data.year() + 1"></span> school year</th>
+    <th> <span data-bind="text:$data.year() - 1"></span>-<span data-bind="text:$data.format('YYYY')"></span> school year</th>
 <!-- /ko -->
 </tr>
 <tr>
@@ -79,7 +79,7 @@ Downlad as CSV</a>
 <th>Children proficient in Math</th>
 <th class="data">% change</th>
 <!-- ko foreach:observable_timestamps -->
-    <th> <span data-bind="text:$data.format('YYYY')"></span>-<span data-bind="text:$data.year() + 1"></span> school year</th>
+    <th> <span data-bind="text:$data.year() - 1"></span>-<span data-bind="text:$data.format('YYYY')"></span> school year</th>
 <!-- /ko -->
 </tr>
 </thead>
@@ -126,7 +126,7 @@ Downlad as CSV</a>
 <th>Kindergarten Readiness Assessment Level (KRA-L)</th>
 <th class="data">% change</th>
 <!-- ko foreach:observable_timestamps -->
-    <th> <span data-bind="text:$data.format('YYYY')"></span>-<span data-bind="text:$data.year() + 1"></span> school year</th>
+    <th> <span data-bind="text:$data.year() - 1"></span>-<span data-bind="text:$data.format('YYYY')"></span> school year</th>
 <!-- /ko -->
 </tr>
 </thead>
@@ -175,7 +175,7 @@ Downlad as CSV</a>
 <th>Other Indicators</th>
 <th class="data">% change</th>
 <!-- ko foreach:observable_timestamps -->
-    <th> <span data-bind="text:$data.format('YYYY')"></span>-<span data-bind="text:$data.year() + 1"></span> school year</th>
+    <th> <span data-bind="text:$data.year() - 1"></span>-<span data-bind="text:$data.format('YYYY')"></span> school year</th>
 <!-- /ko -->
 </tr>
 </thead>

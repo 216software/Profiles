@@ -46,8 +46,8 @@ function IndicatorComparisonViewModel (data) {
 
             for(var i = 0; i < self.observable_timestamps().length; i++){
                 options.push({'value':self.observable_timestamps()[i].year(),
-                    'text':self.observable_timestamps()[i].year() + '-' +
-                    (parseInt(self.observable_timestamps()[i].year()) + 1) })
+                    'text':(parseInt(self.observable_timestamps()[i].year()) - 1) + '-' +
+                        self.observable_timestamps()[i].year() })
             }
         }
         else if(self.observable_timestamps().length > 2){

@@ -25,11 +25,13 @@ function StabilizationViewModel (data) {
         'ntal_sales', '_ntal_sales',
         'med_ntal_price'];
 
+
+    /* Don't need this at the moment
     self.indicator_titles_extra_formatting = {
         'hsg_den':'Number of residential parcels per square mile; includes only single family, multi-family, and condominium parcels.',
         'distress':'Distressed sales are arms-length transactions for $10,000 or less. Residential single family, multi-family, and condominium parcels only included.',
         'ntal_sales':'Arms-length transactions with no history of foreclosure from 2006 onward. Residential single family, multi-family, and condominium parcels only included. Rate is of all arms-arms length transactions on residential single family, multi-family, and condominium parcels. <br />Note: Arm\'s length sales include all property sales except those transferred at Sheriff sale, purchased by a bank, financial institution, GSE or local government, or recorded with a zero price. Bulk sales and self-sales are also excluded.'
-    };
+    };*/
 
     self.overview_indicators = ['res_occ']
 
