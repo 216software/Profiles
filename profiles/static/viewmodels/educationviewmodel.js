@@ -31,7 +31,7 @@ function EducationViewModel (data) {
     self.kindergarten_readiness_titles =  ['band1', '_band1',
         'band2', '_band2',
         'band3', '_band3',
-        'meanscore', ];
+        'meanscore'];
 
     self.other_indicators = ['qslots', '_attend']
 
@@ -83,7 +83,13 @@ function EducationViewModel (data) {
             function (x) {
                 x.indicator.rootvm = self.rootvm;
                 x.indicator.indicator_values = x.indicator_values;
-                return new Indicator(x.indicator);
+
+                var i = new Indicator(x.indicator);
+
+                if (['meanscore', 'qslots'].indexOf(i.title()) >= 0){
+                    i.percent_change_available(false);
+                }
+                return i;
             }));
 
     };

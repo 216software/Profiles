@@ -21,6 +21,8 @@ function Indicator (data) {
     self.numerator_tables = ko.observable(data.numerator_tables);
     self.denominator_tables = ko.observable(data.denominator_tables);
 
+    self.percent_change_available = ko.observable(true);
+
 
 
     self.indicator_category = ko.observable(data.indicator_category);
@@ -95,6 +97,14 @@ function Indicator (data) {
     });
 
     self.percent_change_indicator_value = ko.computed(function(){
+
+
+
+        if(!self.percent_change_available()){
+            return 'n/a';
+        }
+
+
         if(self.indicator_values().length > 0){
             var first = self.indicator_values_sorted_asc()[0].value()
             var last = self.indicator_values_sorted_asc()[self.indicator_values().length - 1].value();
@@ -108,11 +118,9 @@ function Indicator (data) {
                 last = self.indicator_values_sorted_asc()[
                     self.indicator_values().length - 2].value();
             }
-
             result = ((last - first) / first) * 100;
             return format_value(result, 'percent');
         }
-
     });
 
     self.average_indicator_value = ko.computed(function(){
