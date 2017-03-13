@@ -32,4 +32,4 @@ script_order:
 -   add-cle-city-shape.sql
 -   make-cleveland-city.sql
 -   update_indicators_with_extra_details.py
--   change-kindergarten-percent-change-indicator-title.sql
+-   change-kindergarten-labels-and-update-cleveland-reading-data.sql
