@@ -25,8 +25,9 @@ function WorkforceViewModel (data) {
     };
 
     /* This should also include the order we want to display */
-    self.indicator_titles = ['lf' ,'_lf', 'cvlf', '_cvlf', 'mlf',
-        'emp', '_emp', 'cvemp', 'memp',
+    self.indicator_titles = ['lf' ,'_lf', 'cvlf', 'cv_lf', 'mlf', 'm_lf',
+        'emp',  'cvemp', 'memp',
+        '_emp',  'cv_emp', 'm_emp',
         'pop25p', 'cvpop25p', 'mpop25',
         'hsls9', '_hsls9', 'cvhsls9', 'mhsls9',
         'cv_hsls9', 'm_hsls9',
@@ -45,7 +46,7 @@ function WorkforceViewModel (data) {
         'cv_prof', 'm_prof'
         ];
 
-    self.indicators_employment = ['emp', 'lf'];
+    self.indicators_employment = ['emp', '_emp', 'lf', '_lf'];
 
 
     self.indicators_pop_by_ed_attainment = ['pop25', 'hsls9', '_hsls9',
@@ -57,6 +58,7 @@ function WorkforceViewModel (data) {
         'prof', '_prof'];
 
     self.indicator_cv_pairings = {'lf':'cvlf', 'emp':'cvemp',
+        '_lf':'cv_lf', '_emp':'cv_emp',
         'pop25p':'cvpop25p',
         'hsls9':'cvhsls9',
         '_hsls9':'cv_hsls9',
@@ -74,6 +76,7 @@ function WorkforceViewModel (data) {
         }
 
     self.indicator_moe_pairings = {'lf':'mlf', 'emp':'memp',
+        '_lf':'m_lf', '_emp':'cv_emp',
         'pop25p':'mpop25p', 'hsls9':'mhsls9',
         '_hsls9':'m_hsls9',
         'hs9to12':'mhs9to12',
