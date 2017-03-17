@@ -86,7 +86,7 @@ function EducationViewModel (data) {
 
                 var i = new Indicator(x.indicator);
 
-                if (['meanscore', 'qslots'].indexOf(i.title()) >= 0){
+                if (['meanscore', 'qslots', 'band1', '_band1', 'band2', '_band2', 'band3', '_band3'].indexOf(i.title()) >= 0){
                     i.percent_change_available(false);
                 }
                 return i;
