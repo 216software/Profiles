@@ -29,8 +29,8 @@ p.lead{
 }
 
 .navbar-default {
-    background:#19478a;
-    border:none;
+    background:white;
+    border:None;
 }
 
 .search-form{
@@ -288,7 +288,7 @@ ul.domain-groups, ul.domain-groups li{
     margin-bottom:10px;
     list-style:none;
 }
-ul.nav a:hover { background-color: #92D3D2 !important; }
+ul.nav a:hover { background-color: #19478a !important; color:white !important; }
 .domain-groups table{
     margin-top:-15px;
     font-size:14px;
@@ -828,7 +828,6 @@ td.indicator-options .admin-link{
   font-weight:bold;
 }
 ul.about-faq a:hover {
-  background-color: #428bca !important;
   text-decoration:underline;
 }
 .faq-question{
@@ -914,10 +913,19 @@ padding: 0px;
 }
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus{
    background-color:white;
+   border: 2px solid #19478a;
+   border-bottom:None;
+   margin-bottom:-2px;
+   color:black;
 }
 .navbar-default .navbar-nav>li>a{
-   color: white;
+   color: black;
 }
+
+.navbar-default .navbar-toggle .icon-bar {
+        background-color: #000;
+}
+
 .sub-nav{
    border-radius: 4px 4px 0 0;
 }
