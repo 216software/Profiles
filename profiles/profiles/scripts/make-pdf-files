@@ -23,6 +23,7 @@ def set_up_args():
 
     return ap.parse_args()
 
+"""
 tab_names = [
     "overview",
     "progress",
@@ -36,8 +37,8 @@ tab_names = [
     "economy",
     "population"
 ]
-
-tab_names = [ "population" ]
+"""
+tab_names = ["workforce" ]
 
 if __name__ == "__main__":
 
@@ -104,10 +105,20 @@ if __name__ == "__main__":
             "Indicator-Values-{0}.pdf".format(
                 ind.title))
 
-        pdfkit.from_url(
-            html_url,
-            pdf_file_path,
-            pdf_kit_options)
+        do_it_again = True
+
+        while do_it_again:
+            try:
+                pdfkit.from_url(
+                    html_url,
+                    pdf_file_path,
+                    pdf_kit_options)
+                do_it_again = False
+
+            except Exception as e:
+                log.info("trying {0}".format(html_url))
+                log.debug('gotta do it again')
+                do_it_again = True
 
         log.info("Wrote {0}".format(pdf_file_path))
 

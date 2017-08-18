@@ -1,8 +1,9 @@
+---
 
 app:
 
     secret:                     2246 Tudor
-    host: &host                 profiles.216software.com
+    host: &host                 progressindexcle.org
     scheme:                     http
     launch_debugger_on_error:   False
     webapp_port:                6660
@@ -102,4 +103,4 @@ profiles:
     pdf_files_directory: /tmp/profiles-pdf-files
 
 
-# vim: set filetype=yaml :
+# vim: set filetype=yaml bg=dark:
