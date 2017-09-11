@@ -1,0 +1,108 @@
+---
+
+app:
+
+    secret:                     2246 Tudor
+    host: &host                 test-profiles.216software.com
+    scheme:                     http
+    launch_debugger_on_error:   False
+    webapp_port:                6660
+    pidfile:                    /tmp/prod-2017-profiles-webapp.pid
+    num_webapp_workers:         1
+
+postgresql:
+    database:   &dbname profiles_prod_2017
+    user:       &dbuser profiles
+    host:       &dbhost localhost
+    port:       &dbport 5432
+    password:   &dbpass pr0f1l3s
+
+smtp:
+    host: &smtphost  localhost
+
+logging:
+
+    default: &defaultlogging
+
+        # This is the catch-all.
+        # root:
+        #     level: DEBUG
+        #     handlers: [console, textfile]
+
+        loggers:
+
+
+            pyprofiles: &pyprofileslogging
+                propagate: False
+                level: DEBUG
+                # handlers: [console, pg, textfile]
+                handlers: [console, textfile]
+
+            profiles: *pyprofileslogging
+            werkzeug: *pyprofileslogging
+            horsemeat: *pyprofileslogging
+
+        disable_existing_loggers: false
+
+        version: 1
+
+        handlers:
+
+            console:
+                class: logging.StreamHandler
+                level: DEBUG
+                formatter: colorfmt
+
+            pg:
+                class:          logtopg.PGHandler
+                level:          DEBUG
+                log_table_name: profileslogs
+                database:       *dbname
+                host:           *dbhost
+                user:           *dbuser
+                password:       *dbpass
+
+            textfile:
+                class: logging.FileHandler
+                filename: /var/log/profiles/profiles-2017.log
+                mode: a
+                level: DEBUG
+                formatter: consolefmt
+
+            email:
+                level: CRITICAL
+                formatter: consolefmt
+                class: logging.handlers.SMTPHandler
+                mailhost: *smtphost
+
+                fromaddr: profiles-2017@profiles.216software.com
+
+                toaddrs:
+                    - info@216software.com
+
+                subject: production error (2017 site)
+        formatters:
+            consolefmt:
+                format: '%(asctime)-22s [%(process)d] %(name)-30s %(lineno)-5d %(levelname)-8s %(message)s'
+
+            boringfmt:
+                format: "%(asctime)-22s [%(process)d] %(name)-30s %(lineno)-5d %(levelname)-8s %(message)s"
+
+            colorfmt:
+                (): "colorlog.ColoredFormatter"
+                format: "%(log_color)s%(asctime)-22s [%(process)d] %(name)-30s %(lineno)-5d %(levelname)-8s %(message)s"
+
+    script: *defaultlogging
+
+google:
+    google_maps_API_key:    AIzaSyBigZQyl666oFxkCvg6WM9vBW9-1F8-Hho
+
+
+# This is stuff just for this project
+profiles:
+
+    csv_data_files_folder: /home/communityprofiles/checkouts/2017-Profiles/datafiles/csvfiles
+    pdf_files_directory: /tmp/2017profiles-pdf-files
+
+
+# vim: set filetype=yaml bg=dark:
