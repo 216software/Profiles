@@ -6,7 +6,7 @@ app:
     host: &host                 test-profiles.216software.com
     scheme:                     http
     launch_debugger_on_error:   False
-    webapp_port:                6660
+    webapp_port:                6661
     pidfile:                    /tmp/prod-2017-profiles-webapp.pid
     num_webapp_workers:         1
 
@@ -102,7 +102,7 @@ google:
 profiles:
 
     csv_data_files_folder: /home/communityprofiles/checkouts/2017-Profiles/datafiles/csvfiles
+    csv_data_files_folder_2017: /home/communityprofiles/checkouts/2017-Profiles/datafiles-2017/csvfiles
     pdf_files_directory: /tmp/2017profiles-pdf-files
-
 
 # vim: set filetype=yaml bg=dark:

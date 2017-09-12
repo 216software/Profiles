@@ -396,6 +396,12 @@ class IndicatorCategory(RelationWrapper):
             raise KeyError("No indicator_category {0}!".format(
                 category))
 
+class IndicatorLocationValueFactory(psycopg2.extras.CompositeCaster):
+
+    def make(self, values):
+        d = dict(zip(self.attnames, values))
+        return IndicatorLocationValue(**d)
+
 class IndicatorLocationValue(RelationWrapper):
 
     def __init__(self, indicator_uuid, location_uuid,
@@ -430,4 +436,64 @@ class IndicatorLocationValue(RelationWrapper):
             observation_range, value])
 
         return cursor.fetchone().indlocval
+
+    @classmethod
+    def by_ilo(cls, pgconn, indicator, location, observation_timestamp):
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+            select indicator_location_values.*::indicator_location_values as ilv
+            from indicator_location_values
+            where (indicator_uuid, location_uuid, observation_timestamp)
+            = (%s, %s, %s)
+            """), [indicator, location, observation_timestamp])
+
+        if cursor.rowcount:
+            return cursor.fetchone().ilv
+
+        else:
+            raise KeyError("Sorry, no ILV with {0}, {1}, {2} found!".format(
+                indicator,
+                location,
+                observation_timestamp))
+
+    @classmethod
+    def update_value(cls, pgconn, indicator, location,
+        observation_timestamp, value):
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+            update indicator_location_values
+
+            set value = %s
+
+            where (indicator_uuid, location_uuid, observation_timestamp)
+            = (%s, %s, %s)
+
+            returning indicator_location_values.*::indicator_location_values as ilv
+            """), [value, indicator, location, observation_timestamp])
+
+        if cursor.rowcount:
+            ilv = cursor.fetchone().ilv
+            log.info("Updated {0}'s value to {1}.".format(ilv, value))
+            return ilv
+
+        else:
+            raise KeyError("Sorry, no ILV with {0}, {1}, {2} found!".format(
+                indicator,
+                location,
+                observation_timestamp))
+
+    def update_my_value(self, pgconn, new_value):
+
+        if float(new_value) != self.value:
+
+            return self.update_value(
+                pgconn,
+                self.indicator_uuid,
+                self.location_uuid,
+                self.observation_timestamp,
+                float(new_value))
 

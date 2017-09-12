@@ -88,6 +88,13 @@ class ConfigWrapper(configwrapper.ConfigWrapper):
             pgconn,
             factory=IndicatorCategoryFactory)
 
+        from profiles.pg.indicators import IndicatorLocationValueFactory
+
+        psycopg2.extras.register_composite(
+            'indicator_location_values',
+            pgconn,
+            factory=IndicatorLocationValueFactory)
+
         log.info('Just registered composite types in psycopg2')
 
         return pgconn
@@ -169,8 +176,12 @@ class ConfigWrapper(configwrapper.ConfigWrapper):
 
     @property
     def csv_data_files_folder(self):
-
         return self.config_dictionary["profiles"]["csv_data_files_folder"]
+
+    @property
+    def csv_data_files_folder_2017(self):
+
+        return self.config_dictionary["profiles"]["csv_data_files_folder_2017"]
 
     @property
     def google_maps_API_key(self):
