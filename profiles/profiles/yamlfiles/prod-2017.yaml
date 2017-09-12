@@ -36,7 +36,7 @@ logging:
                 propagate: False
                 level: DEBUG
                 # handlers: [console, pg, textfile]
-                handlers: [console, textfile]
+                handlers: [console, textfile, email]
 
             profiles: *pyprofileslogging
             werkzeug: *pyprofileslogging
@@ -75,7 +75,7 @@ logging:
                 class: logging.handlers.SMTPHandler
                 mailhost: *smtphost
 
-                fromaddr: profiles-2017@profiles.216software.com
+                fromaddr: profiles-2017@test-profiles.216software.com
 
                 toaddrs:
                     - info@216software.com
