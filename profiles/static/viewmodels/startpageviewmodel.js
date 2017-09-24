@@ -24,8 +24,6 @@ function StartPageViewModel (data) {
     /* We might have a selected location from the parameter line */
     self.location_uuid = ko.observable();
 
-    self.test = ko.observable("hello");
-
     self.selected_location = ko.observable(new Location({rootvm:data.rootvm}));
 
     self.selector_location = ko.observable();
@@ -411,7 +409,7 @@ function StartPageViewModel (data) {
         var lng = geocode_result.geometry.location.lng();
 
         self.map.setView([lat, lng], 14);
-        L.marker([lat, lng]).addTo(self.map);
+        //L.marker([lat, lng]).addTo(self.map);
 
     };
 

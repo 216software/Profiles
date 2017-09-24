@@ -83,6 +83,25 @@ ko.bindingHandlers.masked_input_on_change =  {
 
 };
 
+ko.bindingHandlers.popover = {
+  init: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+    ko.bindingHandlers.value.init(element, valueAccessor, allBindings);
+    var source = allBindings.get('popoverTitle');
+    var sourceUnwrapped = ko.unwrap(source);
+    $(element).popover({
+      trigger: 'focus',
+      placement: 'top',
+      html: 'true',
+      content: valueAccessor(),
+      title: sourceUnwrapped
+    });
+  },
+  update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
+    var value = valueAccessor();
+    ko.bindingHandlers.value.update(element, valueAccessor);
+  }
+};
+
 phone_number_has_error = function (ph) {
     if (ph != undefined && ph != "" && ph.length != 10) {
         return true;
@@ -533,4 +552,58 @@ ko.bindingHandlers.slideVisible = {
     }
 };
 
+
+// We can probably put this somewhere else -- but create a component
+// here
+
+ko.components.register('indicator-table', {
+    viewModel: function(params) {
+        var self = this;
+        self.observable_timestamps = params.observable_timestamps;
+        self.indicator_titles = params.indicator_titles;
+        self.indicators = params.indicators;
+        self.table_id = params.table_id;
+        self.rootvm = params.rootvm;
+
+        // make sure our pop over gets inited
+    },
+    template:
+        '<table class="table table-striped table-bordered" data-bind="attr:{id: table_id}">'
+        + '<thead><tr><th>Indicator</th>'
+        + '<th class="data">% change</th>'
+        + '<!-- ko foreach:observable_timestamps -->'
+        + '    <th class="data" data-bind="text:$data.format(\'YYYY\')"></th>'
+        + '<!-- /ko -->'
+        + '<tbody>'
+        + '<!-- ko foreach:indicator_titles -->'
+        + '<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->'
+
+        + '<tr data-bind="css: {rate_data: is_a_rate() }">'
+        + '<td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>'
+        + '<span class="pull-right" style="padding-left:5px">'
+        + '<button href="#" class="info-link hide-from-print btn-primary btn-xs"'
+                + 'data-bind="visible:rootvm.indicator_extra_info($data),'
+                           + 'popover:rootvm.indicator_extra_info($data),'
+                           + 'popoverTitle:pretty_label">'
+                + '<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>'
+        + '</button>'
+        + '<a href="#" class="btn btn-primary btn-sm hide-from-print"'
+              + 'data-bind="page-href: {path : \'/indicator-map\','
+              + 'params: {indicator_uuid: indicator_uuid}}">'
+              + 'Map</a>'
+        + '</span>'
+        + '</td>'
+        + '<td class="data" data-bind="text:percent_change_indicator_value"></td>'
+
+        + '<!-- ko foreach:$parents[1].observable_timestamps -->'
+        + '<td class="data"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>'
+        + '</td>'
+        + '<!-- /ko --> <!-- closes inner for loop -->'
+
+        + '</tr>'
+        + '<!-- /ko --> <!-- closes with:Indicator -->'
+        + '<!-- /ko --> <!-- closes foreach:indicator_titles -->'
+        + '</tbody>'
+        + '</thead></table>'
+});
 
