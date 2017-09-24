@@ -12,7 +12,7 @@ function OverViewModel (data) {
 
     var self = this;
 
-    self.type = "ProgressMetricsViewModel";
+    self.type = "OverViewModel";
     self.rootvm = data.rootvm;
     self.parentvm = data.parentvm;
 
