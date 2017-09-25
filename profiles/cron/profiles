@@ -1,1 +1,1 @@
-
+30 * * * * communityprofiles /usr/bin/pg_dump -Fc profiles_prod > /tmp/profiles_prod.pg_dump
