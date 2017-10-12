@@ -179,6 +179,10 @@ class ConfigWrapper(configwrapper.ConfigWrapper):
         return self.config_dictionary["profiles"]["csv_data_files_folder"]
 
     @property
+    def xls_data_files_folder(self):
+        return self.config_dictionary["profiles"]["xls_data_files_folder"]
+
+    @property
     def csv_data_files_folder_2017(self):
 
         return self.config_dictionary["profiles"]["csv_data_files_folder_2017"]

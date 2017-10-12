@@ -1,0 +1,37 @@
+++++++++++++++
+NEOCANDO notes
+++++++++++++++
+
+Big idea
+========
+
+1.  Find a statistic in April's spreadsheet.
+
+2.  Find that in NEOCANDO
+
+3.  Write a script to extract that statistic from NEOCANDO
+
+4.  Define a postgresql table to cram it in
+
+
+First attempt
+=============
+
+Median sales price of residential parcels.  5-year change is 36%
+
+======================================================= ===========
+formula                                                 resolves to
+======================================================= ===========
+
+='Progress Metrics'!C5                                  =INDIRECT("armslength2010to2014!BE"&coding!E2)/100
+
+=INDIRECT("armslength2010to2014!BE"&coding!E2)/100
+
+coding!E2                                               =VLOOKUP(Summary!B1,coding!B2:C37,2,FALSE)
+
+=VLOOKUP(Summary!B1,coding!B2:C37,2,FALSE)              34
+
+Summary!B1                                              University
+
+
+.. vim: set syntax=rst:

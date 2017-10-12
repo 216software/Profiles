@@ -19,10 +19,7 @@ def xls2csv(xls_file_path, csv_file_path):
 
     if len(sheet_names) > 1:
 
-        log.critical("Sorry, {0} has {1} sheets and I can only "
-            "handle single-sheet files!".format(
-            xls_file_path,
-            len(sheet_names)))
+        multi_page_xls2csv(xls_file_path, csv_file_path)
 
     else:
 
@@ -67,13 +64,32 @@ def multi_page_xls2csv(xls_file_path, csv_folder_path):
 
             ws = wb.get_sheet_by_name(sheet_name)
 
-            for row in ws.rows:
+            for row_number, row in enumerate(ws.rows, start=1):
 
-                out.writerow([cell.value.encode("utf-8") for cell in row if cell.value])
+                non_empty_cells = [unicode(cell.value) for cell
+                    in row
+                    if cell.value is not None
+                    and unicode(cell.value).strip()]
+
+                # This is in here because Tsui sometimes puts in two
+                # header rows in her spreadsheets.
+                if row_number == 1 and len(non_empty_cells) == 1:
+
+                    log.debug(
+                        "Will not write out row {0!r}.".format(
+                            ", ".join(non_empty_cells)))
+
+                    continue
+
+                else:
+
+                    out.writerow([unicode(cell.value).encode("utf-8") for cell in row if cell.value])
 
             f.close()
 
             log.info("Saved {0}.".format(out_file_path))
+
+            yield out_file_path
 
 
 def guess_sql_type_to_use(s):

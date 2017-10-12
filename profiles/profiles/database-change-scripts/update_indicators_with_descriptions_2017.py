@@ -9,8 +9,9 @@ import re
 
 from profiles import configwrapper
 from profiles import pg
+from profiles import junkdrawer
 
-log = logging.getLogger("profiles.scripts.update_indicators_with_descriptions")
+log = logging.getLogger("profiles.scripts.update_indicators_with_descriptions_2017")
 
 def set_up_args():
 
@@ -19,19 +20,6 @@ def set_up_args():
 
     return ap.parse_args()
 
-description_files = """
-Armslength.csv
-Blood Lead Level.csv
-CMSD Attendance.csv
-CMSD Proficiency Tests.csv
-CMSD-KRAL.csv
-Crimes.csv
-Mortality-Life Expectancy.csv
-Property-Foreclosure.csv
-Quality pre-school slots.csv
-USPS Vacancies.csv
-cen_acs_lehd.csv
-""".strip()
 
 if __name__ == "__main__":
 
@@ -43,17 +31,15 @@ if __name__ == "__main__":
 
     pgconn = cw.get_pgconn()
 
-    for csv_file_name in description_files.split("\n"):
-
-        log.info(csv_file_name)
-
-        csv_file_path = os.path.join(
-            cw.csv_data_files_folder,
-            csv_file_name)
+    for csv_file_path in junkdrawer.multi_page_xls2csv(
+        os.path.join(
+            cw.xls_data_files_folder,
+            "CNP Dashboard Varlist_2017.xlsx"),
+        "/tmp"):
 
         if not os.path.isfile(csv_file_path):
 
-            raise Exception(csv_file_path)
+            raise IOError(csv_file_path)
 
         else:
 
@@ -63,10 +49,9 @@ if __name__ == "__main__":
 
                 # Clean up whitespace around keys.
                 for col in row.keys():
-                    row[col.strip()] = row[col]
 
-                if row_number < 2:
-                    log.debug(row)
+                    if col is not None:
+                        row[col.strip()] = row[col]
 
                 if "Variable Name" in row and "Variable Description" in row:
                     ind_title = row["Variable Name"]
@@ -78,6 +63,7 @@ if __name__ == "__main__":
 
                 else:
 
+                    log.critical(row_number)
                     log.critical(row)
                     raise Exception("Could not figure out what column has variable name in it!")
 
@@ -102,7 +88,9 @@ if __name__ == "__main__":
 
                     except KeyError as ex:
 
-                        log.error("{0}:{1} not in indicators".format(csv_file_name, ind_title))
+                        log.error("{0}:{1} not in indicators".format(
+                            csv_file_path,
+                            ind_title))
 
     pgconn.commit()
 
