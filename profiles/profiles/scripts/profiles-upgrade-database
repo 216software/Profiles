@@ -158,8 +158,6 @@ def run_sql_script(cw, path_to_script):
         "psql",
         "--quiet",
         "--no-psqlrc",
-        "-U",
-        cw.database_user,
         "-d",
         cw.database_name,
         "--single-transaction",
@@ -170,6 +168,10 @@ def run_sql_script(cw, path_to_script):
         "-f",
         path_to_script,
     ]
+
+    if cw.database_user:
+        x.append("-U")
+        x.append(cw.database_user)
 
     if cw.database_host:
         x.append("-h")
@@ -225,8 +227,6 @@ def maybe_run_setup_script(pgconn, setup_script):
             "psql",
             "--quiet",
             "--no-psqlrc",
-            "-U",
-            cw.database_user,
             "-d",
             cw.database_name,
             "--single-transaction",
@@ -238,6 +238,10 @@ def maybe_run_setup_script(pgconn, setup_script):
             path_to_setup_script,
         ]
 
+        if cw.database_user:
+            x.append("-U")
+            x.append(cw.database_user)
+
         if cw.database_host:
             x.append("-h")
             x.append(cw.database_host)
@@ -245,6 +249,8 @@ def maybe_run_setup_script(pgconn, setup_script):
         if cw.database_port:
             x.append("-p")
             x.append(str(cw.database_port))
+
+        log.debug("About to run this command in a subprocess: {0}".format(" ".join(x)))
 
         subprocess.check_call(x, env=env)
 

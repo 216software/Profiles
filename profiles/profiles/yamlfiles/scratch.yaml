@@ -99,7 +99,7 @@ rackspace:
 # This is stuff just for this project
 profiles:
 
-    csv_data_files_folder:      /home/matt/checkouts/Profiles/datafiles/csvfiles
+    csv_data_files_folder:      /home/matt/checkouts/cwru-poverty-center/datafiles-2017/csvfiles
     pdf_files_directory:        /tmp/profiles-pdf-files
     xls_data_files_folder:      /home/matt/checkouts/cwru-poverty-center/datafiles-2017/xlsfiles
 

@@ -189,7 +189,7 @@ def load_neighborhood(csv_file_name):
 
     return CSVInserter.load_neighborhood(
         pgconn,
-        cw.csv_data_files_folder_2017,
+        cw.csv_data_files_folder,
         csv_file_name)
 
 def load_cdc(csv_file_name):
@@ -199,7 +199,7 @@ def load_cdc(csv_file_name):
 
     return CSVInserter.load_cdc(
         pgconn,
-        cw.csv_data_files_folder_2017,
+        cw.csv_data_files_folder,
         csv_file_name)
 
 if __name__ == "__main__":

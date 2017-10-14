@@ -2,6 +2,7 @@
 
 import locale
 import logging
+import os
 import warnings
 
 import jinja2
@@ -176,7 +177,13 @@ class ConfigWrapper(configwrapper.ConfigWrapper):
 
     @property
     def csv_data_files_folder(self):
-        return self.config_dictionary["profiles"]["csv_data_files_folder"]
+        folder = self.config_dictionary["profiles"]["csv_data_files_folder"]
+
+        if os.path.isdir(folder):
+            return folder
+
+        else:
+            raise IOError("Sorry, {0} is not a directory!".format(folder))
 
     @property
     def xls_data_files_folder(self):
