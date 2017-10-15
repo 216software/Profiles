@@ -3,6 +3,7 @@
 import argparse
 import csv
 import datetime
+import glob
 import logging
 import os
 import re
@@ -189,7 +190,7 @@ def load_neighborhood(csv_file_name):
 
     return CSVInserter.load_neighborhood(
         pgconn,
-        cw.csv_data_files_folder,
+        cw.csv_data_files_folder_2017,
         csv_file_name)
 
 def load_cdc(csv_file_name):
@@ -199,7 +200,7 @@ def load_cdc(csv_file_name):
 
     return CSVInserter.load_cdc(
         pgconn,
-        cw.csv_data_files_folder,
+        cw.csv_data_files_folder_2017,
         csv_file_name)
 
 if __name__ == "__main__":
@@ -212,31 +213,21 @@ if __name__ == "__main__":
 
     pgconn = cw.get_pgconn()
 
-    load_cdc("acs0610_cdc.csv")
-    load_neighborhood("acs0610_spa.csv")
+    cdc_files = glob.glob(
+        "{0}/*cdc.csv".format(
+        cw.csv_data_files_folder_2017))
 
-    load_cdc("acs1115_lehd_cdc.csv")
-    load_neighborhood("acs1115_lehd_spa.csv")
+    spa_files = glob.glob(
+        "{0}/*spa.csv".format(
+        cw.csv_data_files_folder_2017))
 
-    load_cdc("armslength2012to2016_cdc.csv")
-    load_neighborhood("armslength2012to2016_spa.csv")
 
-    load_cdc("Blood_lead2011to2015_cdc.csv")
-    load_neighborhood("blood_lead2011to2015_spa.csv")
+    for cdc_file, spa_file in zip(
+        sorted(cdc_files),
+        sorted(spa_files)):
 
-    load_cdc("crime2012to2016_cdc.csv")
-    load_neighborhood("crime2012to2016_spa.csv")
-
-    load_cdc("foreclosures2012to2016_cdc.csv")
-    load_neighborhood("foreclosures2012to2016_spa.csv")
-    load_cdc("kra2012to2016_cdc.csv")
-    load_neighborhood("kra2012to2016_spa.csv")
-    load_cdc("Mortality_2011to2015_cdc.csv")
-    load_neighborhood("Mortality_2011to2015_spa.csv")
-    load_cdc("Preschool_quality_slots_2012to2016_cdc.csv")
-    load_neighborhood("Preschool_quality_slots_2012to2016_spa.csv")
-    load_cdc("usps_vac2012to2016_cdc.csv")
-    load_neighborhood("usps_vac2012to2016_spa.csv")
+        load_cdc(cdc_file)
+        load_neighborhood(spa_file)
 
     pgconn.commit()
 

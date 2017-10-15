@@ -24,7 +24,7 @@ script_order:
 -   add-more-indicator-columns.sql
 -   add-indicator-extra-data-columns.sql
 -   insert_all_csv_files.py
--   update_indicators_with_descriptions.py
+-   update_indicators_with_descriptions_2017.py
 -   insert-indicator-formatting-based-on-spreadsheet.sql
 -   insert-indicator-pretty-labels.sql
 -   clean-up-locations.sql
