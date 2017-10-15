@@ -104,5 +104,6 @@ profiles:
     csv_data_files_folder: /home/communityprofiles/checkouts/2017-Profiles/datafiles/csvfiles
     csv_data_files_folder_2017: /home/communityprofiles/checkouts/2017-Profiles/datafiles-2017/csvfiles
     pdf_files_directory: /tmp/2017profiles-pdf-files
+    xls_data_files_folder:      /home/communityprofiles/checkouts/2017-Profiles/datafiles-2017/xlsfiles
 
 # vim: set filetype=yaml bg=dark:
