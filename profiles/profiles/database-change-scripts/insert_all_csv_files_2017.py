@@ -9,7 +9,9 @@ import os
 import re
 
 from profiles import configwrapper
+from profiles import junkdrawer
 from profiles import pg
+
 
 log = logging.getLogger("profiles.scripts.insert_all_csv_files_2017")
 
@@ -213,21 +215,33 @@ if __name__ == "__main__":
 
     pgconn = cw.get_pgconn()
 
-    cdc_files = glob.glob(
-        "{0}/*cdc.csv".format(
-        cw.csv_data_files_folder_2017))
+    for xls_file in os.listdir(cw.xls_data_files_folder):
 
-    spa_files = glob.glob(
-        "{0}/*spa.csv".format(
-        cw.csv_data_files_folder_2017))
+        if xls_file == "CNP Dashboard Varlist_2017.xlsx":
+            continue
 
+        else:
 
-    for cdc_file, spa_file in zip(
-        sorted(cdc_files),
-        sorted(spa_files)):
+            xls_file_path = os.path.abspath(
+                os.path.join(
+                    cw.xls_data_files_folder,
+                    xls_file))
 
-        load_cdc(cdc_file)
-        load_neighborhood(spa_file)
+            csv_file = junkdrawer.xls2csv(xls_file_path, os.path.join(
+                "/tmp",
+                "{0}.csv".format(os.path.splitext(os.path.basename(xls_file))[0])))
+
+            csv_file_path = os.path.abspath(csv_file)
+
+            if csv_file.endswith("cdc.csv"):
+                load_cdc(csv_file_path)
+
+            elif csv_file.endswith("spa.csv"):
+                load_neighborhood(csv_file_path)
+
+            else:
+                raise Exception("Can not handle {0}.".format(csv_file))
+
 
     pgconn.commit()
 

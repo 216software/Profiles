@@ -13,13 +13,17 @@ log = logging.getLogger(__name__)
 
 def xls2csv(xls_file_path, csv_file_path):
 
+    """
+    Convert an XLS file to one or many CSV files.
+    """
+
     wb = openpyxl.load_workbook(xls_file_path)
 
     sheet_names = wb.get_sheet_names()
 
     if len(sheet_names) > 1:
 
-        multi_page_xls2csv(xls_file_path, csv_file_path)
+        raise Exception("Sorry, I can only handle one-worksheet files!  Use multi_page_xls2csv instead...")
 
     else:
 
