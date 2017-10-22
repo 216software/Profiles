@@ -120,6 +120,8 @@ function PopulationViewModel (data) {
 
     self.look_up_indicator_complete = function(data){
 
+        console.log(data);
+
         self.observable_timestamps(ko.utils.arrayMap(
             data.distinct_observable_timestamps || [],
             function(x){
