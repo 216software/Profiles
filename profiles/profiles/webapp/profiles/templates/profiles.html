@@ -28,6 +28,17 @@
 "></div>
 
 <div data-bind="page: {
+    id: 'indicator-chart',
+    source: '/static/templates/indicatorbyracecomparison.html',
+    with: indicatorcomparisonbyracevm,
+    afterShow: indicatorcomparisonbyracevm.initialize,
+    params: ['indicator_uuid'],
+    }
+"></div>
+
+
+
+<div data-bind="page: {
     id: 'indicator-table',
     source: '/static/templates/indicatorcomparison-table.html',
     with: indicatorcomparisonvm,
@@ -57,7 +68,12 @@
 
 
 {% block scripts %}
+<!-- google chart script -->
+<script type="text/javascript"
+src="https://www.gstatic.com/charts/loader.js"></script>
 
+
+<!-- our scripts -->
 <script type="text/javascript" src="/static/viewmodels/daterange.js"></script>
 <script type="text/javascript" src="/static/viewmodels/webappsession.js"></script>
 <script type="text/javascript" src="/static/viewmodels/location.js"></script>
@@ -80,6 +96,8 @@
 
 <script type="text/javascript" src="/static/viewmodels/indicatorcomparisonviewmodel.js"></script>
 
+<script type="text/javascript"
+    src="/static/viewmodels/indicatorcomparisonbyraceviewmodel.js"></script>
 
 <script type="text/javascript">
 
