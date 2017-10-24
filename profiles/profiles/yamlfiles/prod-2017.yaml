@@ -31,12 +31,12 @@ logging:
 
         loggers:
 
-
             pyprofiles: &pyprofileslogging
                 propagate: False
                 level: DEBUG
                 # handlers: [console, pg, textfile]
-                handlers: [console, textfile, email]
+                # handlers: [console, textfile, email]
+                handlers: [console, textfile]
 
             profiles: *pyprofileslogging
             werkzeug: *pyprofileslogging

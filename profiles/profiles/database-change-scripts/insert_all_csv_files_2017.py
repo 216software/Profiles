@@ -114,6 +114,35 @@ class CSVInserter(object):
 
                         year = match.groupdict().get("year")
 
+                        # It causes me physical pain to do this sort of
+                        # hack...
+                        if year == "1115":
+
+                            log.debug("Hacking {0} {1} to {0}2011 and 2015".format(
+                                indicator_name,
+                                year))
+
+                            indicator_name = "{0}2011".format(indicator_name)
+                            year = "2015"
+
+                        elif year == "0610":
+
+                            log.debug("Hacking {0} {1} to {0}2006 and 2010".format(
+                                indicator_name,
+                                year))
+
+                            indicator_name = "{0}2006".format(indicator_name)
+                            year = "2010"
+
+                        elif year == "1014":
+
+                            log.debug("Hacking {0} {1} to {0}2010 and 2014".format(
+                                indicator_name,
+                                year))
+
+                            indicator_name = "{0}2010".format(indicator_name)
+                            year = "2014"
+
                         try:
                             ind = pg.indicators.Indicator.by_title(
                                 pgconn,
