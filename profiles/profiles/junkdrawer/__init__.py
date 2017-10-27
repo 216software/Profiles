@@ -359,10 +359,6 @@ class CSVInserter(object):
 
         for row_number, row in enumerate(cr, start=1):
 
-            # Quit after the first row.
-            if row_number > 1:
-                break
-
             location_title = self.figure_out_location_title(row)
 
             try:
@@ -451,9 +447,7 @@ class CSVInserter(object):
             os.path.basename(self.path_to_csv)))
 
     @classmethod
-    def load_neighborhood(cls, pgconn, csv_file_folder, file_name):
-
-        path_to_csv = os.path.join(csv_file_folder, file_name)
+    def load_neighborhood(cls, pgconn, path_to_csv):
 
         self = CSVInserter(path_to_csv, "neighborhood", "neighbor10")
 
@@ -462,9 +456,7 @@ class CSVInserter(object):
         return self
 
     @classmethod
-    def load_cdc(cls, pgconn, csv_file_folder, file_name):
-
-        path_to_csv = os.path.join(csv_file_folder, file_name)
+    def load_cdc(cls, pgconn, path_to_csv):
 
         self = CSVInserter(
             path_to_csv,
