@@ -119,7 +119,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <th class="data">% change</th>
 <!-- ko foreach:observable_timestamps_census -->
     <!-- ko if:($index() == 0) -->
-    <th  class="data" data-bind="text:$data.format('YYYY')"></th>
+    <th class="data">2005- <span data-bind="text:$data.format('YYYY')"></span></th>
     <!-- /ko -->
     <!-- ko if:($index() != 0) -->
     <th class="data">2010 - <span data-bind="text:$data.year()"></span></th>
@@ -201,7 +201,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <th class="data">% change</th>
 <!-- ko foreach:observable_timestamps_census -->
     <!-- ko if:($index() == 0) -->
-    <th  class="data" data-bind="text:$data.format('YYYY')"></th>
+    <th class="data">2005- <span data-bind="text:$data.format('YYYY')"></span></th>
     <!-- /ko -->
     <!-- ko if:($index() != 0) -->
     <th class="data">2010 - <span data-bind="text:$data.year()"></span></th>
@@ -283,7 +283,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <th class="data">% change</th>
 <!-- ko foreach:observable_timestamps_census -->
     <!-- ko if:($index() == 0) -->
-    <th  class="data" data-bind="text:$data.format('YYYY')"></th>
+    <th class="data">2005- <span data-bind="text:$data.format('YYYY')"></span></th>
     <!-- /ko -->
     <!-- ko if:($index() != 0) -->
     <th class="data">2010 - <span data-bind="text:$data.year()"></span></th>
