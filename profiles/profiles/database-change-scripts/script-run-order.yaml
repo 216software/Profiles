@@ -34,3 +34,6 @@ script_order:
 -   change-kindergarten-labels-and-update-cleveland-reading-data.sql
 -   insert_all_csv_files_2017.py
 -   update_indicators_with_descriptions_2017.py
+-   clean-up-collinwood.sql
+-   other-nina-edits.sql
+
