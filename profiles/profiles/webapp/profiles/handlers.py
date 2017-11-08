@@ -186,21 +186,16 @@ class IndicatorValuesByRace(Handler):
         # Based on our main indicator, find all associated indicators by
         # race
 
-        if indicator.title == 'pop':
+        # if indicator.title == 'pop':
 
-
-        category_indicator_values = [x for x in \
-            location.indicators_with_values_by_location(self.cw.get_pgconn(),
+        category_indicator_values = [x
+            for x in location.indicators_with_values_by_location(
+                self.cw.get_pgconn(),
                 indicators)]
 
         distinct_observable_timestamps = [x for x in \
             location.distinct_observation_timestamp_for_indicators(self.cw.get_pgconn(),
                 indicators)]
-
-
-            x['location'].area = x['location_area']
-            ivs.append(x)
-
 
         distinct_observable_timestamps = [x for x in \
             indicator.distinct_observation_timestamps(self.cw.get_pgconn())]
