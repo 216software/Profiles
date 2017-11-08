@@ -40,7 +40,7 @@ function IndicatorComparisonByRaceViewModel (data) {
     self.drawVisualization = function() {
         // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
-         ['Race', self.selected_indicator().title()],
+         ['Race', self.selected_indicator().pretty_label()],
          ['White',  165],
          ['Black',  135],
          ['Asian',  157],
@@ -120,7 +120,7 @@ function IndicatorComparisonByRaceViewModel (data) {
             dataType: "json",
             processData: true,
 
-            data: {'indicator_uuid':self.selected_indicators().indicator_uuid(),
+            data: {'indicator_uuid':self.selected_indicator().indicator_uuid(),
                    'location_uuid':self.location_uuid()},
 
             complete: function () {
