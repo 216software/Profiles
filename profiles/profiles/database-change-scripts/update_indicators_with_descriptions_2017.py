@@ -1,5 +1,9 @@
 # vim: set expandtab ts=4 sw=4 filetype=python fileencoding=utf8:
 
+"""
+Despite the script name, this reads the CNP Varlist_2017 spreadsheet.
+"""
+
 import argparse
 import csv
 import datetime

@@ -33,9 +33,10 @@ script_order:
 -   add-index-to-locations.sql
 -   add-cle-city-shape.sql
 -   make-cleveland-city.sql
--   update_indicators_with_extra_details.py
+# -   update_indicators_with_extra_details.py
 -   change-kindergarten-labels-and-update-cleveland-reading-data.sql
 -   update_indicators_with_descriptions_2017.py
+# -   load_indicator_descriptions_2017.py
 -   clean-up-collinwood.sql
 -   other-nina-edits.sql
 -   create-races-and-connect-to-indicators.sql

@@ -24,19 +24,19 @@ function HealthViewModel (data) {
     };
 
     /* This should also include the order we want to display */
-    self.indicator_titles = ['mort_rate2009','infmort_rate2009', 'le2009',
+    self.indicator_titles = ['le', '_mort_rate','_infmort_rate',
         '_ebll_c'];
 
-    self.ind_twonine = ['le2009', 'mort_rate2009' , 'infmort_rate2009'];
+    self.ind_twonine = ['le', '_mort_rate' , '_infmort_rate'];
     self.ind_twoten= ['_ebll_c'];
 
 
 
     self.indicator_titles_extra_formatting = {
-        'infmort_rate2009':'Rate per 1,000 births',
-        'mort_rate2009':'Rate per 1,000 population',
+        'infmort_rate':'Rate per 1,000 births',
+        'mort_rate':'Rate per 1,000 population',
         '_ebll_c':'Lead data provided by Ohio Department of Health. This should not be considered an endorsement of this study or these conclusions by the ODH.',
-        'le2009': 'Life expectancy is calculated using the Life Expectancy Calculator created by Daniel Eayres published in the South East Public Health Observatory (SEPHO) website.'
+        'le': 'Life expectancy is calculated using the Life Expectancy Calculator created by Daniel Eayres published in the South East Public Health Observatory (SEPHO) website.'
     }
 
     self.overview_indicators = ['le2009'];

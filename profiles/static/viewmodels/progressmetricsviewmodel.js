@@ -257,4 +257,10 @@ function ProgressMetricsViewModel (data) {
 
     };
 
+    self.show_sales_data = ko.observable(false);
+
+    self.toggle_sales_data = function () {
+        self.show_sales_data(!self.show_sales_data());
+    };
+
 };

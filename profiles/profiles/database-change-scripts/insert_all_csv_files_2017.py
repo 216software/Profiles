@@ -51,7 +51,11 @@ if __name__ == "__main__":
 
     for xls_file in os.listdir(cw.xls_data_files_folder):
 
-        if xls_file == "CNP Dashboard Varlist_2017.xlsx":
+        if xls_file in set([
+            "CNP Dashboard Varlist_2017.xlsx",
+            "Indicators_Descriptions2017.xlsx",
+            ]):
+
             continue
 
         else:

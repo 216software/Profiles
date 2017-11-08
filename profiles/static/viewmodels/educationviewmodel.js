@@ -31,9 +31,10 @@ function EducationViewModel (data) {
     self.kindergarten_readiness_titles =  ['band1', '_band1',
         'band2', '_band2',
         'band3', '_band3',
-        'meanscore'];
+        'meanscore',
+        'qslots'];
 
-    self.other_indicators = ['qslots', '_attend']
+    self.other_indicators = ['_attend']
 
     self.overview_indicators = ['rpass50', 'mpass50'];
 
@@ -86,7 +87,7 @@ function EducationViewModel (data) {
 
                 var i = new Indicator(x.indicator);
 
-                if (['meanscore', 'qslots', 'band1', '_band1', 'band2', '_band2', 'band3', '_band3'].indexOf(i.title()) >= 0){
+                if (['meanscore', 'qslots'].indexOf(i.title()) >= 0){
                     i.percent_change_available(false);
                 }
                 return i;

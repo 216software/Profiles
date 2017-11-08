@@ -48,8 +48,7 @@ function WorkforceViewModel (data) {
 
     self.indicators_employment = ['emp', '_emp', 'lf', '_lf'];
 
-
-    self.indicators_pop_by_ed_attainment = ['pop25', 'hsls9', '_hsls9',
+    self.old_indicators_pop_by_ed_attainment = ['pop25', 'hsls9', '_hsls9',
         'hs9to12', '_hs9to12',
         'hsgrad', '_hsgrad',
         'somecoll', '_somecoll',
@@ -57,7 +56,20 @@ function WorkforceViewModel (data) {
         'bs', '_bs',
         'prof', '_prof'];
 
+    // This is the correct list
+    self.indicators_pop_by_ed_attainment = [
+        'lshs',
+        '_lshs',
+        'hsgrad',
+        '_hsgrad',
+        'somecollassoc',
+        '_somecollassoc',
+        'bsp',
+        '_bsp',
+    ];
+
     self.indicator_cv_pairings = {'lf':'cvlf', 'emp':'cvemp',
+        'lshs': 'cvlshs',
         '_lf':'cv_lf', '_emp':'cv_emp',
         'pop25p':'cvpop25p',
         'hsls9':'cvhsls9',

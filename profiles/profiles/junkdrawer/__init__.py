@@ -26,7 +26,9 @@ def xls2csv(xls_file_path, csv_file_path):
 
     if len(sheet_names) > 1:
 
-        raise Exception("Sorry, I can only handle one-worksheet files!  Use multi_page_xls2csv instead...")
+        raise Exception("Sorry, I can only handle one-worksheet files!  "
+            " Use multi_page_xls2csv instead for {0}.".format(
+            xls_file_path))
 
     else:
 
