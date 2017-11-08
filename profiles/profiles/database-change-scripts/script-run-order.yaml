@@ -33,4 +33,5 @@ script_order:
 -   make-cleveland-city.sql
 -   update_indicators_with_extra_details.py
 -   change-kindergarten-labels-and-update-cleveland-reading-data.sql
--   insert_all_csv_files_2017.py
+#-   insert_all_csv_files_2017.py
+-   create-races-and-connect-to-indicators.sql

@@ -25,41 +25,41 @@ function IndicatorComparisonByRaceViewModel (data) {
     self.rootvm = data.rootvm;
 
     self.initialize = function(){
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(self.drawVisualization);
-
         self.selected_indicator().indicator_uuid(self.indicator_uuid());
 
-        self.selected_indicator().look_up_details();
         self.get_all_indicator_values();
+        self.selected_indicator().look_up_details().then(function(){
+
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(self.drawVisualization);
+
+
+        });
     };
 
     self.drawVisualization = function() {
         // Some raw data (not necessarily accurate)
         var data = google.visualization.arrayToDataTable([
-         ['Race', 'Indicator Title'],
+         ['Race', self.selected_indicator().title()],
          ['White',  165],
          ['Black',  135],
          ['Asian',  157],
          ['Other',  139],
-      ]);
+        ]);
 
-    var options = {
-      title : 'Indicator by Race',
-      vAxis: {title: 'Count'},
-      hAxis: {title: 'Race'},
-      seriesType: 'bars',
-    };
-    var chart = new google.visualization.ComboChart(
-        document.getElementById('comparisonChart'));
-    chart.draw(data, options);
-  }
-
-
-
-
+        var options = {
+          title : 'Indicator by Race',
+          vAxis: {title: 'Count'},
+          hAxis: {title: 'Race'},
+          seriesType: 'bars',
+        };
+        var chart = new google.visualization.ComboChart(
+            document.getElementById('comparisonChart'));
+        chart.draw(data, options);
+    }
 
     self.indicator_uuid = ko.observable();
+    self.location_uuid = ko.observable();
 
     self.selected_indicator = ko.observable(new Indicator({rootvm:data.rootvm}));
 
@@ -120,8 +120,8 @@ function IndicatorComparisonByRaceViewModel (data) {
             dataType: "json",
             processData: true,
 
-            data: {'indicator_uuid':self.selected_indicator().indicator_uuid(),
-                   },
+            data: {'indicator_uuid':self.selected_indicators().indicator_uuid(),
+                   'location_uuid':self.location_uuid()},
 
             complete: function () {
                 self.rootvm.is_busy(false);
@@ -136,23 +136,10 @@ function IndicatorComparisonByRaceViewModel (data) {
                         }
                     ));
 
-                    self.indicator_locations(ko.utils.arrayMap(
+                    self.indicator_values_by_race(ko.utils.arrayMap(
                         data.indicatorvalues || [],
                         function (x) {
-                            x.location.rootvm = self.rootvm;
-                            var l = new Location(x.location);
-                            l.indicator_values(ko.utils.arrayMap(
-                                x.indicator_location_values|| [],
-                                    function (x) {
-                                        x.rootvm = self.rootvm;
-                                        x.indicator = self.selected_indicator();
-                                        x.indicator_value_format= self.selected_indicator().indicator_value_format();
-                                        return new IndicatorValue(x);
-                                    }
-                            ));
-
-                            return l;
-
+                            console.log(x);
                         }));
 
                 }
