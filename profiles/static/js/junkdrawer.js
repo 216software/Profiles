@@ -568,7 +568,9 @@ ko.components.register('indicator-table', {
         // make sure our pop over gets inited
     },
     template:
-        '<table class="table table-striped table-bordered" data-bind="attr:{id: table_id}">'
+        '<div><button data-bind="attr:{\'data-target\': \'#collapse\' + table_id}" data-toggle="collapse" class="btn btn-sm btn-default">Show table</button></div>'
+        + '<div class="collapse" data-bind="attr:{id:  \'collapse\' + table_id}">'
+        + '<table class="table table-striped table-bordered" data-bind="attr:{id: table_id}">'
         + '<thead><tr><th>Indicator</th>'
         + '<th class="data">% change</th>'
         + '<!-- ko foreach:observable_timestamps -->'
@@ -604,6 +606,6 @@ ko.components.register('indicator-table', {
         + '<!-- /ko --> <!-- closes with:Indicator -->'
         + '<!-- /ko --> <!-- closes foreach:indicator_titles -->'
         + '</tbody>'
-        + '</thead></table>'
+        + '</thead></table></div>'
 });
 

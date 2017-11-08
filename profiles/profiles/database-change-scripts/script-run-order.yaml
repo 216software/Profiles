@@ -38,4 +38,5 @@ script_order:
 -   update_indicators_with_descriptions_2017.py
 -   clean-up-collinwood.sql
 -   other-nina-edits.sql
+-   create-races-and-connect-to-indicators.sql
 

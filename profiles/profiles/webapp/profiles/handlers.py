@@ -170,6 +170,53 @@ class IndicatorValuesByIndicator(Handler):
             indicatorvalues=ivs,
             distinct_observable_timestamps=distinct_observable_timestamps))
 
+class IndicatorValuesByRace(Handler):
+
+    route_strings = set(["GET /api/indicator-values-by-race"])
+    route = Handler.check_route_strings
+
+    def handle(self, req):
+
+        location = pg.locations.Location.by_location_uuid(self.cw.get_pgconn(),
+            req.wz_req.args['location_uuid'])
+
+        indicator = pg.indicators.Indicator.by_indicator_uuid(self.cw.get_pgconn(),
+            req.wz_req.args['indicator_uuid'])
+
+        # Based on our main indicator, find all associated indicators by
+        # race
+
+        if indicator.title == 'pop':
+
+
+        category_indicator_values = [x for x in \
+            location.indicators_with_values_by_location(self.cw.get_pgconn(),
+                indicators)]
+
+        distinct_observable_timestamps = [x for x in \
+            location.distinct_observation_timestamp_for_indicators(self.cw.get_pgconn(),
+                indicators)]
+
+
+            x['location'].area = x['location_area']
+            ivs.append(x)
+
+
+        distinct_observable_timestamps = [x for x in \
+            indicator.distinct_observation_timestamps(self.cw.get_pgconn())]
+
+        return Response.json(dict(
+            message="Found this indicator {0}".\
+                format(indicator),
+            reply_timestamp=datetime.datetime.now(),
+            success=True,
+            indicatorvalues=ivs,
+            distinct_observable_timestamps=distinct_observable_timestamps))
+
+
+
+
+
 class IndicatorValuesByIndicatorCSV(Handler):
 
     route_strings = set(["GET /api/indicator-values-by-indicator-csv"])
