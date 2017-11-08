@@ -98,12 +98,9 @@ function Indicator (data) {
 
     self.percent_change_indicator_value = ko.computed(function(){
 
-
-
         if(!self.percent_change_available()){
             return 'n/a';
         }
-
 
         if(self.indicator_values().length > 0){
             var first = self.indicator_values_sorted_asc()[0].value()
