@@ -3,15 +3,15 @@
 app:
 
     secret:                     2246 Tudor
-    host: &host                 test-profiles.216software.com
+    host: &host                 profiles
     scheme:                     http
     launch_debugger_on_error:   False
     webapp_port:                6661
-    pidfile:                    /tmp/prod-2017-profiles-webapp.pid
+    pidfile:                    /tmp/profiles-xps-webapp.pid
     num_webapp_workers:         1
 
 postgresql:
-    database:   &dbname profiles_prod_2017
+    database:   &dbname profiles_xps
     user:       &dbuser profiles
     host:       &dbhost localhost
     port:       &dbport 5432
@@ -64,7 +64,7 @@ logging:
 
             textfile:
                 class: logging.FileHandler
-                filename: /var/log/profiles/profiles-2017.log
+                filename: /tmp/profiles-xps.log
                 mode: a
                 level: DEBUG
                 formatter: consolefmt
@@ -101,9 +101,9 @@ google:
 # This is stuff just for this project
 profiles:
 
-    csv_data_files_folder: /home/communityprofiles/checkouts/2017-Profiles/datafiles/csvfiles
-    csv_data_files_folder_2017: /home/communityprofiles/checkouts/2017-Profiles/datafiles-2017/csvfiles
-    pdf_files_directory: /tmp/2017profiles-pdf-files
-    xls_data_files_folder:      /home/communityprofiles/checkouts/2017-Profiles/datafiles-2017/xlsfiles
+    csv_data_files_folder:          /home/matt/checkouts/cwru-poverty-center/datafiles/csvfiles
+    csv_data_files_folder_2017:     /home/matt/checkouts/cwru-poverty-center/datafiles-2017/csvfiles
+    pdf_files_directory:            /tmp/2017profiles-pdf-files
+    xls_data_files_folder:          /home/matt/checkouts/cwru-poverty-center/datafiles-2017/xlsfiles
 
 # vim: set filetype=yaml bg=dark:

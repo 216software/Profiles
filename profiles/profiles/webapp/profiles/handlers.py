@@ -310,6 +310,8 @@ class IndicatorValuesByLocation(Handler):
             location.distinct_observation_timestamp_for_indicators(self.cw.get_pgconn(),
                 indicators)]
 
+        log.debug(distinct_observable_timestamps)
+
         return Response.json(dict(
             message="Found these indicator categories and values for this location {0}".\
                 format(location.title),

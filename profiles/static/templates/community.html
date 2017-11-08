@@ -1,11 +1,24 @@
-
 <h2>Community</h2>
 
 <p class="lead">
-A work in progress, the community indicators seeks to further illustrate
-the data in the Progress Index by showcasing residents’ neighborhood
+Community indicators showcase residents’ neighborhood
 experiences, perceptions, and attitudes.</p>
 
+<div data-bind="with:parentvm.selected_location()">
 
-<p class="small">Stay tuned, as data is not yet available.</p>
+<h4>Now viewing data for <span data-bind="text:title"></span></h4>
+<h5>Note: clicking the <span class="label label-primary">Map</span>
+button will allow for a cross-location (city-wide)
+comparison of a given indicator. <br />The cross-location information is
+available in a table as well.</h5>
 
+<p class="hide-from-print text-info small">
+<a target="_blank" data-bind="attr: {href: '/pdf/economy-' + print_friendly_name + '.pdf'}">Download as PDF</a>
+|
+<a href="#"
+    data-bind="click:function(event){
+    rootvm.exportTableToCSV(event, ['economyTable', 'commercialTable'], 'economy - ' + print_friendly_name + '.csv');   return true;}">
+    Downlad as CSV</a>
+</p>
+
+</div>
