@@ -69,17 +69,21 @@ function PopulationViewModel (data) {
     self.indicators_population_overview = ['nhw' ,'nhb',
         'nhapi', 'nho', 'hisp'];
 
-    self.indicator_cv_pairings = {'pop':'cvpop',
-        'nhw':'cvnhw', 'nhb':'cvnhb',
+    self.indicator_cv_pairings = {
+        'pop':'cvpop',
+        'nhw':'cvnhw',
+        'nhb':'cvnhb',
         'nhapi':'cvnhapi',
-        'nho':'cvnho', 'hisp':'cvhisp',
-
+        'nho':'cvnho',
+        'hisp':'cvhisp',
         '_nhw':'cv_nhw',
         '_nhb':'cv_nhb',
         '_nhapi':'cv_nhapi',
         '_nho':'cv_nho',
         '_hisp':'cv_hisp',
-        }
+        'popls5': 'cvpopls5',
+        '_popls5': 'cv_popls5'
+    }
 
     self.indicator_moe_pairings = {'pop':'mpop',
         'nhw':'mnhw', 'nhb':'mnhb',
