@@ -56,4 +56,3 @@ if __name__ == "__main__":
 
                     if col is not None:
                         row[col.strip()] = row[col]
-
