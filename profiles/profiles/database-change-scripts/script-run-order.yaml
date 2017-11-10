@@ -36,7 +36,8 @@ script_order:
 # -   update_indicators_with_extra_details.py
 -   change-kindergarten-labels-and-update-cleveland-reading-data.sql
 -   update_indicators_with_descriptions_2017.py
-# -   load_indicator_descriptions_2017.py
+-   load_indicator_descriptions_2017.py
+-   update-pretty-labels-from-descriptions.sql
 -   clean-up-collinwood.sql
 -   other-nina-edits.sql
 -   create-races-and-connect-to-indicators.sql

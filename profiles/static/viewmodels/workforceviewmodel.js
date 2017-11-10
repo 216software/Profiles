@@ -29,13 +29,14 @@ function WorkforceViewModel (data) {
         'emp',  'cvemp', 'memp',
         '_emp',  'cv_emp', 'm_emp',
         'pop25p', 'cvpop25p', 'mpop25',
-        'hsls9', '_hsls9', 'cvhsls9', 'mhsls9',
-        'cv_hsls9', 'm_hsls9',
         'hs9to12', '_hs9to12',
         'cvhs9to12', 'mhs9to12',
         'cv_hs9to12', 'm_hs9to12',
-        'hsgrad', '_hsgrad', 'cvhsgrad', 'mhsgrad',
-        'cv_hsgrad', 'm_hsgrad',
+        'lshs', '_lshs', 'cvlshs', 'mlshs', 'cv_lshs', 'm_lshs',
+        'hsgrad', '_hsgrad', 'cvhsgrad', 'mhsgrad', 'cv_hsgrad', 'm_hsgrad',
+        'somecollassoc', '_somecollassoc', 'cvsomecollassoc', 'msomecollassoc', 'cv_somecollassoc', 'm_somecollassoc',
+        'bsp', '_bsp', 'cvbsp', 'mbsp', 'cv_bsp', 'm_bsp',
+
         'somecoll', '_somecoll' , 'cvsomecoll', 'msomecoll',
         'cv_somecoll', 'm_somecoll',
         'assoc', '_assoc', 'cvassoc', 'massoc',
@@ -68,29 +69,30 @@ function WorkforceViewModel (data) {
         '_bsp',
     ];
 
-    self.indicator_cv_pairings = {'lf':'cvlf', 'emp':'cvemp',
+    self.indicator_cv_pairings = {
+        'lf':'cvlf',
+        'emp':'cvemp',
         'lshs': 'cvlshs',
-        '_lf':'cv_lf', '_emp':'cv_emp',
+        '_lf':'cv_lf',
+        '_emp':'cv_emp',
         'pop25p':'cvpop25p',
-        'hsls9':'cvhsls9',
-        '_hsls9':'cv_hsls9',
-        'hs9to12':'cvhs9to12',
-        '_hs9to12':'cv_hs9to12',
+        // 'hs9to12':'cvhs9to12',
+        // '_hs9to12':'cv_hs9to12',
         'hsgrad':'cvhsgrad',
         '_hsgrad':'cv_hsgrad',
-        'somecoll':'cvsomecoll',
-        '_somecoll':'cv_somecoll',
-        'assoc':'cvassoc',
-        '_assoc':'cv_assoc',
-        'bs':'cvbs', '_bs':'cv_bs',
-        'prof':'cvprof',
-        '_prof':'cv_prof'
+        // 'somecoll':'cvsomecoll',
+        // '_somecoll':'cv_somecoll',
+        // 'assoc':'cvassoc',
+        // '_assoc':'cv_assoc',
+        // 'bs':'cvbs',
+        // '_bs':'cv_bs',
+        // 'prof':'cvprof',
+        // '_prof':'cv_prof'
         }
 
     self.indicator_moe_pairings = {'lf':'mlf', 'emp':'memp',
         '_lf':'m_lf', '_emp':'cv_emp',
-        'pop25p':'mpop25p', 'hsls9':'mhsls9',
-        '_hsls9':'m_hsls9',
+        'pop25p':'mpop25p',
         'hs9to12':'mhs9to12',
         '_hs9to12':'m_hs9to12',
         'hsgrad':'mhsgrad',
@@ -105,6 +107,13 @@ function WorkforceViewModel (data) {
         '_prof':'m_prof'
         }
 
+    // add some stuff dynamically.
+    $.each(self.indicators_pop_by_ed_attainment, function (index, value) {
+        var cv_indicator = "cv" + value;
+        var moe_indicator = "m" + value;
+        self.indicator_cv_pairings[value] = cv_indicator;
+        self.indicator_moe_pairings[value] = moe_indicator;
+    });
 
     self.overview_indicators = ['emp'];
 
@@ -151,11 +160,23 @@ function WorkforceViewModel (data) {
 
         for (var indicator_key in self.indicator_cv_pairings) {
             var ind = Indicator.indicator_by_title(self.indicators(), indicator_key)
+
+            console.debug(indicator_key);
+
+            if (!ind) {
+                console.debug("indicator_key", indicator_key, "not found");
+            }
+
             var ind_cv = Indicator.indicator_by_title(self.indicators(),
                 self.indicator_cv_pairings[indicator_key])
+
             ind.indicator_CV(ind_cv);
-            var ind_moe = Indicator.indicator_by_title(self.indicators(),
-                self.indicator_moe_pairings[indicator_key])
+
+
+            var ind_moe = Indicator.indicator_by_title(
+                self.indicators(),
+                self.indicator_moe_pairings[indicator_key]);
+
             ind.indicator_MOE(ind_moe);
 
         }

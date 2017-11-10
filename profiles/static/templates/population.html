@@ -153,6 +153,8 @@ $parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
         Map</a>
 </span>
 
+<span class="sas_variable small" style="display:none;" data-bind="text: title"></span>
+
 </td></td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
@@ -212,8 +214,8 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <th class="show-only-print">MOE (+/-)</th>
 </tr>
 </thead>
-<tbody>
 
+<tbody>
 
 <!-- ko foreach:indicators_age_population -->
 
@@ -234,13 +236,16 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
         Map</a>
 </span>
 
+<span class="sas_variable small" style="display:none;" data-bind="text: title"></span>
+
 </td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
 <!-- ko foreach:$parents[1].observable_timestamps -->
 <td class="data"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 
-<span data-bind="if:$parent.indicator_CV"><span data-bind="if:
+<span data-bind="if:$parent.indicator_CV">
+<span data-bind="if:
 $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <button class="btn btn-xs hide-from-print"
         data-toggle="popover"

@@ -65,6 +65,12 @@ Downlad as CSV</a>
        params: {indicator_uuid: indicator_uuid}}">
         Map</a>
 </span>
+
+<span class="sas_variable" style="display:none;" data-bind="text: title"></span>
+
+</td>
+
+
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
 <!-- ko foreach:$parents[1].observable_timestamps -->
@@ -123,6 +129,10 @@ $parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
        params: {indicator_uuid: indicator_uuid}}">
         Map</a>
 </span>
+
+<span class="sas_variable" style="display:none;" data-bind="text: title"></span>
+
+</td>
 
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 

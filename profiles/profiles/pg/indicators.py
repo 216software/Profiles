@@ -167,6 +167,29 @@ class Indicator(object):
         else:
             raise KeyError("Could not find indicator {0}!".format(self))
 
+    def update_pretty_label(self, pgconn, new_pretty_label):
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+            update indicators
+            set pretty_label = %s
+            where indicator_uuid = %s
+            returning indicators.*::indicators as updated_ind
+            """), [new_pretty_label, self.indicator_uuid])
+
+        if cursor.rowcount:
+
+            updated_ind = cursor.fetchone().updated_ind
+
+            log.info("Updated pretty_label on {0} to {1}".format(
+                updated_ind,
+                updated_ind.pretty_label))
+
+            return updated_ind
+
+        else:
+            raise KeyError("Could not find indicator {0}!".format(self))
 
     @classmethod
     def update_description_by_title(cls, pgconn, title, description):
