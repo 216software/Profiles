@@ -37,6 +37,9 @@ function IndicatorComparisonViewModel (data) {
 
     self.observable_timestamp_options = ko.computed(function(){
 
+        // Matt just sidestepping doing it the right way.
+        return [{value: 2010, text: "2006-2010"}, {value: 2015, text:"2011-2015"}];
+
         // This is a bit of a hack since we don't exactly handle ranges
         // the best...
         var options = [];
@@ -74,6 +77,7 @@ function IndicatorComparisonViewModel (data) {
                     'text':'Avg. 2009 - ' + self.observable_timestamps()[0].year()})
         }
 
+        console.debug("options:", options);
         return options;
     });
 

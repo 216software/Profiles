@@ -56,7 +56,7 @@
 
 <div class="col-md-8">
 <p>
-Click on table headings to sort. Use the filter selector
+Click on the table headings to sort. Use the filter selector
 to filter by location type, or to search for a specific location.
 </p>
 
@@ -93,8 +93,10 @@ to filter by location type, or to search for a specific location.
 <!-- ko foreach:observable_timestamp_options -->
   <th style="text-align:right; cursor:pointer"> <span data-bind="text:$data.text,
     click:$parent.year_click_sort"></span>
+
    <span data-bind="visible:$parent.asc() && $parent.sort_column() == $data.value"
          class="glyphicon glyphicon-chevron-up"></span>
+
    <span data-bind="visible:!$parent.asc() && $parent.sort_column() == $data.value"
          class="glyphicon glyphicon-chevron-down"></span>
   </th>
