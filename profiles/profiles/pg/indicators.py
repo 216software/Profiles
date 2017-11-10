@@ -16,7 +16,7 @@ class IndicatorsFactory(psycopg2.extras.CompositeCaster):
         d = dict(zip(self.attnames, values))
         return Indicator(**d)
 
-class Indicator(object):
+class Indicator(RelationWrapper):
 
     def __init__(self, indicator_uuid, title, description,
         pretty_label, indicator_value_format, indicator_category, source_document,

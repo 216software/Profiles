@@ -92,7 +92,7 @@ def multi_page_xls2csv(xls_file_path, csv_folder_path):
 
                 else:
 
-                    out.writerow([unicode(cell.value).encode("utf-8") for cell in row if cell.value])
+                    out.writerow([unicode(cell.value).encode("utf-8") if cell.value else None for cell in row])
 
             f.close()
 

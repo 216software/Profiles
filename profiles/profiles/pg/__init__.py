@@ -14,6 +14,24 @@ class RelationWrapper(object):
     def __jsondata__(self):
         return self.__dict__
 
+    @staticmethod
+    def none_or_s(s):
+
+        if s in set(["$-", "#N/A", "NULL"]):
+            return
+
+        elif isinstance(s, basestring):
+            s2 = s.strip().replace("$", "").replace("%", "").replace(",", "").replace("-", "")
+
+            if s2:
+                return s2
+
+        elif isinstance(s, (float, int)):
+            return s
+
+
+
+
 class KeepixJSONEncoder(HorsemeatJSONEncoder):
 
     """

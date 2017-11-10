@@ -88,7 +88,7 @@ if __name__ == "__main__":
                         row["Variable Name Prefix"],
                         row["Variable Description"],
                         row["Definition"],
-                        row["Universe"],
+                        ind.none_or_s(row["Universe"]),
                         row["Limitations"],
                         row["Note"],
                         row["Source"],
