@@ -90,6 +90,9 @@ function StartPageViewModel (data) {
     self.progressmetricsvm = new ProgressMetricsViewModel({'rootvm':data.rootvm,
         'parentvm':self});
 
+    self.communityvm = new CommunityViewModel({
+        'rootvm':data.rootvm,
+        'parentvm':self});
 
     self.initialize = function(){
 

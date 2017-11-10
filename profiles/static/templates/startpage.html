@@ -144,6 +144,8 @@ containing locations:</strong>
 <div data-bind="page: {
     id: 'community',
     source: '/static/templates/community.html',
+    with: communityvm,
+    params: ['location_uuid']
 }"></div>
 
 <div data-bind="page: {

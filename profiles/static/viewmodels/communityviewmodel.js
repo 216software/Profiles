@@ -14,6 +14,7 @@ function CommunityViewModel (data) {
 
     self.type = "CommunityViewModel";
     self.rootvm = data.rootvm;
+    self.parentvm = data.parentvm;
 
     self.map = undefined;
     self.added_map_layers = [];
@@ -181,4 +182,54 @@ function CommunityViewModel (data) {
             return false;
         }
     };
+
+    self.indicator_titles = ["_voter"];
+
+    self.indicators = ko.observableArray([]);
+
+    self.csv_link =  ko.computed(function(){
+
+        var base_url= "/api/indicator-categories-with-values-by-location-csv";
+        base_url += '?location_uuid=' + self.location_uuid();
+        base_url += '&page_title=ProgressMetrics';
+
+        for(var i = 0; i<self.indicator_titles.length; i++)
+        {
+            base_url += '&indicators[]=' + self.indicator_titles[i];
+        };
+
+        return base_url;
+    });
+
+    self.parentvm.selected_location.subscribe(function(){
+
+        self.parentvm.look_up_indicator_and_values(self.indicator_titles,
+            self.look_up_indicator_complete);
+    });
+
+    self.observable_timestamps = ko.observableArray([]);
+
+    self.look_up_indicator_complete = function(data) {
+
+        self.observable_timestamps(ko.utils.arrayMap(
+            data.distinct_observable_timestamps || [],
+            function(x){
+                return new moment(x.observation_timestamp);
+            }
+        ));
+
+        self.indicators(ko.utils.arrayMap(
+            data.indicator_values || [],
+            function (x) {
+                x.indicator.rootvm = self.rootvm;
+                x.indicator.indicator_values = x.indicator_values;
+                return new Indicator(x.indicator);
+            }));
+
+        console.debug("observable_timestamps have",
+            self.observable_timestamps().length,
+            "elements");
+
+    };
+
 };
