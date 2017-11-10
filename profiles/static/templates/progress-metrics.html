@@ -117,7 +117,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 </table>
 
-
+<!-- rental data table -->
 <table class="table table-striped table-bordered" id="rentalDataTable">
 <thead>
 <tr><th colspan="4">Rental Data
@@ -189,6 +189,84 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <td class="show-only-print data" data-bind="if:$parent.indicator_MOE">
 <span class="show-only-print"
      data-bind="text:$parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
+
+</td>
+<!-- /ko -->
+<!-- /ko -->
+
+
+
+<!-- /ko --> <!-- closes inner for loop -->
+
+</tr>
+
+<!-- /ko -->
+
+<!-- /ko -->
+</tbody><table>
+
+<!-- housing cost burden table -->
+
+<table class="table table-striped table-bordered" id="rentalDataTable">
+<thead>
+<tr><th colspan="4">Housing Cost Burden Data
+
+<button class="btn btn-default" data-bind="visible: show_housing_cost_burden_data, click:toggle_housing_cost_burden_data">Hide</button>
+
+<button class="btn btn-default" data-bind="visible: !show_housing_cost_burden_data(), click:toggle_housing_cost_burden_data">Show</button>
+
+</th></tr>
+<tr data-bind="visible: show_housing_cost_burden_data">
+<th>Indicator</th>
+<th class="data">2010-2014</th>
+<th class="show-only-print">CV</th>
+<th class="show-only-print">MOE (+/-)</th>
+
+</tr>
+</thead>
+<tbody data-bind="visible: show_housing_cost_burden_data">
+<!-- ko foreach:housing_cost_burden_indicators -->
+
+<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
+<tr data-bind="css: {rate_data: is_a_rate() }">
+<td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>
+
+<span class="pull-right" style="padding-left:5px">
+<a href="#" class="info-link hide-from-print"
+        data-toggle="popover"
+        data-bind="visible:$root.indicator_extra_info($data),
+                   attr: {'data-content' :
+                          $root.indicator_extra_info($data)}">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+</a>
+
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="page-href: {path : '/indicator-map',
+       params: {indicator_uuid: indicator_uuid}}">
+        Map</a>
+</span>
+</td>
+
+<td class="data">
+<span data-bind="text: indicator_value_by_year(2014).formatted"></span>
+
+<span data-bind="if: indicator_CV"><span data-bind="if: indicator_CV().indicator_value_by_year(2014).formatted">
+<button class="btn btn-xs hide-from-print"
+        data-toggle="popover"
+        title="CV &amp; MOE"
+        data-bind="attr: {'data-content' : pretty_CV_and_MOE(2014)}">
+        +/-</button>
+
+</span></span>
+</td>
+
+<td class="show-only-print data" data-bind="if:indicator_CV">
+<span class="show-only-print"
+     data-bind="text: indicator_CV().indicator_value_by_year(2014).formatted"></span>
+</td>
+<td class="show-only-print data" data-bind="if:indicator_MOE">
+<span class="show-only-print"
+     data-bind="text:indicator_MOE().indicator_value_by_year(2014).formatted"></span>
 
 </td>
 <!-- /ko -->

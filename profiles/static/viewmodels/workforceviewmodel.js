@@ -161,8 +161,6 @@ function WorkforceViewModel (data) {
         for (var indicator_key in self.indicator_cv_pairings) {
             var ind = Indicator.indicator_by_title(self.indicators(), indicator_key)
 
-            console.debug(indicator_key);
-
             if (!ind) {
                 console.debug("indicator_key", indicator_key, "not found");
             }

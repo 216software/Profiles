@@ -87,6 +87,44 @@ function ProgressMetricsViewModel (data) {
 
     self.rental_indicators = ['_grent', 'cashrent'];
 
+    self.housing_cost_burden_indicators = [
+        "t_cburden30p",
+        "_t_cburden30p",
+        "t_cburden50p",
+        "_t_cburden50p",
+        "t_ocburden30p",
+        "_t_ocburden30p",
+        "t_rcburden30p",
+        "_t_rcburden30p",
+        "t_ocburden50p",
+        "_t_ocburden50p",
+        "t_rcburden50p",
+        "_t_rcburden50p",
+
+    ];
+
+    // The array.concat method doesn't alter the first array, just
+    // returns a new one.
+    self.census_indicator_titles = self.census_indicator_titles.concat(
+        self.housing_cost_burden_indicators);
+
+    /*
+
+    Housing costs >30% of household income, number
+    Housing costs >30% of household income, percent
+    Housing costs >50% of household income
+    Housing costs >50% of household income, percent
+    Owner-occupied housing costs >30%, number t_ocburden30p
+    Owner-occupied housing costs >30%, percent
+    Renter-occupied housing costs>30%, number
+    Renter-occupied housing costs>30%, percent
+    Owner-occupied housing costs >50%, number
+    Owner-occupied housing costs >50%, percent
+    Renter-occupied housing costs>50%, number
+    Renter-occupied housing costs>50%, percent"
+
+    */
+
     self.income_indicators= ['_medinc', 'hhincls10k', '_hhincls10k',
         'hhinc10to15k', '_hhinc10to15k',
         'hhinc15to25k','_hhinc15to25k',
@@ -166,6 +204,16 @@ function ProgressMetricsViewModel (data) {
 
 
      };
+
+    // add some stuff dynamically.
+    $.each(self.housing_cost_burden_indicators, function (index, value) {
+        var cv_indicator = "cv" + value;
+        var moe_indicator = "m" + value;
+        self.indicator_cv_pairings[value] = cv_indicator;
+        self.indicator_moe_pairings[value] = moe_indicator;
+        self.census_indicator_titles.push(cv_indicator);
+        self.census_indicator_titles.push(moe_indicator);
+    });
 
     self.overview_indicators_sales = ['med_al_price', '_grent'];
     self.overview_indicators_income = ['_medinc', 'bpv'];
@@ -279,6 +327,12 @@ function ProgressMetricsViewModel (data) {
 
     self.toggle_poverty_data = function () {
         self.show_poverty_data(!self.show_poverty_data());
+    };
+
+    self.show_housing_cost_burden_data = ko.observable(true);
+
+    self.toggle_housing_cost_burden_data = function () {
+        self.show_housing_cost_burden_data(!self.show_housing_cost_burden_data());
     };
 
 };
