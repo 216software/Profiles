@@ -130,7 +130,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <tr data-bind="visible:show_rental_data">
 <th>Indicator</th>
 <th class="data">% change</th>
-<!-- ko foreach:observable_timestamps_census -->
+<!-- ko foreach:[moment({y: 2010}), moment({y: 2015})] -->
     <!-- ko if:($index() == 0) -->
     <th class="data">2006-<span data-bind="text:$data.format('YYYY')"></span></th>
     <!-- /ko -->
@@ -166,7 +166,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 </td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
-<!-- ko foreach:$parents[1].observable_timestamps_census -->
+<!-- ko foreach:[moment({y: 2010}), moment({y: 2015})] -->
 <td class="data"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
@@ -295,7 +295,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <tr data-bind="visible: show_income_data">
 <th>Indicator</th>
 <th class="data">% change</th>
-<!-- ko foreach:observable_timestamps_census -->
+<!-- ko foreach:[moment({y: 2010}), moment({y: 2015})] -->
     <!-- ko if:($index() == 0) -->
     <th class="data">2006-<span data-bind="text:$data.format('YYYY')"></span></th>
     <!-- /ko -->
@@ -330,7 +330,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 </td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
-<!-- ko foreach:$parents[1].observable_timestamps_census -->
+<!-- ko foreach:[moment({y: 2010}), moment({y: 2015})] -->
 <td class="data"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
@@ -383,7 +383,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <tr data-bind="visible: show_poverty_data">
 <th>Indicator</th>
 <th class="data">% change</th>
-<!-- ko foreach:observable_timestamps_census -->
+<!-- ko foreach:[moment({y: 2010}), moment({y: 2015})] -->
     <!-- ko if:($index() == 0) -->
     <th class="data">2006-<span data-bind="text:$data.format('YYYY')"></span></th>
     <!-- /ko -->
@@ -419,7 +419,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 </td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
-<!-- ko foreach:$parents[1].observable_timestamps_census -->
+<!-- ko foreach:[moment({y: 2010}), moment({y: 2015})] -->
 <td class="data"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
@@ -446,8 +446,6 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 </td>
 <!-- /ko -->
 <!-- /ko -->
-
-
 
 <!-- /ko --> <!-- closes inner for loop -->
 

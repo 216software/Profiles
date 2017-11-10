@@ -329,7 +329,7 @@ function ProgressMetricsViewModel (data) {
         self.show_poverty_data(!self.show_poverty_data());
     };
 
-    self.show_housing_cost_burden_data = ko.observable(true);
+    self.show_housing_cost_burden_data = ko.observable(false);
 
     self.toggle_housing_cost_burden_data = function () {
         self.show_housing_cost_burden_data(!self.show_housing_cost_burden_data());
