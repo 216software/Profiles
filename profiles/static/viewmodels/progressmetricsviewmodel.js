@@ -263,4 +263,22 @@ function ProgressMetricsViewModel (data) {
         self.show_sales_data(!self.show_sales_data());
     };
 
+    self.show_rental_data = ko.observable(false);
+
+    self.toggle_rental_data = function () {
+        self.show_rental_data(!self.show_rental_data());
+    };
+
+    self.show_income_data = ko.observable(false);
+
+    self.toggle_income_data = function () {
+        self.show_income_data(!self.show_income_data());
+    };
+
+    self.show_poverty_data = ko.observable(false);
+
+    self.toggle_poverty_data = function () {
+        self.show_poverty_data(!self.show_poverty_data());
+    };
+
 };
