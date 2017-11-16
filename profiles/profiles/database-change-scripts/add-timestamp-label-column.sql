@@ -1,0 +1,2 @@
+alter table indicator_location_values
+add column observation_timestamp_label text;

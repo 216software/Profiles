@@ -37,8 +37,15 @@ function IndicatorComparisonViewModel (data) {
 
     self.observable_timestamp_options = ko.computed(function(){
 
+        console.debug("Figuring out time options",
+            "self.indicator_uuid",
+            self.indicator_uuid(),
+            "selected_indicator",
+            self.selected_indicator().title()
+        );
+
         // Matt just sidestepping doing it the right way.
-        return [{value: 2010, text: "2006-2010"}, {value: 2015, text:"2011-2015"}];
+        // return [{value: 2010, text: "2006-2010"}, {value: 2015, text:"2011-2015"}];
 
         // This is a bit of a hack since we don't exactly handle ranges
         // the best...
@@ -64,9 +71,10 @@ function IndicatorComparisonViewModel (data) {
 
             // Then our second set of values is really a range
             options.push({'value':self.observable_timestamps()[0].year(),
-                    'text':self.observable_timestamps()[0].year()})
+                    'text':'2016-'+self.observable_timestamps()[0].year()})
+
             options.push({'value':self.observable_timestamps()[1].year(),
-                    'text':'2010 - ' + self.observable_timestamps()[1].year()})
+                    'text':'2011-' + self.observable_timestamps()[1].year()})
 
         }
 

@@ -42,3 +42,4 @@ script_order:
 -   other-nina-edits.sql
 -   create-races-and-connect-to-indicators.sql
 
+-   add-timestamp-label-column.sql

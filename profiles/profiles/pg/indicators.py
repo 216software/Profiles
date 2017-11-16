@@ -289,7 +289,8 @@ class Indicator(RelationWrapper):
 
         cursor.execute(textwrap.dedent("""
 
-                select distinct observation_timestamp
+                select distinct observation_timestamp,
+                observation_timestamp_label
                 from indicator_location_values
                 where indicator_uuid = %(indicator_uuid)s
                 order by observation_timestamp asc;
@@ -429,12 +430,13 @@ class IndicatorLocationValue(RelationWrapper):
 
     def __init__(self, indicator_uuid, location_uuid,
         observation_timestamp, observation_range,
-        value, inserted, updated):
+        value, observation_timestamp_label, inserted, updated):
 
         self.indicator_uuid = indicator_uuid
         self.location_uuid = location_uuid
         self.observation_timestamp = observation_timestamp
         self.observation_range = observation_range
+        self.observation_timestamp_label = observation_timestamp_label
         self.value = value
         self.inserted = inserted
         self.updated = updated

@@ -158,8 +158,7 @@ class IndicatorValuesByIndicator(Handler):
             x['location'].area = x['location_area']
             ivs.append(x)
 
-
-        distinct_observable_timestamps = [x for x in \
+        distinct_observable_timestamps = [x for x in
             indicator.distinct_observation_timestamps(self.cw.get_pgconn())]
 
         return Response.json(dict(
@@ -304,8 +303,6 @@ class IndicatorValuesByLocation(Handler):
         distinct_observable_timestamps = [x for x in \
             location.distinct_observation_timestamp_for_indicators(self.cw.get_pgconn(),
                 indicators)]
-
-        log.debug(distinct_observable_timestamps)
 
         return Response.json(dict(
             message="Found these indicator categories and values for this location {0}".\

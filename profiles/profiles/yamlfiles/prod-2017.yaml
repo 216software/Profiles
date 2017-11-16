@@ -8,7 +8,7 @@ app:
     launch_debugger_on_error:   False
     webapp_port:                6661
     pidfile:                    /tmp/prod-2017-profiles-webapp.pid
-    num_webapp_workers:         1
+    num_webapp_workers:         4
 
 postgresql:
     database:   &dbname profiles_prod_2017
