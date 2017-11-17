@@ -3,7 +3,7 @@
 app:
 
     secret:                     2246 Tudor
-    host: &host                 test-profiles.216software.com
+    host: &host                 profiles.216software.com
     scheme:                     http
     launch_debugger_on_error:   False
     webapp_port:                6661
