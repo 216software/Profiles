@@ -37,13 +37,6 @@ function IndicatorComparisonViewModel (data) {
 
     self.observable_timestamp_options = ko.computed(function(){
 
-        console.debug("Figuring out time options",
-            "self.indicator_uuid",
-            self.indicator_uuid(),
-            "selected_indicator",
-            self.selected_indicator().title()
-        );
-
         // Matt just sidestepping doing it the right way.
         // return [{value: 2010, text: "2006-2010"}, {value: 2015, text:"2011-2015"}];
 
@@ -85,7 +78,6 @@ function IndicatorComparisonViewModel (data) {
                     'text':'Avg. 2009 - ' + self.observable_timestamps()[0].year()})
         }
 
-        console.debug("options:", options);
         return options;
     });
 
@@ -363,15 +355,17 @@ function IndicatorComparisonViewModel (data) {
         }
 
 
-        var geoToAdd = []
-        var geoValues = []
+        var geoToAdd = [];
+        var geoValues = [];
 
 
         ko.utils.arrayForEach(self.location_search_filtered(), function(loc){
+
             var leaf_feature = loc.leaflet_feature(self.map_selected_year().value);
 
             // only add if we have a value
-            if(typeof(leaf_feature.properties.indicator_value) == 'function'){
+            if(typeof(leaf_feature.properties.indicator_value) == 'function'
+                && leaf_feature.geometry){
                 geoToAdd.push(leaf_feature);
                 geoValues.push(leaf_feature.properties.indicator_value);
             }
@@ -401,6 +395,9 @@ function IndicatorComparisonViewModel (data) {
 
         // This adds the actual layers to the map
         var featureCollection = {"type": "FeatureCollection", "features":geoToAdd};
+
+        console.debug(featureCollection);
+
         self.geojson = L.geoJson(featureCollection,{
             style: self.makeStyle,
             onEachFeature:self.makeOnEachFeature}).addTo(self.map);
@@ -432,8 +429,6 @@ function IndicatorComparisonViewModel (data) {
 
         self.mapInfo.addTo(self.map);
         self.legend.addTo(self.map);
-
-
 
     };
 
@@ -550,22 +545,29 @@ function IndicatorComparisonViewModel (data) {
     }
 
     self.makeOnEachFeature = function(feature, layer) {
+
         layer.on({
             mouseover: self.highlightFeature,
             mouseout: self.resetHighlight,
         });
 
-        var bounds = layer.getBounds();
-        // Get center of bounds
-        var center = bounds.getCenter();
-        // Use center to put marker on map
-        var marker = L.marker(center)
+        // Do not draw markers for neighborhoods.
+        if (feature.properties.location_type != "neighborhood") {
 
-        marker.layer = layer
-        layer.marker = marker
-        self.markers.push(marker);
-        marker.on('click',
-            self.highlightFeature).addTo(self.map);
+            var bounds = layer.getBounds();
+            // Get center of bounds
+            var center = bounds.getCenter();
+            // Use center to put marker on map
+            var marker = L.marker(center)
+
+            marker.layer = layer
+            layer.marker = marker
+            self.markers.push(marker);
+            marker.on('click',
+                self.highlightFeature).addTo(self.map);
+
+        }
+
     }
 
 

@@ -226,10 +226,6 @@ function CommunityViewModel (data) {
                 return new Indicator(x.indicator);
             }));
 
-        console.debug("observable_timestamps have",
-            self.observable_timestamps().length,
-            "elements");
-
     };
 
 };

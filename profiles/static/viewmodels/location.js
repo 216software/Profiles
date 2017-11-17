@@ -116,6 +116,7 @@ function Location (data) {
 
         return {'type':'Feature',
                 'properties':{'name':self.title(),
+                              'location_type': self.location_type(),
                               'year':year,
                               'indicator_value': self.indicator_value_by_year(year)
             },
