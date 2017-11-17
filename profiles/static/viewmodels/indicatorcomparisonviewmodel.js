@@ -64,7 +64,7 @@ function IndicatorComparisonViewModel (data) {
 
             // Then our second set of values is really a range
             options.push({'value':self.observable_timestamps()[0].year(),
-                    'text':'2016-'+self.observable_timestamps()[0].year()})
+                    'text':'2006-'+self.observable_timestamps()[0].year()})
 
             options.push({'value':self.observable_timestamps()[1].year(),
                     'text':'2011-' + self.observable_timestamps()[1].year()})
