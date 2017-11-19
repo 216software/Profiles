@@ -27,10 +27,14 @@ visible:selected_location().location_uuid() != undefined">
     <label>
     Location
     </label>
-    <select class="form-control" data-bind="options: filtered_locations,
-                                    optionsCaption: 'Choose...',
-                                    optionsText:'title',
-                                    value:selector_location"></select>
+
+    <select
+        class="select2-me form-control"
+        data-bind="
+            options: filtered_locations,
+            optionsCaption: 'Choose...',
+            optionsText:'title',
+            value:selector_location"></select>
 </div> <!-- closes form-group -->
 
 

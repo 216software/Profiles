@@ -30,6 +30,15 @@ function StartPageViewModel (data) {
 
     self.selected_location_type = ko.observable();
 
+    self.selected_location_type.subscribe(function () {
+
+        // I don't like using jquery selectors within viewmodels; but, I
+        // don't feel like writing a data-binding or a component right
+        // now.
+        $(".select2-me").select2();
+
+    });
+
     self.filtered_locations = ko.computed(function(){
 
          if(self.selected_location_type() != undefined) {
@@ -103,6 +112,7 @@ function StartPageViewModel (data) {
 
         self.get_all_location_types().then(self.get_all_locations).
             then(self.selected_location_initialize);
+
     };
 
     self.get_all_location_types = function(){
@@ -119,6 +129,7 @@ function StartPageViewModel (data) {
             success: function (data) {
                 if (data.success) {
                     self.location_types(data.location_types);
+                    $(".select2-me").select2();
                 }
                 else {
                     toastr.error(data.message);
@@ -433,6 +444,7 @@ function StartPageViewModel (data) {
         */
 
         self.change_location_click();
+
 
     };
 

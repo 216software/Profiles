@@ -24,6 +24,7 @@ script_order:
 -   add-more-indicator-columns.sql
 -   add-indicator-extra-data-columns.sql
 # -   insert_all_csv_files.py
+-   add-timestamp-label-column.sql
 -   insert_all_csv_files_2017.py
 -   insert-indicator-formatting-based-on-spreadsheet.sql
 -   insert-indicator-pretty-labels.sql
@@ -42,4 +43,5 @@ script_order:
 -   other-nina-edits.sql
 -   create-races-and-connect-to-indicators.sql
 
--   add-timestamp-label-column.sql
+
+-   hide-irrelevant-locations.sql

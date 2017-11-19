@@ -102,7 +102,9 @@ if __name__ == "__main__":
 
                     except KeyError as ex:
 
-                        log.error("{0}:{1} not in indicators".format(csv_file_name, ind_title))
+                        log.error("{0}:{1} not in indicators".format(
+                            csv_file_name,
+                            ind_title))
 
     pgconn.commit()
 

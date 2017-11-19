@@ -27,7 +27,8 @@
     "zxcvbn": "https://github.com/dropbox/zxcvbn.git",
     "bootstrap-datepicker": "~1.5.1",
     "bootstrap-select": "~1.7.3",
-    "css-progress-wizard":"*",
-    "leaflet":"0.7.7"
+    "css-progress-wizard": "*",
+    "leaflet": "0.7.7",
+    "select2": "^4.0.5"
   }
 }
