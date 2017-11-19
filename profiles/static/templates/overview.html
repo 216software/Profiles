@@ -62,7 +62,26 @@ Downlad as CSV</a>
 <!-- ko foreach:overview_indicators_sales -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
-<td span data-bind="text:pretty_label"></td>
+<td>
+
+<span data-bind="text:pretty_label"></span>
+
+<span class="pull-right" style="padding-left:5px">
+<a href="#" class="info-link hide-from-print"
+        data-toggle="popover"
+        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
+                   attr: {'data-content' :
+                          $parents[1].rootvm.indicator_extra_info($data)}">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+</a>
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="page-href: {path : '/indicator-map',
+       params: {indicator_uuid: indicator_uuid}}">
+        Map</a>
+</span>
+
+
+</td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 <td class="data"> <span data-bind="text:most_recent_value().formatted"></span>
 
@@ -111,7 +130,25 @@ indicator_MOE().indicator_value_by_year(most_recent_indicator_value().observatio
 <!-- ko foreach:overview_indicators_income -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
-<td data-bind="text:pretty_label"></td>
+<td>
+
+<span data-bind="text:pretty_label"></span>
+
+<span class="pull-right" style="padding-left:5px">
+<a href="#" class="info-link hide-from-print"
+        data-toggle="popover"
+        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
+                   attr: {'data-content' :
+                          $parents[1].rootvm.indicator_extra_info($data)}">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+</a>
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="page-href: {path : '/indicator-map',
+       params: {indicator_uuid: indicator_uuid}}">
+        Map</a>
+</span>
+
+</td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 <td class="data"><span data-bind="text:most_recent_value().formatted"></span>
 
@@ -177,7 +214,25 @@ view more details</a></td>
 <!-- ko foreach:total_population -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
-<td data-bind="text:pretty_label"></td>
+<td>
+
+<span data-bind="text:pretty_label"></span>
+
+<span class="pull-right" style="padding-left:5px">
+<a href="#" class="info-link hide-from-print"
+        data-toggle="popover"
+        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
+                   attr: {'data-content' :
+                          $parents[1].rootvm.indicator_extra_info($data)}">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+</a>
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="page-href: {path : '/indicator-map',
+       params: {indicator_uuid: indicator_uuid}}">
+        Map</a>
+</span>
+
+</td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 <td class="data"> <span data-bind="text:most_recent_value().formatted"></span>
 <span data-bind="if:indicator_CV()">
@@ -225,7 +280,25 @@ view more details</a></td>
 <!-- ko foreach:indicators_population_overview -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
-<td data-bind="text:pretty_label"></td>
+<td>
+<span data-bind="text:pretty_label"></span>
+
+<span class="pull-right" style="padding-left:5px">
+<a href="#" class="info-link hide-from-print"
+        data-toggle="popover"
+        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
+                   attr: {'data-content' :
+                          $parents[1].rootvm.indicator_extra_info($data)}">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+</a>
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="page-href: {path : '/indicator-map',
+       params: {indicator_uuid: indicator_uuid}}">
+        Map</a>
+</span>
+
+</td>
+
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 <td class="data"> <span data-bind="text:most_recent_value().formatted"></span>
 <span data-bind="if:indicator_CV()">
@@ -276,6 +349,22 @@ view more details</a></td>
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
 <td> <span data-bind="text:description"></span>
+
+<span class="pull-right" style="padding-left:5px">
+<a href="#" class="info-link hide-from-print"
+        data-toggle="popover"
+        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
+                   attr: {'data-content' :
+                          $parents[1].rootvm.indicator_extra_info($data)}">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+</a>
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="page-href: {path : '/indicator-map',
+       params: {indicator_uuid: indicator_uuid}}">
+        Map</a>
+</span>
+
+
 </td>
 <td  class="data" data-bind="text:percent_change_indicator_value"></td>
 <td class="data" data-bind="text:most_recent_value().formatted"></td>
@@ -295,7 +384,24 @@ view more details</a></td>
 <!-- ko foreach:overview_indicators -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
-<td data-bind="text:pretty_label"></td>
+<td>
+<span data-bind="text:pretty_label"></span>
+
+<span class="pull-right" style="padding-left:5px">
+<a href="#" class="info-link hide-from-print"
+        data-toggle="popover"
+        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
+                   attr: {'data-content' :
+                          $parents[1].rootvm.indicator_extra_info($data)}">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+</a>
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="page-href: {path : '/indicator-map',
+       params: {indicator_uuid: indicator_uuid}}">
+        Map</a>
+</span>
+
+</td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 <td class="data" data-bind="text:most_recent_value().formatted"></td>
 </tr>
@@ -314,7 +420,24 @@ view more details</a></td>
 <!-- ko foreach:overview_indicators -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
-<td data-bind="text:pretty_label"></td>
+<td>
+
+<span data-bind="text:pretty_label"></span>
+
+<span class="pull-right" style="padding-left:5px">
+<a href="#" class="info-link hide-from-print"
+        data-toggle="popover"
+        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
+                   attr: {'data-content' :
+                          $parents[1].rootvm.indicator_extra_info($data)}">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+</a>
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="page-href: {path : '/indicator-map',
+       params: {indicator_uuid: indicator_uuid}}">
+        Map</a>
+</span>
+</td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 <td class="data" data-bind="text:most_recent_value().formatted"></td>
 </tr>
@@ -330,7 +453,25 @@ view more details</a></td></tr>
 <!-- ko foreach:overview_indicators -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
-<td data-bind="text:pretty_label"></td>
+<td>
+<span data-bind="text:pretty_label"></span>
+<span class="pull-right" style="padding-left:5px">
+<a href="#" class="info-link hide-from-print"
+        data-toggle="popover"
+        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
+                   attr: {'data-content' :
+                          $parents[1].rootvm.indicator_extra_info($data)}">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+</a>
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="page-href: {path : '/indicator-map',
+       params: {indicator_uuid: indicator_uuid}}">
+        Map</a>
+</span>
+
+</td>
+
+
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 <td class="data" data-bind="text:most_recent_value().formatted"></td>
 </tr>
@@ -347,7 +488,24 @@ view more details</a></th></tr></tr>
 <!-- ko foreach:overview_indicators -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
-<td data-bind="text:pretty_label"></td>
+<td>
+<span data-bind="text:pretty_label"></span>
+
+<span class="pull-right" style="padding-left:5px">
+<a href="#" class="info-link hide-from-print"
+        data-toggle="popover"
+        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
+                   attr: {'data-content' :
+                          $parents[1].rootvm.indicator_extra_info($data)}">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+</a>
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="page-href: {path : '/indicator-map',
+       params: {indicator_uuid: indicator_uuid}}">
+        Map</a>
+</span>
+
+</td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 <td class="data"> <span data-bind="text:most_recent_value().formatted"></span>
 <span data-bind="if:indicator_CV()">
@@ -395,7 +553,22 @@ view more details</a></td></tr></tr></tr>
 <!-- ko foreach:overview_indicators -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
-<td data-bind="text:pretty_label"></td>
+<td>
+<span data-bind="text:pretty_label"></span>
+<span class="pull-right" style="padding-left:5px">
+<a href="#" class="info-link hide-from-print"
+        data-toggle="popover"
+        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
+                   attr: {'data-content' :
+                          $parents[1].rootvm.indicator_extra_info($data)}">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+</a>
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="page-href: {path : '/indicator-map',
+       params: {indicator_uuid: indicator_uuid}}">
+        Map</a>
+</span>
+</td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 <td class="data"> <span data-bind="text:most_recent_value().formatted"></span>
 <span data-bind="if:indicator_CV()">
