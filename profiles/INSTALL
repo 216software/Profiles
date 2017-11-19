@@ -25,8 +25,8 @@ After that
 
 ::
 
-    $ cd python-code
-    $ pip install -r requirements.txt
+    $ cd profiles
+    $ pip install -r requirements.txt -e .
 
 Apache configs
 ==============
@@ -137,7 +137,7 @@ pdfkit has requirement - wkhtmltopdf and can be installed as detailed here::
 We've included the binary in external-code. It should be installed when
 you run::
 
-    pip install -r requirments -e .
+    pip install -r requirements.txt -e .
 
 
 

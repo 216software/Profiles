@@ -39,7 +39,7 @@ function HealthViewModel (data) {
         'le': 'Life expectancy is calculated using the Life Expectancy Calculator created by Daniel Eayres published in the South East Public Health Observatory (SEPHO) website.'
     }
 
-    self.overview_indicators = ['le2009'];
+    self.overview_indicators = ['le'];
 
 
     self.indicators = ko.observableArray([]);
