@@ -39,6 +39,7 @@ Downlad as CSV</a>
 
 </div>
 
+
 <table class="table table-striped table-bordered" id="progressMetricsTable">
 <thead>
 <tr>
@@ -58,7 +59,6 @@ Downlad as CSV</a>
 <tbody>
 
 <!-- ko with:progressmetricsvm-->
-
 <!-- ko foreach:overview_indicators_sales -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr>
@@ -79,6 +79,7 @@ Downlad as CSV</a>
 </span></span>
 </td>
 
+
 <!-- ko if:indicator_CV -->
 <!-- ko if:indicator_CV().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted -->
 
@@ -92,22 +93,17 @@ Downlad as CSV</a>
 indicator_MOE().indicator_value_by_year(most_recent_indicator_value().observation_timestamp_year()).formatted"></span>
 
 </td>
-<!-- /ko --><!-- if indicator_CV.indicator_value_by_year -->
-<!-- /ko --><!-- if indicator_CV -->
+<!-- /ko -->
+<!-- /ko -->
 
 </tr>
-<!-- /ko --><!-- with indicator.indicator_by_title -->
-<!-- /ko --><!-- foreach overview_indicators_sales -->
+<!-- /ko -->
+<!-- /ko -->
+<!-- /ko -->
 
-<!-- /ko --><!-- with progressmetricsvm -->
-
-</tbody>
-</table>
 
 
 <!-- ko with:progressmetricsvm-->
-<table class="table table-striped table-bordered" id="progressMetricsTable">
-<tbody>
 
 <tr>
 <tr><td colspan ="3"><strong>Income</strong></td></tr>
@@ -127,6 +123,7 @@ indicator_MOE().indicator_value_by_year(most_recent_indicator_value().observatio
         data-bind="attr: {'data-content' :
             pretty_CV_and_MOE(most_recent_indicator_value().observation_timestamp_year())}">
         +/-</button>
+
 
 </span></span>
 </td>
