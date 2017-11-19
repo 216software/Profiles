@@ -83,6 +83,10 @@ function ProfilesViewModel (data) {
         if(indicator.denominator_tables()){
             extra_info += '<br />Denominator Tables: ' + indicator.denominator_tables()
         }
+        if(indicator.title()){
+            extra_info += '<br />SAS variable: ' + indicator.title()
+        }
+
 
         return extra_info;
 

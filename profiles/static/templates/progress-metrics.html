@@ -16,7 +16,6 @@ button will allow for a cross-location (city-wide)
 comparison of a given indicator. <br />The cross-location information is
 available in a table as well.</h5>
 
-
 <p class="hide-from-print text-info small">
 <a target="_blank" data-bind="attr: {href: '/pdf/progress-' + print_friendly_name + '.pdf'}">Download as PDF</a>
 |
@@ -24,7 +23,6 @@ available in a table as well.</h5>
     data-bind="click:function(event){
     rootvm.exportTableToCSV(event, ['salesDataTable', 'rentalDataTable', 'incomeDataTable', 'povertyDataTable'], 'progressmetrics- ' + print_friendly_name + '.csv');   return true;}">
 Downlad as CSV</a>
-
 
 </p>
 
@@ -163,7 +161,9 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
        params: {indicator_uuid: indicator_uuid}}">
         Map</a>
 </span>
+<span style="display:none;" data-bind="text: title"></span>
 </td>
+
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
 <!-- ko foreach:[moment({y: 2010}), moment({y: 2015})] -->
@@ -211,7 +211,10 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <thead>
 <tr><th colspan="4">Housing Cost Burden Data
 
-<button class="btn btn-default" data-bind="visible: show_housing_cost_burden_data, click:toggle_housing_cost_burden_data">Hide</button>
+<button class="btn btn-default"
+    data-bind="
+        visible: show_housing_cost_burden_data,
+        click:toggle_housing_cost_burden_data">Hide</button>
 
 <button class="btn btn-default" data-bind="visible: !show_housing_cost_burden_data(), click:toggle_housing_cost_burden_data">Show</button>
 
