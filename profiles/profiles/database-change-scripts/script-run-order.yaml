@@ -45,3 +45,5 @@ script_order:
 
 
 -   hide-irrelevant-locations.sql
+
+-   make-pdf-files.py
