@@ -215,7 +215,8 @@ function ProgressMetricsViewModel (data) {
         self.census_indicator_titles.push(moe_indicator);
     });
 
-    self.overview_indicators_sales = ['med_al_price', '_grent'];
+    self.overview_indicators_sales = ['med_al_price'];
+    self.overview_indicators_sales_2nd_table = ['_grent'];
     self.overview_indicators_income = ['_medinc', 'bpv'];
 
     self.indicators = ko.observableArray([]);
