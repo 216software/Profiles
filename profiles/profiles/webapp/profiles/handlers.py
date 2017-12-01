@@ -218,9 +218,15 @@ class IndicatorValuesByRace(Handler):
             req.wz_req.args['indicator_uuid'])
 
         dt = datetime.datetime(
-            req.wz_req.args["year"],
+            int(req.wz_req.args["year"]),
             1,
             1)
+
+        racial_split = pg.indicators.IndicatorLocationValue.look_up_racial_split(
+            self.cw.get_pgconn(),
+            indicator.title,
+            location.location_uuid,
+            dt)
 
         return Response.json(dict(
             message="Looked up racial breakouts for {0} / {1} / {2}.".format(
@@ -228,7 +234,8 @@ class IndicatorValuesByRace(Handler):
                 location.title,
                 dt),
             reply_timestamp=datetime.datetime.now(),
-            success=True))
+            success=True,
+            racial_split=list(racial_split)))
 
 class IndicatorValuesByIndicatorCSV(Handler):
 

@@ -265,6 +265,18 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <td class="data">
 <span data-bind="text: indicator_value_by_year(2014).formatted"></span>
 
+
+<a href="#" class="btn btn-info btn-xs hide-from-print"
+      data-bind="
+        visible: $parents[1].show_chart[title()],
+        page-href: {path : '/indicator-chart',
+            params: {
+                indicator_uuid: indicator_uuid,
+                location_uuid: $parents[1].location_uuid,
+                year: 2014}}">
+        Chart</a>
+
+
 <span data-bind="if: indicator_CV"><span data-bind="if: indicator_CV().indicator_value_by_year(2014).formatted">
 <button class="btn btn-xs hide-from-print"
         data-toggle="popover"

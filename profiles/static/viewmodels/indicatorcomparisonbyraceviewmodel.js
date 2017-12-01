@@ -69,6 +69,7 @@ function IndicatorComparisonByRaceViewModel (data) {
 
     self.indicator_uuid = ko.observable();
     self.location_uuid = ko.observable();
+    self.year = ko.observable();
 
     self.selected_indicator = ko.observable(new Indicator({rootvm:data.rootvm}));
 
@@ -130,8 +131,9 @@ function IndicatorComparisonByRaceViewModel (data) {
             processData: true,
 
             data: {
-                'indicator_uuid':self.selected_indicator().indicator_uuid(),
-                'location_uuid':self.location_uuid()
+                'indicator_uuid': self.selected_indicator().indicator_uuid(),
+                'location_uuid': self.location_uuid(),
+                'year': self.year()
             },
 
             complete: function () {

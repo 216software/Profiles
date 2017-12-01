@@ -529,7 +529,9 @@ class IndicatorLocationValue(RelationWrapper):
         cursor = pgconn.cursor()
 
         cursor.execute(textwrap.dedent("""
-            select (ilv.*)::indicator_location_values as ilv
+            select (ilv.*)::indicator_location_values as ilv,
+            (indicators.*)::indicators as ind
+
             from indicator_location_values ilv
             join indicators
             on ilv.indicator_uuid = indicators.indicator_uuid
@@ -548,7 +550,7 @@ class IndicatorLocationValue(RelationWrapper):
             dt))
 
         for row in cursor:
-            yield row.ilv
+            yield row._asdict()
 
     @classmethod
     def find_racial_sub_indicators(cls, indicator_title):
