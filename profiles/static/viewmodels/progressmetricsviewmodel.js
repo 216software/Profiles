@@ -336,4 +336,8 @@ function ProgressMetricsViewModel (data) {
         self.show_housing_cost_burden_data(!self.show_housing_cost_burden_data());
     };
 
+    self.show_chart = {
+        't_cburden50p': true
+    }
+
 };

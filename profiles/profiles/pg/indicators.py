@@ -522,3 +522,45 @@ class IndicatorLocationValue(RelationWrapper):
                 self.observation_timestamp,
                 float(new_value))
 
+    @classmethod
+    def look_up_racial_split(cls, pgconn, indicator_title,
+        location_uuid, dt):
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+            select (ilv.*)::indicator_location_values as ilv
+            from indicator_location_values ilv
+            join indicators
+            on ilv.indicator_uuid = indicators.indicator_uuid
+            where indicators.title = any (%(race_indicator_titles)s)
+            and ilv.location_uuid = %(location_uuid)s
+            and ilv.observation_timestamp = %(dt)s
+            """), dict(
+                race_indicator_titles=cls.find_racial_sub_indicators(indicator_title),
+                location_uuid=location_uuid,
+                dt=dt))
+
+        log.debug("Found {0} rows for {1} / {2} / {3}.".format(
+            cursor.rowcount,
+            indicator_title,
+            location_uuid,
+            dt))
+
+        for row in cursor:
+            yield row.ilv
+
+    @classmethod
+    def find_racial_sub_indicators(cls, indicator_title):
+
+        if not indicator_title.startswith("t_"):
+
+            raise ValueError("Sorry, I can only do this when "
+                "indicator starts with 't_', not {0}.".format(
+                    indicator_title))
+
+        else:
+
+            return ["{0}_{1}".format(c, indicator_title[2:]) for c in 'abhow']
+
+

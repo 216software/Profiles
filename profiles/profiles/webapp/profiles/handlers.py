@@ -127,15 +127,35 @@ class IndicatorDetails(Handler):
 
     def handle(self, req):
 
-        indicator = pg.indicators.Indicator.by_indicator_uuid(self.cw.get_pgconn(),
-            req.wz_req.args['indicator_uuid'])
+        if "indicator_uuid" not in req.wz_req.args:
 
-        return Response.json(dict(
-            message="Found this indicator {0}".\
-                format(indicator),
-            reply_timestamp=datetime.datetime.now(),
-            success=True,
-            indicator=indicator))
+            return Response.json(dict(
+                message="Missing parameter 'indicator_uuid'!",
+                reply_timestamp=datetime.datetime.now(),
+                success=False))
+
+        else:
+
+            try:
+
+                indicator = pg.indicators.Indicator.by_indicator_uuid(self.cw.get_pgconn(),
+                    req.wz_req.args['indicator_uuid'])
+
+            except KeyError as ex:
+
+                return Response.json(dict(
+                    message="Could not find indicator {0}!".format(req.wz_req.args["indicator_uuid"]),
+                    reply_timestamp=datetime.datetime.now(),
+                    success=False))
+
+            else:
+
+                return Response.json(dict(
+                    message="Found this indicator {0}".\
+                        format(indicator),
+                    reply_timestamp=datetime.datetime.now(),
+                    success=True,
+                    indicator=indicator))
 
 
 class IndicatorValuesByIndicator(Handler):
@@ -174,7 +194,22 @@ class IndicatorValuesByRace(Handler):
     route_strings = set(["GET /api/indicator-values-by-race"])
     route = Handler.check_route_strings
 
+    required_qs_params = [
+        "location_uuid",
+        "indicator_uuid",
+        "year"
+    ]
+
     def handle(self, req):
+
+        for rqp in self.required_qs_params:
+
+            if rqp not in req.wz_req.args:
+
+                return Response.json(dict(
+                    message="Missing parameter {0}!".format(rqp),
+                    reply_timestamp=datetime.datetime.now(),
+                    success=False))
 
         location = pg.locations.Location.by_location_uuid(self.cw.get_pgconn(),
             req.wz_req.args['location_uuid'])
@@ -182,34 +217,18 @@ class IndicatorValuesByRace(Handler):
         indicator = pg.indicators.Indicator.by_indicator_uuid(self.cw.get_pgconn(),
             req.wz_req.args['indicator_uuid'])
 
-        # Based on our main indicator, find all associated indicators by
-        # race
-
-        # if indicator.title == 'pop':
-
-        category_indicator_values = [x
-            for x in location.indicators_with_values_by_location(
-                self.cw.get_pgconn(),
-                indicators)]
-
-        distinct_observable_timestamps = [x for x in \
-            location.distinct_observation_timestamp_for_indicators(self.cw.get_pgconn(),
-                indicators)]
-
-        distinct_observable_timestamps = [x for x in \
-            indicator.distinct_observation_timestamps(self.cw.get_pgconn())]
+        dt = datetime.datetime(
+            req.wz_req.args["year"],
+            1,
+            1)
 
         return Response.json(dict(
-            message="Found this indicator {0}".\
-                format(indicator),
+            message="Looked up racial breakouts for {0} / {1} / {2}.".format(
+                indicator.title,
+                location.title,
+                dt),
             reply_timestamp=datetime.datetime.now(),
-            success=True,
-            indicatorvalues=ivs,
-            distinct_observable_timestamps=distinct_observable_timestamps))
-
-
-
-
+            success=True))
 
 class IndicatorValuesByIndicatorCSV(Handler):
 

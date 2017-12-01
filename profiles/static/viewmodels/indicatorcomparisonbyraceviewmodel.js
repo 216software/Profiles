@@ -25,20 +25,29 @@ function IndicatorComparisonByRaceViewModel (data) {
     self.rootvm = data.rootvm;
 
     self.initialize = function(){
+
         self.selected_indicator().indicator_uuid(self.indicator_uuid());
 
-        self.get_all_indicator_values();
-        self.selected_indicator().look_up_details().then(function(){
+        // Don't do any AJAX requests unless we have a selected
+        // location.
 
-            google.charts.load('current', {'packages':['corechart']});
-            google.charts.setOnLoadCallback(self.drawVisualization);
+        if (self.rootvm.startpagevm.location_uuid()) {
 
+            self.get_all_indicator_values();
 
-        });
+            self.selected_indicator().look_up_details().then(function(){
+
+                google.charts.load('current', {'packages':['corechart']});
+                google.charts.setOnLoadCallback(self.drawVisualization);
+
+            });
+        }
     };
 
+
     self.drawVisualization = function() {
-        // Some raw data (not necessarily accurate)
+
+        // TODO: replace these bogus numbers with real numbers.
         var data = google.visualization.arrayToDataTable([
          ['Race', self.selected_indicator().pretty_label()],
          ['White',  165],
@@ -110,7 +119,7 @@ function IndicatorComparisonByRaceViewModel (data) {
         return options;
     });
 
-    self.get_all_indicator_values = function(){
+    self.get_all_indicator_values = function () {
 
         self.rootvm.is_busy(true);
 
@@ -120,13 +129,17 @@ function IndicatorComparisonByRaceViewModel (data) {
             dataType: "json",
             processData: true,
 
-            data: {'indicator_uuid':self.selected_indicator().indicator_uuid(),
-                   'location_uuid':self.location_uuid()},
+            data: {
+                'indicator_uuid':self.selected_indicator().indicator_uuid(),
+                'location_uuid':self.location_uuid()
+            },
 
             complete: function () {
                 self.rootvm.is_busy(false);
             },
+
             success: function (data) {
+
                 if (data.success) {
 
                     self.observable_timestamps(ko.utils.arrayMap(
@@ -150,14 +163,9 @@ function IndicatorComparisonByRaceViewModel (data) {
         });
     };
 
-
-
-
     self.sourceLoaded = function(){
         console.log('indicator comparison by race source loaded')
     };
-
-
 
     self.update_chart = function(){
 
@@ -236,8 +244,6 @@ function IndicatorComparisonByRaceViewModel (data) {
 
         self.mapInfo.addTo(self.map);
         self.legend.addTo(self.map);
-
-
 
     };
 
