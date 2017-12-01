@@ -26,35 +26,65 @@ function IndicatorComparisonByRaceViewModel (data) {
 
     self.initialize = function(){
 
+        console.debug("Inside initialize");
+
         self.selected_indicator().indicator_uuid(self.indicator_uuid());
 
-        // Don't do any AJAX requests unless we have a selected
-        // location.
+        $.when(
+            self.get_indicator_values_by_race(),
+            self.selected_indicator().look_up_details()).then(
 
-        if (self.rootvm.startpagevm.location_uuid()) {
+                function() {
 
-            self.get_all_indicator_values();
+                    google.charts.load('current', {'packages':['corechart']});
+                    google.charts.setOnLoadCallback(self.drawVisualization);
 
-            self.selected_indicator().look_up_details().then(function(){
-
-                google.charts.load('current', {'packages':['corechart']});
-                google.charts.setOnLoadCallback(self.drawVisualization);
-
-            });
-        }
+                });
     };
+
+
+    self.make_google_data = function () {
+
+        var google_data = [
+
+            ['Race', self.selected_indicator().pretty_label()],
+            self.racial_split()[0],
+            self.racial_split()[1],
+            self.racial_split()[2],
+            self.racial_split()[3],
+        ]
+
+        return google_data;
+
+    }
 
 
     self.drawVisualization = function() {
 
         // TODO: replace these bogus numbers with real numbers.
-        var data = google.visualization.arrayToDataTable([
-         ['Race', self.selected_indicator().pretty_label()],
-         ['White',  165],
-         ['Black',  135],
-         ['Asian',  157],
-         ['Other',  139],
-        ]);
+        var data = google.visualization.arrayToDataTable(
+            [
+
+                ['Race', self.selected_indicator().pretty_label()],
+                /*
+                */
+
+                /*
+                ['White',  165],
+                ['Black',  135],
+                ['Asian',  157],
+                ['Other',  139],
+                */
+
+                self.racial_split()[0],
+                self.racial_split()[1],
+                self.racial_split()[2],
+                self.racial_split()[3],
+                self.racial_split()[4]
+                /*
+                */
+
+            ]);
 
         var options = {
           title : 'Indicator by Race',
@@ -120,7 +150,9 @@ function IndicatorComparisonByRaceViewModel (data) {
         return options;
     });
 
-    self.get_all_indicator_values = function () {
+    self.racial_split = ko.observableArray([]);
+
+    self.get_indicator_values_by_race = function () {
 
         self.rootvm.is_busy(true);
 
@@ -143,20 +175,13 @@ function IndicatorComparisonByRaceViewModel (data) {
             success: function (data) {
 
                 if (data.success) {
+                    console.debug(data);
 
-                    self.observable_timestamps(ko.utils.arrayMap(
-                        data.distinct_observable_timestamps || [],
-                        function(x){
-                            return new moment(x.observation_timestamp);
-                        }
-                    ));
-
-                    self.indicator_values_by_race(ko.utils.arrayMap(
-                        data.indicatorvalues || [],
+                    self.racial_split(ko.utils.arrayMap(
+                        data.racial_split,
                         function (x) {
-                            console.log(x);
+                            return [x.pretty_label, x.value];
                         }));
-
                 }
                 else {
                     toastr.error(data.message);

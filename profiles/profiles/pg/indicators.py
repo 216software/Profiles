@@ -529,8 +529,13 @@ class IndicatorLocationValue(RelationWrapper):
         cursor = pgconn.cursor()
 
         cursor.execute(textwrap.dedent("""
-            select (ilv.*)::indicator_location_values as ilv,
-            (indicators.*)::indicators as ind
+            select
+
+            indicators.pretty_label,
+            ilv.value
+
+            -- (ilv.*)::indicator_location_values as ilv,
+            -- (indicators.*)::indicators as ind
 
             from indicator_location_values ilv
             join indicators
