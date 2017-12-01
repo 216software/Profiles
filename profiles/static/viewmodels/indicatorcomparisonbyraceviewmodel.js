@@ -87,7 +87,7 @@ function IndicatorComparisonByRaceViewModel (data) {
             ]);
 
         var options = {
-          title : 'Indicator by Race',
+          title : self.selected_indicator().pretty_label() + ", " + self.year(),
           vAxis: {title: 'Count'},
           hAxis: {title: 'Race'},
           seriesType: 'bars',

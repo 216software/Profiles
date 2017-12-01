@@ -109,7 +109,8 @@ function ProfilesViewModel (data) {
     self.rowDelim = '"\r\n"';
 
     self.exportTableToCSV = function(context, tableIDs, filename) {
-        console.log($table);
+
+        // console.log($table);
 
         var csv = '"';
         for (var i = 0; i < tableIDs.length; i++){

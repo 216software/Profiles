@@ -87,7 +87,7 @@ if __name__ == "__main__":
 
                 except Exception as e:
                     log.exception(e)
-                    log.info("trying {0}, {1} retries remaining".format(html_url))
+                    log.info("trying {0}, {1} retries remaining".format(html_url, num_retries))
                     log.debug('gotta do it again')
                     num_retries -= 1
                     do_it_again = True

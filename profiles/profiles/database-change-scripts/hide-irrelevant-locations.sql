@@ -33,3 +33,10 @@ set location_uuid = cmsd.cleveland_location_uuid
 from cmsd
 where indicator_location_values.location_uuid = cmsd.cmsd_location_uuid
 ;
+
+update locations
+set display_me = true
+where title = 'CMSD'
+;
+
+
