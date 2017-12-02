@@ -530,29 +530,35 @@ class IndicatorLocationValue(RelationWrapper):
 
         cursor.execute(textwrap.dedent("""
             select
-
             indicators.pretty_label,
-            ilv.value
+            ilv.value,
 
-            -- (ilv.*)::indicator_location_values as ilv,
-            -- (indicators.*)::indicators as ind
+            ilv.value - ilv_moe.value as floor,
+            ilv.value + ilv_moe.value as ceiling
 
             from indicator_location_values ilv
+
             join indicators
             on ilv.indicator_uuid = indicators.indicator_uuid
+
+            left join indicators moe
+            on 'm' || indicators.title = moe.title
+
+            left join indicator_location_values ilv_moe
+            on moe.indicator_uuid = ilv_moe.indicator_uuid
+            and ilv_moe.location_uuid = %(location_uuid)s
+            and ilv_moe .observation_timestamp = %(dt)s
+
             where indicators.title = any (%(race_indicator_titles)s)
             and ilv.location_uuid = %(location_uuid)s
             and ilv.observation_timestamp = %(dt)s
+
+            order by indicators.pretty_label
+
             """), dict(
                 race_indicator_titles=cls.find_racial_sub_indicators(indicator_title),
                 location_uuid=location_uuid,
                 dt=dt))
-
-        log.debug("Found {0} rows for {1} / {2} / {3}.".format(
-            cursor.rowcount,
-            indicator_title,
-            location_uuid,
-            dt))
 
         for row in cursor:
             yield row._asdict()

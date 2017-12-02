@@ -235,7 +235,10 @@ class IndicatorValuesByRace(Handler):
                 dt),
             reply_timestamp=datetime.datetime.now(),
             success=True,
-            racial_split=list(racial_split)))
+            racial_split=list(racial_split),
+            indicator=indicator,
+            location=location,
+        ))
 
 class IndicatorValuesByIndicatorCSV(Handler):
 

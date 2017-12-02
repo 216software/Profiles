@@ -45,27 +45,25 @@ function IndicatorComparisonByRaceViewModel (data) {
         var data = new google.visualization.DataTable();
 
         data.addColumn("string", "Race");
-        data.addColumn("number", "value");
+        data.addColumn("number", self.selected_indicator().pretty_label());
         data.addColumn({id: "floor", type: "number", role: "interval"})
         data.addColumn({id: "ceiling", type: "number", role: "interval"})
 
         for (var i=0; i<self.racial_split().length; i++) {
             var o = self.racial_split()[i];
-
-            var floor = o.value * 0.9;
-            var ceiling = o.value * 1.1;
-
-            var row = [o.pretty_label, o.value, floor, ceiling];
-
+            var row = [o.pretty_label, o.value, o.floor, o.ceiling];
             console.debug(row);
-
             data.addRow(row);
         }
 
         console.debug(data);
 
         var options = {
-          title : self.selected_indicator().pretty_label() + ", " + self.year() + ", " + self.location_uuid()
+            title : self.selected_indicator().pretty_label() + ", " + self.year() + ", " + self.location().title(),
+            intervals: {
+                'lineWidth': 4,
+                'color': 'black'
+            }
         };
 
         var chart = new google.visualization.ColumnChart(
@@ -127,6 +125,8 @@ function IndicatorComparisonByRaceViewModel (data) {
     });
 
     self.racial_split = ko.observableArray([]);
+    self.location = ko.observable();
+    self.indicator = ko.observable();
 
     self.get_indicator_values_by_race = function () {
 
@@ -152,6 +152,8 @@ function IndicatorComparisonByRaceViewModel (data) {
 
                 if (data.success) {
                     self.racial_split(data.racial_split);
+                    self.location(new Location(data.location));
+                    self.indicator(new Indicator(data.indicator));
                 }
                 else {
                     toastr.error(data.message);
