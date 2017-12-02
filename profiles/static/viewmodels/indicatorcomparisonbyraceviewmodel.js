@@ -20,79 +20,55 @@ function IndicatorComparisonByRaceViewModel (data) {
 
     var self = this;
 
-
     self.type = "IndicatorComparisonByRaceViewModel";
     self.rootvm = data.rootvm;
 
     self.initialize = function(){
 
-        console.debug("Inside initialize");
-
         self.selected_indicator().indicator_uuid(self.indicator_uuid());
 
+        // This is just a fancy way of saying "do both of these things
+        // and then do the callback".
         $.when(
             self.get_indicator_values_by_race(),
-            self.selected_indicator().look_up_details()).then(
-
-                function() {
-
-                    google.charts.load('current', {'packages':['corechart']});
-                    google.charts.setOnLoadCallback(self.drawVisualization);
-
-                });
+            self.selected_indicator().look_up_details()
+        ).then(
+            function() {
+                google.charts.load('current', {'packages':['corechart']});
+                google.charts.setOnLoadCallback(self.drawVisualization);
+            });
     };
-
-
-    self.make_google_data = function () {
-
-        var google_data = [
-
-            ['Race', self.selected_indicator().pretty_label()],
-            self.racial_split()[0],
-            self.racial_split()[1],
-            self.racial_split()[2],
-            self.racial_split()[3],
-        ]
-
-        return google_data;
-
-    }
-
 
     self.drawVisualization = function() {
 
         // TODO: replace these bogus numbers with real numbers.
-        var data = google.visualization.arrayToDataTable(
-            [
+        var data = new google.visualization.DataTable();
 
-                ['Race', self.selected_indicator().pretty_label()],
-                /*
-                */
+        data.addColumn("string", "Race");
+        data.addColumn("number", "value");
+        data.addColumn({id: "floor", type: "number", role: "interval"})
+        data.addColumn({id: "ceiling", type: "number", role: "interval"})
 
-                /*
-                ['White',  165],
-                ['Black',  135],
-                ['Asian',  157],
-                ['Other',  139],
-                */
+        for (var i=0; i<self.racial_split().length; i++) {
+            var o = self.racial_split()[i];
 
-                self.racial_split()[0],
-                self.racial_split()[1],
-                self.racial_split()[2],
-                self.racial_split()[3],
-                self.racial_split()[4]
-                /*
-                */
+            var floor = o.value * 0.9;
+            var ceiling = o.value * 1.1;
 
-            ]);
+            var row = [o.pretty_label, o.value, floor, ceiling];
+
+            console.debug(row);
+
+            data.addRow(row);
+        }
+
+        console.debug(data);
 
         var options = {
-          title : self.selected_indicator().pretty_label() + ", " + self.year(),
-          vAxis: {title: 'Count'},
-          hAxis: {title: 'Race'},
-          seriesType: 'bars',
+          title : self.selected_indicator().pretty_label() + ", " + self.year() + ", " + self.location_uuid()
         };
-        var chart = new google.visualization.ComboChart(
+
+        var chart = new google.visualization.ColumnChart(
             document.getElementById('comparisonChart'));
         chart.draw(data, options);
     }
@@ -175,23 +151,13 @@ function IndicatorComparisonByRaceViewModel (data) {
             success: function (data) {
 
                 if (data.success) {
-                    console.debug(data);
-
-                    self.racial_split(ko.utils.arrayMap(
-                        data.racial_split,
-                        function (x) {
-                            return [x.pretty_label, x.value];
-                        }));
+                    self.racial_split(data.racial_split);
                 }
                 else {
                     toastr.error(data.message);
                 }
             }
         });
-    };
-
-    self.sourceLoaded = function(){
-        console.log('indicator comparison by race source loaded')
     };
 
     self.update_chart = function(){
