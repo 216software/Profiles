@@ -522,8 +522,8 @@ class IndicatorLocationValue(RelationWrapper):
                 self.observation_timestamp,
                 float(new_value))
 
-    @classmethod
-    def look_up_racial_split(cls, pgconn, indicator_title,
+    @staticmethod
+    def look_up_racial_split(pgconn, indicator_title,
         location_uuid, dt):
 
         cursor = pgconn.cursor()
@@ -556,15 +556,15 @@ class IndicatorLocationValue(RelationWrapper):
             order by indicators.pretty_label
 
             """), dict(
-                race_indicator_titles=cls.find_racial_sub_indicators(indicator_title),
+                race_indicator_titles=IndicatorLocationValue.find_racial_sub_indicators(indicator_title),
                 location_uuid=location_uuid,
                 dt=dt))
 
         for row in cursor:
             yield row._asdict()
 
-    @classmethod
-    def find_racial_sub_indicators(cls, indicator_title):
+    @staticmethod
+    def find_racial_sub_indicators(indicator_title):
 
         if not indicator_title.startswith("t_"):
 
@@ -576,4 +576,28 @@ class IndicatorLocationValue(RelationWrapper):
 
             return ["{0}_{1}".format(c, indicator_title[2:]) for c in 'abhow']
 
+
+    @staticmethod
+    def find_available_observation_timestamps(pgconn, indicator_uuid,
+        location_uuid):
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+            select ilv.observation_timestamp,
+
+            coalesce(
+                ilv.observation_timestamp_label,
+                to_char(
+                    ilv.observation_timestamp,
+                    'YYYY')) as observation_timestamp_label
+
+            from indicator_location_values ilv
+            where ilv.indicator_uuid = %(indicator_uuid)s
+            and ilv.location_uuid = %(location_uuid)s
+            order by ilv.observation_timestamp
+            """), locals())
+
+        for row in cursor:
+            yield row._asdict()
 

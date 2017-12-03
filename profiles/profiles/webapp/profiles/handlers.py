@@ -238,7 +238,12 @@ class IndicatorValuesByRace(Handler):
             racial_split=list(racial_split),
             indicator=indicator,
             location=location,
-        ))
+            available_observation_timestamps=list(pg.indicators.IndicatorLocationValue.find_available_observation_timestamps(
+                self.cw.get_pgconn(),
+                req.wz_req.args["indicator_uuid"],
+                req.wz_req.args["location_uuid"]))))
+
+
 
 class IndicatorValuesByIndicatorCSV(Handler):
 
