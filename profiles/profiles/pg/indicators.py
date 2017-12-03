@@ -566,16 +566,11 @@ class IndicatorLocationValue(RelationWrapper):
     @staticmethod
     def find_racial_sub_indicators(indicator_title):
 
-        if not indicator_title.startswith("t_"):
-
-            raise ValueError("Sorry, I can only do this when "
-                "indicator starts with 't_', not {0}.".format(
-                    indicator_title))
+        if indicator_title.startswith("t_"):
+            return ["{0}{1}".format(c, indicator_title[1:]) for c in 'abhow']
 
         else:
-
-            return ["{0}_{1}".format(c, indicator_title[2:]) for c in 'abhow']
-
+            return ["{0}{1}".format(c, indicator_title) for c in 'abhow']
 
     @staticmethod
     def find_available_observation_timestamps(pgconn, indicator_uuid,
