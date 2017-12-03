@@ -1,13 +1,5 @@
 "use strict";
 
-/* Got execute on enter from :
-   http://stackoverflow.com/questions/23087721/call-function-on-enter-key-press-knockout-js
-
-   bind like this
-
-   data-bind="executeOnEnter: sendMessage, button : buttonSelector"
-*/
-
 function OverViewModel (data) {
 
     var self = this;

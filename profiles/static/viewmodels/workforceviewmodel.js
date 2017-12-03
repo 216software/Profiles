@@ -179,4 +179,9 @@ function WorkforceViewModel (data) {
 
         }
     }
+
+    self.show_chart = {
+        'emp': true
+    }
+
 };
