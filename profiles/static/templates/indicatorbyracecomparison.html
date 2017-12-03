@@ -1,32 +1,25 @@
 <div class="row">
 
 <div class="col-md-3">
-<p style="font-size:18px">Viewing comparison data for
-<span class="strong" data-bind="text:selected_indicator().pretty_label"></span>
+
+<p data-bind="if: indicator" style="font-size:18px">Viewing comparison data for
+<span class="strong"
+    data-bind="text: indicator().pretty_label"></span>
 </p>
-</div> <!-- closes col-md-3 -->
 
-<div class="col-md-9">
-
-<ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a href="#">Chart</a></li>
-</ul>
-</div> <!-- closes col-md-9 -->
-
-</div> <!-- closes row -->
-
-<div class="row">
-
-<div class="col-md-3">
-<p>Chart by race comparison ... </p>
 <div class="form-group">
+
     <label>
     Choose a year
     </label>
-    <select class="form-control" data-bind="options: observable_timestamp_options,
-                                 optionsCaption: 'Choose...',
-                                 optionsText: 'text',
-                                 value:selected_year"></select>
+
+    <select class="form-control"
+        data-bind="options: available_observation_timestamps,
+            value: selected_observation_timestamp,
+            optionsValue: 'observation_timestamp_label',
+            optionsText: 'observation_timestamp_label',
+            optionsCaption: 'Choose...'"></select>
+
 </div> <!-- closes form-group -->
 
 <div class="form-group">
