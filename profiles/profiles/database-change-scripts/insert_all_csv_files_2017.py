@@ -54,6 +54,8 @@ if __name__ == "__main__":
         if xls_file in set([
             "CNP Dashboard Varlist_2017.xlsx",
             "Indicators_Descriptions2017.xlsx",
+            "CNP Dashboard Varlist_2017_w_chartlabels.xlsx",
+            "CNP Dashboard Varlist_2017_revNov07.xlsx",
             ]):
 
             continue
