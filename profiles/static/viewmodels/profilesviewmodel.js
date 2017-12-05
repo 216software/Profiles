@@ -187,6 +187,8 @@ function ProfilesViewModel (data) {
         else{
             $text = $col.text();
         }
+        // Remove new lines
+        $text = $text.replace(/(\r\n|\n|\r)/gm,"");
         return $text.replace('"', '""'); // escape double quotes
 
     };
