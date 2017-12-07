@@ -61,7 +61,7 @@ if __name__ == "__main__":
 
         for tab_name in tab_names:
 
-            html_url = "{web_host}/#/{tab_name}?location_uuid={loc_uuid}".format(
+            html_url = "{web_host}/#/{tab_name}?location_uuid={loc_uuid}&expand_everything=1".format(
                 web_host=cw.web_host,
                 tab_name=tab_name,
                 loc_uuid=loc.location_uuid)
@@ -98,7 +98,7 @@ if __name__ == "__main__":
 
     for ind in pg.indicators.Indicator.select_all(pgconn):
 
-        html_url = "{web_host}/#indicator-table?indicator_uuid={ind_uuid}".\
+        html_url = "{web_host}/#indicator-table?indicator_uuid={ind_uuid}&expand_everything=1".\
             format(web_host = cw.web_host,
             ind_uuid=ind.indicator_uuid)
 

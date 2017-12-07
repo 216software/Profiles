@@ -30,7 +30,7 @@ function IndicatorComparisonByRaceViewModel (data) {
 
         for (var i=0; i<self.racial_split().length; i++) {
             var o = self.racial_split()[i];
-            var row = [o.pretty_label, o.value, o.floor, o.ceiling];
+            var row = [o.chart_label, o.value, o.floor, o.ceiling];
             data.addRow(row);
         }
 

@@ -416,7 +416,8 @@ class CSVInserter(object):
                                 None, # indicator value format
                                 None, # indicator category
                                 os.path.basename(self.path_to_csv),
-                                k
+                                k,
+                                None
                             )
 
                         # Look for this key.

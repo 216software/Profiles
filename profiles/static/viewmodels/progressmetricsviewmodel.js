@@ -16,6 +16,8 @@ function ProgressMetricsViewModel (data) {
     self.rootvm = data.rootvm;
     self.parentvm = data.parentvm;
 
+    self.expand_everything = ko.observable();
+
     // Parameter location uuid -- set this on
     // the start page vm
     self.location_uuid = ko.observable();
@@ -335,6 +337,14 @@ function ProgressMetricsViewModel (data) {
     self.toggle_housing_cost_burden_data = function () {
         self.show_housing_cost_burden_data(!self.show_housing_cost_burden_data());
     };
+
+    if (self.expand_everything()) {
+        self.show_sales_data(true);
+        self.show_rental_data(true);
+        self.show_income_data(true);
+        self.show_poverty_data(true);
+        self.show_housing_cost_burden_data(true);
+    }
 
     self.show_chart = {
         't_cburden50p': true

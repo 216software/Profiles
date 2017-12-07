@@ -94,7 +94,8 @@ if __name__ == "__main__":
                         row["Source"],
                         row.get("Data as of"),
                         row.get("Numerator Tables"),
-                        row.get("Denominator Tables"))
+                        row.get("Denominator Tables"),
+                        ind.none_or_s(row.get("Chart Label")))
 
                     ind.update_pretty_label(pgconn, row["Variable Description"])
 
