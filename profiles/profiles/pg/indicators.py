@@ -23,6 +23,7 @@ class Indicator(RelationWrapper):
         sas_variable, formula, extra_notes,
         definition, universe, limitations, note, data_source,
         data_as_of, numerator_tables, denominator_tables,
+        chart_label,
 
         inserted, updated):
 
@@ -45,7 +46,7 @@ class Indicator(RelationWrapper):
         self.data_as_of = data_as_of
         self.numerator_tables = numerator_tables
         self.denominator_tables = denominator_tables
-
+        self.chart_label = chart_label
 
         self.inserted = inserted
         self.updated = updated
@@ -92,20 +93,22 @@ class Indicator(RelationWrapper):
     @classmethod
     def insert(cls, pgconn, title, description,
         indicator_value_format, indicator_category,
-        source_document, sas_variable):
+        source_document, sas_variable, chart_label):
 
         cursor = pgconn.cursor()
 
         cursor.execute(textwrap.dedent("""
             insert into indicators
             (title, description, indicator_value_format,
-            indicator_category, source_document, sas_variable)
+            indicator_category, source_document, sas_variable,
+            chart_label)
             values
-            (%s, %s, %s, %s, %s, %s)
+            (%s, %s, %s, %s, %s, %s, %s)
             returning (indicators.*)::indicators as ind
             """),
             [title, description, indicator_value_format,
-            indicator_category, source_document, sas_variable])
+            indicator_category, source_document, sas_variable,
+            chart_label])
 
         return cursor.fetchone().ind
 
@@ -143,24 +146,28 @@ class Indicator(RelationWrapper):
         for row in cursor:
             yield row.ind
 
-    def update_description(self, pgconn, new_description):
+    def update_description(self, pgconn, new_description, chart_label):
 
         cursor = pgconn.cursor()
 
         cursor.execute(textwrap.dedent("""
             update indicators
-            set description = %s
+
+            set description = %s,
+            chart_label = %s
+
             where indicator_uuid = %s
             returning indicators.*::indicators as updated_ind
-            """), [new_description, self.indicator_uuid])
+            """), [new_description, chart_label, self.indicator_uuid])
 
         if cursor.rowcount:
 
             updated_ind = cursor.fetchone().updated_ind
 
-            log.info("Updated description on {0} to {1}".format(
+            log.info("Updated description, chart_label on {0} to {1}, {2}".format(
                 updated_ind,
-                new_description))
+                new_description,
+                chart_label))
 
             return updated_ind
 
@@ -192,7 +199,8 @@ class Indicator(RelationWrapper):
             raise KeyError("Could not find indicator {0}!".format(self))
 
     @classmethod
-    def update_description_by_title(cls, pgconn, title, description):
+    def update_description_by_title(cls, pgconn, title, description,
+        chart_label):
 
         """
         Use the title to find this indicator.  Then update the
@@ -203,10 +211,13 @@ class Indicator(RelationWrapper):
 
         cursor.execute(textwrap.dedent("""
             update indicators
-            set description = %s
+
+            set description = %s,
+            chart_label = %s
+
             where title = %s
             returning indicators.*::indicators as updated_ind
-            """), [description, title])
+            """), [description, chart_label, title])
 
         if cursor.rowcount:
 
@@ -226,7 +237,7 @@ class Indicator(RelationWrapper):
     def update_extra_details_by_title(cls, pgconn, title, description,
         definition,
         universe, limitations, note, data_source, data_as_of,
-        numerator_tables, denominator_tables):
+        numerator_tables, denominator_tables, chart_label):
 
         """
         Use the title to find this indicator.  Then update
@@ -247,7 +258,8 @@ class Indicator(RelationWrapper):
             data_source = %(data_source)s,
             data_as_of = %(data_as_of)s,
             numerator_tables = %(numerator_tables)s,
-            denominator_tables = %(denominator_tables)s
+            denominator_tables = %(denominator_tables)s,
+            chart_label = %(chart_label)s
 
             where title = %(title)s
 
@@ -530,11 +542,12 @@ class IndicatorLocationValue(RelationWrapper):
 
         cursor.execute(textwrap.dedent("""
             select
-            indicators.pretty_label,
+            indicators.chart_label,
             ilv.value,
 
             ilv.value - ilv_moe.value as floor,
             ilv.value + ilv_moe.value as ceiling
+
 
             from indicator_location_values ilv
 

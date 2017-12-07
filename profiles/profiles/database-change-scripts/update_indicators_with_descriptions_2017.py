@@ -38,7 +38,7 @@ if __name__ == "__main__":
     for csv_file_path in junkdrawer.multi_page_xls2csv(
         os.path.join(
             cw.xls_data_files_folder,
-            "CNP Dashboard Varlist_2017.xlsx"),
+            "CNP Dashboard Varlist_2017_w_chartlabels.xlsx"),
         "/tmp"):
 
         if not os.path.isfile(csv_file_path):
@@ -76,7 +76,8 @@ if __name__ == "__main__":
                     updated_ind = pg.indicators.Indicator.update_description_by_title(
                         pgconn,
                         ind_title,
-                        ind_description)
+                        ind_description,
+                        row["Chart Label"])
 
                 except KeyError as ex:
 
