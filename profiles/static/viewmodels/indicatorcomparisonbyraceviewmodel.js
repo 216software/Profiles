@@ -37,8 +37,9 @@ function IndicatorComparisonByRaceViewModel (data) {
         var options = {
             title : self.indicator().pretty_label() + ", " + self.year() + ", " + self.location().title(),
             intervals: {
-                'lineWidth': 4,
-                'color': 'black'
+                'lineWidth': 2,
+                'color': '383737',
+                'style': 'sticks'
             }
         };
 

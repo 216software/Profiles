@@ -543,10 +543,10 @@ class IndicatorLocationValue(RelationWrapper):
         cursor.execute(textwrap.dedent("""
             select
             indicators.chart_label,
-            ilv.value,
+            round(ilv.value) as value,
 
-            ilv.value - ilv_moe.value as floor,
-            ilv.value + ilv_moe.value as ceiling
+            round(ilv.value - ilv_moe.value) as floor,
+            round(ilv.value + ilv_moe.value) as ceiling
 
 
             from indicator_location_values ilv
