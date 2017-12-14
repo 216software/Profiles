@@ -1,10 +1,11 @@
 <h2>Population Metrics</h2>
 
 <p class="lead">
-It's important for us to monitor changes in population in a
-neighborhood, understanding where neighborhoods are growing or losing
-population, and understanding changes in neighborhood demographic
-make-up.
+
+It is important to monitor changes in population in a neighborhood,
+understanding where neighborhoods are growing or losing population, and
+understanding changes in neighborhood demographic make-up.
+
 </p>
 
 <div data-bind="with:parentvm.selected_location()">
@@ -57,6 +58,7 @@ Downlad as CSV</a>
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr data-bind="css: {rate_data: is_a_rate() }">
 <td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>
+
 <span class="pull-right" style="padding-left:5px">
 <a href="#" class="info-link hide-from-print"
         data-toggle="popover"
@@ -69,6 +71,16 @@ Downlad as CSV</a>
       data-bind="page-href: {path : '/indicator-map',
        params: {indicator_uuid: indicator_uuid}}">
         Map</a>
+
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="
+        page-href: {path : '/indicator-chart',
+            params: {
+                indicator_uuid: indicator_uuid,
+                location_uuid: $parents[1].location_uuid,
+                year: $parents[1].observable_timestamps()[$parents[1].observable_timestamps().length-1].format('YYYY')}}">
+        By race</a>
+
 </span>
 
 </td>
@@ -151,6 +163,16 @@ $parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
       data-bind="page-href: {path : '/indicator-map',
        params: {indicator_uuid: indicator_uuid}}">
         Map</a>
+
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="
+        page-href: {path : '/indicator-chart',
+            params: {
+                indicator_uuid: indicator_uuid,
+                location_uuid: $parents[1].location_uuid,
+                year: $parents[1].observable_timestamps()[$parents[1].observable_timestamps().length-1].format('YYYY')}}">
+        By race</a>
+
 </span>
 
 <span class="sas_variable small" style="display:none;" data-bind="text: title"></span>
@@ -234,6 +256,16 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
       data-bind="page-href: {path : '/indicator-map',
        params: {indicator_uuid: indicator_uuid}}">
         Map</a>
+
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="
+        page-href: {path : '/indicator-chart',
+            params: {
+                indicator_uuid: indicator_uuid,
+                location_uuid: $parents[1].location_uuid,
+                year: $parents[1].observable_timestamps()[$parents[1].observable_timestamps().length-1].format('YYYY')}}">
+        By race</a>
+
 </span>
 
 <span class="sas_variable small" style="display:none;" data-bind="text: title"></span>

@@ -548,7 +548,6 @@ class IndicatorLocationValue(RelationWrapper):
             round(ilv.value - ilv_moe.value) as floor,
             round(ilv.value + ilv_moe.value) as ceiling
 
-
             from indicator_location_values ilv
 
             join indicators
