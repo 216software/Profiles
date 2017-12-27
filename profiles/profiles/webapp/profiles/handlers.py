@@ -117,7 +117,8 @@ class LocationShapeJSON(Handler):
             message="Found this location shape json",
             reply_timestamp=datetime.datetime.now(),
             success=True,
-            location_shape_json=location.location_shape_json))
+            location_shape_json=location.location_shape_json,
+            location=location))
 
 
 class IndicatorDetails(Handler):

@@ -347,7 +347,24 @@ function ProgressMetricsViewModel (data) {
     }
 
     self.show_chart = {
-        't_cburden50p': true
+        't_cburden30p': true,
+        't_cburden50p': true,
+        't_ocburden30p': true,
+        't_rcburden30p': true,
+        't_ocburden50p': true,
+        't_rcburden50p': true,
+        'hhincls10k': true,
+        'hhinc10to15k': true,
+        'hhinc15to25k': true,
+        'hhinc25to35k': true,
+        'hhinc35to50k': true,
+        'hhinc50to75k': true,
+        'hhinc75to100k': true,
+        'hhinc100to150k': true,
+        'hhinc150to200k': true,
+        'hhinc200kp': true,
+        'bpv': true,
+        'tpv': true
     }
 
 };
