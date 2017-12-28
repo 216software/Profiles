@@ -51,11 +51,13 @@ if __name__ == "__main__":
 
     for xls_file in os.listdir(cw.xls_data_files_folder):
 
+        # Skip these files
         if xls_file in set([
             "CNP Dashboard Varlist_2017.xlsx",
             "Indicators_Descriptions2017.xlsx",
             "CNP Dashboard Varlist_2017_w_chartlabels.xlsx",
             "CNP Dashboard Varlist_2017_revNov07.xlsx",
+            "CNP Dashboard Chart By Race Mapping.xlsx",
             ]):
 
             continue
