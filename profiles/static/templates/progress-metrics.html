@@ -125,7 +125,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <thead>
 <tr>
 
-<th data-bind="attr: {'colspan': function () { if (Boolean(Number(expand_everything())) { return 6; } else { return 4; }  }}">
+<th data-bind="attr: {'colspan': function () { if (Boolean(Number(expand_everything()))) { return 8; } else { return 4; }}()}">
 
 <span>Rental Data</span>
 
@@ -142,16 +142,20 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <th>Indicator</th>
 <th class="data">% change</th>
 <!-- ko foreach:[moment({y: 2010}), moment({y: 2015})] -->
+
     <!-- ko if:($index() == 0) -->
     <th class="data">2006-<span data-bind="text:$data.format('YYYY')"></span></th>
+    <th class="show-only-print">CV</th>
+    <th class="show-only-print">MOE (+/-)</th>
     <!-- /ko -->
+
     <!-- ko if:($index() != 0) -->
     <th class="data">2011-<span data-bind="text:$data.year()"></span></th>
+    <th class="show-only-print">CV</th>
+    <th class="show-only-print">MOE (+/-)</th>
     <!-- /ko -->
-<!-- /ko -->
 
-<th class="show-only-print">CV</th>
-<th class="show-only-print">MOE (+/-)</th>
+<!-- /ko -->
 
 </tr>
 </thead>
