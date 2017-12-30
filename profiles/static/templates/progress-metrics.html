@@ -322,25 +322,34 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 <table class="table table-striped table-bordered" id="incomeDataTable">
 <thead>
-<tr><th colspan="4">Income Data
+<tr>
 
-<button class="btn btn-default" data-bind="visible: show_income_data, click:toggle_income_data">Hide</button>
-<button class="btn btn-default" data-bind="visible: !show_income_data(), click:toggle_income_data">Show</button>
+<th data-bind="attr: {'colspan': function () { if (Boolean(Number(expand_everything()))) {  return 8; } else { return 4; }}()}">
+
+<span>Income Data</span>
+
+<button class="hide-from-print btn btn-default" data-bind="visible: show_income_data, click:toggle_income_data">Hide</button>
+<button class="hide-from-print btn btn-default" data-bind="visible: !show_income_data(), click:toggle_income_data">Show</button>
 
 </th></tr>
+
 <tr data-bind="visible: show_income_data">
 <th>Indicator</th>
 <th class="data">% change</th>
 <!-- ko foreach:[moment({y: 2010}), moment({y: 2015})] -->
+
     <!-- ko if:($index() == 0) -->
     <th class="data">2006-<span data-bind="text:$data.format('YYYY')"></span></th>
     <!-- /ko -->
+
     <!-- ko if:($index() != 0) -->
     <th class="data">2011-<span data-bind="text:$data.year()"></span></th>
     <!-- /ko -->
+
+    <th class="show-only-print">CV</th>
+    <th class="show-only-print">MOE (+/-)</th>
+
 <!-- /ko -->
-<th class="show-only-print">CV</th>
-<th class="show-only-print">MOE (+/-)</th>
 
 </tr>
 </thead>
@@ -409,11 +418,15 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 <table class="table table-striped table-bordered" id="povertyDataTable">
 <thead>
-<tr><th colspan="4">Poverty Data
 
-<button class="btn btn-default" data-bind="visible: show_poverty_data, click:toggle_poverty_data">Hide</button>
+<tr>
+<th data-bind="attr: {'colspan': function () { if (Boolean(Number(expand_everything()))) { return 8; } else { return 4; }}()}">
 
-<button class="btn btn-default" data-bind="visible: !show_poverty_data(), click:toggle_poverty_data">Show</button>
+<span>Poverty Data</span>
+
+<button class="hide-from-print btn btn-default" data-bind="visible: show_poverty_data, click:toggle_poverty_data">Hide</button>
+
+<button class="hide-from-print btn btn-default" data-bind="visible: !show_poverty_data(), click:toggle_poverty_data">Show</button>
 
 </th></tr>
 <tr data-bind="visible: show_poverty_data">
@@ -426,9 +439,9 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
     <!-- ko if:($index() != 0) -->
     <th class="data">2011-<span data-bind="text:$data.year()"></span></th>
     <!-- /ko -->
+    <th class="show-only-print">CV</th>
+    <th class="show-only-print">MOE (+/-)</th>
 <!-- /ko -->
-<th class="show-only-print">CV</th>
-<th class="show-only-print">MOE (+/-)</th>
 </tr>
 
 </thead>
