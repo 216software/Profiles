@@ -10,7 +10,8 @@ job training programs, and other opportunities in order to build wealth.
 <div data-bind="with:parentvm.selected_location()">
 
 <h4> Now viewing data for <span data-bind="text:title"></h4>
-<h5>Note: clicking the <span class="label label-primary">Map</span>
+
+<h5 class="hide-from-print">Note: clicking the <span class="label label-primary">Map</span>
 button will allow for a cross-location (city-wide)
 comparison of a given indicator. <br />The cross-location information is
 available in a table as well.</h5>
@@ -41,9 +42,9 @@ Downlad as CSV</a>
     <!-- ko if:($index() != 0) -->
     <th class="data">2011-<span data-bind="text:$data.year()"></span></th>
     <!-- /ko -->
-<!-- /ko -->
 <th class="show-only-print">CV</th>
 <th class="show-only-print">MOE (+/-)</th>
+<!-- /ko -->
 </tr>
 </thead>
 <tbody>

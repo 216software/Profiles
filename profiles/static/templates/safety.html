@@ -1,4 +1,3 @@
-
 <h2>Safety Metrics</h2>
 
 <p class="lead">
@@ -14,7 +13,6 @@ residents.
 No data found.
 <h5>Note: data only available for neighborhoods, not CDCs</h5>
 
-
 </div> <!-- closes if: indicators.length <= 0 -->
 
 <div data-bind="if:indicators().length > 0">
@@ -22,11 +20,10 @@ No data found.
 <div data-bind="with:parentvm.selected_location()">
 <h4> Now viewing data for <span data-bind="text:title"></h4>
 
-<h5>Note: clicking the <span class="label label-primary">Map</span>
+<h5 class="hide-from-print">Note: clicking the <span class="label label-primary">Map</span>
 button will allow for a cross-location (city-wide)
 comparison of a given indicator. <br />The cross-location information is
 available in a table as well.</h5>
-
 
 <p class="hide-from-print text-info small">
 <a target="_blank" data-bind="attr: {href: '/pdf/safety-' + print_friendly_name + '.pdf'}">Download as PDF</a>

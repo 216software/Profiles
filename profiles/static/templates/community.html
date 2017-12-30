@@ -7,7 +7,7 @@ experiences, perceptions, and attitudes.</p>
 <div data-bind="with:parentvm.selected_location()">
 
 <h4>Now viewing data for <span data-bind="text:title"></span></h4>
-<h5>Note: clicking the <span class="label label-primary">Map</span>
+<h5 class="hide-from-print">Note: clicking the <span class="label label-primary">Map</span>
 button will allow for a cross-location (city-wide)
 comparison of a given indicator. <br />The cross-location information is
 available in a table as well.</h5>
@@ -25,10 +25,8 @@ available in a table as well.</h5>
 
 <table class="table table-striped table-bordered" id="salesDataTable">
 <thead>
-<tr><th>Voter Participation Data</th>
-</tr>
 <tr>
-<th>Indicator</th>
+<th>Voter Participation Data</th>
 <!-- ko foreach:observable_timestamps -->
 <th  class="data" data-bind="text:$data.format('YYYY')"></th>
 <!-- /ko -->
