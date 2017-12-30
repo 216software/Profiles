@@ -19,6 +19,8 @@ function PopulationViewModel (data) {
 
     self.location_uuid = ko.observable();
 
+    self.expand_everything = ko.observable();
+
     self.initialize = function(){
         if(self.location_uuid()){
             self.parentvm.location_uuid(self.location_uuid());

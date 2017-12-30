@@ -12,11 +12,12 @@ understanding changes in neighborhood demographic make-up.
 
 <h4> Now viewing data for <span data-bind="text:title"></span>
 </h4>
-<h5>Note: clicking the <span class="label label-primary">Map</span>
+
+<h5 class="hide-from-print">Note: clicking the
+<span class="label label-primary">Map</span>
 button will allow for a cross-location (city-wide)
 comparison of a given indicator. <br />The cross-location information is
 available in a table as well.</h5>
-
 
 <p class="hide-from-print text-info small">
 <a target="_blank" data-bind="attr: {href: '/pdf/population-' + print_friendly_name + '.pdf'}">Download as PDF</a>
@@ -37,7 +38,13 @@ Downlad as CSV</a>
        id="totalPopulationTable">
 <thead>
 <tr>
-<th>Indicator</th>
+
+<th>
+
+<span>Indicator</span>
+
+</th>
+
 <th class="data">% change</th>
 <!-- ko foreach:observable_timestamps -->
     <!-- ko if:($index() == 0) -->
@@ -46,9 +53,9 @@ Downlad as CSV</a>
     <!-- ko if:($index() != 0) -->
     <th class="data">2011 - <span data-bind="text:$data.year()"></span></th>
     <!-- /ko -->
-<!-- /ko -->
 <th class="show-only-print">CV</th>
 <th class="show-only-print">MOE (+/-)</th>
+<!-- /ko -->
 </tr>
 </thead>
 <tbody>
@@ -72,6 +79,7 @@ Downlad as CSV</a>
        params: {indicator_uuid: indicator_uuid}}">
         Map</a>
 
+<!--
 <a href="#" class="btn btn-primary btn-sm hide-from-print"
       data-bind="
         page-href: {path : '/indicator-chart',
@@ -80,6 +88,7 @@ Downlad as CSV</a>
                 location_uuid: $parents[1].location_uuid,
                 year: $parents[1].observable_timestamps()[$parents[1].observable_timestamps().length-1].format('YYYY')}}">
         By race</a>
+-->
 
 </span>
 
@@ -137,14 +146,12 @@ $parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
     <!-- ko if:($index() != 0) -->
     <th class="data">2011 - <span data-bind="text:$data.year()"></span></th>
     <!-- /ko -->
-<!-- /ko -->
 <th class="show-only-print">CV</th>
 <th class="show-only-print">MOE (+/-)</th>
+<!-- /ko -->
 </tr>
 </thead>
 <tbody>
-
-
 
 <!-- ko foreach:indicators_population -->
 
@@ -164,6 +171,7 @@ $parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
        params: {indicator_uuid: indicator_uuid}}">
         Map</a>
 
+<!--
 <a href="#" class="btn btn-primary btn-sm hide-from-print"
       data-bind="
         page-href: {path : '/indicator-chart',
@@ -172,6 +180,7 @@ $parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
                 location_uuid: $parents[1].location_uuid,
                 year: $parents[1].observable_timestamps()[$parents[1].observable_timestamps().length-1].format('YYYY')}}">
         By race</a>
+-->
 
 </span>
 
@@ -231,9 +240,9 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
     <!-- ko if:($index() != 0) -->
     <th class="data">2011 - <span data-bind="text:$data.year()"></span></th>
     <!-- /ko -->
-<!-- /ko -->
 <th class="show-only-print">CV</th>
 <th class="show-only-print">MOE (+/-)</th>
+<!-- /ko -->
 </tr>
 </thead>
 
@@ -257,6 +266,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
        params: {indicator_uuid: indicator_uuid}}">
         Map</a>
 
+<!--
 <a href="#" class="btn btn-primary btn-sm hide-from-print"
       data-bind="
         page-href: {path : '/indicator-chart',
@@ -265,6 +275,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
                 location_uuid: $parents[1].location_uuid,
                 year: $parents[1].observable_timestamps()[$parents[1].observable_timestamps().length-1].format('YYYY')}}">
         By race</a>
+-->
 
 </span>
 
@@ -277,8 +288,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <td class="data"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 
 <span data-bind="if:$parent.indicator_CV">
-<span data-bind="if:
-$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
+<span data-bind="if: $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <button class="btn btn-xs hide-from-print"
         data-toggle="popover"
         title="CV &amp; MOE"
@@ -291,8 +301,21 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 </span></span> </td>
 
+<!-- ko if:$parent.indicator_CV -->
+<!-- ko if:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted -->
+<td class="show-only-print data" data-bind="if:$parent.indicator_CV">
+<span class="show-only-print"
+     data-bind="text: $parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
+</td>
+<td class="show-only-print data" data-bind="if:$parent.indicator_MOE">
+<span class="show-only-print"
+     data-bind="text:$parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
 
-<!-- /ko --> <!-- closes inner for loop -->
+</td>
+<!-- /ko -->
+<!-- /ko -->
+
+<!-- /ko --> <!-- closes inner for loop on observable_timestamps -->
 
 </tr>
 
