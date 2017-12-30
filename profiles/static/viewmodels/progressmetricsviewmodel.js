@@ -16,7 +16,7 @@ function ProgressMetricsViewModel (data) {
     self.rootvm = data.rootvm;
     self.parentvm = data.parentvm;
 
-    self.expand_everything = ko.observable();
+    self.expand_everything = ko.observable(0);
 
     // Parameter location uuid -- set this on
     // the start page vm
@@ -27,6 +27,8 @@ function ProgressMetricsViewModel (data) {
         if(self.location_uuid()){
             self.parentvm.location_uuid(self.location_uuid());
         }
+
+        self.parentvm.expand_everything(self.expand_everything());
     };
 
     /* This should also include the order we want to display */
@@ -241,14 +243,14 @@ function ProgressMetricsViewModel (data) {
         return base_url;
     });
 
-
-
     self.parentvm.selected_location.subscribe(function(){
+
         self.parentvm.look_up_indicator_and_values(self.indicator_titles,
             self.look_up_indicator_complete);
 
         self.parentvm.look_up_indicator_and_values(self.census_indicator_titles,
             self.look_up_census_indicator_complete);
+
     });
 
     self.observable_timestamps = ko.observableArray([]);
@@ -338,13 +340,17 @@ function ProgressMetricsViewModel (data) {
         self.show_housing_cost_burden_data(!self.show_housing_cost_burden_data());
     };
 
-    if (self.expand_everything()) {
-        self.show_sales_data(true);
-        self.show_rental_data(true);
-        self.show_income_data(true);
-        self.show_poverty_data(true);
-        self.show_housing_cost_burden_data(true);
-    }
+    self.expand_everything.subscribe(function () {
+
+        var ee = Boolean(Number(self.expand_everything()));
+
+        self.show_sales_data(ee);
+        self.show_rental_data(ee);
+        self.show_income_data(ee);
+        self.show_poverty_data(ee);
+        self.show_housing_cost_burden_data(ee);
+
+    });
 
     self.show_chart = {
         't_cburden30p': true,

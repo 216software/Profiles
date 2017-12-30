@@ -24,6 +24,8 @@ function StartPageViewModel (data) {
     /* We might have a selected location from the parameter line */
     self.location_uuid = ko.observable();
 
+    self.expand_everything = ko.observable();
+
     self.selected_location = ko.observable(new Location({rootvm:data.rootvm}));
 
     self.selector_location = ko.observable();
@@ -103,7 +105,7 @@ function StartPageViewModel (data) {
         'rootvm':data.rootvm,
         'parentvm':self});
 
-    self.initialize = function(){
+    self.initialize = function() {
 
         //We gotta refresh the map
         if(self.map){
@@ -187,8 +189,7 @@ function StartPageViewModel (data) {
         self.change_location();
     }
 
-
-    self.change_location = function(){
+    self.change_location = function() {
 
         //First do this and then recursively call this method
         if(self.selected_location().location_shape_json() == undefined){
@@ -206,11 +207,17 @@ function StartPageViewModel (data) {
 
         self.create_feature_layer(self.selected_location());
 
-        /* Also -- look up data for this location */
-        //self.look_up_indicator_and_values();
-        //
         // Make sure we put the location in the QS
-        pager.navigate('/' + pager.activePage$().id() + '?location_uuid=' + self.selected_location().location_uuid());
+        // This is where it happens!!!
+        pager.navigate(
+            '/'
+            + pager.activePage$().id()
+            + '?location_uuid='
+            + self.selected_location().location_uuid()
+            + "&expand_everything="
+            + self.expand_everything()
+        );
+
     }
 
     /* Makes an outline of an area on the map*/
@@ -232,7 +239,6 @@ function StartPageViewModel (data) {
 
     }
 
-
     /* There's a certain assumption about this function:
      * namely, if a sub page is opened, then it's initialize
      * function will be called, setting the location_uuid on
@@ -251,7 +257,8 @@ function StartPageViewModel (data) {
             // Also, we want our map layer to be updated accordingly
             self.change_location();
         }
-        else{
+
+        else {
             // Let's set Cleveland as the default location
             self.selected_location(ko.utils.arrayFirst(self.locations(), function(loc){
                 return 'Cleveland' == loc.title();
@@ -270,8 +277,7 @@ function StartPageViewModel (data) {
 
     self.indicators = ko.observableArray([]);
 
-
-    self.look_up_indicator_and_values = function(indicators, success_callback){
+    self.look_up_indicator_and_values = function(indicators, success_callback) {
 
         /* At some point, we're going to need the tab we're on
          * so that we only return the correct info -- unless

@@ -23,6 +23,7 @@ setup(
         "profiles/scripts/profiles-load-dump",
         "profiles/scripts/xls2csv",
         "profiles/scripts/make-pdf-files",
+        "profiles/scripts/make-one-pdf-file",
     ],
 
 )

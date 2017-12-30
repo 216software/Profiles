@@ -25,10 +25,10 @@ function HealthViewModel (data) {
 
     /* This should also include the order we want to display */
     self.indicator_titles = ['le', '_mort_rate','_infmort_rate',
-        '_ebll_5yavg'];
+        '_ebll_c'];
 
     self.ind_twonine = ['le', '_mort_rate' , '_infmort_rate'];
-    self.ind_twoten= ['_ebll_5yavg'];
+    self.ind_twoten= ['_ebll_c'];
 
 
 

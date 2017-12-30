@@ -1,0 +1,85 @@
+#! /usr/bin/env python
+
+# vim: set expandtab ts=4 sw=4 filetype=python fileencoding=utf8:
+
+import argparse
+import collections
+import logging
+import os
+
+import pdfkit
+
+from profiles import configwrapper
+from profiles import pg
+
+log = logging.getLogger("pyprofiles.scripts.make_pdf_files")
+
+def set_up_args():
+
+    ap = argparse.ArgumentParser(
+        description="Write out one PDF file.  Mostly this is for debugging")
+
+    ap.add_argument("yaml_file_name")
+
+    ap.add_argument("url")
+
+    ap.add_argument("outfile")
+
+    return ap.parse_args()
+
+tab_names = [
+    "overview",
+    "progress",
+    "stabilization",
+    "safety",
+    "stabilization",
+    "community",
+    "health",
+    "education",
+    "workforce",
+    "economy",
+    "population"
+]
+
+if __name__ == "__main__":
+
+    args = set_up_args()
+
+    cw = configwrapper.ConfigWrapper.load_yaml(args.yaml_file_name)
+
+    cw.configure_logging()
+
+    pgconn = cw.get_pgconn()
+
+    if not os.path.isdir(cw.pdf_files_directory):
+        os.mkdir(cw.pdf_files_directory)
+        log.info("Created pdf files directory")
+
+    do_it_again = True
+
+    num_retries = 3
+
+    while do_it_again and num_retries > 0:
+
+        try:
+
+            pdfkit.from_url(
+                args.url,
+                args.outfile,
+                {
+                    'javascript-delay': 2000,
+                    'print-media-type': ''
+                })
+
+        except Exception as e:
+            log.exception(e)
+            log.info("trying {0}, {1} retries remaining".format(html_url, num_retries))
+            log.debug('gotta do it again')
+            num_retries -= 1
+            do_it_again = True
+
+        else:
+
+            do_it_again = False
+
+    log.info("Wrote {0}".format(args.outfile))
