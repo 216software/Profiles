@@ -191,32 +191,38 @@ function StartPageViewModel (data) {
 
     self.change_location = function() {
 
-        //First do this and then recursively call this method
+        //First do this and then recursively call this method.  Can't
+        //easily just block here and then move on, because
+        //look_up_shape_json is async.
         if(self.selected_location().location_shape_json() == undefined){
             self.selected_location().look_up_shape_json().then(self.change_location);
             return;
         }
 
-        /* Updates the map and then looks up values for
-         * a given location */
+        else {
 
-        // Remove any old layers:
-        for (var index in self.added_map_layers){
-            self.map.removeLayer(self.added_map_layers[index]);
+            // Remove any old layers:
+            for (var index in self.added_map_layers){
+                self.map.removeLayer(self.added_map_layers[index]);
+            }
+
+            self.create_feature_layer(self.selected_location());
+
+            // Make sure we put the new location in the QS
+            pager.navigate(
+                '/'
+                + pager.activePage$().id()
+                + '?location_uuid='
+                + self.selected_location().location_uuid()
+                + "&expand_everything="
+                + self.expand_everything()
+            );
+
+            // Zoom the map out to zoom level 12 and center at the first
+            // coordinate.
+            self.map.setView(self.selected_location().first_coordinate(), 12);
+
         }
-
-        self.create_feature_layer(self.selected_location());
-
-        // Make sure we put the location in the QS
-        // This is where it happens!!!
-        pager.navigate(
-            '/'
-            + pager.activePage$().id()
-            + '?location_uuid='
-            + self.selected_location().location_uuid()
-            + "&expand_everything="
-            + self.expand_everything()
-        );
 
     }
 

@@ -9,6 +9,24 @@ function Location (data) {
     self.description = ko.observable(data.description);
     self.location_type = ko.observable(data.location_type);
     self.location_shape_json = ko.observable(data.location_shape_json);
+
+    // Return NULL or return a [lat, lng] pair.
+    self.first_coordinate = ko.computed(function () {
+
+        if (self.location_shape_json()) {
+
+            var first_coordinate = self.location_shape_json().coordinates[0][0][0];
+
+            var lat = first_coordinate[1];
+            var lng = first_coordinate[0];
+
+            return [lat, lng];
+
+        }
+
+
+    });
+
     self.area = ko.observable();
     self.display_me = data.display_me;
     self.print_friendly_name = data.print_friendly_name;
