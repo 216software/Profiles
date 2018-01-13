@@ -353,6 +353,7 @@ function ProgressMetricsViewModel (data) {
     });
 
     self.show_chart = {
+
         't_cburden30p': true,
         't_cburden50p': true,
         't_ocburden30p': true,
