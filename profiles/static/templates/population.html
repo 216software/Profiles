@@ -79,16 +79,15 @@ Downlad as CSV</a>
        params: {indicator_uuid: indicator_uuid}}">
         Map</a>
 
-<!--
 <a href="#" class="btn btn-primary btn-sm hide-from-print"
       data-bind="
+        visible: $parents[1].show_chart[title()],
         page-href: {path : '/indicator-chart',
             params: {
                 indicator_uuid: indicator_uuid,
                 location_uuid: $parents[1].location_uuid,
                 year: $parents[1].observable_timestamps()[$parents[1].observable_timestamps().length-1].format('YYYY')}}">
         By race</a>
--->
 
 </span>
 
@@ -171,16 +170,15 @@ $parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
        params: {indicator_uuid: indicator_uuid}}">
         Map</a>
 
-<!--
 <a href="#" class="btn btn-primary btn-sm hide-from-print"
       data-bind="
+        visible: $parents[1].show_chart[title()],
         page-href: {path : '/indicator-chart',
             params: {
                 indicator_uuid: indicator_uuid,
                 location_uuid: $parents[1].location_uuid,
                 year: $parents[1].observable_timestamps()[$parents[1].observable_timestamps().length-1].format('YYYY')}}">
         By race</a>
--->
 
 </span>
 
@@ -266,16 +264,15 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
        params: {indicator_uuid: indicator_uuid}}">
         Map</a>
 
-<!--
 <a href="#" class="btn btn-primary btn-sm hide-from-print"
       data-bind="
+        visible: $parents[1].show_chart[title()],
         page-href: {path : '/indicator-chart',
             params: {
                 indicator_uuid: indicator_uuid,
                 location_uuid: $parents[1].location_uuid,
                 year: $parents[1].observable_timestamps()[$parents[1].observable_timestamps().length-1].format('YYYY')}}">
         By race</a>
--->
 
 </span>
 

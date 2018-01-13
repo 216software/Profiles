@@ -165,4 +165,33 @@ function PopulationViewModel (data) {
         }
 
     }
+
+    self.show_chart = {
+        "pop": true,
+        "popls5": true,
+        "_popls5": true,
+        "pop5to9": true,
+        "_pop5to9": true,
+        "pop10to14": true,
+        "_pop10to14": true,
+        "pop15to19": true,
+        "_pop15to19": true,
+        "pop20to24": true,
+        "_pop20to24": true,
+        "pop25to34": true,
+        "_pop25to34": true,
+        "pop35to44": true,
+        "_pop35to44": true,
+        "pop45to54": true,
+        "_pop45to54": true,
+        "pop55to64": true,
+        "_pop55to64": true,
+        "pop65to74": true,
+        "_pop65to74": true,
+        "pop75to84": true,
+        "_pop75to84": true,
+        "pop85p": true,
+        "_pop85p": true
+    };
+
 };
