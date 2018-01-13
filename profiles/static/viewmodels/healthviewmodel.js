@@ -88,4 +88,11 @@ function HealthViewModel (data) {
             }));
 
     };
+
+
+    self.show_chart = {
+        "_mort_rate": true,
+        "_infmort_rate": true,
+        "_ebll_c": true
+    };
 };

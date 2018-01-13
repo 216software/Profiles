@@ -581,6 +581,9 @@ class IndicatorLocationValue(RelationWrapper):
         if indicator_title.startswith("t_"):
             return ["{0}{1}".format(c, indicator_title[1:]) for c in 'abhow']
 
+        elif indicator_title.startswith("_"):
+            return ["_{0}_{1}".format(c, indicator_title[1:]) for c in 'abhow']
+
         else:
             return ["{0}{1}".format(c, indicator_title) for c in 'abhow']
 
