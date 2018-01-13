@@ -583,6 +583,7 @@ class IndicatorLocationValue(RelationWrapper):
         on statistics.
         """
 
+        # rpass50 => w_rpass50
         if indicator_title in set([
             "rpass50", "rpass20", "rpass10", "rpass41",
             "mpass50", "mpass20", "mpass10", "mpass41"
@@ -590,6 +591,7 @@ class IndicatorLocationValue(RelationWrapper):
 
             return ["{0}_{1}".format(c, indicator_title) for c in 'abhow']
 
+        # _rpass50 => _w_rpass50
         elif indicator_title in set([
             "_rpass50", "_rpass20", "_rpass10", "_rpass41",
             "_mpass50", "_mpass20", "_mpass10", "_mpass41",
@@ -597,15 +599,25 @@ class IndicatorLocationValue(RelationWrapper):
 
             return ["_{0}{1}".format(c, indicator_title) for c in 'abhow']
 
+        # _attend => w_attend
         elif indicator_title in set(["_attend"]):
             return ["{0}{1}".format(c, indicator_title) for c in 'abhow']
 
+        # _emp => _wemp
+        elif indicator_title in set(["_emp", "_lf", "_lshs", "_hsgrad",
+            "_somecollassoc", "_bsp",
+        ]):
+            return ["_{0}{1}".format(c, indicator_title[1:]) for c in 'abhow']
+
+        # t_cburden50p => w_cburden50p
         elif indicator_title.startswith("t_"):
             return ["{0}{1}".format(c, indicator_title[1:]) for c in 'abhow']
 
+        # _t_cburden50p => _w_cburden50p
         elif indicator_title.startswith("_"):
             return ["_{0}_{1}".format(c, indicator_title[1:]) for c in 'abhow']
 
+        # xyz => wxyz
         else:
             return ["{0}{1}".format(c, indicator_title) for c in 'abhow']
 

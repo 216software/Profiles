@@ -65,6 +65,20 @@ Downlad as CSV</a>
       data-bind="page-href: {path : '/indicator-map',
        params: {indicator_uuid: indicator_uuid}}">
         Map</a>
+
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="
+        visible: $parents[1].show_chart[title()],
+        page-href: {path : '/indicator-chart',
+            params: {
+                indicator_uuid: indicator_uuid,
+                location_uuid: $parents[1].location_uuid,
+                year: 2015}}">
+        By race</a>
+
+
+
+
 </span>
 
 <span class="sas_variable" style="display:none;" data-bind="text: title"></span>
@@ -129,6 +143,19 @@ $parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
       data-bind="page-href: {path : '/indicator-map',
        params: {indicator_uuid: indicator_uuid}}">
         Map</a>
+
+
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="
+        visible: $parents[1].show_chart[title()],
+        page-href: {path : '/indicator-chart',
+            params: {
+                indicator_uuid: indicator_uuid,
+                location_uuid: $parents[1].location_uuid,
+                year: 2015}}">
+        By race</a>
+
+
 </span>
 
 <span class="sas_variable" style="display:none;" data-bind="text: title"></span>

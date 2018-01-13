@@ -181,7 +181,18 @@ function WorkforceViewModel (data) {
     }
 
     self.show_chart = {
-        'emp': true
+        "emp": true,
+        "_emp": true,
+        "lf": true,
+        "_lf": true,
+        "lshs": true,
+        "_lshs": true,
+        "hsgrad": true,
+        "_hsgrad": true,
+        "somecollassoc": true,
+        "_somecollassoc": true,
+        "bsp": true,
+        "_bsp": true
     }
 
 };
