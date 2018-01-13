@@ -62,6 +62,17 @@ Downlad as CSV</a>
       data-bind="page-href: {path : '/indicator-map',
        params: {indicator_uuid: indicator_uuid}}">
         Map</a>
+
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="
+        visible: $parents[1].show_chart[title()],
+        page-href: {path : '/indicator-chart',
+            params: {
+                indicator_uuid: indicator_uuid,
+                location_uuid: $parents[1].location_uuid,
+                year: 2015}}">
+        By race</a>
+
 </span>
 </td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
@@ -117,6 +128,17 @@ Downlad as CSV</a>
       data-bind="page-href: {path : '/indicator-map',
        params: {indicator_uuid: indicator_uuid}}">
         Map</a>
+
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="
+        visible: $parents[1].show_chart[title()],
+        page-href: {path : '/indicator-chart',
+            params: {
+                indicator_uuid: indicator_uuid,
+                location_uuid: $parents[1].location_uuid,
+                year: 2015}}">
+        By race</a>
+
 </span>
 </td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
@@ -171,7 +193,23 @@ Downlad as CSV</a>
       data-bind="page-href: {path : '/indicator-map',
        params: {indicator_uuid: indicator_uuid}}">
         Map</a>
+
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="
+        visible: $parents[1].show_chart[title()],
+        page-href: {path : '/indicator-chart',
+            params: {
+                indicator_uuid: indicator_uuid,
+                location_uuid: $parents[1].location_uuid,
+                year: 2015}}">
+        By race</a>
+
+
 </span>
+
+
+
+
 </td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
@@ -227,6 +265,19 @@ Downlad as CSV</a>
       data-bind="page-href: {path : '/indicator-map',
        params: {indicator_uuid: indicator_uuid}}">
         Map</a>
+
+<a href="#" class="btn btn-primary btn-sm hide-from-print"
+      data-bind="
+        visible: $parents[1].show_chart[title()],
+        page-href: {path : '/indicator-chart',
+            params: {
+                indicator_uuid: indicator_uuid,
+                location_uuid: $parents[1].location_uuid,
+                year: 2015}}">
+        By race</a>
+
+
+
 </span>
 </td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>

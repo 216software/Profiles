@@ -92,4 +92,32 @@ function EducationViewModel (data) {
             }));
 
     };
+
+    self.show_chart = {
+        "rpass50": true,
+        "_rpass50": true,
+        "rpass10": true,
+        "_rpass10": true,
+        "rpass20": true,
+        "_rpass20": true,
+        "rpass41": true,
+        "_rpass41": true,
+        "mpass50": true,
+        "_mpass50": true,
+        "mpass10": true,
+        "_mpass10": true,
+        "mpass20": true,
+        "_mpass20": true,
+        "mpass41": true,
+        "_mpass41": true,
+        "band1": true,
+        "_band1": true,
+        "band2": true,
+        "_band2": true,
+        "band3": true,
+        "_band3": true,
+        "meanscore": true,
+        "_attend": true
+    };
+
 };

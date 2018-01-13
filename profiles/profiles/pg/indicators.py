@@ -578,7 +578,29 @@ class IndicatorLocationValue(RelationWrapper):
     @staticmethod
     def find_racial_sub_indicators(indicator_title):
 
-        if indicator_title.startswith("t_"):
+        """
+        The CWRU folks have no single pattern for how they racial splits
+        on statistics.
+        """
+
+        if indicator_title in set([
+            "rpass50", "rpass20", "rpass10", "rpass41",
+            "mpass50", "mpass20", "mpass10", "mpass41"
+        ]):
+
+            return ["{0}_{1}".format(c, indicator_title) for c in 'abhow']
+
+        elif indicator_title in set([
+            "_rpass50", "_rpass20", "_rpass10", "_rpass41",
+            "_mpass50", "_mpass20", "_mpass10", "_mpass41",
+        ]):
+
+            return ["_{0}{1}".format(c, indicator_title) for c in 'abhow']
+
+        elif indicator_title in set(["_attend"]):
+            return ["{0}{1}".format(c, indicator_title) for c in 'abhow']
+
+        elif indicator_title.startswith("t_"):
             return ["{0}{1}".format(c, indicator_title[1:]) for c in 'abhow']
 
         elif indicator_title.startswith("_"):
