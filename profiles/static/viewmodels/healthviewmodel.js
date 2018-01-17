@@ -57,6 +57,7 @@ function HealthViewModel (data) {
         return base_url;
     });
 
+    self.api_address = ko.observable();
 
     self.parentvm.selected_location.subscribe(function(){
         self.parentvm.look_up_indicator_and_values(self.indicator_titles,
@@ -71,6 +72,9 @@ function HealthViewModel (data) {
     self.observable_timestamps = ko.observableArray([]);
 
     self.look_up_indicator_complete = function(data){
+
+        console.debug(data);
+        self.api_address(data.api_address);
 
         self.observable_timestamps(ko.utils.arrayMap(
             data.distinct_observable_timestamps || [],

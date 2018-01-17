@@ -20,7 +20,7 @@
 
     # make new empty files with these permissions and this owner and
     # group
-	create 640 profiles profiles
+	create 640 communityprofiles communityprofiles
 
     # Only run the postrotate script once, after rotating all the logs
     # at the top.
@@ -28,15 +28,13 @@
 
     # This is a silly thing that I had to put in because otherwise
     # logrotate won't touch stuff in /tmp, since /tmp is world-writable.
-    su profiles profiles
+    su communityprofiles communityprofiles
 
     # After rotating files, do this stuff.  You can add extra lines if
     # you want to.
 	postrotate
 
-        /home/profiles/.virtualenvs/profiles/bin/supervisorctl \
-        -c /home/profiles/checkouts/profiles/supervisord/profiles.conf \
-        restart all > /dev/null;
+        /home/communityprofiles/checkouts/2017-Profiles/profiles/logrotate/profiles-post-rotate
 
 	endscript
 }

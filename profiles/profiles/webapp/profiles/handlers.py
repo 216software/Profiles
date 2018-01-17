@@ -172,6 +172,7 @@ class IndicatorValuesByIndicator(Handler):
         order_by_area = req.wz_req.args.get('order_by_area', False)
 
         ivs = []
+
         for x in \
             indicator.all_indicator_location_values(self.cw.get_pgconn(),
             order_by_area=order_by_area):
@@ -313,8 +314,10 @@ class IndicatorValuesByLocationOld(Handler):
             location.look_up_indicators(self.cw.get_pgconn())]
 
         return Response.json(dict(
+
             message="Found these indicator values for this location {0}".\
                 format(location.title),
+
             reply_timestamp=datetime.datetime.now(),
             success=True,
             indicator_values=indicator_values))
@@ -339,7 +342,17 @@ class IndicatorValuesByLocation(Handler):
             location.distinct_observation_timestamp_for_indicators(self.cw.get_pgconn(),
                 indicators)]
 
+        log.debug("About to build api_address...")
+
+        api_address = "/api/indicator-categories-with-values-by-location?{0}".format(
+            urllib.urlencode(dict({
+                "location": req.wz_req.args["location_uuid"],
+                "indicators[]": req.wz_req.args.getlist("indicators[]")})))
+
+        log.debug("Built api_address: {0}".format(api_address))
+
         return Response.json(dict(
+            api_address=api_address,
             message="Found these indicator categories and values for this location {0}".\
                 format(location.title),
             reply_timestamp=datetime.datetime.now(),
