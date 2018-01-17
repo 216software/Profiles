@@ -346,10 +346,12 @@ class IndicatorValuesByLocation(Handler):
 
         api_address = "/api/indicator-categories-with-values-by-location?{0}".format(
             urllib.urlencode(dict({
-                "location": req.wz_req.args["location_uuid"],
-                "indicators[]": req.wz_req.args.getlist("indicators[]")})))
+                "location_uuid": req.wz_req.args["location_uuid"],
+                "indicators[]": req.wz_req.args.getlist("indicators[]")}),
+            doseq=True))
 
         log.debug("Built api_address: {0}".format(api_address))
+        log.debug("req.address_bar is {0}".format(req.address_bar))
 
         return Response.json(dict(
             api_address=api_address,
