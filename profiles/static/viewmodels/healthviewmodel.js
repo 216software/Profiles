@@ -71,7 +71,6 @@ function HealthViewModel (data) {
 
     self.look_up_indicator_complete = function(data){
 
-        console.debug(data);
         self.api_address(data.api_address);
 
         self.observable_timestamps(ko.utils.arrayMap(

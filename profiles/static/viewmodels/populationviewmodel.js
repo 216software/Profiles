@@ -50,11 +50,10 @@ function PopulationViewModel (data) {
         'm_pop45to54', 'pop55to64', '_pop55to64', 'cvpop55to64', 'mpop55to64',
         'cv_pop55to64', 'm_pop55to64',
 
-
         'pop65to74', '_pop65to74', 'cvpop65to74', 'mpop65to74', 'cv_pop65to74',
         'm_pop65to74',
         'pop75to84', '_pop75to84', 'cvpop75to84', 'mpop75to84', 'cv_pop75to84',
-        'm_pop75to84 ',
+        'm_pop75to84',
         'pop85p', '_pop85p', 'cvpop85p', 'mpop85p', 'cv_pop85p', 'm_pop85p'
 
     ];
@@ -96,7 +95,7 @@ function PopulationViewModel (data) {
         'hisp':'mhisp',
         '_nhw':'m_nhw',
         '_nhb':'m_nhb',
-        '_nhapi':'mnh_api',
+        '_nhapi':'m_nhapi',
         '_nho':'m_nho',
         '_hisp':'m_hisp',
         }
@@ -112,7 +111,8 @@ function PopulationViewModel (data) {
     self.indicators = ko.observableArray([]);
 
     self.parentvm.selected_location.subscribe(function(){
-        self.parentvm.look_up_indicator_and_values(self.indicator_titles,
+        self.parentvm.look_up_indicator_and_values(
+            self.indicator_titles,
             self.look_up_indicator_complete);
     });
 
@@ -149,9 +149,10 @@ function PopulationViewModel (data) {
             }));
 
         for (var indicator_key in self.indicator_cv_pairings) {
+
             var ind = Indicator.indicator_by_title(
                 self.indicators(),
-                indicator_key)
+                indicator_key);
 
             var ind_cv = Indicator.indicator_by_title(
                 self.indicators(),
@@ -160,7 +161,8 @@ function PopulationViewModel (data) {
             ind.indicator_CV(ind_cv);
 
             var ind_moe = Indicator.indicator_by_title(self.indicators(),
-                self.indicator_moe_pairings[indicator_key])
+                self.indicator_moe_pairings[indicator_key]);
+
             ind.indicator_MOE(ind_moe);
         }
 
