@@ -30,8 +30,6 @@ function HealthViewModel (data) {
     self.ind_twonine = ['le', '_mort_rate' , '_infmort_rate'];
     self.ind_twoten= ['_ebll_c'];
 
-
-
     self.indicator_titles_extra_formatting = {
         'infmort_rate':'Rate per 1,000 births',
         'mort_rate':'Rate per 1,000 population',

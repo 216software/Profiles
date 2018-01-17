@@ -23,8 +23,6 @@ function Indicator (data) {
 
     self.percent_change_available = ko.observable(true);
 
-
-
     self.indicator_category = ko.observable(data.indicator_category);
 
     self.update_self = function(data){
