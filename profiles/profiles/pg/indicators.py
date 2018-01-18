@@ -582,6 +582,10 @@ class IndicatorLocationValue(RelationWrapper):
         The CWRU folks have no single pattern for how they racial splits
         on statistics.
         """
+        # This one is my favorite -- it is completely unlike the other
+        # patterns.
+        if indicator_title == "pop":
+            return ["nhw", "nhb", "nhapi", "nho", "hisp"]
 
         # rpass50 => w_rpass50
         if indicator_title in set([

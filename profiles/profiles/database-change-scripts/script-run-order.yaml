@@ -47,3 +47,4 @@ script_order:
 
 -   hide-irrelevant-locations.sql
 
+-   add-population-chart-labels.sql
