@@ -178,14 +178,17 @@ function Indicator (data) {
 
             ind_value = self.indicator_CV().indicator_value_by_year(year);
             output = 'CV: <span class="' + self.CV_css_mapping(ind_value()) + '">' +
-                ind_value.formatted() + '</span><br />';
+                format_value(ind_value(),null, 1) + '</span><br />';
+            //output = 'CV: <span class="' + self.CV_css_mapping(ind_value()) + '">' +
+            //    ind_value.formatted() + '</span><br />';
 
         }
 
         if(self.indicator_MOE() != undefined){
 
             ind_value = self.indicator_MOE().indicator_value_by_year(year);
-            output += 'MOE (+/-): ' + ind_value.formatted() + '<br />';
+            output += 'MOE (+/-): ' + format_value(ind_value(),null, 1) + '<br />';
+            //output += 'MOE (+/-): ' + ind_value.formatted() + '<br />';
         }
 
         if(output){
