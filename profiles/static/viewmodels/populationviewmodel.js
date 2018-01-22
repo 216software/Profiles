@@ -196,4 +196,6 @@ function PopulationViewModel (data) {
         "_pop85p": true
     };
 
+    self.show_chart = {};
+
 };

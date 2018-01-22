@@ -193,6 +193,8 @@ function WorkforceViewModel (data) {
         "_somecollassoc": true,
         "bsp": true,
         "_bsp": true
-    }
+    };
+
+    self.show_chart = {};
 
 };

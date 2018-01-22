@@ -120,4 +120,6 @@ function EducationViewModel (data) {
         "_attend": true
     };
 
+    self.show_chart = {};
+
 };

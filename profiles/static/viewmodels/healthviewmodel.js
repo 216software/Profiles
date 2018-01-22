@@ -96,4 +96,6 @@ function HealthViewModel (data) {
         "_infmort_rate": true,
         "_ebll_c": true
     };
+
+    self.show_chart = {};
 };
