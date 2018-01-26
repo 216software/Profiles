@@ -1,9 +1,5 @@
 #!/bin/bash -e
 
-/home/communityprofiles/.virtualenvs/Profiles/bin/supervisorctl \
--c /home/communityprofiles/checkouts/Profiles/profiles/supervisord/profiles.conf \
-restart all > /tmp/logrote-profiles.log;
-
 /home/communityprofiles/.virtualenvs/2017Profiles/bin/supervisorctl \
 -c /home/communityprofiles/checkouts/2017-Profiles/profiles/supervisord/test-profiles.conf \
 restart all > /tmp/logrotate-profiles-2017.log;

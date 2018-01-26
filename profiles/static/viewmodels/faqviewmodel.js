@@ -20,5 +20,6 @@ function FAQViewModel (data) {
     self.show_tell_me_more = ko.observable(false);
     self.show_data = ko.observable(false);
     self.show_data_sources = ko.observable(false);
+    self.show_citedata = ko.observable(false);
 
 };
