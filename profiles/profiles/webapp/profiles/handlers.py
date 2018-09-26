@@ -36,6 +36,7 @@ class TemplateServer(Handler):
         "GET /":                    "profiles/profiles.html",
         "GET /login":               "profiles/login.html",
         "GET /reset-password":      "profiles/reset-password.html",
+        "GET /admin/data-load":   "profiles/admin-data-load.html",
     })
 
     route = Handler.check_route_strings

@@ -1,0 +1,63 @@
+{% extends 'profiles/base.html' %}
+
+{% block title %}Profiles{% endblock %}
+
+{% block styles %}
+<style type="text/css">
+
+</style>
+{% endblock styles %}
+
+{% block main %}
+
+<div class="row" style="margin-bottom:50px">
+<div class="col-md-12">
+
+<h1>New Data Upload</h1>
+<p>Explanation of how new data upload works</p>
+
+<div class="row">
+
+<div class = "col-md-6 col-md-offset-3">
+<div class="form-group">
+    <label>Please input data upload password</label>
+    <input class="form-control" type="password" />
+</div>
+
+
+<button class="btn btn-block btn-default">Enter</button>
+</div>
+</div>
+
+</div> <!-- closes col-md-12 -->
+
+
+
+
+{% endblock main %}
+
+
+
+{% block scripts %}
+<!-- our scripts -->
+
+
+<script type="text/javascript">
+
+var pvm;
+
+$(document).ready(function () {
+
+    //pvm = new ProfilesViewModel({});
+
+    //ko.applyBindings(pvm);
+
+
+});
+
+
+</script>
+
+{% endblock scripts %}
+
+{# vim: set syntax=htmldjango: #}
