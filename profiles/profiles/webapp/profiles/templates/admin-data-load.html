@@ -1,6 +1,6 @@
-{% extends 'profiles/base.html' %}
+{% extends 'profiles/base-admin.html' %}
 
-{% block title %}Profiles{% endblock %}
+{% block title %}Upload New Data File{% endblock %}
 
 {% block styles %}
 <style type="text/css">
@@ -11,12 +11,12 @@
 {% block main %}
 
 <div class="row" style="margin-bottom:50px">
-<div class="col-md-12">
+<div class="col-md-8 col-md-offset-2">
 
 <h1>New Data Upload</h1>
 <p>Explanation of how new data upload works</p>
 
-<div class="row">
+<!--
 
 <div class = "col-md-6 col-md-offset-3">
 <div class="form-group">
@@ -28,9 +28,41 @@
 <button class="btn btn-block btn-default">Enter</button>
 </div>
 </div>
+-->
 
+<!-- this is status -->
+<h2>Please upload a file to begin.</h2>
+<p class="help-text">The file should be a zip file and contain all data
+files</p>
+
+<div class="form-group">
+<label for="uploadDataFile">Data zip file</label>
+    <input class="form-control" type="file"
+           id="uploadDataFile"
+           data-bind="event:{change:start_ajax_upload}"
+           accept="zip/application,.zip"
+           />
+
+</div>
+
+<div class="alert alert-info" data-bind="visible:is_uploading">
+Uploading data file progress:
+<span class="pull-right" data-bind="text: upload_progress"></span>
+</div>
+
+
+<div class="form-group">
+
+</div>
+
+<hr />
+
+<pre>This section will show if a job is currently running</pre>
+
+<h2>Data load is currently running:</h2>
+<p class="help">List data load status items here</p>
 </div> <!-- closes col-md-12 -->
-
+</div> <!-- closes row -->
 
 
 
@@ -48,12 +80,96 @@ var pvm;
 
 $(document).ready(function () {
 
-    //pvm = new ProfilesViewModel({});
+    adlvm = new AdminDataLoadViewModel({});
 
-    //ko.applyBindings(pvm);
+    ko.applyBindings(adlvm);
 
 
 });
+
+function AdminDataLoadViewModel(data){
+
+    var self = this;
+    self.type = "AdminDataLoadViewModel";
+
+    self.rootvm = self;
+	self.is_busy = ko.observable(false);
+
+    self.upload_progress = ko.observable();
+    self.is_uploading = ko.observable(false);
+    self.local_source = ko.observable();
+    self.error = ko.observable();
+
+    self.start_ajax_upload = function(me, evt){
+        console.log('starting ajax upload');
+        self.files = evt.target.files;
+
+        for(var i = 0; i < evt.target.files.length; i++)
+        {
+            self.file(evt.target.files[i]);
+            self.read_local_source();
+            self.upload_file();
+        }
+
+    };
+
+    self.xhr_with_progress = function() {
+        var xhr = new window.XMLHttpRequest();
+        xhr.upload.addEventListener("progress",
+            function(evt) {
+                if (!evt.lengthComputable) return;
+                var percentComplete = (evt.loaded / evt.total) * 100;
+                self.upload_progress(Math.round(percentComplete) + '%');
+            }, false);
+        return xhr;
+    };
+    self.file = ko.observable(null);
+
+    self.read_local_source = function(){
+        // TODO We might not want to do this if the
+        // file is too large...
+        var fr = new FileReader();
+        //First read as data url
+        fr.onload = function (file_data) {
+            //Make thumbnail show up
+            self.local_source(file_data.target.result);
+        }
+        fr.readAsDataURL(self.file());
+    };
+
+    self.upload_file = function () {
+
+        self.is_uploading(true);
+
+        return $.ajax({
+            xhr: self.xhr_with_progress,
+
+            url: '/api/admin/data-file',
+            type: 'PUT',
+            data: self.file(),
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            success: function (data) {
+
+                self.is_uploading(false);
+                if(data.success){
+                    console.log('file uploaded!')
+                }
+                else{
+                }
+            },
+
+            error: function (data) {
+                self.error(data.statusText);
+            }
+        });
+
+    };
+
+
+}
 
 
 </script>

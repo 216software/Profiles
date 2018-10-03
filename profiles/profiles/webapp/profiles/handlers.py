@@ -466,3 +466,73 @@ class FindContainingNeighborhoods(Handler):
             reply_timestamp=datetime.datetime.now(),
             success=True,
             containing_neighborhoods=containing_neighborhoods))
+
+
+#####
+#
+# Admin data load handlers
+#
+#
+class DataUploadAPI(Handler):
+
+    """
+    Upload a data file -- probably have a secondary webapp
+    instance handle this, since it's likely the files could be
+    very big
+    """
+
+    route_strings = set([
+        'PUT /api/admin/data-file',
+    ])
+
+    route = Handler.check_route_strings
+
+    def handle(self, req):
+
+        # Check content-type
+        if req.CONTENT_TYPE != 'application/zip':
+            return Response.json(dict(
+                message="Invalid content-type {0}, must be 'application/zip'".\
+                    format(req.CONTENT_TYPE),
+                reply_timestamp=datetime.datetime.now(),
+                success=False))
+
+        pgconn = self.cw.get_pgconn()
+
+        data_file_uuid = uuid.uuid4()
+        filename = "{0}.zip".format(data_file_uuid)
+        original_path = os.path.join(self.cw.zip_path_prefix, filename)
+        #save_path = os.path.join(self.cw.zip_save_directory, original_path)
+        save_path = os.path.join(self.cw.zip_save_directory,  filename)
+
+
+        # Put it in the place where we store zips, see config wrapper
+        f = open(save_path, 'wb')
+        try:
+            f.write(req.wz_req.stream.read())
+            f.close()
+        except Exception as e:
+            log.error(e)
+            return Response.json(dict(
+                message="Error encountered {0}".format(e),
+                reply_timestamp=datetime.datetime.now(),
+                success=False))
+
+        else:
+            #photo = pg.photos.Photo.insert_with_uuid(pgconn, photo_uuid, original_path,
+            #    uploaded_by)
+
+            # Add the file and the job
+
+            return Response.json(dict(
+                message="Data file inserted {0}".format(data_file_uuid),
+                data_file_uuid=data_file_uuid,
+                reply_timestamp=datetime.datetime.now(),
+                success=True))
+
+        finally:
+            if not f.closed:
+                f.close()
+
+
+

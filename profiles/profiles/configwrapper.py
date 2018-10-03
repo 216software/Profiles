@@ -194,6 +194,16 @@ class ConfigWrapper(configwrapper.ConfigWrapper):
 
         return self.config_dictionary["profiles"]["csv_data_files_folder_2017"]
 
+
+    @property
+    def zip_save_directory(self):
+        return self.config_dictionary["profiles"]["zip_save_directory"]
+
+    @property
+    def zip_path_prefix(self):
+        return self.config_dictionary["profiles"]["zip_path_prefix"]
+
+
     @property
     def google_maps_API_key(self):
         return self.config_dictionary["google"]["google_maps_API_key"]
