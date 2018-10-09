@@ -48,3 +48,6 @@ script_order:
 -   hide-irrelevant-locations.sql
 
 -   add-population-chart-labels.sql
+
+# 2018 Data Load
+-   make-admin-load-job-table.sql

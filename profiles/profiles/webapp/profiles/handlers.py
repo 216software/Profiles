@@ -519,20 +519,45 @@ class DataUploadAPI(Handler):
                 success=False))
 
         else:
+
+            # now we update the database
             #photo = pg.photos.Photo.insert_with_uuid(pgconn, photo_uuid, original_path,
             #    uploaded_by)
+            zip_file_uuid = self.save_zip_file(pgconn, data_file_uuid,
+                original_path, save_path)
+
 
             # Add the file and the job
 
             return Response.json(dict(
-                message="Data file inserted {0}".format(data_file_uuid),
-                data_file_uuid=data_file_uuid,
+                message="Zip File inserted {0}".format(zip_file_uuid),
+                zip_file_uuid=zip_file_uuid,
                 reply_timestamp=datetime.datetime.now(),
                 success=True))
 
         finally:
             if not f.closed:
                 f.close()
+
+    def save_zip_file(self, pgconn, zip_uuid, zip_path, original_filename):
+
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+            insert into zip_files
+
+            (zip_file_uuid, original_path, original_filename)
+
+            values
+
+            (%(zip_file_uuid)s, %(zip_path)s, %(original_filename)s)
+
+
+        """), dict(zip_file_uuid=zip_uuid, zip_path=zip_path,
+        original_filename=original_filename))
+
+        return zip_uuid
 
 
 
