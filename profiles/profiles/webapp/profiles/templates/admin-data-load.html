@@ -50,11 +50,6 @@ Uploading data file progress:
 <span class="pull-right" data-bind="text: upload_progress"></span>
 </div>
 
-<div data-bind="visible:zip_file_uuid">
-<button data-bind="click:start_job"
-    class="btn btn-primary btn-block">Load the data!</button>
-</div>
-
 
 <div class="form-group">
 
@@ -109,9 +104,14 @@ function AdminDataLoadViewModel(data){
 
     // Ok, after we've uploaded, save the zip uuid
     self.zip_file_uuid = ko.observable();
+    self.job_uuid= ko.observable();
 
     self.job_started = ko.observable(false);
+    self.job_complete = ko.observable(false);
     self.job_message_log = ko.observable();
+
+    self.check_job_interval = null;
+
 
     self.start_ajax_upload = function(me, evt){
         console.log('starting ajax upload');
@@ -170,6 +170,11 @@ function AdminDataLoadViewModel(data){
                 if(data.success){
                     console.log('file uploaded!')
                     self.zip_file_uuid(data.zip_file_uuid);
+                    self.job_uuid(data.job_uuid);
+                    self.job_started(true);
+
+                    self.check_job_interval = setInterval(self.lookup_job_progress, 1000)
+
                 }
                 else{
                 }
@@ -182,10 +187,33 @@ function AdminDataLoadViewModel(data){
 
     };
 
-    self.start_job = function(){
+    self.lookup_job_progress = function(){
 
-        self.job_started(true);
-        self.job_message_log("Job started!");
+        return $.ajax({
+            url: "/api/admin-job-status",
+            type: "GET",
+            dataType: "json",
+            data:{ job_uuid: self.job_uuid()},
+            complete: function () {
+
+            },
+            success: function (data) {
+                if (data.success) {
+                    self.job_message_log(data.job_log);
+                    self.job_complete(data.job_complete);
+
+                    if(self.job_complete()){
+                        clearInterval(self.check_job_interval);
+                    }
+                }
+                else {
+                    toastr.error(data.message);
+                    clearInterval(self.check_job_interval);
+                }
+            },
+
+        });
+
     }
 
 

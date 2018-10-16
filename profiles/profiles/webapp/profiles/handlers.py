@@ -527,11 +527,15 @@ class DataUploadAPI(Handler):
                 original_path, save_path)
 
 
+
+
             # Add the file and the job
+            job_uuid = self.start_admin_job(pgconn, zip_file_uuid)
 
             return Response.json(dict(
                 message="Zip File inserted {0}".format(zip_file_uuid),
                 zip_file_uuid=zip_file_uuid,
+                job_uuid=job_uuid,
                 reply_timestamp=datetime.datetime.now(),
                 success=True))
 
@@ -559,5 +563,50 @@ class DataUploadAPI(Handler):
 
         return zip_uuid
 
+    def start_admin_job(self, pgconn, zip_file_uuid):
+        """
+        Kick off the admin job.
+        in another place, we'll have a script watching this table
+        to see if anything new is there.
+        """
+
+        cursor = pgconn.cursor()
+
+        job_log = "{0} - <b>Admin data load started:</b>".\
+            format(datetime.datetime.now())
+
+        cursor.execute(textwrap.dedent("""
+
+            insert into admin_data_load_jobs
+
+            (zip_file_uuid, job_log)
+
+            values
+
+            (%(zip_file_uuid)s, %(job_log)s )
+
+            returning job_uuid
+
+        """), dict(zip_file_uuid=zip_file_uuid,
+        job_log=job_log))
+
+        return cursor.fetchone().job_uuid
+
+class GetAdminJobLogHandler(Handler):
+
+    route_strings = set(["GET /api/admin-job-status"])
+
+    route = Handler.check_route_strings
+
+    def handle(self, req):
+
+        job_uuid = req.wz_req.args["job_uuid"]
+
+        return Response.json(dict(
+            message="Job status",
+            reply_timestamp=datetime.datetime.now(),
+            success=True,
+            job_complete=False,
+            job_log="Work in progress"))
 
 
