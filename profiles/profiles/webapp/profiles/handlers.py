@@ -602,11 +602,35 @@ class GetAdminJobLogHandler(Handler):
 
         job_uuid = req.wz_req.args["job_uuid"]
 
-        return Response.json(dict(
-            message="Job status",
-            reply_timestamp=datetime.datetime.now(),
-            success=True,
-            job_complete=False,
-            job_log="Work in progress"))
+        cursor = self.cw.get_pgconn().cursor()
+
+        cursor.execute(textwrap.dedent("""
+
+            select job_log, now()::timestamp without time zone <@
+                job_start_end as job_not_complete from
+
+            admin_data_load_jobs where job_uuid = %(job_uuid)s
+
+        """), dict(job_uuid=job_uuid))
+
+        if cursor.rowcount:
+
+            row = cursor.fetchone()
+
+            return Response.json(dict(
+                message="Job status",
+                reply_timestamp=datetime.datetime.now(),
+                success=True,
+                job_complete=(not row.job_not_complete),
+                job_log=row.job_log))
+
+        else:
+            return Response.json(dict(
+                message="No job log",
+                reply_timestamp=datetime.datetime.now(),
+                success=False,
+                job_complete=False,
+                job_log=cursor.fetchone().job_))
+
 
 
