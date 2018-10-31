@@ -380,6 +380,12 @@ class CSVInserter(object):
                     None,
                     None)
 
+            # Set all indicator values to visible = False
+
+            log.info('setting all visible to false {0}'.format(loc))
+            loc.set_all_visible(pgconn, visible=False)
+
+
             for (k, v) in row.items():
 
                 if v:
@@ -420,7 +426,10 @@ class CSVInserter(object):
                                 None
                             )
 
+
+
                         # Look for this key.
+
                         try:
 
                             ilv = pg.indicators.IndicatorLocationValue.by_ilo(

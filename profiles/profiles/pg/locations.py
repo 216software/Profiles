@@ -122,6 +122,27 @@ class Location(object):
             yield row.x
 
 
+    def set_all_visible(self, pgconn, visible=False):
+
+        """
+        Set all values for this location indicator to visible (true / false)
+
+        """
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+
+            update indicator_location_values
+
+            set visible = %(visible)s
+
+            where location_uuid = %(location_uuid)s
+
+        """), dict(visible=visible, location_uuid=self.location_uuid))
+
+        return self
+
     def look_up_area(self, pgconn):
 
         """
@@ -265,6 +286,8 @@ class Location(object):
                     title = any(%(indicators)s))
 
                 and location_uuid = %(location_uuid)s
+
+                and visible = true
                 order by observation_timestamp asc;
 
         """), dict(location_uuid=self.location_uuid,

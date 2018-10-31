@@ -42,7 +42,7 @@ script_order:
 -   update-pretty-labels-from-descriptions.sql
 -   clean-up-collinwood.sql
 -   other-nina-edits.sql
--   create-races-and-connect-to-indicators.sql
+#-   create-races-and-connect-to-indicators.sql
 
 
 -   hide-irrelevant-locations.sql
@@ -51,3 +51,4 @@ script_order:
 
 # 2018 Data Load
 -   make-admin-load-job-table.sql
+-   add-visible-flag-indicator-location-value.sql

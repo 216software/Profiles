@@ -146,6 +146,27 @@ class Indicator(RelationWrapper):
         for row in cursor:
             yield row.ind
 
+    def set_all_visible(self, pgconn, visible=False):
+
+        """
+        Set all values for this indicator to visible (true / false)
+
+        """
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+
+            update indicator_location_values
+
+            set visible = %(visible)s
+
+            where indicator_uuid = %(indicator_uuid)s
+
+        """), dict(visible=visible, indicator_uuid=self.indicator_uuid))
+
+        return self
+
     def update_description(self, pgconn, new_description, chart_label):
 
         cursor = pgconn.cursor()
@@ -442,7 +463,7 @@ class IndicatorLocationValue(RelationWrapper):
 
     def __init__(self, indicator_uuid, location_uuid,
         observation_timestamp, observation_range,
-        value, observation_timestamp_label, inserted, updated):
+        value, observation_timestamp_label, visible, inserted, updated):
 
         self.indicator_uuid = indicator_uuid
         self.location_uuid = location_uuid
@@ -450,6 +471,7 @@ class IndicatorLocationValue(RelationWrapper):
         self.observation_range = observation_range
         self.observation_timestamp_label = observation_timestamp_label
         self.value = value
+        self.visible = visible
         self.inserted = inserted
         self.updated = updated
 
@@ -497,20 +519,20 @@ class IndicatorLocationValue(RelationWrapper):
 
     @classmethod
     def update_value(cls, pgconn, indicator, location,
-        observation_timestamp, value):
+        observation_timestamp, value, visible=True):
 
         cursor = pgconn.cursor()
 
         cursor.execute(textwrap.dedent("""
             update indicator_location_values
 
-            set value = %s
+            set value = %s, visible = %s
 
             where (indicator_uuid, location_uuid, observation_timestamp)
             = (%s, %s, %s)
 
             returning indicator_location_values.*::indicator_location_values as ilv
-            """), [value, indicator, location, observation_timestamp])
+            """), [value, visible, indicator, location, observation_timestamp])
 
         if cursor.rowcount:
             ilv = cursor.fetchone().ilv
@@ -523,16 +545,17 @@ class IndicatorLocationValue(RelationWrapper):
                 location,
                 observation_timestamp))
 
-    def update_my_value(self, pgconn, new_value):
+    def update_my_value(self, pgconn, new_value, visible=True):
 
-        if float(new_value) != self.value:
+        if float(new_value) != self.value or self.visible != visible:
 
             return self.update_value(
                 pgconn,
                 self.indicator_uuid,
                 self.location_uuid,
                 self.observation_timestamp,
-                float(new_value))
+                float(new_value),
+                visible=visible)
 
     @staticmethod
     def look_up_racial_split(pgconn, indicator_title,
