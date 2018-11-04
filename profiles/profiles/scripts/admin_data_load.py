@@ -41,6 +41,56 @@ def lookup_job(pgconn):
     if cursor.rowcount:
         return cursor.fetchone()
 
+
+def update_job_with_total_files(pgconn, num_total_files, job_uuid):
+
+    cursor = pgconn.cursor()
+
+    cursor.execute(textwrap.dedent("""
+        update admin_data_load_jobs
+
+        set total_files_to_process = %(total_files)s,
+        files_processed = 0
+
+        where job_uuid = %(job_uuid)s
+
+    """), dict(total_files=num_total_files, job_uuid=job_uuid))
+
+    return num_total_files
+
+def update_job_with_num_files_processed(pgconn, num_files, job_uuid):
+
+    cursor = pgconn.cursor()
+
+    cursor.execute(textwrap.dedent("""
+        update admin_data_load_jobs
+
+        set files_processed = %(num_files)s
+
+        where job_uuid = %(job_uuid)s
+
+    """), dict(num_files=num_files, job_uuid=job_uuid))
+
+    return num_files
+
+
+def close_job(pgconn, job_uuid):
+
+    cursor = pgconn.cursor()
+
+    cursor.execute(textwrap.dedent("""
+        update admin_data_load_jobs
+
+        set job_start_end = tsrange(lower(job_start_end), now()::timestamp without time zone)
+
+        where job_uuid = %(job_uuid)s
+
+    """), dict(job_uuid=job_uuid))
+
+    return
+
+
+
 def log_job_message(pgconn, job_uuid, message):
 
     cursor = pgconn.cursor()
@@ -48,8 +98,7 @@ def log_job_message(pgconn, job_uuid, message):
     cursor.execute(textwrap.dedent("""
         update admin_data_load_jobs
 
-        set job_log = job_log || '<br />' || now() || ' - ' ||
-        %(message)s
+        set job_log = job_log || '<br />' || TO_CHAR(NOW(), 'MM.DD.YY HH:MM') || ' - ' ||  %(message)s
 
         where job_uuid = %(job_uuid)s
 
@@ -80,6 +129,8 @@ def remove_old_data(pgconn):
 
 # borrowed from database change insert all csv files
 def insert_csv_files(pgconn, directory, job_uuid):
+
+    jobs_done = 0
     for xls_file in os.listdir(directory):
 
         # Skip these files
@@ -109,10 +160,10 @@ def insert_csv_files(pgconn, directory, job_uuid):
             csv_file_path = os.path.abspath(csv_file)
 
 
-            pgconn.commit()
             log_job_message(pgconn, job_uuid,
             "<b>Trying to load: {0}</b>".\
                 format(csv_file))
+            pgconn.commit()
 
 
             if csv_file.endswith("cdc.csv"):
@@ -131,6 +182,10 @@ def insert_csv_files(pgconn, directory, job_uuid):
                 log_job_message(pgconn, job_uuid,
                 "<span style='color:red'>Can't load {0}</span>".\
                     format(csv_file))
+
+            jobs_done += 1
+            update_job_with_num_files_processed(pgconn, jobs_done,
+                job_uuid)
 
             pgconn.commit()
 
@@ -161,17 +216,28 @@ if __name__ == "__main__":
     zip_ref = zipfile.ZipFile(zip_file_path, 'r')
     zip_ref.extractall('/tmp/profiles')
 
+    update_job_with_total_files(pgconn, len(zip_ref.infolist()),
+        job_uuid)
+
     log_job_message(pgconn, job_uuid, "Extracted zip file to '/tmp' {0}".format("<br />".join([x for x in zip_ref.namelist()])))
 
     zip_ref.close()
+
+    pgconn.commit()
 
     # OK, now try to do the actual data load!
 
     # TODO -- clear our our data before we try to load!
 
     remove_old_data(pgconn)
+    try:
+        insert_csv_files(pgconn, '/tmp/profiles', job_uuid)
 
-    insert_csv_files(pgconn, '/tmp/profiles', job_uuid)
+    except Exception as e:
+        log.error("We experienced failure loading csv {0}".format(e))
+
+    log.debug("closing admin job")
+    close_job(pgconn, job_uuid)
 
     pgconn.commit()
 

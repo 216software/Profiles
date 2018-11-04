@@ -46,6 +46,10 @@ create table admin_data_load_jobs
     -- Log what happens in the job here
     job_log text,
 
+    total_files_to_process numeric,
+
+    files_processesed numeric,
+
     inserted timestamp not null default now(),
     updated timestamp
 );

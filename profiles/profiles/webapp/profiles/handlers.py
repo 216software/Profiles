@@ -36,7 +36,6 @@ class TemplateServer(Handler):
         "GET /":                    "profiles/profiles.html",
         "GET /login":               "profiles/login.html",
         "GET /reset-password":      "profiles/reset-password.html",
-        "GET /admin/data-load":   "profiles/admin-data-load.html",
     })
 
     route = Handler.check_route_strings
@@ -527,8 +526,6 @@ class DataUploadAPI(Handler):
                 original_path, save_path)
 
 
-
-
             # Add the file and the job
             job_uuid = self.start_admin_job(pgconn, zip_file_uuid)
 
@@ -607,7 +604,11 @@ class GetAdminJobLogHandler(Handler):
         cursor.execute(textwrap.dedent("""
 
             select job_log, now()::timestamp without time zone <@
-                job_start_end as job_not_complete from
+                job_start_end as job_not_complete,
+            total_files_to_process,
+            files_processed
+
+            from
 
             admin_data_load_jobs where job_uuid = %(job_uuid)s
 
@@ -622,7 +623,9 @@ class GetAdminJobLogHandler(Handler):
                 reply_timestamp=datetime.datetime.now(),
                 success=True,
                 job_complete=(not row.job_not_complete),
-                job_log=row.job_log))
+                job_log=row.job_log,
+                total_files_to_process=row.total_files_to_process,
+                files_processed=row.files_processed))
 
         else:
             return Response.json(dict(
@@ -632,5 +635,32 @@ class GetAdminJobLogHandler(Handler):
                 job_complete=False,
                 job_log=cursor.fetchone().job_))
 
+class GetAdminJobHandler(Handler):
+
+    route_strings = dict({
+        "GET /admin/data-load":   "profiles/admin-data-load.html",
+    })
+
+    route = Handler.check_route_strings
+
+    def handle(self, req):
+
+        template_name = self.route_strings[req.line_one]
+
+        job_uuid = self.check_for_open_job(self.cw.get_pgconn())
+        return Response.tmpl(template_name, job_uuid=job_uuid)
+
+    def check_for_open_job(self, pgconn):
+
+        cursor = pgconn.cursor()
+        cursor.execute(textwrap.dedent("""
+            select job_uuid from
+            admin_data_load_jobs
+            where now()::timestamp without time zone <@ job_start_end
+
+        """))
+
+        if cursor.rowcount:
+            return cursor.fetchone().job_uuid
 
 
