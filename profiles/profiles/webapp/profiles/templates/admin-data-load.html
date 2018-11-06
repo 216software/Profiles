@@ -16,18 +16,58 @@
 <h4>Progress</h4>
 <div class="progress">
   <div class="progress-bar" role="progressbar" aria-valuenow="60"
-aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-    60%
+   aria-valuemin="0" aria-valuemax="100"
+    data-bind="style: {width: percent_complete() + '%'}, text: Math.round(percent_complete()) + '%'">
   </div>
 </div><p class="smaller"><span data-bind="text:files_processed"></span>
 files processed / <span data-bind="text:total_files"></span> total files
 </p>
 
+<h4>Status</h4>
+
+<div>
+
+<div class="row">
+<div class="col-xs-4">In Progress:</div>
+<div class="col-xs-2">
+<span class="badge"  data-bind="style:{ backgroundColor: job_started() ?
+'yellow':'grey'}" style="background-color: grey;">P</span>
+</div>
+</div>
+
+
+<div class="row">
+<div class="col-xs-4">Complete:</div>
+<div class="col-xs-2">
+<span class="badge"  data-bind="style:{ backgroundColor: job_complete() ?
+'green':'grey'}" style="background-color: grey;">C</span>
+</div>
+</div>
+
+
+<div class="row">
+<div class="col-xs-4">Error:</div>
+<div class="col-xs-2">
+<span class="badge"  data-bind="style:{ backgroundColor: job_error() ?
+'red':'grey'}" style="background-color: grey;">E</span>
+</div>
+</div>
+
+
+</div>
 </div>
 <div class="col-md-8">
 
-<h1>New Data Upload</h1>
-<p>Explanation of how new data upload works</p>
+<h1>Add/Update Data</h1>
+<p>Use this page to update the data on our profiles site. You can upload
+a single zip file that contains multiple data files. The zip file will
+be unzipped and each data file will be loaded individually. There should
+also be a control file <strong>Dashboard</strong> that contains
+descriptions for the indicators. If descriptions have changed or need to
+be udpated, we'll read them from this file.</p>
+
+<p>Begin your upload now. If a job is long running, you can come back
+and check the progress of the job.</p>
 
 <!--
 
@@ -44,7 +84,7 @@ files processed / <span data-bind="text:total_files"></span> total files
 -->
 
 <!-- this is status -->
-<h2>Please upload a file to begin.</h2>
+<h3>Please upload a file to begin.</h3>
 <p class="help-text">The file should be a zip file and contain all data
 files</p>
 
@@ -68,7 +108,7 @@ Uploading data file progress:
 
 </div>
 
-<div data-bind="visible:job_started">
+<div data-bind="visible:job_started() || job_complete()">
 <hr />
 
 <h3>Data load started:</h3>
@@ -127,9 +167,21 @@ function AdminDataLoadViewModel(data){
 
     self.job_started = ko.observable(false);
     self.job_complete = ko.observable(false);
+    self.job_error = ko.observable(false);
     self.job_message_log = ko.observable();
     self.total_files = ko.observable(0);
     self.files_processed = ko.observable(0);
+
+    self.percent_complete = ko.pureComputed(function(){
+
+        if(self.total_files() > 0){
+            return (self.files_processed() / self.total_files()) * 100;
+        }
+        else{
+            return 0;
+        }
+
+    });
 
     self.check_job_interval = null;
 
@@ -227,10 +279,15 @@ function AdminDataLoadViewModel(data){
 
                     if(self.job_complete()){
                         clearInterval(self.check_job_interval);
+                        self.job_started(false);
                     }
+
                 }
                 else {
                     toastr.error(data.message);
+                    self.job_error(true);
+                    self.job_complete(false);
+                    self.job_started(false);
                     clearInterval(self.check_job_interval);
                 }
             },
