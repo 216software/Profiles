@@ -194,8 +194,10 @@ function StartPageViewModel (data) {
         //First do this and then recursively call this method.  Can't
         //easily just block here and then move on, because
         //look_up_shape_json is async.
+
         if(self.selected_location().location_shape_json() == undefined){
-            self.selected_location().look_up_shape_json().then(self.change_location);
+            var d = self.selected_location().look_up_shape_json()
+            d.done(self.change_location);
             return;
         }
 

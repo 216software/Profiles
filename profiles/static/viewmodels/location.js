@@ -109,7 +109,9 @@ function Location (data) {
 
     self.look_up_shape_json = function(){
 
-        return $.ajax({
+        var d = new $.Deferred()
+
+        $.ajax({
             url: "/api/location-shape-json",
             type: "GET",
             dataType: "json",
@@ -119,14 +121,17 @@ function Location (data) {
             },
             success: function (data) {
                 if (data.success) {
-
                     self.location_shape_json(data.location_shape_json);
+                    d.resolve()
                 }
                 else {
                     toastr.error(data.message);
+                    d.reject()
                 }
             }
         });
+
+        return d;
 
     };
 
