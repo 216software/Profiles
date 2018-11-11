@@ -122,7 +122,7 @@ class Location(object):
             yield row.x
 
 
-    def set_all_visible(self, pgconn, visible=False):
+    def set_all_visible(self, pgconn, indicator, visible=False):
 
         """
         Set all values for this location indicator to visible (true / false)
@@ -138,8 +138,10 @@ class Location(object):
             set visible = %(visible)s
 
             where location_uuid = %(location_uuid)s
+            and indicator_uuid = %(indicator_uuid)s
 
-        """), dict(visible=visible, location_uuid=self.location_uuid))
+        """), dict(visible=visible, location_uuid=self.location_uuid,
+        indicator_uuid=indicator.indicator_uuid))
 
         return self
 

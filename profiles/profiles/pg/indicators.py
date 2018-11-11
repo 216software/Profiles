@@ -57,6 +57,14 @@ class Indicator(RelationWrapper):
         d = copy.copy(self.__dict__)
         return d
 
+    def __eq__(self, other):
+        return self.indicator_uuid == other.indicator_uuid
+
+    def __ne__(self, other):
+        if other:
+            return self.indicator_uuid != other.indicator_uuid
+        else:
+            return True
 
     @classmethod
     def by_indicator_uuid(cls, pgconn, indicator_uuid):

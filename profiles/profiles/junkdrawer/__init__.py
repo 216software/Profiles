@@ -383,10 +383,11 @@ class CSVInserter(object):
             # Set all indicator values to visible = False
 
             log.info('setting all visible to false {0}'.format(loc))
-            loc.set_all_visible(pgconn, visible=False)
+            last_indicator = None
 
+            sorted_rows = sorted(row.items(), key=lambda tup: tup[0])
 
-            for (k, v) in row.items():
+            for (k, v) in sorted_rows:
 
                 if v:
 
@@ -426,6 +427,9 @@ class CSVInserter(object):
                                 None
                             )
 
+                        if last_indicator != ind:
+                            loc.set_all_visible(pgconn, ind, visible=False)
+                            last_indicator = ind
 
 
                         # Look for this key.
@@ -453,7 +457,7 @@ class CSVInserter(object):
                         # doesn't match the new one.
                         else:
 
-                            ilv = ilv.update_my_value(pgconn, v)
+                           ilv = ilv.update_my_value(pgconn, v)
 
         log.info("Inserted all data from {0}.".format(
             os.path.basename(self.path_to_csv)))
