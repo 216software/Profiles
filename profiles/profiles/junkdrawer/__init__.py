@@ -53,6 +53,7 @@ def multi_page_xls2csv(xls_file_path, csv_folder_path):
 
     sheet_names = wb.get_sheet_names()
 
+
     if len(sheet_names) == 1:
 
         log.critical("Sorry, {0} has {1} sheets and I can only "

@@ -135,7 +135,14 @@ def load_cdc(pgconn, csv_file_name):
 
 def remove_old_data(pgconn):
 
-    log.info("DELETING CURRENT DATA!")
+    import shutil
+    folder = '/tmp/profiles'
+    for the_file in os.listdir(folder):
+        file_path = os.path.join(folder, the_file)
+        if os.path.isfile(file_path):
+            os.unlink(file_path)
+
+    log.info("DELETED CURRENT DATA!")
 
 
 # borrowed from database change insert all csv files
@@ -163,8 +170,20 @@ def insert_csv_files(pgconn, directory, job_uuid):
                 os.path.join(
                     directory,
                     xls_file))
+
             if 'CNP Dashboard' in xls_file_path:
                 log.info('CNP Dashboard file -- processing')
+
+                csv_files = [x for x in\
+                    junkdrawer.multi_page_xls2csv(xls_file_path,  "/tmp")]
+                csv_file_paths = [os.path.abspath(x) for x in csv_files]
+                log_job_message(pgconn, job_uuid,
+                "<b>Trying to update descriptions from Dashboard file: {0}</b>".\
+                    format(csv_files))
+
+                import ipdb; ipdb.set_trace()
+                pgconn.commit()
+
 
             else:
 
@@ -211,12 +230,14 @@ def do_stuff(cw):
 
     if job_uuid is None:
         return
-
     log.info("Admin job found! {0}".format(job_uuid))
 
     log_job_message(cw.get_pgconn(), job_uuid,
         "Found open job with zip file {0}".format(zip_file_path))
     cw.get_pgconn().commit()
+
+    # TODO -- clear our our old files before we try to load!
+    remove_old_data(cw.get_pgconn())
 
     import zipfile
     zip_ref = zipfile.ZipFile(zip_file_path, 'r')
@@ -233,9 +254,7 @@ def do_stuff(cw):
 
     # OK, now try to do the actual data load!
 
-    # TODO -- clear our our data before we try to load!
 
-    remove_old_data(cw.get_pgconn())
     try:
         insert_csv_files(cw.get_pgconn(), '/tmp/profiles', job_uuid)
 
@@ -245,6 +264,7 @@ def do_stuff(cw):
 
     log.debug("closing admin job")
     close_job(cw.get_pgconn(), job_uuid)
+    log_job_message(cw.get_pgconn(), job_uuid, "Data load job is now complete!")
 
     cw.get_pgconn().commit()
 
