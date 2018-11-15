@@ -20,7 +20,7 @@ def xls2csv(xls_file_path, csv_file_path):
     Convert an XLS file to one or many CSV files.
     """
 
-    wb = openpyxl.load_workbook(xls_file_path)
+    wb = openpyxl.load_workbook(xls_file_path, data_only=True)
 
     sheet_names = wb.get_sheet_names()
 
@@ -49,10 +49,9 @@ def xls2csv(xls_file_path, csv_file_path):
 
 def multi_page_xls2csv(xls_file_path, csv_folder_path):
 
-    wb = openpyxl.load_workbook(xls_file_path)
+    wb = openpyxl.load_workbook(xls_file_path, data_only=True)
 
     sheet_names = wb.get_sheet_names()
-
 
     if len(sheet_names) == 1:
 
@@ -65,6 +64,10 @@ def multi_page_xls2csv(xls_file_path, csv_folder_path):
 
         for sheet_name in sheet_names:
 
+            if 'base chart outline' in sheet_name.lower():
+                log.info("skipping base chart outline")
+                continue
+
             out_file_path = os.path.join(
                 csv_folder_path,
                 "{0}.csv".format(sheet_name))
@@ -75,11 +78,11 @@ def multi_page_xls2csv(xls_file_path, csv_folder_path):
             ws = wb.get_sheet_by_name(sheet_name)
 
             for row_number, row in enumerate(ws.rows, start=1):
-
                 non_empty_cells = [unicode(cell.value) for cell
                     in row
-                    if cell.value is not None
-                    and unicode(cell.value).strip()]
+                    if cell.value is not None \
+                        and unicode(cell.value).strip()]
+
 
                 # This is in here because Tsui sometimes puts in two
                 # header rows in her spreadsheets.
@@ -93,12 +96,14 @@ def multi_page_xls2csv(xls_file_path, csv_folder_path):
 
                 else:
 
-                    out.writerow([unicode(cell.value).encode("utf-8") if cell.value else None for cell in row])
+
+                    out.writerow([unicode(cell.value).encode("utf-8") if\
+                    cell.value and u"='" not in unicode(cell.value)  \
+                    else None for cell in row])
 
             f.close()
 
             log.info("Saved {0}.".format(out_file_path))
-
             yield out_file_path
 
 
@@ -463,24 +468,61 @@ class CSVInserter(object):
         log.info("Inserted all data from {0}.".format(
             os.path.basename(self.path_to_csv)))
 
+
+class CSVUpdater(object):
+
+
+    def __init__(self, path_to_csv):
+
+        self.path_to_csv = path_to_csv
+
+    def update_descriptions(self, pgconn):
+
+        log.info("Starting to update descriptions from {0}".format(
+            os.path.basename(self.path_to_csv)))
+
+        cr = csv.DictReader(open(self.path_to_csv))
+
+        for row_number, row in enumerate(cr, start=1):
+
+            variable_name = row.get('Variable Name')
+
+            try:
+
+                ind = pg.indicators.Indicator.by_title(
+                    pgconn,
+                    variable_name)
+
+            except KeyError as ex:
+                log.error(ex)
+                log.info("No indicator found with name".format(variable_name))
+                continue
+
+            else:
+
+                vd = row.get('Variable Description')
+
+                if vd and ind.description != vd:
+                    log.info("updating description")
+                    ind.update_description(pgconn, vd, None)
+
+            # Set all indicator values to visible = False
+
+
+        log.info("Updated all indicators from {0}.".format(
+            os.path.basename(self.path_to_csv)))
+
+
+
+
     @classmethod
-    def load_neighborhood(cls, pgconn, path_to_csv):
+    def load_descriptions(cls, pgconn, path_to_csv):
 
-        self = CSVInserter(path_to_csv, "neighborhood", "neighbor10")
+        self = CSVUpdater(
+            path_to_csv
+            )
 
-        self.insert(pgconn)
-
-        return self
-
-    @classmethod
-    def load_cdc(cls, pgconn, path_to_csv):
-
-        self = CSVInserter(
-            path_to_csv,
-            "community development corporation",
-            "cdc_name")
-
-        self.insert(pgconn)
+        self.update_descriptions(pgconn)
 
         return self
 

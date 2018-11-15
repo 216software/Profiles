@@ -133,6 +133,14 @@ def load_cdc(pgconn, csv_file_name):
         pgconn,
         csv_file_name)
 
+
+def update_descriptions(pgconn, csv_file_name):
+
+    return junkdrawer.CSVUpdater.load_descriptions(
+        pgconn,
+        csv_file_name)
+
+
 def remove_old_data(pgconn):
 
     import shutil
@@ -180,10 +188,10 @@ def insert_csv_files(pgconn, directory, job_uuid):
                 log_job_message(pgconn, job_uuid,
                 "<b>Trying to update descriptions from Dashboard file: {0}</b>".\
                     format(csv_files))
-
-                import ipdb; ipdb.set_trace()
                 pgconn.commit()
 
+                for csv_file in csv_files:
+                    update_descriptions(pgconn, csv_file)
 
             else:
 
@@ -260,7 +268,9 @@ def do_stuff(cw):
 
     except Exception as e:
         log.error("We experienced failure loading csv {0}".format(e))
+        import traceback
         print e
+        log.info(traceback.print_exc())
 
     log.debug("closing admin job")
     close_job(cw.get_pgconn(), job_uuid)
