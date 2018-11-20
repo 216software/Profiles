@@ -114,7 +114,7 @@ def log_job_message(pgconn, job_uuid, message):
     cursor.execute(textwrap.dedent("""
         update admin_data_load_jobs
 
-        set job_log = job_log || '<br />' || TO_CHAR(NOW(), 'MM.DD.YY HH:MM') || ' - ' ||  %(message)s
+        set job_log = job_log || '<br />' || TO_CHAR(NOW(), 'MM.DD.YY HH:MI') || ' - ' ||  %(message)s
 
         where job_uuid = %(job_uuid)s
 

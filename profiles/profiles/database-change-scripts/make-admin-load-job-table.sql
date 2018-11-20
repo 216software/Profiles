@@ -48,8 +48,7 @@ create table admin_data_load_jobs
 
     total_files_to_process numeric,
 
-    files_processesed numeric,
-
+    files_processed numeric,
     inserted timestamp not null default now(),
     updated timestamp
 );

@@ -412,8 +412,14 @@ class CSVInserter(object):
                         elif year == "0610":
                             year = "2010"
 
+                        elif year == "0711":
+                            year = "2011"
+
                         elif year == "1115":
                             year = "2015"
+
+                        elif year == "1216":
+                            year = "2016"
 
                         try:
                             ind = pg.indicators.Indicator.by_title(
@@ -468,6 +474,26 @@ class CSVInserter(object):
         log.info("Inserted all data from {0}.".format(
             os.path.basename(self.path_to_csv)))
 
+    @classmethod
+    def load_neighborhood(cls, pgconn, path_to_csv):
+
+        self = CSVInserter(path_to_csv, "neighborhood", "neighbor10")
+
+        self.insert(pgconn)
+
+        return self
+
+    @classmethod
+    def load_cdc(cls, pgconn, path_to_csv):
+
+        self = CSVInserter(
+            path_to_csv,
+            "community development corporation",
+            "cdc_name")
+
+        self.insert(pgconn)
+
+        return self
 
 class CSVUpdater(object):
 
@@ -501,10 +527,45 @@ class CSVUpdater(object):
             else:
 
                 vd = row.get('Variable Description')
+                source = row.get('Source')
+                note = row.get('Note')
+                definition = row.get('Definition')
+                universe = row.get('Universe')
+                limitations = row.get('Limitations')
+                num_tables = row.get('Numerator Tables')
+                denom_tables = row.get('Denominator Tables')
+                data_as_of = row.get('Data as-of date')
+                chart_label = row.get('Chart Label')
 
                 if vd and ind.description != vd:
                     log.info("updating description")
                     ind.update_description(pgconn, vd, None)
+                    ind.update_pretty_label(pgconn, vd)
+
+                pg.indicators.Indicator.update_extra_details_by_title(pgconn,
+                    ind.title, vd, definition, universe, limitations, note,
+                    source, data_as_of, num_tables, denom_tables,
+                    chart_label)
+
+
+                # Lastly, update visiblity
+
+                time_type = row.get('TimeType')
+                if time_type == 'Yearly':
+                    ind.set_visible_years(pgconn,
+                        start_year=row.get('StartTime1'),
+                        end_year=row.get('EndTime1'),
+                        visible=True)
+
+                if time_type == '5 Year Survey':
+                    ind.set_visible_year(pgconn,
+                        year=row.get('EndTime1'),
+                        visible=True)
+
+                    ind.set_visible_year(pgconn,
+                        year=row.get('EndTime2'),
+                        visible=True)
+
 
             # Set all indicator values to visible = False
 

@@ -175,6 +175,52 @@ class Indicator(RelationWrapper):
 
         return self
 
+    def set_visible_years(self, pgconn, start_year, end_year, visible=False):
+
+        """
+        Set all values for this indicator to visible (true / false)
+
+        """
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+
+            update indicator_location_values
+
+            set visible = %(visible)s
+
+            where indicator_uuid = %(indicator_uuid)s
+            and date_part('year', observation_timestamp) >= %(start_year)s
+            and date_part('year', observation_timestamp) <= %(end_year)s
+
+        """), dict(visible=visible, indicator_uuid=self.indicator_uuid,
+            end_year=end_year, start_year=start_year))
+
+        return self
+
+    def set_visible_year(self, pgconn, year, visible=False):
+
+        """
+        Set all values for this indicator to visible (true / false)
+
+        """
+
+        cursor = pgconn.cursor()
+
+        cursor.execute(textwrap.dedent("""
+
+            update indicator_location_values
+
+            set visible = %(visible)s
+
+            where indicator_uuid = %(indicator_uuid)s
+            and date_part('year', observation_timestamp) = %(year)s
+
+        """), dict(visible=visible, indicator_uuid=self.indicator_uuid, year=year))
+
+        return self
+
     def update_description(self, pgconn, new_description, chart_label):
 
         cursor = pgconn.cursor()
