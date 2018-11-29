@@ -439,12 +439,8 @@ class CSVInserter(object):
                                 None
                             )
 
-                        if last_indicator != ind:
-                            loc.set_all_visible(pgconn, ind, visible=False)
-                            last_indicator = ind
-
-
                         # Look for this key.
+                        loc.set_all_visible(pgconn, ind, visible=False)
 
                         try:
 
@@ -550,14 +546,14 @@ class CSVUpdater(object):
 
                 # Lastly, update visiblity
 
-                time_type = row.get('TimeType')
-                if time_type == 'Yearly':
+                time_type = row.get('TimeType').lower()
+                if time_type == 'yearly':
                     ind.set_visible_years(pgconn,
                         start_year=row.get('StartTime1'),
                         end_year=row.get('EndTime1'),
                         visible=True)
 
-                if time_type == '5 Year Survey':
+                elif time_type == '5 year survey':
                     ind.set_visible_year(pgconn,
                         year=row.get('EndTime1'),
                         visible=True)
@@ -565,6 +561,9 @@ class CSVUpdater(object):
                     ind.set_visible_year(pgconn,
                         year=row.get('EndTime2'),
                         visible=True)
+
+                else:
+                    log.debug(time_type)
 
 
             # Set all indicator values to visible = False
