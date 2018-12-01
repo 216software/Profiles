@@ -105,8 +105,6 @@ def close_job(pgconn, job_uuid):
 
     return
 
-
-
 def log_job_message(pgconn, job_uuid, message):
 
     cursor = pgconn.cursor()
@@ -157,7 +155,6 @@ def remove_old_data(pgconn):
 def insert_csv_files(pgconn, directory, job_uuid):
 
     description_xls_file_path = None
-
     jobs_done = 0
     for xls_file in os.listdir(directory):
 
@@ -185,7 +182,6 @@ def insert_csv_files(pgconn, directory, job_uuid):
 
                 # we need to do this last
                 description_xls_file_path = xls_file_path
-
 
             else:
 
@@ -232,6 +228,8 @@ def insert_csv_files(pgconn, directory, job_uuid):
             "<b>Trying to load Description file: {0}</b>".\
                 format(description_xls_file_path))
             pgconn.commit()
+
+            xls_file_path = description_xls_file_path
 
             csv_files = [x for x in\
                 junkdrawer.multi_page_xls2csv(xls_file_path,  "/tmp")]
