@@ -68,6 +68,15 @@ function HealthViewModel (data) {
 
 
     self.observable_timestamps = ko.observableArray([]);
+    self.pretty_date_range = ko.pureComputed(function(){
+        if (self.observable_timestamps().length > 0){
+            var m = self.observable_timestamps()[self.observable_timestamps().length-1];
+            if (m){
+                return m.format('YYYY') - 4 + '-' + m.format('YYYY');
+            }
+
+        }
+    })
 
     self.look_up_indicator_complete = function(data){
 
