@@ -215,7 +215,9 @@ class Indicator(RelationWrapper):
             set visible = %(visible)s
 
             where indicator_uuid = %(indicator_uuid)s
+            and observation_timestamp is not null
             and date_part('year', observation_timestamp) = %(year)s
+
 
         """), dict(visible=visible, indicator_uuid=self.indicator_uuid, year=year))
 
