@@ -23,6 +23,9 @@ class NotFound(Handler):
         return self.handle
 
     def handle(self, req):
+        self.Response = Response
+        from profiles import configwrapper
+        self.Response.configwrapper = configwrapper
         return self.not_found(req)
 
     @property
