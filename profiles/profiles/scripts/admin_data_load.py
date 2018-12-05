@@ -105,8 +105,6 @@ def close_job(pgconn, job_uuid):
 
     return
 
-
-
 def log_job_message(pgconn, job_uuid, message):
 
     cursor = pgconn.cursor()
@@ -157,7 +155,6 @@ def remove_old_data(pgconn):
 def insert_csv_files(pgconn, directory, job_uuid):
 
     description_xls_file_path = None
-
     jobs_done = 0
     for xls_file in os.listdir(directory):
 
@@ -185,7 +182,6 @@ def insert_csv_files(pgconn, directory, job_uuid):
 
                 # we need to do this last
                 description_xls_file_path = xls_file_path
-
 
             else:
 
@@ -225,34 +221,40 @@ def insert_csv_files(pgconn, directory, job_uuid):
 
             pgconn.commit()
 
-        if description_xls_file_path:
+    if description_xls_file_path:
 
-            log.info('CNP Dashboard file -- processing')
+        log.info('CNP Dashboard file -- processing')
+        log_job_message(pgconn, job_uuid,
+        "<b>Trying to load Description file: {0}</b>".\
+            format(description_xls_file_path))
+        pgconn.commit()
+
+        xls_file_path = description_xls_file_path
+
+        csv_files = [x for x in\
+            junkdrawer.multi_page_xls2csv(xls_file_path,  "/tmp")]
+        csv_file_paths = [os.path.abspath(x) for x in csv_files]
+        log_job_message(pgconn, job_uuid,
+        "<b>Trying to update descriptions from Dashboard file: {0}</b>".\
+            format(csv_files))
+        pgconn.commit()
+
+        for csv_file in csv_files:
             log_job_message(pgconn, job_uuid,
-            "<b>Trying to load Description file: {0}</b>".\
-                format(description_xls_file_path))
-            pgconn.commit()
+            "<b>Trying to update descriptions from Dashboard sheet: {0}</b>".\
+                format(csv_file))
 
-            csv_files = [x for x in\
-                junkdrawer.multi_page_xls2csv(xls_file_path,  "/tmp")]
-            csv_file_paths = [os.path.abspath(x) for x in csv_files]
-            log_job_message(pgconn, job_uuid,
-            "<b>Trying to update descriptions from Dashboard file: {0}</b>".\
-                format(csv_files))
-            pgconn.commit()
+            update_descriptions(pgconn, csv_file)
 
-            for csv_file in csv_files:
-                update_descriptions(pgconn, csv_file)
+        jobs_done += 1
+        update_job_with_num_files_processed(pgconn, jobs_done,
+            job_uuid)
 
-            jobs_done += 1
-            update_job_with_num_files_processed(pgconn, jobs_done,
-                job_uuid)
-
-            log_job_message(pgconn, job_uuid,
-            "<b>Description file updated: {0}</b>".\
-                format(csv_files))
-            pgconn.commit()
-            pgconn.commit()
+        log_job_message(pgconn, job_uuid,
+        "<b>Description file updated: {0}</b>".\
+            format(csv_files))
+        pgconn.commit()
+        pgconn.commit()
 
 
 def do_stuff(cw):

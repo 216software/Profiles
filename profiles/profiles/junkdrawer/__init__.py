@@ -421,6 +421,9 @@ class CSVInserter(object):
                         elif year == "1216":
                             year = "2016"
 
+                        elif year == "1317":
+                            year = "2017"
+
                         try:
                             ind = pg.indicators.Indicator.by_title(
                                 pgconn,
@@ -547,23 +550,35 @@ class CSVUpdater(object):
                 # Lastly, update visiblity
 
                 time_type = row.get('TimeType').lower()
-                if time_type == 'yearly':
-                    ind.set_visible_years(pgconn,
-                        start_year=row.get('StartTime1'),
-                        end_year=row.get('EndTime1'),
-                        visible=True)
+                if row.get('StartTime1'):
+                    if time_type == 'yearly':
+                        ind.set_visible_years(pgconn,
+                            start_year=row.get('StartTime1'),
+                            end_year=row.get('EndTime1'),
+                            visible=True)
 
-                elif time_type == '5 year survey':
-                    ind.set_visible_year(pgconn,
-                        year=row.get('EndTime1'),
-                        visible=True)
+                    elif time_type == '5 year survey':
+                        if not row.get('EndTime2'):
+                            log.error(textwrap.dedent("""
+                                This row is marked as 5 survey
+                                but has no end time !
+                                {0}
+                                """.format(row)))
+                        else:
 
-                    ind.set_visible_year(pgconn,
-                        year=row.get('EndTime2'),
-                        visible=True)
+                            ind.set_visible_year(pgconn,
+                                year=row.get('EndTime1'),
+                                visible=True)
+
+                            ind.set_visible_year(pgconn,
+                                year=row.get('EndTime2'),
+                                visible=True)
+
+                    else:
+                        log.debug(time_type)
 
                 else:
-                    log.debug(time_type)
+                    log.debug("No Start Time for {0}".format(row))
 
 
             # Set all indicator values to visible = False

@@ -28,28 +28,16 @@ function WorkforceViewModel (data) {
     self.indicator_titles = ['lf' ,'_lf', 'cvlf', 'cv_lf', 'mlf', 'm_lf',
         'emp',  'cvemp', 'memp',
         '_emp',  'cv_emp', 'm_emp',
-        'pop25p', 'cvpop25p', 'mpop25',
-        'hs9to12', '_hs9to12',
-        'cvhs9to12', 'mhs9to12',
-        'cv_hs9to12', 'm_hs9to12',
         'lshs', '_lshs', 'cvlshs', 'mlshs', 'cv_lshs', 'm_lshs',
         'hsgrad', '_hsgrad', 'cvhsgrad', 'mhsgrad', 'cv_hsgrad', 'm_hsgrad',
         'somecollassoc', '_somecollassoc', 'cvsomecollassoc', 'msomecollassoc', 'cv_somecollassoc', 'm_somecollassoc',
         'bsp', '_bsp', 'cvbsp', 'mbsp', 'cv_bsp', 'm_bsp',
-
-        'somecoll', '_somecoll' , 'cvsomecoll', 'msomecoll',
-        'cv_somecoll', 'm_somecoll',
-        'assoc', '_assoc', 'cvassoc', 'massoc',
-        'cv_assoc', 'm_assoc',
-        'bs', '_bs', 'cvbs', 'mbs',
-        'cv_bs', 'm_bs',
-        'prof', '_prof', 'cvprof', 'mprof',
-        'cv_prof', 'm_prof'
         ];
 
     self.indicators_employment = ['emp', '_emp', 'lf', '_lf'];
 
-    self.old_indicators_pop_by_ed_attainment = ['pop25', 'hsls9', '_hsls9',
+    self.old_indicators_pop_by_ed_attainment = ['pop25',
+        'hsls9', '_hsls9',
         'hs9to12', '_hs9to12',
         'hsgrad', '_hsgrad',
         'somecoll', '_somecoll',
@@ -75,7 +63,6 @@ function WorkforceViewModel (data) {
         'lshs': 'cvlshs',
         '_lf':'cv_lf',
         '_emp':'cv_emp',
-        'pop25p':'cvpop25p',
         // 'hs9to12':'cvhs9to12',
         // '_hs9to12':'cv_hs9to12',
         'hsgrad':'cvhsgrad',
@@ -92,7 +79,6 @@ function WorkforceViewModel (data) {
 
     self.indicator_moe_pairings = {'lf':'mlf', 'emp':'memp',
         '_lf':'m_lf', '_emp':'cv_emp',
-        'pop25p':'mpop25p',
         'hs9to12':'mhs9to12',
         '_hs9to12':'m_hs9to12',
         'hsgrad':'mhsgrad',
