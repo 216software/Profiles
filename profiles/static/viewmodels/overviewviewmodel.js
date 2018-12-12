@@ -105,9 +105,13 @@ function OverViewModel (data) {
 
         for (var indicator_key in self.indicator_cv_pairings) {
             var ind = Indicator.indicator_by_title(self.indicators(), indicator_key)
-            var ind_cv = Indicator.indicator_by_title(self.indicators(),
-                self.indicator_cv_pairings[indicator_key])
-            ind.indicator_CV(ind_cv);
+            if(ind){
+                var ind_cv = Indicator.indicator_by_title(self.indicators(),
+                    self.indicator_cv_pairings[indicator_key])
+                ind.indicator_CV(ind_cv);
+            }
+
+
         }
 
     };

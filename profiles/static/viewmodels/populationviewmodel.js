@@ -154,16 +154,19 @@ function PopulationViewModel (data) {
                 self.indicators(),
                 indicator_key);
 
-            var ind_cv = Indicator.indicator_by_title(
-                self.indicators(),
-                self.indicator_cv_pairings[indicator_key]);
+            if(ind){
 
-            ind.indicator_CV(ind_cv);
+                var ind_cv = Indicator.indicator_by_title(
+                    self.indicators(),
+                    self.indicator_cv_pairings[indicator_key]);
 
-            var ind_moe = Indicator.indicator_by_title(self.indicators(),
-                self.indicator_moe_pairings[indicator_key]);
+                ind.indicator_CV(ind_cv);
 
-            ind.indicator_MOE(ind_moe);
+                var ind_moe = Indicator.indicator_by_title(self.indicators(),
+                    self.indicator_moe_pairings[indicator_key]);
+
+                ind.indicator_MOE(ind_moe);
+            }
         }
 
     }

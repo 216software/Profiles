@@ -557,7 +557,7 @@ class CSVUpdater(object):
                             end_year=row.get('EndTime1'),
                             visible=True)
 
-                    elif time_type == '5 year survey':
+                    elif time_type == '5 year survey' :
                         if not row.get('EndTime2'):
                             log.error(textwrap.dedent("""
                                 This row is marked as 5 survey
@@ -573,6 +573,14 @@ class CSVUpdater(object):
                             ind.set_visible_year(pgconn,
                                 year=row.get('EndTime2'),
                                 visible=True)
+                    elif time_type == 'school year':
+                        ind.set_visible_year(pgconn,
+                            year=row.get('StartTime1'),
+                            visible=True)
+
+                        ind.set_visible_year(pgconn,
+                            year=row.get('EndTime1'),
+                            visible=True)
 
                     else:
                         log.debug(time_type)
