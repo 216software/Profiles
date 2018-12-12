@@ -546,11 +546,13 @@ class CSVUpdater(object):
                     source, data_as_of, num_tables, denom_tables,
                     chart_label)
 
-
                 # Lastly, update visiblity
 
                 time_type = row.get('TimeType').lower()
                 if row.get('StartTime1'):
+                    # Set everything to false
+                    ind.set_all_visible(pgconn, visible=False)
+
                     if time_type == 'yearly':
                         ind.set_visible_years(pgconn,
                             start_year=row.get('StartTime1'),
@@ -574,13 +576,11 @@ class CSVUpdater(object):
                                 year=row.get('EndTime2'),
                                 visible=True)
                     elif time_type == 'school year':
-                        ind.set_visible_year(pgconn,
-                            year=row.get('StartTime1'),
+                        ind.set_visible_years(pgconn,
+                            start_year=row.get('StartTime1'),
+                            end_year=row.get('EndTime1'),
                             visible=True)
 
-                        ind.set_visible_year(pgconn,
-                            year=row.get('EndTime1'),
-                            visible=True)
 
                     else:
                         log.debug(time_type)
