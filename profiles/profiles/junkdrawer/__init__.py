@@ -19,7 +19,7 @@ def xls2csv(xls_file_path, csv_file_path):
     """
     Convert an XLS file to one or many CSV files.
     """
-
+    print xls_file_path
     wb = openpyxl.load_workbook(xls_file_path, data_only=True)
 
     sheet_names = wb.get_sheet_names()
