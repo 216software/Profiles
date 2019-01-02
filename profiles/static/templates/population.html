@@ -47,11 +47,9 @@ Downlad as CSV</a>
 
 <th class="data">% change</th>
 <!-- ko foreach:observable_timestamps -->
-    <!-- ko if:($index() != 0) -->
     <th class="data">
     <span data-bind="text:$data.year() - 4"></span>-
     <span data-bind="text:$data.year()"></span></th>
-    <!-- /ko -->
 <th class="show-only-print">CV</th>
 <th class="show-only-print">MOE (+/-)</th>
 <!-- /ko -->
