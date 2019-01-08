@@ -7,6 +7,7 @@ import clepy
 from horsemeat.webapp import response
 
 from profiles import fancyjsondumps
+from profiles import configwrapper
 
 log = logging.getLogger(__name__)
 
@@ -15,6 +16,9 @@ class Response(response.Response):
     """
     Add stuff here that is specific to the profiles response.
     """
+
+    fancyjsondumps = fancyjsondumps
+    configwrapper = configwrapper
 
     # TODO: Move into horsemeat
     @classmethod

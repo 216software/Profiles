@@ -25,7 +25,7 @@ from profiles.webapp.framework.response import Response
 
 from profiles import pg
 
-log = logging.getLogger(__name__)
+log = logging.getLogger('pyprofiles.profiles.handlers')
 
 module_template_prefix = 'profiles'
 module_template_package = 'profiles.webapp.profiles.templates'
@@ -481,20 +481,26 @@ class DataUploadAPI(Handler):
     """
 
     route_strings = set([
-        'PUT /api/admin/data-file',
+        'PUT /admin/data-file',
     ])
 
     route = Handler.check_route_strings
 
     def handle(self, req):
 
+        log.info("DOING DATA UPLOAD")
+        log.info(req.CONTENT_TYPE)
+        log.info(req)
+
         # Check content-type
-        if req.CONTENT_TYPE != 'application/zip':
-            return Response.json(dict(
-                message="Invalid content-type {0}, must be 'application/zip'".\
-                    format(req.CONTENT_TYPE),
-                reply_timestamp=datetime.datetime.now(),
-                success=False))
+        if req.CONTENT_TYPE not in ['application/zip',
+            'application/x-zip-compressed']:
+            log.info("not correct CONTENT TYPE")
+            #return Response.json(dict(
+            #    message="Invalid content-type {0}, must be 'application/zip'".\
+            #        format(req.CONTENT_TYPE),
+            #    reply_timestamp=datetime.datetime.now(),
+            #    success=False))
 
         pgconn = self.cw.get_pgconn()
 
@@ -504,10 +510,13 @@ class DataUploadAPI(Handler):
         #save_path = os.path.join(self.cw.zip_save_directory, original_path)
         save_path = os.path.join(self.cw.zip_save_directory,  filename)
 
+        log.info('saving file {0}'.format(filename))
+
 
         # Put it in the place where we store zips, see config wrapper
         f = open(save_path, 'wb')
         try:
+            log.info('writing file')
             f.write(req.wz_req.stream.read())
             f.close()
         except Exception as e:

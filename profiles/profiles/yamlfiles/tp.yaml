@@ -1,14 +1,16 @@
----
-
 app:
 
     secret:                     2246 Tudor
-    host: &host                 progressindexcle.org
+    host: &host                 profiles.216software.com
     scheme:                     http
     launch_debugger_on_error:   False
     webapp_port:                6661
     pidfile:                    /tmp/tp-profiles-webapp.pid
-    num_webapp_workers:         1
+    num_webapp_workers:         3
+    webapp_timeout_secs:        300
+    access_control:             True
+    prod_mode:                  True
+
 
 postgresql:
     database:   &dbname profiles_tp
