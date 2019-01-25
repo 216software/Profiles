@@ -1,5 +1,3 @@
----
-
 app:
 
     secret:                     2246 Tudor
@@ -105,5 +103,9 @@ profiles:
     csv_data_files_folder_2017: /home/communityprofiles/checkouts/2017-Profiles/datafiles-2017/csvfiles
     pdf_files_directory:        /tmp/2017profiles-pdf-files
     xls_data_files_folder:      /home/communityprofiles/checkouts/2017-Profiles/datafiles-2017/xlsfiles
+    zip_save_directory:  /tmp/profiles/zip
+    zip_path_prefix:     https://progressindexcle.org/zip
+
+
 
 # vim: set filetype=yaml bg=dark:
