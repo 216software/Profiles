@@ -23,7 +23,62 @@ function StabilizationViewModel (data) {
         'shf',
         'distress', '_distress',
         'ntal_sales', '_ntal_sales',
+        'med_ntal_price',
+       'evict',
+       'move_out',
+       '_evict',
+       '_move_out' ];
+
+    self.stabilization_titles = ['res_occ', '_res_occ',
+        'hsg_den', 'f',
+        'shf',
+        'distress', '_distress',
+        'ntal_sales', '_ntal_sales',
         'med_ntal_price'];
+
+    self.eviction_titles = [
+        'evict',
+       '_evict',
+       'move_out',
+       '_move_out'];
+
+    self.eviction_observable_timestamps = ko.pureComputed(function(){
+        if(self.indicators().length > 0){
+            var x = self.observable_timestamps_from_indicators(self.eviction_titles);
+            return x;
+        }
+        else{
+            return [moment({y: 2010}), moment({y: 2015})];
+        }
+    });
+
+    self.stabilization_observable_timestamps = ko.pureComputed(function(){
+        if(self.indicators().length > 0){
+            var x = self.observable_timestamps_from_indicators(self.stabilization_titles);
+            return x;
+        }
+        else{
+            return [moment({y: 2010}), moment({y: 2015})];
+        }
+    });
+    self.observable_timestamps_from_indicators = function(indicator_titles){
+        var observable_timestamps = [];
+        for (var i =0; i< indicator_titles.length; i++){
+            var i = Indicator.indicator_by_title(self.indicators(),
+                indicator_titles[i])
+
+            if(i == null){
+                break;
+            }
+
+            for(var j = 0; j< i.indicator_values().length; j++){
+                observable_timestamps.push(i.indicator_values()[j].observation_timestamp());
+            }
+
+        }
+
+        return observable_timestamps;
+    };
 
 
     /* Don't need this at the moment

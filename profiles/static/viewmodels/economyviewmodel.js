@@ -40,6 +40,7 @@ function EconomyViewModel (data) {
 
 
     self.parentvm.selected_location.subscribe(function(){
+        self.indicators([]);
         self.parentvm.look_up_indicator_and_values(self.indicator_titles,
             self.look_up_indicator_complete);
 
@@ -60,7 +61,7 @@ function EconomyViewModel (data) {
             }
         ));
 
-        self.indicators(ko.utils.arrayMap(
+        self.indicators.push.apply(self.indicators, ko.utils.arrayMap(
             data.indicator_values || [],
             function (x) {
                 x.indicator.rootvm = self.rootvm;

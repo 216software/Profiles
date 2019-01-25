@@ -16,17 +16,16 @@ function EducationViewModel (data) {
         }
     };
 
-    self.reading_indicator_titles =  ['rpass50', '_rpass50',
-        'rpass10', '_rpass10',
-        'rpass15', '_rpass15',
-        'rpass20', '_rpass20',
-        'rpass41', '_rpass41'];
+    self.reading_indicator_titles =  ['rpassed3', '_rpassed3',
+        'rpassed4', '_rpassed4',
+        'rpassed6', '_rpassed6',
+        'rpassed10', '_rpasssed10'];
 
-    self.math_indicator_titles =  ['mpass50', '_mpass50',
-        'mpass10', '_mpass10',
-        'mpass15', '_mpass15',
-        'mpass20', '_mpass20',
-        'mpass41', '_mpass41'];
+    self.math_indicator_titles =  ['mpassed3', '_mpassed3',
+        'mpassed4', '_mpassed4',
+        'mpassed6', '_mpassed6',
+        'mpassed10', '_rpasssed10'];
+
 
     self.kindergarten_readiness_titles =  ['band1', '_band1',
         'band2', '_band2',
@@ -36,7 +35,7 @@ function EducationViewModel (data) {
 
     self.other_indicators = ['_attend']
 
-    self.overview_indicators = ['rpass50', 'mpass50'];
+    self.overview_indicators = ['rpassed3', 'mpassed3'];
 
     self.indicator_titles = (self.reading_indicator_titles.concat(
         self.math_indicator_titles)).concat(self.kindergarten_readiness_titles).concat(

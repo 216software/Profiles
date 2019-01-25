@@ -371,10 +371,24 @@ class CSVInserter(object):
 
             try:
 
-                loc = pg.locations.Location.by_location_type_and_title(
-                    pgconn,
-                    self.location_type,
-                    location_title)
+                if location_title.lower() == 'cleveland city':
+                    location_title = 'Cleveland'
+                    loc = pg.locations.Location.by_location_type_and_title(
+                        pgconn,
+                        'city',
+                        location_title)
+
+                elif location_title == 'Cuyahoga County':
+                    loc = pg.locations.Location.by_location_type_and_title(
+                        pgconn,
+                        'county',
+                        location_title)
+                else:
+
+                    loc = pg.locations.Location.by_location_type_and_title(
+                        pgconn,
+                        self.location_type,
+                        location_title)
 
             except KeyError as ex:
 
@@ -560,21 +574,32 @@ class CSVUpdater(object):
                             visible=True)
 
                     elif time_type == '5 year survey' :
-                        if not row.get('EndTime2'):
+
+
+                        if row.get('EndTime1'):
+
+                            ind.set_visible_year(pgconn,
+                                year=row.get('EndTime1'),
+                                visible=True)
+
+                        if row.get('EndTime2'):
+
+                            ind.set_visible_year(pgconn,
+                                year=row.get('EndTime2'),
+                                visible=True)
+
+                    elif time_type == '5 year average' :
+                        if not row.get('EndTime1'):
                             log.error(textwrap.dedent("""
                                 This row is marked as 5 survey
                                 but has no end time !
                                 {0}
                                 """.format(row)))
                         else:
-
                             ind.set_visible_year(pgconn,
                                 year=row.get('EndTime1'),
                                 visible=True)
 
-                            ind.set_visible_year(pgconn,
-                                year=row.get('EndTime2'),
-                                visible=True)
                     elif time_type == 'school year':
                         ind.set_visible_years(pgconn,
                             start_year=row.get('StartTime1'),
