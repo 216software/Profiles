@@ -117,6 +117,7 @@ function StartPageViewModel (data) {
 
     };
 
+
     self.get_all_location_types = function(){
 
         /* Look up the different location_types */

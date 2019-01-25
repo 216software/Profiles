@@ -110,8 +110,11 @@ function Indicator (data) {
             // if last is suppressed, get the next to last
             if (last == '999999')
             {
-                last = self.indicator_values_sorted_asc()[
-                    self.indicator_values().length - 2].value();
+                var x = self.indicator_values_sorted_asc()[
+                    self.indicator_values().length - 2]
+                if(x){
+                    last = x.value();
+                }
             }
             result = ((last - first) / first) * 100;
             return format_value(result, 'percent');

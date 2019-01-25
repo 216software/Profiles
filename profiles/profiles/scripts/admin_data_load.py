@@ -166,6 +166,7 @@ def insert_csv_files(pgconn, directory, job_uuid):
             "CNP Dashboard Varlist_2017_w_chartlabels.xlsx",
             "CNP Dashboard Varlist_2017_revNov07.xlsx",
             "CNP Dashboard Chart By Race Mapping.xlsx",
+            "zip"
             ]):
 
             continue

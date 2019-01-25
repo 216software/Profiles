@@ -91,6 +91,16 @@ function ProgressMetricsViewModel (data) {
 
     self.rental_indicators = ['_grent', 'cashrent'];
 
+    self.rental_observable_timestamps = ko.pureComputed(function(){
+        if(self.indicators().length > 0){
+            var x = self.observable_timestamps_from_indicators(self.rental_indicators);
+            return x;
+        }
+        else{
+            return [moment({y: 2010}), moment({y: 2015})];
+        }
+    });
+
     self.housing_cost_burden_indicators = [
         "t_cburden30p",
         "_t_cburden30p",
@@ -106,6 +116,18 @@ function ProgressMetricsViewModel (data) {
         "_t_rcburden50p",
 
     ];
+
+    // TODO look into housing cost burden data
+    self.housing_cost_observable_timestamps = ko.pureComputed(function(){
+        if(self.indicators().length > 0){
+            var x = self.observable_timestamps_from_indicators(self.housing_cost_burden_indicators);
+            return x;
+        }
+        else{
+            return [moment({y: 2010}), moment({y: 2015})];
+        }
+    });
+
 
     // The array.concat method doesn't alter the first array, just
     // returns a new one.
@@ -140,8 +162,31 @@ function ProgressMetricsViewModel (data) {
         'hhinc150to200k', '_hhinc150to200k',
         'hhinc200kp','_hhinc200kp'];
 
+    self.income_observable_timestamps = ko.pureComputed(function(){
+        if(self.indicators().length > 0){
+            var x = self.observable_timestamps_from_indicators(self.income_indicators);
+            return x;
+        }
+        else{
+            return [moment({y: 2010}), moment({y: 2015})];
+        }
+    });
+
+
+
     self.poverty_indicators = ['bpv', '_bpv', 'tpv', 'bpv_samehou',
         '_bpv_samehou', 'bpv_diffhou', '_bpv_diffhou'];
+
+    self.poverty_observable_timestamps = ko.pureComputed(function(){
+        if(self.indicators().length > 0){
+            var x = self.observable_timestamps_from_indicators(self.poverty_indicators);
+            return x;
+        }
+        else{
+            return [moment({y: 2010}), moment({y: 2015})];
+        }
+    });
+
 
     self.indicator_cv_pairings = {'cashrent':'cvcashrent',
      'hhincls10k': 'cvhhincls10k',
@@ -273,6 +318,25 @@ function ProgressMetricsViewModel (data) {
                 return new Indicator(x.indicator);
             }));
 
+    };
+
+    self.observable_timestamps_from_indicators = function(indicator_titles){
+        var observable_timestamps = [];
+        for (var i =0; i< indicator_titles.length; i++){
+            var i = Indicator.indicator_by_title(self.indicators(),
+                indicator_titles[i])
+
+            if(i == null){
+                break;
+            }
+
+            for(var j = 0; j< i.indicator_values().length; j++){
+                observable_timestamps.push(i.indicator_values()[j].observation_timestamp());
+            }
+
+        }
+
+        return observable_timestamps;
     };
 
 

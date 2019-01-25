@@ -23,8 +23,4 @@ class NotFound(Handler):
         return self.handle
 
     def handle(self, req):
-        return self.not_found(req)
-
-    @property
-    def four_zero_four_template(self):
-        return 'profiles/404.html'
+        return Response.plain('not found')

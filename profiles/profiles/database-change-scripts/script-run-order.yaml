@@ -39,15 +39,15 @@ script_order:
 -   change-kindergarten-labels-and-update-cleveland-reading-data.sql
 #-   update_indicators_with_descriptions_2017.py
 #-   load_indicator_descriptions_2017.py
--   update-pretty-labels-from-descriptions.sql
--   clean-up-collinwood.sql
+#-   update-pretty-labels-from-descriptions.sql
+#-   clean-up-collinwood.sql
 -   other-nina-edits.sql
 #-   create-races-and-connect-to-indicators.sql
 
 
--   hide-irrelevant-locations.sql
+#-   hide-irrelevant-locations.sql
 
--   add-population-chart-labels.sql
+#-   add-population-chart-labels.sql
 
 # 2018 Data Load
 -   make-admin-load-job-table.sql

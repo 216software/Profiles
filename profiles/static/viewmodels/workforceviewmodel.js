@@ -151,17 +151,19 @@ function WorkforceViewModel (data) {
                 console.debug("indicator_key", indicator_key, "not found");
             }
 
-            var ind_cv = Indicator.indicator_by_title(self.indicators(),
-                self.indicator_cv_pairings[indicator_key])
+            if(ind){
+                var ind_cv = Indicator.indicator_by_title(self.indicators(),
+                    self.indicator_cv_pairings[indicator_key])
 
-            ind.indicator_CV(ind_cv);
+                ind.indicator_CV(ind_cv);
 
 
-            var ind_moe = Indicator.indicator_by_title(
-                self.indicators(),
-                self.indicator_moe_pairings[indicator_key]);
+                var ind_moe = Indicator.indicator_by_title(
+                    self.indicators(),
+                    self.indicator_moe_pairings[indicator_key]);
 
-            ind.indicator_MOE(ind_moe);
+                ind.indicator_MOE(ind_moe);
+            }
 
         }
     }

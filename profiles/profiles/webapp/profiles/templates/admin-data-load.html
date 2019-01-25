@@ -230,7 +230,7 @@ function AdminDataLoadViewModel(data){
         return $.ajax({
             xhr: self.xhr_with_progress,
 
-            url: '/api/admin/data-file',
+            url: '{{cw.web_host}}' + '/admin/data-file',
             type: 'PUT',
             data: self.file(),
             cache: false,

@@ -36,9 +36,8 @@ Downlad as CSV</a>
 <thead>
 <tr>
 <th>Indicator</th>
-<th class="data">Average (2011-2015)
-<span data-bind="text:observable_timestamps()[observable_timestamps().length-1]">
-</span>
+<th class="data">Average
+(<span data-bind="text:pretty_date_range"></span>)
 </th>
 
 </tr>
@@ -107,7 +106,7 @@ Downlad as CSV</a>
 </td>
 
 <td class="data">
-<span data-bind="text: indicator_value_by_year('2015')"></span>
+<span data-bind="text: indicator_value_by_year('2016')"></span>
 </td>
 
 </tr>

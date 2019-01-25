@@ -40,6 +40,7 @@ function EconomyViewModel (data) {
 
 
     self.parentvm.selected_location.subscribe(function(){
+        self.indicators([]);
         self.parentvm.look_up_indicator_and_values(self.indicator_titles,
             self.look_up_indicator_complete);
 
@@ -60,7 +61,7 @@ function EconomyViewModel (data) {
             }
         ));
 
-        self.indicators(ko.utils.arrayMap(
+        self.indicators.push.apply(self.indicators, ko.utils.arrayMap(
             data.indicator_values || [],
             function (x) {
                 x.indicator.rootvm = self.rootvm;
@@ -74,6 +75,8 @@ function EconomyViewModel (data) {
      * commercial values -- probably could filter in javascript land
      * but this seems faster */
     self.look_up_commercial_indicator_complete = function(data){
+
+        console.log(data);
 
         self.observable_timestamps_commercial(ko.utils.arrayMap(
             data.distinct_observable_timestamps || [],
@@ -92,13 +95,15 @@ function EconomyViewModel (data) {
 
         for (var indicator_key in self.indicator_cv_pairings) {
             var ind = Indicator.indicator_by_title(self.indicators(), indicator_key)
-            var ind_cv = Indicator.indicator_by_title(self.indicators(),
-                self.indicator_cv_pairings[indicator_key])
-            ind.indicator_CV(ind_cv);
+            if(ind){
+                var ind_cv = Indicator.indicator_by_title(self.indicators(),
+                    self.indicator_cv_pairings[indicator_key])
+                ind.indicator_CV(ind_cv);
 
-            var ind_moe = Indicator.indicator_by_title(self.indicators(),
-                self.indicator_moe_pairings[indicator_key])
-            ind.indicator_MOE(ind_moe);
+                var ind_moe = Indicator.indicator_by_title(self.indicators(),
+                    self.indicator_moe_pairings[indicator_key])
+                ind.indicator_MOE(ind_moe);
+            }
 
         }
 

@@ -6,7 +6,7 @@ app:
     host: &host                 progressindexcle.org
     scheme:                     http
     launch_debugger_on_error:   False
-    webapp_port:                6661
+    webapp_port:                6660
     pidfile:                    /tmp/prod-2017-profiles-webapp.pid
     num_webapp_workers:         4
 

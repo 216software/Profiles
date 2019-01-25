@@ -46,6 +46,7 @@ class HandlerList(Handler):
             'dashboard/handler-list.html',
             handler_list=handler_list)
 
+
 class HandlerCode(Handler):
 
     def route(self, req):

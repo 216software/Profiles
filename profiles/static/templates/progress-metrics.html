@@ -82,7 +82,7 @@ Downlad as CSV</a>
             params: {
                 indicator_uuid: indicator_uuid,
                 location_uuid: $parents[1].location_uuid,
-                year: 2014}}">
+                year: 2015}}">
         By race</a>
 
 
@@ -100,8 +100,6 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
         title="CV &amp; MOE"
         data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
         +/-</button>
-
-
 </span></span> </td>
 
 
@@ -154,20 +152,13 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <tr data-bind="visible:show_rental_data">
 <th>Indicator</th>
 <th class="data">% change</th>
-<!-- ko foreach:[moment({y: 2010}), moment({y: 2015})] -->
-
-    <!-- ko if:($index() == 0) -->
-    <th class="data">2006-<span data-bind="text:$data.format('YYYY')"></span></th>
+<!-- TODO start here - needs to use 2 observable timestamps -->
+<!-- ko foreach:rental_observable_timestamps -->
+    <th class="data">
+    <span data-bind="text:$data.year() - 4"></span>-
+    <span data-bind="text:$data.year()"></span></th>
     <th class="show-only-print">CV</th>
     <th class="show-only-print">MOE (+/-)</th>
-    <!-- /ko -->
-
-    <!-- ko if:($index() != 0) -->
-    <th class="data">2011-<span data-bind="text:$data.year()"></span></th>
-    <th class="show-only-print">CV</th>
-    <th class="show-only-print">MOE (+/-)</th>
-    <!-- /ko -->
-
 <!-- /ko -->
 
 </tr>
@@ -196,7 +187,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
-<!-- ko foreach:[moment({y: 2010}), moment({y: 2015})] -->
+<!-- ko foreach:$parents[1].rental_observable_timestamps() -->
 <td class="data"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
@@ -255,9 +246,14 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 </th></tr>
 <tr data-bind="visible: show_housing_cost_burden_data">
 <th>Indicator</th>
-<th class="data">2010-2014</th>
-<th class="show-only-print">CV</th>
-<th class="show-only-print">MOE (+/-)</th>
+<!-- ko foreach:housing_cost_observable_timestamps -->
+    <th class="data">
+    <span data-bind="text:$data.year() - 4"></span>-
+    <span data-bind="text:$data.year()"></span></th>
+
+    <th class="show-only-print">CV</th>
+    <th class="show-only-print">MOE (+/-)</th>
+<!-- /ko -->
 
 </tr>
 </thead>
@@ -289,7 +285,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
             params: {
                 indicator_uuid: indicator_uuid,
                 location_uuid: $parents[1].location_uuid,
-                year: 2014}}">
+                year: 2015}}">
         By race</a>
 
 </span>
@@ -297,13 +293,13 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 </td>
 
 <td class="data">
-<span data-bind="text: indicator_value_by_year(2014).formatted"></span>
+<span data-bind="text: indicator_value_by_year($parents[1].housing_cost_observable_timestamps()[0].year()).formatted"></span>
 
-<span data-bind="if: indicator_CV"><span data-bind="if: indicator_CV().indicator_value_by_year(2014).formatted">
+<span data-bind="if: indicator_CV"><span data-bind="if: indicator_CV().indicator_value_by_year($parents[1].housing_cost_observable_timestamps()[0].year()).formatted">
 <button class="btn btn-xs hide-from-print"
         data-toggle="popover"
         title="CV &amp; MOE"
-        data-bind="attr: {'data-content' : pretty_CV_and_MOE(2014)}">
+        data-bind="attr: {'data-content' : pretty_CV_and_MOE($parents[1].housing_cost_observable_timestamps()[0].year())}">
         +/-</button>
 
 </span></span>
@@ -311,7 +307,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 <td class="show-only-print data" data-bind="if:indicator_CV">
 <span class="show-only-print"
-     data-bind="text: indicator_CV().indicator_value_by_year(2014).formatted"></span>
+     data-bind="text: indicator_CV().indicator_value_by_year($parents[1].housing_cost_observable_timestamps()[0].year()).formatted"></span>
 </td>
 <td class="show-only-print data" data-bind="if:indicator_MOE">
 <span class="show-only-print"
@@ -349,20 +345,15 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <tr data-bind="visible: show_income_data">
 <th>Indicator</th>
 <th class="data">% change</th>
-<!-- ko foreach:[moment({y: 2010}), moment({y: 2015})] -->
-
-    <!-- ko if:($index() == 0) -->
-    <th class="data">2006-<span data-bind="text:$data.format('YYYY')"></span></th>
-    <!-- /ko -->
-
-    <!-- ko if:($index() != 0) -->
-    <th class="data">2011-<span data-bind="text:$data.year()"></span></th>
-    <!-- /ko -->
+<!-- ko foreach:income_observable_timestamps -->
+    <th class="data">
+    <span data-bind="text:$data.year() - 4"></span>-
+    <span data-bind="text:$data.year()"></span></th>
 
     <th class="show-only-print">CV</th>
     <th class="show-only-print">MOE (+/-)</th>
-
 <!-- /ko -->
+
 
 </tr>
 </thead>
@@ -400,7 +391,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 </td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
-<!-- ko foreach:[moment({y: 2010}), moment({y: 2015})] -->
+<!-- ko foreach:$parents[1].income_observable_timestamps() -->
 <td class="data"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
@@ -457,13 +448,11 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <tr data-bind="visible: show_poverty_data">
 <th>Indicator</th>
 <th class="data">% change</th>
-<!-- ko foreach:[moment({y: 2010}), moment({y: 2015})] -->
-    <!-- ko if:($index() == 0) -->
-    <th class="data">2006-<span data-bind="text:$data.format('YYYY')"></span></th>
-    <!-- /ko -->
-    <!-- ko if:($index() != 0) -->
-    <th class="data">2011-<span data-bind="text:$data.year()"></span></th>
-    <!-- /ko -->
+<!-- ko foreach:poverty_observable_timestamps -->
+    <th class="data">
+    <span data-bind="text:$data.year() - 4"></span>-
+    <span data-bind="text:$data.year()"></span></th>
+
     <th class="show-only-print">CV</th>
     <th class="show-only-print">MOE (+/-)</th>
 <!-- /ko -->
@@ -506,7 +495,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 </td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
-<!-- ko foreach:[moment({y: 2010}), moment({y: 2015})] -->
+<!-- ko foreach:$parents[1].poverty_observable_timestamps() -->
 <td class="data"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:

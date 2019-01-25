@@ -43,7 +43,7 @@ Downlad as CSV</a>
 <table class="table table-striped table-bordered" id="progressMetricsTable">
 <thead>
 <tr>
-<td colspan="3"><strong>Progress Metrics (most recent is 2016)</strong>
+<td colspan="3"><strong>Progress Metrics (most recent is 2017)</strong>
 <a class="small" data-bind="page-href: '//progress'">
         view more details</a></th>
 
@@ -51,7 +51,7 @@ Downlad as CSV</a>
 <tr>
 <th>Property</th>
 <th class="data">5 year change</th>
-<th class="data">2016 (Most recent)</th>
+<th class="data">2017 (Most recent)</th>
 <th class="show-only-print">CV</th>
 <th class="show-only-print">MOE (+/-)</th>
 </tr>
@@ -126,7 +126,7 @@ indicator_MOE().indicator_value_by_year(most_recent_indicator_value().observatio
 <table class="table table-striped table-bordered" id="progressMetricsTable">
 <thead>
 <tr>
-<td colspan="3"><strong>More Progress Metrics (most recent is 2015)</strong>
+<td colspan="3"><strong>More Progress Metrics (most recent is 2016)</strong>
 <a class="small" data-bind="page-href: '//progress'">
         view more details</a></th>
 
@@ -134,7 +134,7 @@ indicator_MOE().indicator_value_by_year(most_recent_indicator_value().observatio
 <tr>
 <th>Property</th>
 <th class="data">5 year change</th>
-<th class="data">2015 (Most recent)</th>
+<th class="data">2012-2016</th>
 <th class="show-only-print">CV</th>
 <th class="show-only-print">MOE (+/-)</th>
 </tr>
@@ -281,7 +281,7 @@ indicator_MOE().indicator_value_by_year(most_recent_indicator_value().observatio
 <tr>
 <th>Progress Drivers</th>
 <th class="data">5 year change</th>
-<th class="data">2015 (most recent)</th></thead>
+<th class="data">2012-2016</th></thead>
 </tr>
 <tr>
 <td colspan="3">
@@ -421,11 +421,13 @@ indicator_MOE().indicator_value_by_year(most_recent_indicator_value().observatio
 <!-- /ko -->
 
 <tr>
-<td colspan="3">
+<td>
 <strong>Safety</strong> <a class="small " data-bind="page-href:'//safety'">
 view more details</a></td>
-
+<th class="data" style="text-align:center">5 year change</th>
+<th class="data" style="text-align:center">2017</th>
 </tr>
+
 <!-- ko with:safetyvm -->
 <!-- ko foreach:overview_indicators -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
@@ -493,9 +495,13 @@ view more details</a></td>
 
 
 <tr>
-<td colspan="3">
+<td>
 <strong>Health</strong> <a class="small " data-bind="page-href:'//health'">
 view more details</a></td>
+
+<th class="data" style="text-align:center"></th>
+<th class="data" style="text-align:center">Avg (2013-2017)</th>
+
 
 </tr>
 <!-- ko with:healthvm -->
@@ -528,9 +534,13 @@ view more details</a></td>
 <!-- /ko -->
 
 <tr>
-<td colspan="3">
+<td>
 <strong>Education</strong><a class="small " data-bind="page-href:'//education'">
-view more details</a></td></tr>
+view more details</a></td>
+<th class="data" style="text-align:center">5 year change</th>
+<th class="data" style="text-align:center">2016-2017 school year</th>
+
+</tr>
 <!-- ko with:educationvm-->
 <!-- ko foreach:overview_indicators -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
@@ -563,9 +573,13 @@ view more details</a></td></tr>
 
 
 <tr>
-<td colspan="3">
+<td>
 <strong>Workforce</strong><a class="small " data-bind="page-href:'//workforce'">
-view more details</a></th></tr></tr>
+view more details</a></th>
+<th class="data" style="text-align:center">5 year change</th>
+<th class="data" style="text-align:center">2012-2016 school year</th>
+
+</tr></tr>
 <!-- ko with:workforcevm-->
 <!-- ko foreach:overview_indicators -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
@@ -593,7 +607,7 @@ view more details</a></th></tr></tr>
             params: {
                 indicator_uuid: indicator_uuid,
                 location_uuid: $root.startpagevm.selected_location().location_uuid,
-                year: 2015}}">
+                year: 2016}}">
         By race</a>
 
 </span>
@@ -640,9 +654,14 @@ indicator_MOE().indicator_value_by_year(most_recent_indicator_value().observatio
 <!-- /ko -->
 
 <tr>
-<td colspan="3">
+<td>
 <strong>Economy</strong><a class="small " data-bind="page-href:'//economy'">
-view more details</a></td></tr></tr></tr>
+view more details</a></td>
+<th class="data" style="text-align:center">5 year change</th>
+<th class="data" style="text-align:center">2015</th>
+
+
+</tr></tr></tr>
 <!-- ko with:economyvm-->
 <!-- ko foreach:overview_indicators -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->

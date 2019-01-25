@@ -105,6 +105,10 @@ class Indicator(RelationWrapper):
 
         cursor = pgconn.cursor()
 
+        if indicator_value_format is None and '_' in title:
+            indicator_value_format = 'percent'
+
+
         cursor.execute(textwrap.dedent("""
             insert into indicators
             (title, description, indicator_value_format,
