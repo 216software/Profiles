@@ -371,7 +371,7 @@ class CSVInserter(object):
 
             try:
 
-                if location_title.lower() == 'cleveland city':
+                if location_title == 'Cleveland city' or location_title == 'Cleveland City':
                     location_title = 'Cleveland'
                     loc = pg.locations.Location.by_location_type_and_title(
                         pgconn,
@@ -429,6 +429,9 @@ class CSVInserter(object):
                         elif year == "0711":
                             year = "2011"
 
+                        elif year == "0812":
+                            year = "2012"
+
                         elif year == "1115":
                             year = "2015"
 
@@ -437,6 +440,9 @@ class CSVInserter(object):
 
                         elif year == "1317":
                             year = "2017"
+
+                        elif year == "1418":
+                            year = "2018"
 
                         try:
                             ind = pg.indicators.Indicator.by_title(

@@ -70,6 +70,13 @@
                 class="sub-nav">Progress Metrics</a>
             </li>
 
+            <li class="domain" data-bind="css: {active : active_tab() == 'equity'}">
+            <a href="#" data-bind="page-href : {
+                path : '//equity',
+                params : {location_uuid:startpagevm.location_uuid()}}"
+            class="sub-nav">
+            Equity</a></li>
+
             <li class="domain" data-bind="css: {active : active_tab() =='population'}">
             <a href="#" data-bind="page-href : {
                 path : '//population',

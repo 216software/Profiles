@@ -77,6 +77,9 @@ function StartPageViewModel (data) {
     self.faqvm = new FAQViewModel({'rootvm':data.rootvm,
         'parentvm':self});
 
+    self.equityvm = new EquityViewModel({'rootvm':data.rootvm,
+        'parentvm':self});
+
     self.stabilizationvm = new StabilizationViewModel({'rootvm':data.rootvm,
         'parentvm':self});
 

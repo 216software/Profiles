@@ -185,6 +185,15 @@ containing locations:</strong>
 }"></div>
 
 <div data-bind="page: {
+    id: 'equity',
+    source: '/static/templates/equity.html',
+    with: equityvm,
+    afterShow: equityvm.initialize,
+    params: ['location_uuid']
+}"></div>
+
+
+<div data-bind="page: {
     id: 'safety',
     source: '/static/templates/safety.html',
     with: safetyvm,
