@@ -626,8 +626,9 @@ class IndicatorLocationValue(RelationWrapper):
 
         cursor.execute(textwrap.dedent("""
             select
+            (indicators.*)::indicators as i,
+            (ilv.*) as indicator_value,
             indicators.chart_label,
-            round(ilv.value) as value,
 
             round(ilv.value - ilv_moe.value) as floor,
             round(ilv.value + ilv_moe.value) as ceiling
@@ -703,7 +704,8 @@ class IndicatorLocationValue(RelationWrapper):
 
         # _t_cburden50p => _w_cburden50p
         elif indicator_title.startswith("_"):
-            return ["_{0}_{1}".format(c, indicator_title[1:]) for c in 'abhow']
+            print ["_{0}_{1}".format(c, indicator_title[3:]) for c in 'abhow']
+            return ["_{0}_{1}".format(c, indicator_title[3:]) for c in 'abhow']
 
         # xyz => wxyz
         else:

@@ -8,6 +8,9 @@ function IndicatorComparisonByRaceViewModel (data) {
     self.type = "IndicatorComparisonByRaceViewModel";
     self.rootvm = data.rootvm;
 
+    self.chart_id = ko.observable('comparisonChart' || data.chart_id);
+    self.show_racial_breakdown_rows = ko.observable(false);
+
     self.initialize = function(){
 
         $.when(
@@ -34,18 +37,20 @@ function IndicatorComparisonByRaceViewModel (data) {
             data.addRow(row);
         }
 
-        var options = {
-            title : self.indicator().pretty_label() + ", " + self.year() + ", " + self.location().title(),
-            intervals: {
-                'lineWidth': 2,
-                'color': '383737',
-                'style': 'sticks'
-            }
-        };
+        if(self.indicator()){
+            var options = {
+                title : self.indicator().pretty_label() + ", " + self.year() + ", " + self.location().title(),
+                intervals: {
+                    'lineWidth': 2,
+                    'color': '383737',
+                    'style': 'sticks'
+                }
+            };
 
-        var chart = new google.visualization.ColumnChart(
-            document.getElementById('comparisonChart'));
-        chart.draw(data, options);
+            var chart = new google.visualization.ColumnChart(
+                document.getElementById(self.chart_id()));
+            chart.draw(data, options);
+        }
     }
 
     self.indicator_uuid = ko.observable();
@@ -109,7 +114,7 @@ function IndicatorComparisonByRaceViewModel (data) {
 
         self.get_indicator_values_by_race().then(
             function() {
-                self.year(self.selected_observation_timestamp());
+                //self.year(self.selected_observation_timestamp());
                 google.charts.load('current', {'packages':['corechart']});
                 google.charts.setOnLoadCallback(self.drawVisualization);
             });

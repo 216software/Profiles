@@ -18,9 +18,20 @@ function EquityViewModel (data) {
 
     self.expand_everything = ko.observable(0);
 
+    self.indicatorcomparisonvm = new IndicatorComparisonByRaceViewModel(data);
+    self.indicatorcomparisontwovm = new IndicatorComparisonByRaceViewModel(data);
+    self.indicatorcomparisontwovm.chart_id('comparisonChartTwo');
+
     // Parameter location uuid -- set this on
     // the start page vm
     self.location_uuid = ko.observable();
+
+    self.location_uuid.subscribe(function(){
+        self.by_race_selector(undefined);
+        self.by_race_selectortwo(undefined);
+    });
+    self.by_race_selector = ko.observable();
+    self.by_race_selectortwo = ko.observable();
 
     self.initialize = function(){
 
@@ -29,8 +40,25 @@ function EquityViewModel (data) {
         }
 
         self.parentvm.expand_everything(self.expand_everything());
+
+
     };
 
+
+
+    self.update_chart = function(){
+        self.indicatorcomparisonvm.location_uuid(self.location_uuid());
+        self.indicatorcomparisonvm.indicator_uuid(self.by_race_selector().indicator_uuid());
+        self.indicatorcomparisonvm.year('2015');
+        self.indicatorcomparisonvm.update_chart();
+
+        console.log('updating charttwo');
+
+        self.indicatorcomparisontwovm.location_uuid(self.location_uuid());
+        self.indicatorcomparisontwovm.indicator_uuid(self.by_race_selectortwo().indicator_uuid());
+        self.indicatorcomparisontwovm.year('2015');
+        self.indicatorcomparisontwovm.update_chart();
+    }
 
 
 
@@ -39,7 +67,6 @@ function EquityViewModel (data) {
         "_t_cburden30p",
     ];
 
-    self.indicator_titles = self.housing_cost_burden_indicators;
 
     // TODO look into housing cost burden data
     self.housing_cost_observable_timestamps = ko.pureComputed(function(){
@@ -75,31 +102,8 @@ function EquityViewModel (data) {
 
     */
 
-    self.income_indicators= ['_medinc', 'hhincls10k', '_hhincls10k',
-        'hhinc10to15k', '_hhinc10to15k',
-        'hhinc15to25k','_hhinc15to25k',
-        'hhinc25to35k','_hhinc25to35k',
-        'hhinc35to50k','_hhinc35to50k',
-        'hhinc50to75k','_hhinc50to75k',
-        'hhinc75to100k','_hhinc75to100k',
-        'hhinc100to150k','_hhinc100to150k',
-        'hhinc150to200k', '_hhinc150to200k',
-        'hhinc200kp','_hhinc200kp'];
 
-    self.income_observable_timestamps = ko.pureComputed(function(){
-        if(self.indicators().length > 0){
-            var x = self.observable_timestamps_from_indicators(self.income_indicators);
-            return x;
-        }
-        else{
-            return [moment({y: 2010}), moment({y: 2015})];
-        }
-    });
-
-
-
-    self.poverty_indicators = ['bpv', '_bpv', 'tpv', 'bpv_samehou',
-        '_bpv_samehou', 'bpv_diffhou', '_bpv_diffhou'];
+    self.poverty_indicators = ['bpv', '_bpv'];
 
     self.poverty_observable_timestamps = ko.pureComputed(function(){
         if(self.indicators().length > 0){
@@ -112,6 +116,7 @@ function EquityViewModel (data) {
     });
 
 
+    self.indicator_titles = self.housing_cost_burden_indicators.concat(self.poverty_indicators);
     self.indicator_cv_pairings = {'cashrent':'cvcashrent',
      'hhincls10k': 'cvhhincls10k',
      'hhinc10to15k': 'cvhhinc10to15k',
@@ -184,6 +189,7 @@ function EquityViewModel (data) {
         var moe_indicator = "m" + value;
         self.indicator_cv_pairings[value] = cv_indicator;
         self.indicator_moe_pairings[value] = moe_indicator;
+
     });
 
     self.overview_indicators_sales = ['med_al_price'];
@@ -191,6 +197,13 @@ function EquityViewModel (data) {
     self.overview_indicators_income = ['_medinc', 'bpv'];
 
     self.indicators = ko.observableArray([]);
+
+    self.indicators.subscribe(function(){
+        // on initial load, show housing cost burden data
+        if(self.indicators().length > 0){
+            self.toggle_housing_cost_burden_data();
+        }
+    });
 
     self.csv_link =  ko.computed(function(){
 
@@ -234,7 +247,8 @@ function EquityViewModel (data) {
             function (x) {
                 x.indicator.rootvm = self.rootvm;
                 x.indicator.indicator_values = x.indicator_values;
-                return new Indicator(x.indicator);
+                var i = new Indicator(x.indicator);
+                return i;
             }));
 
     };
@@ -317,12 +331,25 @@ function EquityViewModel (data) {
     self.show_poverty_data = ko.observable(false);
 
     self.toggle_poverty_data = function () {
+        self.by_race_selector(Indicator.indicator_by_title(self.indicators(),
+                'bpv'))
+
+        self.update_chart();
         self.show_poverty_data(!self.show_poverty_data());
     };
 
     self.show_housing_cost_burden_data = ko.observable(false);
 
     self.toggle_housing_cost_burden_data = function () {
+        self.by_race_selector(Indicator.indicator_by_title(self.indicators(),
+                't_cburden30p'))
+        self.by_race_selectortwo(Indicator.indicator_by_title(self.indicators(),
+                '_t_cburden30p'))
+
+
+        self.update_chart();
+
+
         self.show_housing_cost_burden_data(!self.show_housing_cost_burden_data());
     };
 
@@ -341,7 +368,7 @@ function EquityViewModel (data) {
     self.show_chart = {
 
         't_cburden30p': true,
-        't_cburden50p': true,
+        '_t_cburden30p': true,
         't_ocburden30p': true,
         't_rcburden30p': true,
         't_ocburden50p': true,
@@ -359,5 +386,35 @@ function EquityViewModel (data) {
         'bpv': true,
         'tpv': true
     }
+
+    self.drawVisualization = function() {
+
+        var data = new google.visualization.DataTable();
+
+        data.addColumn("string", "Race");
+        data.addColumn("number", self.indicator().pretty_label());
+        data.addColumn({id: "floor", type: "number", role: "interval"})
+        data.addColumn({id: "ceiling", type: "number", role: "interval"})
+
+        for (var i=0; i<self.racial_split().length; i++) {
+            var o = self.racial_split()[i];
+            var row = [o.chart_label, o.value, o.floor, o.ceiling];
+            data.addRow(row);
+        }
+
+        var options = {
+            title : self.indicator().pretty_label() + ", " + self.year() + ", " + self.location().title(),
+            intervals: {
+                'lineWidth': 2,
+                'color': '383737',
+                'style': 'sticks'
+            }
+        };
+
+        var chart = new google.visualization.ColumnChart(
+            document.getElementById('comparisonChart'));
+        chart.draw(data, options);
+    }
+
 
 };
