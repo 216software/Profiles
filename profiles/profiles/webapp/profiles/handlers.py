@@ -329,6 +329,8 @@ class IndicatorValuesByLocation(Handler):
 
     def handle(self, req):
 
+        with_race = req.wz_req.args.get('with_race') == 'true';
+
         location = pg.locations.Location.by_location_uuid(self.cw.get_pgconn(),
             req.wz_req.args['location_uuid'])
 
@@ -336,7 +338,7 @@ class IndicatorValuesByLocation(Handler):
 
         category_indicator_values = [x for x in \
             location.indicators_with_values_by_location(self.cw.get_pgconn(),
-                indicators)]
+                indicators, with_race)]
 
         distinct_observable_timestamps = [x for x in \
             location.distinct_observation_timestamp_for_indicators(self.cw.get_pgconn(),

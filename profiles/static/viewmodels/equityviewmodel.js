@@ -19,8 +19,6 @@ function EquityViewModel (data) {
     self.expand_everything = ko.observable(0);
 
     self.indicatorcomparisonvm = new IndicatorComparisonByRaceViewModel(data);
-    self.indicatorcomparisontwovm = new IndicatorComparisonByRaceViewModel(data);
-    self.indicatorcomparisontwovm.chart_id('comparisonChartTwo');
 
     // Parameter location uuid -- set this on
     // the start page vm
@@ -28,10 +26,8 @@ function EquityViewModel (data) {
 
     self.location_uuid.subscribe(function(){
         self.by_race_selector(undefined);
-        self.by_race_selectortwo(undefined);
     });
     self.by_race_selector = ko.observable();
-    self.by_race_selectortwo = ko.observable();
 
     self.initialize = function(){
 
@@ -52,12 +48,7 @@ function EquityViewModel (data) {
         self.indicatorcomparisonvm.year('2015');
         self.indicatorcomparisonvm.update_chart();
 
-        console.log('updating charttwo');
 
-        self.indicatorcomparisontwovm.location_uuid(self.location_uuid());
-        self.indicatorcomparisontwovm.indicator_uuid(self.by_race_selectortwo().indicator_uuid());
-        self.indicatorcomparisontwovm.year('2015');
-        self.indicatorcomparisontwovm.update_chart();
     }
 
 
@@ -202,7 +193,14 @@ function EquityViewModel (data) {
         // on initial load, show housing cost burden data
         if(self.indicators().length > 0){
             self.toggle_housing_cost_burden_data();
+
+
+
+            console.log('initial load complete');
+
+            //for each indicator,look up by race values
         }
+
     });
 
     self.csv_link =  ko.computed(function(){
@@ -224,9 +222,9 @@ function EquityViewModel (data) {
     });
 
     self.parentvm.selected_location.subscribe(function(){
-
+        var with_race = true;
         self.parentvm.look_up_indicator_and_values(self.indicator_titles,
-            self.look_up_indicator_complete);
+            self.look_up_indicator_complete, with_race);
 
     });
 
@@ -334,7 +332,7 @@ function EquityViewModel (data) {
         self.by_race_selector(Indicator.indicator_by_title(self.indicators(),
                 'bpv'))
 
-        self.update_chart();
+        //self.update_chart();
         self.show_poverty_data(!self.show_poverty_data());
     };
 
@@ -343,11 +341,9 @@ function EquityViewModel (data) {
     self.toggle_housing_cost_burden_data = function () {
         self.by_race_selector(Indicator.indicator_by_title(self.indicators(),
                 't_cburden30p'))
-        self.by_race_selectortwo(Indicator.indicator_by_title(self.indicators(),
-                '_t_cburden30p'))
 
 
-        self.update_chart();
+        //self.update_chart();
 
 
         self.show_housing_cost_burden_data(!self.show_housing_cost_burden_data());

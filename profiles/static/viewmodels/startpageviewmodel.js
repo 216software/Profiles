@@ -289,7 +289,7 @@ function StartPageViewModel (data) {
 
     self.indicators = ko.observableArray([]);
 
-    self.look_up_indicator_and_values = function(indicators, success_callback) {
+    self.look_up_indicator_and_values = function(indicators, success_callback, with_race) {
 
         /* At some point, we're going to need the tab we're on
          * so that we only return the correct info -- unless
@@ -306,7 +306,8 @@ function StartPageViewModel (data) {
             processData: true,
 
             data: {'location_uuid':self.selected_location().location_uuid(),
-                   'indicators':indicators
+                   'indicators':indicators,
+                   'with_race': with_race
                    },
 
             complete: function () {

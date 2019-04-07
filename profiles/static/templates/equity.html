@@ -78,11 +78,6 @@ Downlad as CSV</a>
            params: {indicator_uuid: indicator_uuid}}">
             Map</a>
 
-    <a href="#" class="btn btn-sm hide-from-print"
-          data-bind="css: $parents[1].by_race_selector() == $data ? 'btn-default' : 'btn-primary', click:function(){$parents[1].by_race_selector($data); $parents[1].update_chart();},
-            visible: $parents[1].show_chart[title()]">
-            By race</a>
-
 
     </span>
 
@@ -112,8 +107,27 @@ Downlad as CSV</a>
 </tr>
 <!-- /ko -->
 
+<!-- ko if: $parent.indicatorcomparisonvm.show_racial_breakdown_rows() -->
+<!-- ko foreach: $parent.indicatorcomparisonvm.racial_split -->
+<tr>
+    <td data-bind="text:chart_label"></td>
+    <td data-bind="text:function(){return Math.round(value)}()"></td>
+</tr>
+<!-- /ko -->
+<!-- /ko -->
+
 <!-- ko if:$parent.by_race_selector() && $data == $parent.by_race_selector().title() -->
 <tr><td colspan = "2">
+<div class="form-group" style="width:50%">
+
+    <label>
+    Choose a year
+    </label>
+
+    <select class="form-control"
+        data-bind="options:['2015']"></select>
+
+</div> <!-- closes form-group -->
 <div id="comparisonChart" style="height:500px"></div> <!-- closes comparisonChart -->
 <p style="margin-top:10px;">The black vertical bars show the indicator's margin of error
 (MOE).
@@ -127,40 +141,8 @@ Downlad as CSV</a>
 
 </td>
 </tr>
-<!-- ko if: $parent.indicatorcomparisonvm.show_racial_breakdown_rows() -->
-<!-- ko foreach: $parent.indicatorcomparisonvm.racial_split -->
-<tr>
-    <td data-bind="text:chart_label"></td>
-    <td data-bind="text:function(){return Math.round(value)}()"></td>
-</tr>
-<!-- /ko -->
-<!-- /ko -->
 <!-- /ko -->
 
-
-<!-- ko if:$parent.by_race_selectortwo() && $data == $parent.by_race_selectortwo().title() -->
-<tr><td colspan = "2">
-<div id="comparisonChartTwo" style="height:500px"></div> <!-- closes comparisonChart -->
-<p style="margin-top:10px;">The black vertical bars show the indicator's margin of error
-(MOE).
-
-<a href="#" class="btn btn-sm hide-from-print"
-      data-bind="css:$parent.indicatorcomparisontwovm.show_racial_breakdown_rows()
-? 'btn-default' : 'btn-primary', click:function(){$parent.indicatorcomparisontwovm.show_racial_breakdown_rows(!$parent.indicatorcomparisontwovm.show_racial_breakdown_rows())}">
-        View table</a>
-
-</p>
-</td>
-</tr>
-<!-- ko if: $parent.indicatorcomparisontwovm.show_racial_breakdown_rows() -->
-<!-- ko foreach: $parent.indicatorcomparisontwovm.racial_split -->
-<tr>
-    <td data-bind="text:chart_label"></td>
-    <td data-bind="text:value"></td>
-</tr>
-<!-- /ko -->
-<!-- /ko -->
-<!-- /ko -->
 
 <!-- /ko -->
 </tbody><table>
@@ -212,12 +194,6 @@ style="display:none">
       data-bind="page-href: {path : '/indicator-map',
        params: {indicator_uuid: indicator_uuid}}">
         Map</a>
-
-
-<a href="#" class="btn btn-sm hide-from-print"
-      data-bind="visible:false, css: $parents[1].by_race_selector() == $data ? 'btn-default' : 'btn-primary', click:function(){$parents[1].by_race_selector($data); $parents[1].update_chart();}">
-        By race</a>
-
 
 
 </span>

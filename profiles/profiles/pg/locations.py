@@ -220,7 +220,7 @@ class Location(object):
             yield row
 
     def indicators_with_values_by_location(self, pgconn,
-        indicators):
+        indicators, with_race=False):
 
         """
         Indicator Values sorted by categories
@@ -228,6 +228,21 @@ class Location(object):
         We specifically do not return values that are '999999' as this
         indicates the value is suppressed / should not be displayed
         """
+
+        if with_race:
+
+            from profiles import pg
+
+            new_indicators = []
+
+            for indicator in indicators:
+                racial_sub_indicators = \
+                pg.indicators.IndicatorLocationValue.find_racial_sub_indicators(indicator)
+
+                new_indicators.append(indicator)
+                new_indicators += racial_sub_indicators
+
+            indicators = new_indicators
 
         cursor = pgconn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
