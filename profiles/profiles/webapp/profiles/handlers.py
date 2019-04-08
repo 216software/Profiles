@@ -338,7 +338,13 @@ class IndicatorValuesByLocation(Handler):
 
         category_indicator_values = [x for x in \
             location.indicators_with_values_by_location(self.cw.get_pgconn(),
-                indicators, with_race)]
+                indicators)]
+
+
+        if with_race:
+            for civ in category_indicator_values:
+                civ.get('indicator').lookup_my_racial_split(self.cw.get_pgconn(),
+                    location.location_uuid)
 
         distinct_observable_timestamps = [x for x in \
             location.distinct_observation_timestamp_for_indicators(self.cw.get_pgconn(),

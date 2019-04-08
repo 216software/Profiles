@@ -51,6 +51,11 @@ class Indicator(RelationWrapper):
         self.inserted = inserted
         self.updated = updated
 
+        # Maybe set this
+
+        self.racial_split = []
+
+
     @property
     def __jsondata__(self):
 
@@ -370,6 +375,52 @@ class Indicator(RelationWrapper):
             self.__class__.__name__,
             self.title)
 
+    def lookup_my_racial_split(self, pgconn, location_uuid):
+
+        """"
+
+        Looks up an indicator location value racial split
+
+        """
+        racial_indicators= IndicatorLocationValue.find_racial_sub_indicators(
+            self.title)
+
+        cursor = pgconn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+
+        cursor.execute(textwrap.dedent("""
+            with indicator_value_location  as
+            (
+                select
+                i.indicator_uuid, i.title, i.indicator_value_format,
+                l.title as location_title,
+                ilv.value, ilv.observation_timestamp, i.indicator_category
+                from indicator_location_values ilv
+
+                join indicators i on i.indicator_uuid = ilv.indicator_uuid
+                join locations l on l.location_uuid = ilv.location_uuid
+
+                where l.location_uuid = %(location_uuid)s
+                and i.title = any(%(indicators)s)
+                and ilv.visible = true
+                --and ilv.value != 999999
+
+                order by ilv.observation_timestamp asc
+            )
+
+            select (i.*)::indicators as indicator,
+            array_to_json(array_agg(ilv.*)) as indicator_values
+
+            from indicator_value_location ilv
+            join indicators i on ilv.indicator_uuid = i.indicator_uuid
+
+            group by (i.*)
+
+        """), dict(location_uuid=location_uuid,
+                indicators=racial_indicators))
+
+        self.racial_split = [row for row in cursor.fetchall()]
+
+        return self
 
     def distinct_observation_timestamps(self, pgconn):
 
@@ -536,6 +587,7 @@ class IndicatorLocationValue(RelationWrapper):
         self.inserted = inserted
         self.updated = updated
 
+
     @classmethod
     def insert(cls, pgconn, indicator_uuid, location_uuid,
         observation_timestamp, observation_range, value):
@@ -659,6 +711,9 @@ class IndicatorLocationValue(RelationWrapper):
 
         for row in cursor:
             yield row._asdict()
+
+
+
 
     @staticmethod
     def find_racial_sub_indicators(indicator_title):

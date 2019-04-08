@@ -37,6 +37,17 @@ function Indicator (data) {
 
     self.indicator_category = ko.observable(data.indicator_category);
 
+    self.racial_split = ko.observableArray([]);
+
+    if(data.racial_split){
+            ko.utils.arrayForEach(data.racial_split, function(ind){
+
+                ind.indicator.indicator_values = ind.indicator_values
+                // only add if we have a value
+                self.racial_split.push(new Indicator(ind.indicator));
+            });
+
+    }
 
     self.look_up_details = function(){
 
