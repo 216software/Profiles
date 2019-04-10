@@ -52,3 +52,5 @@ script_order:
 # 2018 Data Load
 -   make-admin-load-job-table.sql
 -   add-visible-flag-indicator-location-value.sql
+-   insert-indicator-formatting-based-on-spreadsheet-v2.sql
+

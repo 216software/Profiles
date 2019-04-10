@@ -42,13 +42,12 @@ function EquityViewModel (data) {
 
 
 
-    self.update_chart = function(){
+    self.update_chart = function(i, timestamps){
+        self.by_race_selector(i);
         self.indicatorcomparisonvm.location_uuid(self.location_uuid());
-        self.indicatorcomparisonvm.indicator_uuid(self.by_race_selector().indicator_uuid());
-        self.indicatorcomparisonvm.year('2015');
+        self.indicatorcomparisonvm.indicator_uuid(i.indicator_uuid());
+        self.indicatorcomparisonvm.year(timestamps[0].value);
         self.indicatorcomparisonvm.update_chart();
-
-
     }
 
 
@@ -69,6 +68,15 @@ function EquityViewModel (data) {
             return [moment({y: 2010}), moment({y: 2015})];
         }
     });
+
+    self.housing_cost_pretty_timestamps = ko.pureComputed(function(){
+        return ko.utils.arrayMap(self.housing_cost_observable_timestamps(), function(item){
+            return {value: item.year(), label:item.year() - 4 + ' - ' + item.year()};
+        });
+
+    });
+
+
 
 
     // The array.concat method doesn't alter the first array, just
@@ -329,9 +337,6 @@ function EquityViewModel (data) {
     self.show_poverty_data = ko.observable(false);
 
     self.toggle_poverty_data = function () {
-        self.by_race_selector(Indicator.indicator_by_title(self.indicators(),
-                'bpv'))
-
         //self.update_chart();
         self.show_poverty_data(!self.show_poverty_data());
     };
@@ -339,10 +344,6 @@ function EquityViewModel (data) {
     self.show_housing_cost_burden_data = ko.observable(false);
 
     self.toggle_housing_cost_burden_data = function () {
-        self.by_race_selector(Indicator.indicator_by_title(self.indicators(),
-                't_cburden30p'))
-
-
         //self.update_chart();
 
 

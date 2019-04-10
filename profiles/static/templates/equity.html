@@ -47,10 +47,9 @@ Downlad as CSV</a>
 </th></tr>
 <tr data-bind="visible: show_housing_cost_burden_data">
 <th>Indicator</th>
-<!-- ko foreach:housing_cost_observable_timestamps -->
-    <th class="data">
-    <span data-bind="text:$data.year() - 4"></span>-
-    <span data-bind="text:$data.year()"></span></th>
+<!-- ko foreach:housing_cost_pretty_timestamps -->
+    <th class="data" data-bind="text:$data.label">
+    </th>
 
     <th class="show-only-print">CV</th>
     <th class="show-only-print">MOE (+/-)</th>
@@ -74,6 +73,11 @@ Downlad as CSV</a>
     </a>
 
     <a href="#" class="btn btn-primary btn-sm hide-from-print"
+          data-bind="click:function(){$parents[1].update_chart($data,
+$parents[1].housing_cost_pretty_timestamps())}">View Chart</a>
+
+
+    <a href="#" class="btn btn-primary btn-sm hide-from-print"
           data-bind="page-href: {path : '/indicator-map',
            params: {indicator_uuid: indicator_uuid}}">
             Map</a>
@@ -82,29 +86,65 @@ Downlad as CSV</a>
     </span>
 
     </td>
+    <!-- ko foreach:$parents[1].housing_cost_observable_timestamps -->
     <td class="data">
-    <span data-bind="text: indicator_value_by_year($parents[1].housing_cost_observable_timestamps()[0].year()).formatted"></span>
+    <span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 
-    <span data-bind="if: indicator_CV"><span data-bind="if: indicator_CV().indicator_value_by_year($parents[1].housing_cost_observable_timestamps()[0].year()).formatted">
+    <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
+    $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
     <button class="btn btn-xs hide-from-print"
             data-toggle="popover"
             title="CV &amp; MOE"
-            data-bind="attr: {'data-content' : pretty_CV_and_MOE($parents[1].housing_cost_observable_timestamps()[0].year())}">
+            data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
             +/-</button>
+    </span></span></td>
 
-    </span></span>
-    </td>
-
-    <td class="show-only-print data" data-bind="if:indicator_CV">
+    <!-- ko if:$parent.indicator_CV -->
+    <!-- ko if:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted -->
+    <td class="show-only-print data" data-bind="if:$parent.indicator_CV">
     <span class="show-only-print"
-         data-bind="text: indicator_CV().indicator_value_by_year($parents[1].housing_cost_observable_timestamps()[0].year()).formatted"></span>
+         data-bind="text: $parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
     </td>
-    <td class="show-only-print data" data-bind="if:indicator_MOE">
+    <td class="show-only-print data" data-bind="if:$parent.indicator_MOE">
     <span class="show-only-print"
-         data-bind="text:indicator_MOE().indicator_value_by_year(2014).formatted"></span>
+         data-bind="text:
+    $parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
 
     </td>
+    <!-- /ko -->
+<!-- /ko -->
+
+<!-- /ko --> <!-- closes inner for loop -->
+
 </tr>
+
+
+<!-- ko if:$parents[1].by_race_selector() && $data == $parents[1].by_race_selector() -->
+<tr><td colspan = "2">
+<div class="form-group" style="width:50%">
+
+    <label>
+    Choose a year
+    </label>
+
+    <select class="form-control"
+        data-bind="options:$parents[1].housing_cost_pretty_timestamps,
+                    optionsText:'label',
+                    optionsValue:'value'"></select>
+
+</div> <!-- closes form-group -->
+<div id="comparisonChart" style="height:500px"></div> <!-- closes comparisonChart -->
+<p style="margin-top:10px;">The black vertical bars show the indicator's margin of error
+(MOE).
+
+</p>
+
+</td>
+</tr>
+<!-- /ko -->
+
+
+
 
 <!-- ko foreach: racial_split -->
 <tr data-bind="css: {rate_data: is_a_rate() }">
@@ -118,6 +158,12 @@ Downlad as CSV</a>
                               $root.indicator_extra_info($data)}">
             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
     </a>
+
+    <a href="#" class="btn btn-primary btn-sm hide-from-print"
+          data-bind="page-href: {path : '/indicator-map',
+           params: {indicator_uuid: indicator_uuid}}">
+            Map</a>
+
 
     </span>
 
@@ -150,43 +196,6 @@ Downlad as CSV</a>
 
 
 
-<!-- /ko -->
-
-
-<!-- ko if: $parent.indicatorcomparisonvm.show_racial_breakdown_rows() -->
-<!-- ko foreach: $parent.indicatorcomparisonvm.racial_split -->
-<tr>
-    <td data-bind="text:chart_label"></td>
-    <td data-bind="text:function(){return Math.round(value)}()"></td>
-</tr>
-<!-- /ko -->
-<!-- /ko -->
-
-<!-- ko if:$parent.by_race_selector() && $data == $parent.by_race_selector().title() -->
-<tr><td colspan = "2">
-<div class="form-group" style="width:50%">
-
-    <label>
-    Choose a year
-    </label>
-
-    <select class="form-control"
-        data-bind="options:['2015']"></select>
-
-</div> <!-- closes form-group -->
-<div id="comparisonChart" style="height:500px"></div> <!-- closes comparisonChart -->
-<p style="margin-top:10px;">The black vertical bars show the indicator's margin of error
-(MOE).
-<a href="#" class="btn btn-sm hide-from-print"
-      data-bind="css:$parent.indicatorcomparisonvm.show_racial_breakdown_rows()
-? 'btn-default' : 'btn-primary', click:function(){$parent.indicatorcomparisonvm.show_racial_breakdown_rows(!$parent.indicatorcomparisonvm.show_racial_breakdown_rows())}">
-        View table</a>
-
-
-</p>
-
-</td>
-</tr>
 <!-- /ko -->
 
 
