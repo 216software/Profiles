@@ -16,6 +16,7 @@ function EquityViewModel (data) {
     self.rootvm = data.rootvm;
     self.parentvm = data.parentvm;
 
+    self.show_chart = ko.observable(false);
     self.expand_everything = ko.observable(0);
 
     self.indicatorcomparisonvm = new IndicatorComparisonByRaceViewModel(data);
@@ -40,14 +41,21 @@ function EquityViewModel (data) {
 
     };
 
+    self.selected_chart_year = ko.observable();
+    self.selected_chart_year.subscribe(function(){
+        self.show_chart(true);
+        self.update_chart()
+    });
 
+    self.update_chart = function(i){
 
-    self.update_chart = function(i, timestamps){
-        self.by_race_selector(i);
-        self.indicatorcomparisonvm.location_uuid(self.location_uuid());
-        self.indicatorcomparisonvm.indicator_uuid(i.indicator_uuid());
-        self.indicatorcomparisonvm.year(timestamps[0].value);
-        self.indicatorcomparisonvm.update_chart();
+        if(self.by_race_selector() && self.selected_chart_year())
+        {
+            self.indicatorcomparisonvm.location_uuid(self.location_uuid());
+            self.indicatorcomparisonvm.indicator_uuid(self.by_race_selector().indicator_uuid());
+            self.indicatorcomparisonvm.year(self.selected_chart_year());
+            self.indicatorcomparisonvm.update_chart();
+        }
     }
 
 
@@ -114,6 +122,12 @@ function EquityViewModel (data) {
         }
     });
 
+    self.poverty_pretty_timestamps = ko.pureComputed(function(){
+        return ko.utils.arrayMap(self.poverty_observable_timestamps(), function(item){
+            return {value: item.year(), label:item.year() - 4 + ' - ' + item.year()};
+        });
+
+    });
 
     self.indicator_titles = self.housing_cost_burden_indicators.concat(self.poverty_indicators);
     self.indicator_cv_pairings = {'cashrent':'cvcashrent',
@@ -257,6 +271,8 @@ function EquityViewModel (data) {
                 return i;
             }));
 
+        self.by_race_selector(self.indicators()[0]);
+
     };
 
     self.observable_timestamps_from_indicators = function(indicator_titles){
@@ -345,8 +361,6 @@ function EquityViewModel (data) {
 
     self.toggle_housing_cost_burden_data = function () {
         //self.update_chart();
-
-
         self.show_housing_cost_burden_data(!self.show_housing_cost_burden_data());
     };
 
@@ -361,28 +375,6 @@ function EquityViewModel (data) {
         self.show_housing_cost_burden_data(ee);
 
     });
-
-    self.show_chart = {
-
-        't_cburden30p': true,
-        '_t_cburden30p': true,
-        't_ocburden30p': true,
-        't_rcburden30p': true,
-        't_ocburden50p': true,
-        't_rcburden50p': true,
-        'hhincls10k': true,
-        'hhinc10to15k': true,
-        'hhinc15to25k': true,
-        'hhinc25to35k': true,
-        'hhinc35to50k': true,
-        'hhinc50to75k': true,
-        'hhinc75to100k': true,
-        'hhinc100to150k': true,
-        'hhinc150to200k': true,
-        'hhinc200kp': true,
-        'bpv': true,
-        'tpv': true
-    }
 
     self.drawVisualization = function() {
 
