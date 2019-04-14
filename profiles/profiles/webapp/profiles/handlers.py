@@ -346,6 +346,13 @@ class IndicatorValuesByLocation(Handler):
                 civ.get('indicator').lookup_my_racial_split(self.cw.get_pgconn(),
                     location.location_uuid)
 
+                civ.get('indicator').lookup_cv_and_moe(self.cw.get_pgconn(),
+                    location.location_uuid)
+
+                for ind in civ.get('indicator').racial_split:
+                    ind.get('indicator').lookup_cv_and_moe(self.cw.get_pgconn(),
+                    location.location_uuid)
+
         distinct_observable_timestamps = [x for x in \
             location.distinct_observation_timestamp_for_indicators(self.cw.get_pgconn(),
                 indicators)]

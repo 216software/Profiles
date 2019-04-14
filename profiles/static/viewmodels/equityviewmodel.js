@@ -63,6 +63,16 @@ function EquityViewModel (data) {
     self.housing_cost_burden_indicators = [
         "t_cburden30p",
         "_t_cburden30p",
+        "t_cburden50p",
+        "_t_cburden50p",
+        "t_ocburden30p",
+        "_t_ocburden30p",
+        "t_rcburden30p",
+        "_t_rcburden30p",
+        "t_ocburden50p",
+        "_t_ocburden50p",
+        "t_rcburden50p",
+        "_t_rcburden50p",
     ];
 
 
@@ -110,7 +120,7 @@ function EquityViewModel (data) {
     */
 
 
-    self.poverty_indicators = ['bpv', '_bpv'];
+    self.poverty_indicators = ['bpv', '_bpv', 'tpv'];
 
     self.poverty_observable_timestamps = ko.pureComputed(function(){
         if(self.indicators().length > 0){
@@ -129,72 +139,88 @@ function EquityViewModel (data) {
 
     });
 
+
+    self.health_indicators = ['_mort_rate',
+        '_infmort_rate',
+        '_ebll_c',
+    ];
+
+    self.health_observable_timestamps = ko.pureComputed(function(){
+        if(self.indicators().length > 0){
+            var x = self.observable_timestamps_from_indicators(self.health_indicators);
+            return x;
+        }
+        else{
+            return [moment({y: 2010}), moment({y: 2015})];
+        }
+    });
+
+    self.health_pretty_timestamps = ko.pureComputed(function(){
+        return ko.utils.arrayMap(self.health_observable_timestamps(), function(item){
+            return {value: item.year(), label:item.year() - 4 + ' - ' + item.year()};
+        });
+    });
+
+    self.education_indicators = ['rpassed3',
+        '_rpassed3',
+    ];
+
+    self.education_observable_timestamps = ko.pureComputed(function(){
+        if(self.indicators().length > 0){
+            var x = self.observable_timestamps_from_indicators(self.education_indicators);
+            return x;
+        }
+        else{
+            return [moment({y: 2010}), moment({y: 2015})];
+        }
+    });
+
+    self.education_pretty_timestamps = ko.pureComputed(function(){
+        return ko.utils.arrayMap(self.education_observable_timestamps(), function(item){
+            return {value: item.year(), label:item.year() - 1 + ' - ' + item.year() + ' school year'};
+        });
+    });
+
+
+
+
+    self.income_indicators = ['hhincls10k',
+        '_hhincls10k',
+        'hhinc35to50k',
+        '_hhinc35to50k',
+        'hhinc50to75k',
+        '_hhinc50to75k',
+        'hhinc150to200k',
+        '_hhinc150to200k',
+        'hhinc200kp',
+        '_hhinc200kp',
+    ];
+
+    self.income_observable_timestamps = ko.pureComputed(function(){
+        if(self.indicators().length > 0){
+            var x = self.observable_timestamps_from_indicators(self.income_indicators);
+            return x;
+        }
+        else{
+            return [moment({y: 2010}), moment({y: 2015})];
+        }
+    });
+
+    self.income_pretty_timestamps = ko.pureComputed(function(){
+        return ko.utils.arrayMap(self.income_observable_timestamps(), function(item){
+            return {value: item.year(), label:item.year() - 4 + ' - ' + item.year()};
+        });
+    });
+
+
     self.indicator_titles = self.housing_cost_burden_indicators.concat(self.poverty_indicators);
-    self.indicator_cv_pairings = {'cashrent':'cvcashrent',
-     'hhincls10k': 'cvhhincls10k',
-     'hhinc10to15k': 'cvhhinc10to15k',
-     'hhinc15to25k': 'cvhhinc15to25k',
-     'hhinc25to35k':'cvhhinc25to35k',
-     'hhinc35to50k': 'cvhhinc35to50k',
-     'hhinc50to75k': 'cvhhinc50to75k',
-     'hhinc75to100k': 'cvhhinc75to100k',
-     'hhinc100to150k': 'cvhhinc100to150k',
-     'hhinc150to200k': 'cvhhinc150to200k',
-     'hhinc200kp':  'cvhhinc200kp',
-     '_hhincls10k':'cv_hhincls10k',
-     '_hhinc10to15k':'cv_hhinc10to15k',
-     '_hhinc15to25k':'cv_hhinc15to25k',
-     '_hhinc25to35k':'cv_hhinc25to35k',
-     '_hhinc35to50k':'cv_hhinc35to50k',
-     '_hhinc50to75k':'cv_hhinc50to75k',
-     '_hhinc75to100k':'cv_hhinc75to100k',
-     '_hhinc100to150k':'cv_hhinc100to150k',
-     '_hhinc150to200k':'cv_hhinc150to200k',
-     '_hhinc200kp':'cv_hhinc200kp',
-     '_medinc': 'cv_medinc',
-     '_grent': 'cv_grent',
-     'bpv': 'cvbpv',
-     '_bpv': 'cv_bpv',
-     'tpv': 'cvtpv',
-     'bpv_samehou':'cvbpv_samehou',
-     'bpv_diffhou':'cvbpv_diffhou',
-     '_bpv_samehou':'cv_bpv_samehou',
-     '_bpv_diffhou':'cv_bpv_diffhou',
-     };
 
-    self.indicator_moe_pairings = {'cashrent':'mcashrent',
-     'hhincls10k': 'mhhincls10k',
-     'hhinc10to15k': 'mhhinc10to15k',
-     'hhinc15to25k': 'mhhinc15to25k',
-     'hhinc25to35k':'mhhinc25to35k',
-     'hhinc35to50k': 'mhhinc35to50k',
-     'hhinc50to75k': 'mhhinc50to75k',
-     'hhinc75to100k': 'mhhinc75to100k',
-     'hhinc100to150k': 'mhhinc100to150k',
-     'hhinc150to200k': 'mhhinc150to200k',
-     'hhinc200kp':  'mhhinc200kp',
-     '_hhincls10k':'m_hhincls10k',
-     '_hhinc10to15k':'m_hhinc10to15k',
-     '_hhinc15to25k':'m_hhinc15to25k',
-     '_hhinc25to35k':'m_hhinc25to35k',
-     '_hhinc35to50k':'m_hhinc35to50k',
-     '_hhinc50to75k':'m_hhinc50to75k',
-     '_hhinc75to100k':'m_hhinc75to100k',
-     '_hhinc100to150k':'m_hhinc100to150k',
-     '_hhinc150to200k':'m_hhinc150to200k',
-     '_hhinc200kp':'m_hhinc200kp',
-     '_medinc': 'm_medinc',
-     '_grent': 'm_grent',
-     'bpv': 'mbpv',
-     '_bpv': 'm_bpv',
-     'tpv': 'mtpv',
-     'bpv_samehou':'mbpv_samehou',
-     'bpv_diffhou':'mbpv_diffhou',
-     '_bpv_samehou':'m_bpv_samehou',
-     '_bpv_diffhou':'m_bpv_diffhou',
+    self.indicator_titles = self.indicator_titles.concat(self.health_indicators);
+    self.indicator_titles = self.indicator_titles.concat(self.education_indicators);
+    self.indicator_titles = self.indicator_titles.concat(self.income_indicators);
+    self.indicator_cv_pairings = {};
 
-
-     };
+    self.indicator_moe_pairings = {};
 
     // add some stuff dynamically.
     $.each(self.housing_cost_burden_indicators, function (index, value) {
@@ -202,12 +228,7 @@ function EquityViewModel (data) {
         var moe_indicator = "m" + value;
         self.indicator_cv_pairings[value] = cv_indicator;
         self.indicator_moe_pairings[value] = moe_indicator;
-
     });
-
-    self.overview_indicators_sales = ['med_al_price'];
-    self.overview_indicators_sales_2nd_table = ['_grent'];
-    self.overview_indicators_income = ['_medinc', 'bpv'];
 
     self.indicators = ko.observableArray([]);
 
@@ -215,9 +236,6 @@ function EquityViewModel (data) {
         // on initial load, show housing cost burden data
         if(self.indicators().length > 0){
             self.toggle_housing_cost_burden_data();
-
-
-
             console.log('initial load complete');
 
             //for each indicator,look up by race values
@@ -332,23 +350,26 @@ function EquityViewModel (data) {
 
     };
 
-    self.show_sales_data = ko.observable(false);
 
-    self.toggle_sales_data = function () {
-        self.show_sales_data(!self.show_sales_data());
-    };
-
-    self.show_rental_data = ko.observable(false);
-
-    self.toggle_rental_data = function () {
-        self.show_rental_data(!self.show_rental_data());
-    };
 
     self.show_income_data = ko.observable(false);
 
     self.toggle_income_data = function () {
         self.show_income_data(!self.show_income_data());
     };
+
+    self.show_health_data = ko.observable(false);
+
+    self.toggle_health_data = function () {
+        self.show_health_data(!self.show_health_data());
+    };
+
+    self.show_education_data = ko.observable(false);
+
+    self.toggle_education_data = function () {
+        self.show_education_data(!self.show_education_data());
+    };
+
 
     self.show_poverty_data = ko.observable(false);
 

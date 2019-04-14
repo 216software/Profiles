@@ -54,6 +54,8 @@ class Indicator(RelationWrapper):
         # Maybe set this
 
         self.racial_split = []
+        self.indicator_CV = None
+        self.indicator_moe = None
 
 
     @property
@@ -422,6 +424,54 @@ class Indicator(RelationWrapper):
 
         return self
 
+    def lookup_cv_and_moe(self, pgconn, location_uuid):
+
+        """"
+
+        Looks up an indicator location value racial split
+
+        """
+        cv_ind = 'cv' + self.title
+        m_ind = 'm' + self.title
+        cursor = pgconn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+
+        cursor.execute(textwrap.dedent("""
+            with indicator_value_location  as
+            (
+                select
+                i.indicator_uuid, i.title, i.indicator_value_format,
+                l.title as location_title,
+                ilv.value, ilv.observation_timestamp, i.indicator_category
+                from indicator_location_values ilv
+
+                join indicators i on i.indicator_uuid = ilv.indicator_uuid
+                join locations l on l.location_uuid = ilv.location_uuid
+
+                where l.location_uuid = %(location_uuid)s
+                and i.title = any(%(indicators)s)
+                and ilv.visible = true
+                --and ilv.value != 999999
+
+                order by ilv.observation_timestamp asc
+            )
+
+            select (i.*)::indicators as indicator,
+            array_to_json(array_agg(ilv.*)) as indicator_values
+
+            from indicator_value_location ilv
+            join indicators i on ilv.indicator_uuid = i.indicator_uuid
+
+            group by (i.*)
+
+        """), dict(location_uuid=location_uuid,
+                indicators=[cv_ind, m_ind]))
+
+        if cursor.rowcount > 1:
+            self.indicator_CV, self.indicator_moe = cursor.fetchall()
+
+
+        return self
+
     def distinct_observation_timestamps(self, pgconn):
 
         """
@@ -729,16 +779,16 @@ class IndicatorLocationValue(RelationWrapper):
 
         # rpass50 => w_rpass50
         if indicator_title in set([
-            "rpass50", "rpass20", "rpass10", "rpass41",
-            "mpass50", "mpass20", "mpass10", "mpass41"
+            "rpassed3", "rpassed4", "rpassed6", "rpassed10",
+            "mpassed3", "mpassed4", "mpassed6", "mpassed10"
         ]):
 
             return ["{0}_{1}".format(c, indicator_title) for c in 'abhow']
 
         # _rpass50 => _w_rpass50
         elif indicator_title in set([
-            "_rpass50", "_rpass20", "_rpass10", "_rpass41",
-            "_mpass50", "_mpass20", "_mpass10", "_mpass41",
+            "_rpassed50", "_rpassed20", "_rpassed10", "_rpassed41",
+            "_mpassed50", "_mpassed20", "_mpassed10", "_mpassed41",
         ]):
 
             return ["_{0}{1}".format(c, indicator_title) for c in 'abhow']
@@ -749,7 +799,7 @@ class IndicatorLocationValue(RelationWrapper):
 
         # _emp => _wemp
         elif indicator_title in set(["_emp", "_lf", "_lshs", "_hsgrad",
-            "_somecollassoc", "_bsp",
+            "_somecollassoc", "_bsp", "_bpv"
         ]):
             return ["_{0}{1}".format(c, indicator_title[1:]) for c in 'abhow']
 
@@ -757,9 +807,18 @@ class IndicatorLocationValue(RelationWrapper):
         elif indicator_title.startswith("t_"):
             return ["{0}{1}".format(c, indicator_title[1:]) for c in 'abhow']
 
+        elif indicator_title.startswith("_hh"):
+            return ["_{0}{1}".format(c, indicator_title[1:]) for c in 'abhow']
+
+        # _t_cburden50p => _w_cburden50p
+        elif indicator_title.startswith("_t_c"):
+            return ["_{0}_{1}".format(c, indicator_title[3:]) for c in 'abhow']
+
+        elif indicator_title.startswith("_"):
+            return ["_{0}{1}".format(c, indicator_title) for c in 'abhow']
+
         # _t_cburden50p => _w_cburden50p
         elif indicator_title.startswith("_"):
-            print ["_{0}_{1}".format(c, indicator_title[3:]) for c in 'abhow']
             return ["_{0}_{1}".format(c, indicator_title[3:]) for c in 'abhow']
 
         # xyz => wxyz

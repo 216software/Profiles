@@ -49,6 +49,7 @@ function Indicator (data) {
 
     }
 
+
     self.look_up_details = function(){
 
         return $.ajax({
@@ -73,6 +74,17 @@ function Indicator (data) {
     // If this indicator has a Coefficient Variation associated with it
     self.indicator_CV = ko.observable();
     self.indicator_MOE = ko.observable();
+
+    if(data.indicator_CV){
+        data.indicator_CV.indicator.indicator_values = data.indicator_CV.indicator_values
+        self.indicator_CV(new Indicator(data.indicator_CV.indicator));
+
+    }
+    if(data.indicator_moe){
+        data.indicator_moe.indicator.indicator_values = data.indicator_moe.indicator_values
+        self.indicator_MOE(new Indicator(data.indicator_moe.indicator));
+
+    }
 
     self.indicator_values = ko.observableArray(ko.utils.arrayMap(
                             data.indicator_values || [],
