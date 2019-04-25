@@ -53,7 +53,7 @@ function EquityViewModel (data) {
         {
             self.indicatorcomparisonvm.location_uuid(self.location_uuid());
             self.indicatorcomparisonvm.indicator_uuid(self.by_race_selector().indicator_uuid());
-            self.indicatorcomparisonvm.year(self.selected_chart_year());
+            self.indicatorcomparisonvm.year(self.selected_chart_year().value);
             self.indicatorcomparisonvm.update_chart();
         }
     }
@@ -61,9 +61,10 @@ function EquityViewModel (data) {
 
 
     self.housing_cost_burden_indicators = [
-        "t_cburden30p",
         "_t_cburden30p",
-        "t_cburden50p",
+        /*
+        "t_cburden30p",
+         * "t_cburden50p",
         "_t_cburden50p",
         "t_ocburden30p",
         "_t_ocburden30p",
@@ -72,7 +73,7 @@ function EquityViewModel (data) {
         "t_ocburden50p",
         "_t_ocburden50p",
         "t_rcburden50p",
-        "_t_rcburden50p",
+        "_t_rcburden50p",*/
     ];
 
 
@@ -120,7 +121,7 @@ function EquityViewModel (data) {
     */
 
 
-    self.poverty_indicators = ['bpv', '_bpv', 'tpv'];
+    self.poverty_indicators = ['_bpv'];
 
     self.poverty_observable_timestamps = ko.pureComputed(function(){
         if(self.indicators().length > 0){
@@ -161,8 +162,15 @@ function EquityViewModel (data) {
         });
     });
 
-    self.education_indicators = ['rpassed3',
+    self.education_indicators = [
+        /*'rpassed3',
+        'rpassed10',
+        'mpassed3',
+        'mpassed10',*/
         '_rpassed3',
+        '_rpassed10',
+        '_mpassed3',
+        '_mpassed10',
     ];
 
     self.education_observable_timestamps = ko.pureComputed(function(){
@@ -184,15 +192,16 @@ function EquityViewModel (data) {
 
 
 
-    self.income_indicators = ['hhincls10k',
+    self.income_indicators = [
         '_hhincls10k',
-        'hhinc35to50k',
+        /*'hhincls10k',
+         *'hhinc35to50k',
         '_hhinc35to50k',
         'hhinc50to75k',
         '_hhinc50to75k',
         'hhinc150to200k',
         '_hhinc150to200k',
-        'hhinc200kp',
+        'hhinc200kp',*/
         '_hhinc200kp',
     ];
 

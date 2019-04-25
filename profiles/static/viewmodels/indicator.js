@@ -39,6 +39,8 @@ function Indicator (data) {
 
     self.racial_split = ko.observableArray([]);
 
+    self.racial_sort_order = ['black', 'white', 'hispanic', 'asian', 'other'];
+
     if(data.racial_split){
             ko.utils.arrayForEach(data.racial_split, function(ind){
 
@@ -46,6 +48,36 @@ function Indicator (data) {
                 // only add if we have a value
                 self.racial_split.push(new Indicator(ind.indicator));
             });
+
+            self.racial_split.sort(function(left, right){
+                var leftIndex = null;
+                var rightIndex = null;
+                for (var i = 0; i < self.racial_sort_order.length; i++){
+                    var left_char_index = left.description().toLowerCase().indexOf(
+                        self.racial_sort_order[i]);
+
+                    if(left_char_index != -1 && left_char_index == 0 || (left_char_index > 0 && left.description()[left_char_index - 1] != '-')) {
+
+                        leftIndex = i;
+                    }
+                    var right_char_index = right.description().toLowerCase().indexOf(
+                        self.racial_sort_order[i])
+
+                    if(right_char_index != -1 && right_char_index == 0 || (right_char_index > 0 && right.description()[right_char_index - 1] != '-')) {
+                        rightIndex = i;
+                    }
+
+                    if(leftIndex != undefined && rightIndex != undefined){
+                        break;
+                    }
+                }
+
+                return leftIndex < rightIndex ? -1 : 1
+            });
+
+            if(self.racial_split().length > 0){
+            console.log(self.racial_split()[0].description());
+            }
 
     }
 

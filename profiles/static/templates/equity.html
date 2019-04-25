@@ -60,7 +60,7 @@ Downlad as CSV</a>
 <tbody data-bind="visible: show_housing_cost_burden_data">
 <!-- ko foreach:housing_cost_burden_indicators -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
-    <tr data-bind="css: {rate_data: is_a_rate() }">
+    <tr data-bind="css: {rate_data: false }">
     <td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>
 
     <span class="pull-right" style="padding-left:5px">
@@ -122,7 +122,7 @@ Downlad as CSV</a>
         <select class="form-control"
             data-bind="options:$parents[1].housing_cost_pretty_timestamps,
                         optionsText:'label',
-                        optionsValue:'value'"></select>
+                        value: $parents[1].selected_chart_year"></select>
 
     </div> <!-- closes form-group -->
     <div id="comparisonChart" style="height:500px"></div> <!-- closes comparisonChart -->
@@ -214,7 +214,7 @@ Downlad as CSV</a>
 <tbody data-bind="visible: show_poverty_data">
 <!-- ko foreach:poverty_indicators -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
-    <tr data-bind="css: {rate_data: is_a_rate() }">
+    <tr data-bind="css: {rate_data: false }">
     <td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>
 
     <span class="pull-right" style="padding-left:5px">
@@ -277,7 +277,6 @@ Downlad as CSV</a>
         <select class="form-control"
             data-bind="options:$parents[1].poverty_pretty_timestamps,
                         optionsText:'label',
-                        optionsValue:'value',
                         value:$parents[1].selected_chart_year"></select>
 
     </div> <!-- closes form-group -->
@@ -376,7 +375,7 @@ Downlad as CSV</a>
 <tbody data-bind="visible: show_health_data">
 <!-- ko foreach:health_indicators -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
-    <tr data-bind="css: {rate_data: is_a_rate() }">
+    <tr data-bind="css: {rate_data: false }">
     <td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>
 
     <span class="pull-right" style="padding-left:5px">
@@ -438,7 +437,6 @@ Downlad as CSV</a>
         <select class="form-control"
             data-bind="options:$parents[1].health_pretty_timestamps,
                         optionsText:'label',
-                        optionsValue:'value',
                         value:$parents[1].selected_chart_year"></select>
 
     </div> <!-- closes form-group -->
@@ -515,7 +513,7 @@ Downlad as CSV</a>
 <tr>
 <th data-bind="attr: {'colspan': function () { if (Boolean(Number(expand_everything()))) { return 8; } else { return 4; }}()}">
 
-<span>education Data</span>
+<span>Education Data</span>
 
 <button class="hide-from-print btn btn-default" data-bind="visible: show_education_data, click:toggle_education_data">Hide</button>
 
@@ -538,7 +536,7 @@ Downlad as CSV</a>
 <tbody data-bind="visible: show_education_data">
 <!-- ko foreach:education_indicators -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
-    <tr data-bind="css: {rate_data: is_a_rate() }">
+    <tr data-bind="css: {rate_data: false }">
     <td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>
 
     <span class="pull-right" style="padding-left:5px">
@@ -601,7 +599,6 @@ Downlad as CSV</a>
         <select class="form-control"
             data-bind="options:$parents[1].education_pretty_timestamps,
                         optionsText:'label',
-                        optionsValue:'value',
                         value:$parents[1].selected_chart_year"></select>
 
     </div> <!-- closes form-group -->
@@ -703,7 +700,7 @@ Downlad as CSV</a>
 <tbody data-bind="visible: show_income_data">
 <!-- ko foreach:income_indicators -->
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
-    <tr data-bind="css: {rate_data: is_a_rate() }">
+    <tr data-bind="css: {rate_data: false }">
     <td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>
 
     <span class="pull-right" style="padding-left:5px">
@@ -766,7 +763,6 @@ Downlad as CSV</a>
         <select class="form-control"
             data-bind="options:$parents[1].income_pretty_timestamps,
                         optionsText:'label',
-                        optionsValue:'value',
                         value:$parents[1].selected_chart_year"></select>
 
     </div> <!-- closes form-group -->

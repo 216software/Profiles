@@ -44,7 +44,8 @@ function IndicatorComparisonByRaceViewModel (data) {
                     'lineWidth': 2,
                     'color': '383737',
                     'style': 'sticks'
-                }
+                },
+                legend: {position:'none'}
             };
 
             var chart = new google.visualization.ColumnChart(
