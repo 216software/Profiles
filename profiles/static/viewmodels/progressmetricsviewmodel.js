@@ -128,6 +128,13 @@ function ProgressMetricsViewModel (data) {
         }
     });
 
+    self.housing_cost_pretty_timestamps = ko.pureComputed(function(){
+        return ko.utils.arrayMap(self.housing_cost_observable_timestamps(), function(item){
+            return {value: item.year(), label:item.year() - 4 + ' - ' + item.year()};
+        });
+
+    });
+
 
     // The array.concat method doesn't alter the first array, just
     // returns a new one.

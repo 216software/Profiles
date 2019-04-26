@@ -92,7 +92,7 @@ to filter by location type, or to search for a specific location.
    Location (type)
 </th>
 <!-- ko foreach:observable_timestamp_options -->
-  <th style="text-align:right; cursor:pointer"> <span data-bind="text:$data.text,
+  <th style="text-align:right; cursor:pointer"> <span data-bind="text:$data.label,
     click:$parent.year_click_sort"></span>
 
    <span data-bind="visible:$parent.asc() && $parent.sort_column() == $data.value"

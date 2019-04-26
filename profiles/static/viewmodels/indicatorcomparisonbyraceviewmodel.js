@@ -62,6 +62,7 @@ function IndicatorComparisonByRaceViewModel (data) {
     // This is an x by x chart -- so we assume counts for the variables
     // but then we break down into different arrays by race
     self.indicator_values_by_race = ko.observableArray([]);
+    self.racial_sort_order = ['black', 'white', 'hispanic', 'asian', 'other'];
 
     self.racial_split = ko.observableArray([]);
     self.location = ko.observable();
@@ -102,6 +103,33 @@ function IndicatorComparisonByRaceViewModel (data) {
 
                     self.available_observation_timestamps(
                         data.available_observation_timestamps);
+
+                    self.racial_split.sort(function(left, right){
+                        var leftIndex = null;
+                        var rightIndex = null;
+                        for (var i = 0; i < self.racial_sort_order.length; i++){
+                            var left_char_index = left.chart_label.toLowerCase().indexOf(
+                                self.racial_sort_order[i]);
+
+                            if(left_char_index != -1 && left_char_index == 0 || (left_char_index > 0 && left.chart_label[left_char_index - 1] != '-')) {
+
+                                leftIndex = i;
+                            }
+                            var right_char_index = right.chart_label.toLowerCase().indexOf(
+                                self.racial_sort_order[i])
+
+                            if(right_char_index != -1 && right_char_index == 0 || (right_char_index > 0 && right.chart_label[right_char_index - 1] != '-')) {
+                                rightIndex = i;
+                            }
+
+                            if(leftIndex != undefined && rightIndex != undefined){
+                                break;
+                            }
+                        }
+
+                        return leftIndex < rightIndex ? -1 : 1
+                    });
+
 
                 }
                 else {

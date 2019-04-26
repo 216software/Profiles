@@ -246,15 +246,13 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 </th></tr>
 <tr data-bind="visible: show_housing_cost_burden_data">
 <th>Indicator</th>
-<!-- ko foreach:housing_cost_observable_timestamps -->
-    <th class="data">
-    <span data-bind="text:$data.year() - 4"></span>-
-    <span data-bind="text:$data.year()"></span></th>
+<!-- ko foreach:housing_cost_pretty_timestamps -->
+    <th class="data" data-bind="text:$data.label">
+    </th>
 
     <th class="show-only-print">CV</th>
     <th class="show-only-print">MOE (+/-)</th>
 <!-- /ko -->
-
 </tr>
 </thead>
 <tbody data-bind="visible: show_housing_cost_burden_data">
@@ -285,7 +283,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
             params: {
                 indicator_uuid: indicator_uuid,
                 location_uuid: $parents[1].location_uuid,
-                year: 2015}}">
+                year: $parents[1].housing_cost_pretty_timestamps()[0]}}">
         By race</a>
 
 </span>

@@ -49,14 +49,20 @@ function IndicatorComparisonViewModel (data) {
 
             for(var i = 0; i < self.observable_timestamps().length; i++){
                 options.push({'value':self.observable_timestamps()[i].year(),
-                    'text':(parseInt(self.observable_timestamps()[i].year()) - 1) + '-' +
+                    'label':(parseInt(self.observable_timestamps()[i].year()) - 1) + '-' +
                         self.observable_timestamps()[i].year() })
             }
         }
+
+        if(self.rootvm.startpagevm.progressmetricsvm.housing_cost_burden_indicators.indexOf(
+                self.selected_indicator().title()) >= 0){
+            options = self.rootvm.startpagevm.equityvm.housing_cost_pretty_timestamps();
+        }
+
         else if(self.observable_timestamps().length > 2){
             for(var i = 0; i < self.observable_timestamps().length; i++){
                 options.push({'value':self.observable_timestamps()[i].year(),
-                    'text':self.observable_timestamps()[i].year()})
+                    'label':self.observable_timestamps()[i].year()})
             }
 
         }
@@ -64,10 +70,10 @@ function IndicatorComparisonViewModel (data) {
 
             // Then our second set of values is really a range
             options.push({'value':self.observable_timestamps()[0].year(),
-                    'text':'2006-'+self.observable_timestamps()[0].year()})
+                    'label':'2006-'+self.observable_timestamps()[0].year()})
 
             options.push({'value':self.observable_timestamps()[1].year(),
-                    'text':'2011-' + self.observable_timestamps()[1].year()})
+                    'label':'2011-' + self.observable_timestamps()[1].year()})
 
         }
 
@@ -75,7 +81,7 @@ function IndicatorComparisonViewModel (data) {
 
             // Then our second set of values is really a range
             options.push({'value':self.observable_timestamps()[0].year(),
-                    'text':'Avg. 2009 - ' + self.observable_timestamps()[0].year()})
+                    'label':'Avg. 2009 - ' + self.observable_timestamps()[0].year()})
         }
 
         return options;
