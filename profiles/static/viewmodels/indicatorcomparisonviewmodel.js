@@ -35,6 +35,7 @@ function IndicatorComparisonViewModel (data) {
     self.indicator_locations = ko.observableArray([]);
     self.observable_timestamps = ko.observableArray([]);
 
+
     self.observable_timestamp_options = ko.computed(function(){
 
         // Matt just sidestepping doing it the right way.
@@ -53,12 +54,6 @@ function IndicatorComparisonViewModel (data) {
                         self.observable_timestamps()[i].year() })
             }
         }
-
-        if(self.rootvm.startpagevm.progressmetricsvm.housing_cost_burden_indicators.indexOf(
-                self.selected_indicator().title()) >= 0){
-            options = self.rootvm.startpagevm.equityvm.housing_cost_pretty_timestamps();
-        }
-
         else if(self.observable_timestamps().length > 2){
             for(var i = 0; i < self.observable_timestamps().length; i++){
                 options.push({'value':self.observable_timestamps()[i].year(),
@@ -66,22 +61,53 @@ function IndicatorComparisonViewModel (data) {
             }
 
         }
+
+
+        else if(self.selected_indicator().title() && self.selected_indicator().title().indexOf('burden') >= 0){
+            options = ko.utils.arrayMap(self.observable_timestamps(), function(item){
+                return {value: item.year(), label:item.year() - 4 + ' - ' + item.year()};
+            });
+        }
+
+        else if(self.selected_indicator().title() && self.selected_indicator().title().indexOf('ebl') >= 0 ){
+            options = ko.utils.arrayMap(self.observable_timestamps(), function(item){
+                return {value: item.year(), label:item.year() - 4 + ' - ' + item.year()};
+            });
+        }
+        else if(self.selected_indicator().title() && self.selected_indicator().title().indexOf('mort') >= 0 ){
+            options = ko.utils.arrayMap(self.observable_timestamps(), function(item){
+                return {value: item.year(), label:item.year() - 4 + ' - ' + item.year()};
+            });
+        }
+
         else if(self.observable_timestamps().length == 2){
 
             // Then our second set of values is really a range
+            /*
             options.push({'value':self.observable_timestamps()[0].year(),
                     'label':'2006-'+self.observable_timestamps()[0].year()})
 
             options.push({'value':self.observable_timestamps()[1].year(),
                     'label':'2011-' + self.observable_timestamps()[1].year()})
+            */
+
+            options = ko.utils.arrayMap(self.observable_timestamps(), function(item){
+                return {value: item.year(), label:item.year() - 4 + ' - ' + item.year()};
+            });
+
 
         }
 
+
+
         else if(self.observable_timestamps().length == 1){
+            options = ko.utils.arrayMap(self.observable_timestamps(), function(item){
+                return {value: item.year(), label:'Avg. ' + (item.year() - 4) + ' - ' + item.year()};
+            });
 
             // Then our second set of values is really a range
-            options.push({'value':self.observable_timestamps()[0].year(),
-                    'label':'Avg. 2009 - ' + self.observable_timestamps()[0].year()})
+            //options.push({'value':self.observable_timestamps()[0].year(),
+             //       'label':'Avg. 2009 - ' + self.observable_timestamps()[0].year()})
         }
 
         return options;

@@ -84,7 +84,7 @@ function EquityViewModel (data) {
             return x;
         }
         else{
-            return [moment({y: 2010}), moment({y: 2015})];
+            return [];
         }
     });
 
