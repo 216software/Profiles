@@ -20,6 +20,7 @@ function Indicator (data) {
     self.data_as_of = ko.observable(data.data_as_of);
     self.numerator_tables = ko.observable(data.numerator_tables);
     self.denominator_tables = ko.observable(data.denominator_tables);
+    self.chart_label = ko.observable(data.chart_label);
 
     self.percent_change_available = ko.observable(true);
 
@@ -28,6 +29,7 @@ function Indicator (data) {
     self.update_self = function(data){
         self.title(data.title);
         self.pretty_label(data.pretty_label);
+        self.chart_label(data.chart_label);
         self.description(data.description);
         self.indicator_value_format(data.indicator_value_format);
 
