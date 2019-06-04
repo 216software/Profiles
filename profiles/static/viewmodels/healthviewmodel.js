@@ -72,7 +72,7 @@ function HealthViewModel (data) {
         if (self.observable_timestamps().length > 0){
             var m = self.observable_timestamps()[self.observable_timestamps().length-1];
             if (m){
-                return m.format('YYYY') - 4 + '-' + m.format('YYYY');
+                return (m.format('YYYY') - 5) + '-' + (m.format('YYYY') - 1);
             }
 
         }

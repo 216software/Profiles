@@ -85,6 +85,21 @@ Downlad as CSV</a>
 
 <!-- /ko -->
 
+</tbody>
+
+</table>
+
+<table class="table table-striped table-bordered" id="healthTableElb">
+<thead>
+<tr>
+<th>Indicator</th>
+<th class="data">
+<span>2013 - 2017</span>
+</th>
+
+</tr>
+</thead>
+<tbody>
 <!-- ko foreach:ind_twoten -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
@@ -106,7 +121,7 @@ Downlad as CSV</a>
 </td>
 
 <td class="data">
-<span data-bind="text: indicator_value_by_year('2016')"></span>
+<span data-bind="text: indicator_value_by_year('2017')"></span>
 </td>
 
 </tr>

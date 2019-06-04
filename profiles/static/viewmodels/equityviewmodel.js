@@ -143,7 +143,6 @@ function EquityViewModel (data) {
 
     self.health_indicators = ['_mort_rate',
         '_infmort_rate',
-        '_ebll_c',
     ];
 
     self.health_observable_timestamps = ko.pureComputed(function(){
@@ -161,6 +160,25 @@ function EquityViewModel (data) {
             return {value: item.year(), label:item.year() - 4 + ' - ' + item.year()};
         });
     });
+
+    self.health_indicators_two= ['_ebll_c'];
+
+    self.health_two_observable_timestamps = ko.pureComputed(function(){
+        if(self.indicators().length > 0){
+            var x = self.observable_timestamps_from_indicators(self.health_indicators_two);
+            return x;
+        }
+        else{
+            return [moment({y: 2010}), moment({y: 2015})];
+        }
+    });
+
+    self.health_two_pretty_timestamps = ko.pureComputed(function(){
+        return ko.utils.arrayMap(self.health_two_observable_timestamps(), function(item){
+            return {value: item.year(), label:item.year() - 4 + ' - ' + item.year()};
+        });
+    });
+
 
     self.education_indicators = [
         /*'rpassed3',
@@ -225,6 +243,7 @@ function EquityViewModel (data) {
     self.indicator_titles = self.housing_cost_burden_indicators.concat(self.poverty_indicators);
 
     self.indicator_titles = self.indicator_titles.concat(self.health_indicators);
+    self.indicator_titles = self.indicator_titles.concat(self.health_indicators_two);
     self.indicator_titles = self.indicator_titles.concat(self.education_indicators);
     self.indicator_titles = self.indicator_titles.concat(self.income_indicators);
     self.indicator_cv_pairings = {};
