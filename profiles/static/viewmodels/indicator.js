@@ -77,10 +77,6 @@ function Indicator (data) {
                 return leftIndex < rightIndex ? -1 : 1
             });
 
-            if(self.racial_split().length > 0){
-            console.log(self.racial_split()[0].description());
-            }
-
     }
 
 
@@ -247,7 +243,27 @@ function Indicator (data) {
         if(self.indicator_MOE() != undefined){
 
             ind_value = self.indicator_MOE().indicator_value_by_year(year);
-            output += 'MOE (+/-): ' + format_value(ind_value(),null, 1) + '<br />';
+
+            try {
+
+                output += 'MOE (+/-): ' + format_value(ind_value(), null, 1) + '<br />';
+
+            }
+
+            catch (err) {
+
+                // console.error(err);
+                console.log("indicator_uuid:", self.indicator_uuid());
+                console.log("ind_value:", ind_value);
+
+                console.log("self.indicator_MOE(): ", self.indicator_MOE());
+                console.log("year:", year);
+                console.log("self.indicator_value_by_year(year): ", self.indicator_value_by_year(year));
+
+                //throw err;
+
+            }
+
             //output += 'MOE (+/-): ' + ind_value.formatted() + '<br />';
         }
 

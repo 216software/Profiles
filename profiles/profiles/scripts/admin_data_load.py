@@ -24,7 +24,11 @@ def set_up_args():
     ap.add_argument(
         "--run-forever",
         action="store_true",
+
+        # See, this kind of cleverness would annoy the dorks I work
+        # with by day, but I think it is great.
         help="Collect data, sleep, GOTO 10",
+
         default=False)
 
     ap.add_argument(
@@ -119,7 +123,6 @@ def log_job_message(pgconn, job_uuid, message):
     """), dict(job_uuid=job_uuid, message=message))
 
 def load_neighborhood(pgconn, csv_file_name):
-
 
     return junkdrawer.CSVInserter.load_neighborhood(
         pgconn,
@@ -332,6 +335,3 @@ if __name__ == "__main__":
 
     else:
         do_stuff(cw)
-
-
-

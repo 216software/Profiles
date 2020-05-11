@@ -76,7 +76,7 @@ function EconomyViewModel (data) {
      * but this seems faster */
     self.look_up_commercial_indicator_complete = function(data){
 
-        console.log(data);
+        // console.log(data);
 
         self.observable_timestamps_commercial(ko.utils.arrayMap(
             data.distinct_observable_timestamps || [],

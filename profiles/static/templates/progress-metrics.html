@@ -270,28 +270,33 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 </td>
 
-<td class="data">
-<span data-bind="text: indicator_value_by_year($parents[1].housing_cost_observable_timestamps()[0].year()).formatted"></span>
+    <!-- ko foreach:$parents[1].housing_cost_observable_timestamps -->
+        <td class="data">
+        <span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 
-<span data-bind="if: indicator_CV"><span data-bind="if: indicator_CV().indicator_value_by_year($parents[1].housing_cost_observable_timestamps()[0].year()).formatted">
-<button class="btn btn-xs hide-from-print"
-        data-toggle="popover"
-        title="CV &amp; MOE"
-        data-bind="attr: {'data-content' : pretty_CV_and_MOE($parents[1].housing_cost_observable_timestamps()[0].year())}">
-        +/-</button>
+        <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
+        $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
+        <button class="btn btn-xs hide-from-print"
+                data-toggle="popover"
+                title="CV &amp; MOE"
+                data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
+                +/-</button>
+        </span></span></td>
 
-</span></span>
-</td>
+        <!-- ko if:$parent.indicator_CV -->
+        <!-- ko if:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted -->
+        <td class="show-only-print data" data-bind="if:$parent.indicator_CV">
+        <span class="show-only-print"
+             data-bind="text: $parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
+        </td>
+        <td class="show-only-print data" data-bind="if:$parent.indicator_MOE">
+        <span class="show-only-print"
+             data-bind="text:
+        $parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
 
-<td class="show-only-print data" data-bind="if:indicator_CV">
-<span class="show-only-print"
-     data-bind="text: indicator_CV().indicator_value_by_year($parents[1].housing_cost_observable_timestamps()[0].year()).formatted"></span>
-</td>
-<td class="show-only-print data" data-bind="if:indicator_MOE">
-<span class="show-only-print"
-     data-bind="text:indicator_MOE().indicator_value_by_year(2014).formatted"></span>
+        </td>
+        <!-- /ko -->
 
-</td>
 <!-- /ko -->
 <!-- /ko -->
 
