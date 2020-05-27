@@ -199,7 +199,7 @@ Downlad as CSV</a>
 <th>Other indicators
 <th class="data">% change</th>
 
-<!-- ko foreach:observable_timestamps -->
+<!-- ko foreach:other_indicators_observable_timestamps -->
     <th><span data-bind="text:$data.format('YYYY') - 1"></span>-<span data-bind="text:$data.year()"></span> school year</th>
 <!-- /ko -->
 </tr>
@@ -232,7 +232,7 @@ Downlad as CSV</a>
 </td>
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
-<!-- ko foreach:$parents[1].observable_timestamps -->
+<!-- ko foreach:$parents[1].other_indicators_observable_timestamps -->
 <td class="data" data-bind="text:$parent.indicator_value_by_year($data.year()).formatted">
 </td>
 <!-- /ko --> <!-- closes inner for loop -->

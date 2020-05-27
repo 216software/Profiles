@@ -121,4 +121,37 @@ function EducationViewModel (data) {
 
     self.show_chart = {};
 
+    self.other_indicators_observable_timestamps = ko.pureComputed(function(){
+        if(self.indicators().length > 0){
+            var x = self.observable_timestamps_from_indicators(self.other_indicators);
+            return x;
+        }
+        else{
+            return [];
+        }
+
+
+    });
+
+    self.observable_timestamps_from_indicators = function(indicator_titles){
+        var observable_timestamps = [];
+        for (var i =0; i< indicator_titles.length; i++){
+            var i = Indicator.indicator_by_title(self.indicators(),
+                indicator_titles[i])
+
+            if(i == null){
+                break;
+            }
+
+            for(var j = 0; j< i.indicator_values().length; j++){
+                observable_timestamps.push(i.indicator_values()[j].observation_timestamp());
+            }
+
+        }
+
+        return observable_timestamps;
+    };
+
+
+
 };
