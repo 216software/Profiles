@@ -112,7 +112,7 @@ class Indicator(RelationWrapper):
 
         cursor = pgconn.cursor()
 
-        if indicator_value_format is None and '_' in title:
+        if indicator_value_format is None and '_' == title[0]:
             indicator_value_format = 'percent'
 
 

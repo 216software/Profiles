@@ -54,7 +54,8 @@ function PopulationViewModel (data) {
         'm_pop65to74',
         'pop75to84', '_pop75to84', 'cvpop75to84', 'mpop75to84', 'cv_pop75to84',
         'm_pop75to84',
-        'pop85p', '_pop85p', 'cvpop85p', 'mpop85p', 'cv_pop85p', 'm_pop85p'
+        'pop85p', '_pop85p', 'cvpop85p', 'mpop85p', 'cv_pop85p', 'm_pop85p',
+        'native', '_native', 'foreign', '_foreign'
 
     ];
 
@@ -71,6 +72,11 @@ function PopulationViewModel (data) {
         'pop55to64',  '_pop55to64',
         'pop65to74',  '_pop65to74',  'pop75to84',  '_pop75to84',
         'pop85p', '_pop85p'];
+
+    self.indicators_nativity_population = [
+        'native', '_native', 'foreign', '_foreign'
+    ];
+
 
     self.indicators_population_overview = ['nhw' ,'nhb',
         'nhapi', 'nho', 'hisp'];

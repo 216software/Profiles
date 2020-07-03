@@ -183,7 +183,51 @@ function CommunityViewModel (data) {
         }
     };
 
-    self.indicator_titles = ["_voter"];
+    self.indicator_titles = ["_voter", 'comphh',
+    '_comphh','hh_w_intrnet','_hh_w_intrnet'];
+
+    self.voter_titles = ["_voter"]
+    self.computer_titles =['comphh',
+    '_comphh','hh_w_intrnet','_hh_w_intrnet'];
+
+    self.voter_observable_timestamps = ko.pureComputed(function(){
+        if(self.indicators().length > 0){
+            var x = self.observable_timestamps_from_indicators(self.voter_titles);
+            return x;
+        }
+        else{
+            return [moment({y: 2010}), moment({y: 2015})];
+        }
+    });
+
+    self.computer_observable_timestamps = ko.pureComputed(function(){
+        if(self.indicators().length > 0){
+            var x = self.observable_timestamps_from_indicators(self.computer_titles);
+            return x;
+        }
+        else{
+            return [moment({y: 2010}), moment({y: 2015})];
+        }
+    });
+
+    self.observable_timestamps_from_indicators = function(indicator_titles){
+        var observable_timestamps = [];
+        for (var i =0; i< indicator_titles.length; i++){
+            var i = Indicator.indicator_by_title(self.indicators(),
+                indicator_titles[i])
+
+            if(i == null){
+                break;
+            }
+
+            for(var j = 0; j< i.indicator_values().length; j++){
+                observable_timestamps.push(i.indicator_values()[j].observation_timestamp());
+            }
+
+        }
+
+        return observable_timestamps;
+    };
 
     self.indicators = ko.observableArray([]);
 

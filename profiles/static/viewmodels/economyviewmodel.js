@@ -17,9 +17,35 @@ function EconomyViewModel (data) {
     };
 
     /* This should also include the order we want to display */
-    self.indicator_titles = ['alljobs'];
+    self.indicator_titles = ['alljobs',
+            'w_primjobs',
+            'w_within',
+            '_w_within',
+            'w_outside',
+            '_w_outside',
+            'w_age1',
+            '_w_age1',
+            'w_age2',
+            '_w_age2',
+            'w_age3',
+            '_w_age3',
+            'w_earn1',
+            '_w_earn1',
+            'w_earn2',
+            '_w_earn2',
+            'w_earn3',
+            '_w_earn3',
+            'w_sector1',
+            '_w_sector1',
+            'w_sector2',
+            '_w_sector2',
+            'w_sector3',
+            '_w_sector3',
+    ];
 
-    self.overview_indicators = ['alljobs'];
+    self.overview_indicators = ['alljobs',
+
+    ];
     self.commercial_indicators = ['_bus_occ']
 
     self.indicators = ko.observableArray([]);
