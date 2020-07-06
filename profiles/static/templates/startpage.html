@@ -192,6 +192,23 @@ containing locations:</strong>
     params: ['location_uuid']
 }"></div>
 
+<div data-bind="page: {
+    id: 'mobility',
+    source: '/static/templates/mobility.html',
+    with: mobilityvm,
+    afterShow: mobilityvm.initialize,
+    params: ['location_uuid']
+}"></div>
+
+<div data-bind="page: {
+    id: 'income-poverty',
+    source: '/static/templates/income-poverty.html',
+    with: incomepovertyvm,
+    afterShow: incomepovertyvm.initialize,
+    params: ['location_uuid']
+}"></div>
+
+
 
 <div data-bind="page: {
     id: 'safety',
