@@ -25,211 +25,100 @@ function MobilityViewModel (data) {
     };
 
     /* This should also include the order we want to display */
-    self.indicator_titles = ['lf' ,'_lf', 'cvlf', 'cv_lf', 'mlf', 'm_lf',
-        'emp',  'cvemp', 'memp',
-        '_emp',  'cv_emp', 'm_emp',
-        'lshs', '_lshs', 'cvlshs', 'mlshs', 'cv_lshs', 'm_lshs',
-        'hsgrad', '_hsgrad', 'cvhsgrad', 'mhsgrad', 'cv_hsgrad', 'm_hsgrad',
-        'somecollassoc', '_somecollassoc', 'cvsomecollassoc', 'msomecollassoc', 'cv_somecollassoc', 'm_somecollassoc',
-        'bsp', '_bsp', 'cvbsp', 'mbsp', 'cv_bsp', 'm_bsp',
+    self.indicator_titles = [
+            'samehse1y', 'cvsamehse1y', 'msamehse1y',
+            '_samehse1y', 'cv_samehse1y', 'm_samehse1y',
+            'diffhs1y','cvdiffhs1y', 'mdiffhs1y',
+            '_diffhs1y','cv_diffhs1y', 'm_diffhs1y',
+            'thh','cvthh', 'mthh',
+            'pop_in_hh','cvpop_in_hh', 'mpop_in_hh',
+            '_pop_in_hh','cv_pop_in_hh', 'm_pop_in_hh',
+            'nonfam','cvnonfam', 'mnonfam',
+            '_nonfam','cv_nonfam', 'm_nonfam',
+            'hh_popls18','cvhh_popls18', 'mhh_popls18',
+            '_hh_popls18','cv_hh_popls18', 'm_hh_popls18',
+            'hh_pop65p','cvhh_pop65p', 'mhh_pop65p',
+            '_hh_pop65p','cv_hh_pop65p', 'm_hh_pop65p',
+            'pop_in_fam','cvpop_in_fam', 'mpop_in_fam',
+            '_pop_in_fam','cv_pop_in_fam', 'm_pop_in_fam',
+            'famhh','cvfamhh', 'mfamhh',
+            '_famhh','cv_famhh', 'm_famhh',
+            'famhh_wc','cvfamhh_wc', 'mfamhh_wc',
+            '_famhh_wc','cv_famhh_wc', 'm_famhh_wc',
+            'marhh','cvmarhh', 'mmarhh',
+            '_marhh','cv_marhh', 'm_marhh',
+            'marhh_wc','cvmarhh_wc', 'mmarhh_wc',
+            '_marhh_wc','cv_marhh_wc', 'm_marhh_wc',
+            'femhh','cvfemhh', 'mfemhh',
+            '_femhh','cv_femhh', 'm_femhh',
+            'femhh_wc','cvfemhh_wc', 'mfemhh_wc',
+            '_femhh_wc','cv_femhh_wc', 'm_femhh_wc',
+            'malehh','cvmalehh', 'mmalehh',
+            '_malehh','cv_malehh', 'm_malehh',
+            'malehh_wc','cvmalehh_wc', 'mmalehh_wc',
+            '_malehh_wc','cv_malehh_wc', 'm_malehh_wc',
+    ];
 
-        'worker16p', 'cvworker16p', 'mworker16p',
-        'drove', 'cvdrove', 'mdrove',
-        '_drove', 'cv_drove', 'm_drove',
-        'public_tran', 'cvpublic_tran', 'mpublic_tran',
-        '_public_tran', 'cv_public_tran', 'm_public_tran',
-        'other_tran', 'cvother_tran', 'mother_tran',
-        '_other_tran', 'cv_other_tran', 'm_other_tran',
-        'walk', 'cvwalk', 'mwalk',
-        '_walk', 'cv_walk', 'm_walk',
-        'workathome', 'cvworkathome', 'mworkathome',
-        '_workathome', 'cv_workathome', 'm_workathome',
-        'travel_ls30', 'cvtravel_ls30', 'mtravel_ls30',
-        '_travel_ls30','cv_travel_ls30', 'm_travel_ls30',
-        'travel_30to60','cvtravel_30to60', 'mtravel_30to60',
-        '_travel_30to60','cv_travel_30to60', 'm_travel_30to60',
-        'travel_60p','cvtravel_60p', 'mtravel_60p',
-        '_travel_60p','cv_travel_60p', 'm_travel_60p',
-
-        'h_primjobs',
-        'h_within',
-        '_h_within',
-        'h_outside',
-        '_h_outside',
-        'h_age1',
-        '_h_age1',
-        'h_age2',
-        '_h_age2',
-        'h_age3',
-        '_h_age3',
-        'h_earn1',
-        '_h_earn1',
-        'h_earn2',
-        '_h_earn2',
-        'h_earn3',
-        '_h_earn3',
-        'h_sector1',
-        '_h_sector1',
-        'h_sector2',
-        '_h_sector2',
-        'h_sector3',
-        '_h_sector3',
-        ];
-
-    self.indicators_employment = ['emp', '_emp', 'lf', '_lf'];
-
-    self.old_indicators_pop_by_ed_attainment = ['pop25',
-        'hsls9', '_hsls9',
-        'hs9to12', '_hs9to12',
-        'hsgrad', '_hsgrad',
-        'somecoll', '_somecoll',
-        'assoc', '_assoc',
-        'bs', '_bs',
-        'prof', '_prof'];
+    self.indicators_same_house = ['samehse1y',
+        '_samehse1y',
+        'diffhs1y',
+        '_diffhs1y',
+    ];
 
     // This is the correct list
-    self.indicators_pop_by_ed_attainment = [
-        'lshs',
-        '_lshs',
-        'hsgrad',
-        '_hsgrad',
-        'somecollassoc',
-        '_somecollassoc',
-        'bsp',
-        '_bsp',
+    self.indicators_house_type= [
+        'thh',
+        'pop_in_hh',
+        '_pop_in_hh',
+        'nonfam',
+        '_nonfam',
+        'hh_popls18',
+        '_hh_popls18',
+        'hh_pop65p',
+        '_hh_pop65p',
+        'pop_in_fam',
+        '_pop_in_fam',
+        'famhh',
+        '_famhh',
+        'famhh_wc',
+        '_famhh_wc',
+        'marhh',
+        '_marhh',
+        'marhh_wc',
+        '_marhh_wc',
+        'femhh',
+        '_femhh',
+        'femhh_wc',
+        '_femhh_wc',
+        'malehh',
+        '_malehh',
+        'malehh_wc',
+        '_malehh_wc'
     ];
 
-    self.indicators_workers_by_transport = [
-        'worker16p',
-        'drove',
-        '_drove',
-        'public_tran',
-        '_public_tran',
-        'other_tran',
-        '_other_tran',
-        'walk',
-        '_walk',
-        'workathome',
-        '_workathome']
-
-    self.indicators_workers_by_commute = [
-   'travel_ls30',
-   '_travel_ls30',
-   'travel_30to60',
-   '_travel_30to60',
-   'travel_60p',
-   '_travel_60p',
-    ];
-
-    self.indicators_residing = [
-        'h_primjobs',
-        'h_within',
-        '_h_within',
-        'h_outside',
-        '_h_outside',
-        'h_age1',
-        '_h_age1',
-        'h_age2',
-        '_h_age2',
-        'h_age3',
-        '_h_age3',
-        'h_earn1',
-        '_h_earn1',
-        'h_earn2',
-        '_h_earn2',
-        'h_earn3',
-        '_h_earn3',
-        'h_sector1',
-        '_h_sector1',
-        'h_sector2',
-        '_h_sector2',
-        'h_sector3',
-        '_h_sector3',
-        ]
 
 
-    self.indicator_cv_pairings = {
-        'lf':'cvlf',
-        'emp':'cvemp',
-        'lshs': 'cvlshs',
-        '_lf':'cv_lf',
-        '_emp':'cv_emp',
-        // 'hs9to12':'cvhs9to12',
-        // '_hs9to12':'cv_hs9to12',
-        'hsgrad':'cvhsgrad',
-        '_hsgrad':'cv_hsgrad',
-        // 'somecoll':'cvsomecoll',
-        // '_somecoll':'cv_somecoll',
-        // 'assoc':'cvassoc',
-        // '_assoc':'cv_assoc',
-        // 'bs':'cvbs',
-        // '_bs':'cv_bs',
-        // 'prof':'cvprof',
-        // '_prof':'cv_prof',
-        //
-        //
-        'worker16p' : 'cvworker16p',
-        'drove' : 'cvdrove',
-        '_drove' : 'cv_drove',
-        'public_tran' : 'cvpublic_tran',
-        '_public_tran' : 'cv_public_tran',
-        'other_tran' : 'cvother_tran',
-        '_other_tran' : 'cv_other_tran',
-        'walk' : 'cvwalk',
-        '_walk' : 'cv_walk',
-        'workathome' : 'cvworkathome',
-        '_workathome' : 'cv_workathome',
-       'travel_ls30': 'cvtravel_ls30',
-       '_travel_ls30': 'cv_travel_ls30',
-       'travel_30to60': 'cvtravel_30to60',
-       '_travel_30to60': 'cv_travel_30to60',
-       'travel_60p': 'cvtravel_60p',
-       '_travel_60p': 'cv_travel_60p',
-        }
 
-    self.indicator_moe_pairings = {'lf':'mlf', 'emp':'memp',
-        '_lf':'m_lf', '_emp':'cv_emp',
-        'hs9to12':'mhs9to12',
-        '_hs9to12':'m_hs9to12',
-        'hsgrad':'mhsgrad',
-        '_hsgrad':'m_hsgrad',
-        'somecoll':'msomecoll',
-        '_somecoll':'m_somecoll',
-        'assoc':'massoc',
-        '_assoc':'m_assoc',
-        'bs':'mbs',
-        '_bs':'m_bs',
-        'prof':'mprof',
-        '_prof':'m_prof',
-        'worker16p' : 'mworker16p',
-        'drove' : 'mdrove',
-        '_drove' : 'm_drove',
-        'public_tran' : 'mpublic_tran',
-        '_public_tran' : 'm_public_tran',
-        'other_tran' : 'mother_tran',
-        '_other_tran' : 'm_other_tran',
-        'walk' : 'mwalk',
-        '_walk' : 'm_walk',
-        'workathome' : 'mworkathome',
-        '_workathome' : 'm_workathome',
-       'travel_ls30': 'mtravel_ls30',
-       '_travel_ls30': 'm_travel_ls30',
-       'travel_30to60': 'mtravel_30to60',
-       '_travel_30to60': 'm_travel_30to60',
-       'travel_60p': 'mtravel_60p',
-       '_travel_60p': 'm_travel_60p',
+    self.indicator_cv_pairings = { }
 
-        }
+    self.indicator_moe_pairings = { }
 
     // add some stuff dynamically.
-    $.each(self.indicators_pop_by_ed_attainment, function (index, value) {
+    $.each(self.indicators_same_house, function (index, value) {
         var cv_indicator = "cv" + value;
         var moe_indicator = "m" + value;
         self.indicator_cv_pairings[value] = cv_indicator;
         self.indicator_moe_pairings[value] = moe_indicator;
     });
 
-    self.overview_indicators = ['emp'];
+    $.each(self.indicators_house_type, function (index, value) {
+        var cv_indicator = "cv" + value;
+        var moe_indicator = "m" + value;
+        self.indicator_cv_pairings[value] = cv_indicator;
+        self.indicator_moe_pairings[value] = moe_indicator;
+    });
+
+    self.overview_indicators = [];
 
     self.indicators = ko.observableArray([]);
 
@@ -296,43 +185,9 @@ function MobilityViewModel (data) {
         }
     }
 
-    self.show_chart = {
-        "emp": true,
-        "_emp": true,
-        "lf": true,
-        "_lf": true,
-        "lshs": true,
-        "_lshs": true,
-        "hsgrad": true,
-        "_hsgrad": true,
-        "somecollassoc": true,
-        "_somecollassoc": true,
-        "bsp": true,
-        "_bsp": true
-    };
+
 
     self.show_chart = {};
-
-    self.residence_observable_timestamps = ko.pureComputed(function(){
-        if(self.indicators().length > 0){
-            var x = self.observable_timestamps_from_indicators(self.indicators_residing);
-            return x;
-        }
-        else{
-            return [moment({y: 2010}), moment({y: 2015})];
-        }
-    });
-
-    self.worker_observable_timestamps = ko.pureComputed(function(){
-        if(self.indicators().length > 0){
-            var x = self.observable_timestamps_from_indicators(self.indicators_workers_by_transport);
-            return x;
-        }
-        else{
-            return [moment({y: 2010}), moment({y: 2015})];
-        }
-    });
-
 
 
     self.observable_timestamps_from_indicators = function(indicator_titles){

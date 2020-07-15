@@ -19,8 +19,8 @@ function StabilizationViewModel (data) {
 
     /* This should also include the order we want to display */
     self.indicator_titles = ['res_occ', '_res_occ',
-        'hsg_den', 'f',
-        'shf',
+        'hsg_den', 'f', '_f',
+        'shf','_shf',
         'distress', '_distress',
         'ntal_sales', '_ntal_sales',
         'med_ntal_price',
@@ -30,8 +30,8 @@ function StabilizationViewModel (data) {
        '_move_out' ];
 
     self.stabilization_titles = ['res_occ', '_res_occ',
-        'hsg_den', 'f',
-        'shf',
+        'hsg_den', 'f','_f',
+        'shf', '_shf',
         'distress', '_distress',
         'ntal_sales', '_ntal_sales',
         'med_ntal_price'];

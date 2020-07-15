@@ -31,7 +31,10 @@ function EducationViewModel (data) {
         'band2', '_band2',
         'band3', '_band3',
         'meanscore',
-        'qslots'];
+        ];
+
+    self.kindergarten_indicators = ['qslots']
+
 
     self.other_indicators = ['_attend']
 
@@ -39,7 +42,7 @@ function EducationViewModel (data) {
 
     self.indicator_titles = (self.reading_indicator_titles.concat(
         self.math_indicator_titles)).concat(self.kindergarten_readiness_titles).concat(
-        self.other_indicators);
+        self.other_indicators).concat(self.kindergarten_indicators);
 
 
     self.indicators = ko.observableArray([]);
@@ -121,6 +124,28 @@ function EducationViewModel (data) {
 
     self.show_chart = {};
 
+    self.band_observable_timestamps = ko.pureComputed(function(){
+        if(self.indicators().length > 0){
+            var x = self.observable_timestamps_from_indicators(self.reading_indicator_titles);
+            return x;
+        }
+        else{
+            return [];
+        }
+    });
+
+    self.kindergarten_observable_timestamps = ko.pureComputed(function(){
+        if(self.indicators().length > 0){
+            var x = self.observable_timestamps_from_indicators(self.kindergarten_indicators);
+            return x;
+        }
+        else{
+            return [];
+        }
+    });
+
+
+
     self.other_indicators_observable_timestamps = ko.pureComputed(function(){
         if(self.indicators().length > 0){
             var x = self.observable_timestamps_from_indicators(self.other_indicators);
@@ -129,8 +154,6 @@ function EducationViewModel (data) {
         else{
             return [];
         }
-
-
     });
 
     self.observable_timestamps_from_indicators = function(indicator_titles){

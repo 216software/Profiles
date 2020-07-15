@@ -1,10 +1,7 @@
 
-<h2>Workforce Metrics</h2>
+<h2>Households and Mobility</h2>
 <p class="lead">
-Critical to economic mobility, we must assess whether or not residents
-are employed and/or seeking to participate in the labor force. This can
-help us identify barriers or opportunities to connect residents to jobs,
-job training programs, and other opportunities in order to build wealth.
+NEED DESCRIPTION
 </p>
 
 <div data-bind="with:parentvm.selected_location()">
@@ -18,11 +15,11 @@ available in a table as well.</h5>
 
 
 <p class="hide-from-print text-info small">
-<a target="_blank" data-bind="attr: {href: '/pdf/workforce-' + print_friendly_name + '.pdf'}">Download as PDF</a>
+<a target="_blank" data-bind="attr: {href: '/pdf/mobility-' + print_friendly_name + '.pdf'}">Download as PDF</a>
 |
 <a href="#"
     data-bind="click:function(event){ console.log(event.currentTarget);
-    rootvm.exportTableToCSV(event, ['workforceTable'], 'workforce - ' + print_friendly_name + '.csv'); return true;}">
+    rootvm.exportTableToCSV(event, ['mobilityTable'], 'mobility - ' + print_friendly_name + '.csv'); return true;}">
 Downlad as CSV</a>
 
 
@@ -30,178 +27,13 @@ Downlad as CSV</a>
 
 </div>
 
-<table class="table table-striped table-bordered" id="workforceTable">
+<table class="table table-striped table-bordered" id="mobilityTable">
 <thead>
 <tr>
-<th>Indicator</th>
-<th class="data">% change</th>
-<!-- ko foreach:worker_observable_timestamps -->
-    <!-- ko if:($index() == 0) -->
-    <th class="data"><span data-bind="text:$data.format('YYYY') - 4"></span>-
-    <span data-bind="text:$data.format('YYYY')"></span></th>
-    <!-- /ko -->
-    <!-- ko if:($index() != 0) -->
-    <th class="data">
-    <span data-bind="text:$data.year() - 4"></span>-
-    <span data-bind="text:$data.year()"></span></th>
-    <!-- /ko -->
-<th class="show-only-print">CV</th>
-<th class="show-only-print">MOE (+/-)</th>
-<!-- /ko -->
-</tr>
-</thead>
-<tbody>
-<!-- ko foreach:indicators_employment -->
-
-<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
-<tr data-bind="css: {rate_data: is_a_rate() }">
-<td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>
-<span class="pull-right" style="padding-left:5px">
-<a href="#" class="info-link hide-from-print"
-        data-toggle="popover"
-        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
-                   attr: {'data-content' :
-                          $parents[1].rootvm.indicator_extra_info($data)}">
-        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-</a>
-<a href="#" class="btn btn-primary btn-sm hide-from-print"
-      data-bind="page-href: {path : '/indicator-map',
-       params: {indicator_uuid: indicator_uuid}}">
-        Map</a>
-
-
-
-
-
-
-</span>
-
-<span class="sas_variable" style="display:none;" data-bind="text: title"></span>
-
-</td>
-
-
-<td class="data" data-bind="text:percent_change_indicator_value"></td>
-
-<!-- ko foreach:$parents[1].worker_observable_timestamps -->
-<td class="data"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
-<span data-bind="if:$parent.indicator_CV"><span data-bind="if:
-$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
-<button class="btn btn-xs hide-from-print"
-        data-toggle="popover"
-        title="CV &amp; MOE"
-        data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
-        +/-</button>
-</span></span>
-</td>
-<!-- ko if:$parent.indicator_CV -->
-<!-- ko if:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted -->
-<td class="show-only-print data" data-bind="if:$parent.indicator_CV">
-<span class="show-only-print"
-     data-bind="text: $parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
-</td>
-<td class="show-only-print data" data-bind="if:$parent.indicator_MOE">
-<span class="show-only-print"
-     data-bind="text:
-$parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
-
-</td>
-<!-- /ko -->
-<!-- /ko -->
-
-</td>
-<!-- /ko --> <!-- closes inner for loop -->
-
-</tr>
-
-<!-- /ko -->
-
-<!-- /ko -->
-
-<tr>
-<th colspan="4">Population by education attainment level</th>
-</tr>
-<!-- ko foreach:indicators_pop_by_ed_attainment -->
-
-<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
-<tr data-bind="css: {rate_data: is_a_rate() }">
-<td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>
-<span class="pull-right" style="padding-left:5px">
-<a href="#" class="info-link hide-from-print"
-        data-toggle="popover"
-        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
-                   attr: {'data-content' :
-                          $parents[1].rootvm.indicator_extra_info($data)}">
-        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-</a>
-<a href="#" class="btn btn-primary btn-sm hide-from-print"
-      data-bind="page-href: {path : '/indicator-map',
-       params: {indicator_uuid: indicator_uuid}}">
-        Map</a>
-
-
-
-
-
-</span>
-
-<span class="sas_variable" style="display:none;" data-bind="text: title"></span>
-
-</td>
-
-<td class="data" data-bind="text:percent_change_indicator_value"></td>
-
-<!-- ko foreach:$parents[1].worker_observable_timestamps -->
-<td class="data"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
-<span data-bind="if:$parent.indicator_CV"><span data-bind="if:
-$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
-<button class="btn btn-xs hide-from-print"
-        data-toggle="popover"
-        title="CV &amp; MOE"
-        data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
-        +/-</button>
-
-</span></span> </td>
-
-<!-- ko if:$parent.indicator_CV -->
-<!-- ko if:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted -->
-<td class="show-only-print data" data-bind="if:$parent.indicator_CV">
-<span class="show-only-print"
-     data-bind="text: $parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
-</td>
-<td class="show-only-print data" data-bind="if:$parent.indicator_MOE">
-<span class="show-only-print"
-     data-bind="text: $parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
-
-</td>
-<!-- /ko -->
-<!-- /ko -->
-
-
-<!-- /ko --> <!-- closes inner for loop -->
-
-</tr>
-
-<!-- /ko -->
-
-<!-- /ko -->
-
-
-
-
-</tbody>
-
-</table>
-
-
-
-<table class="table table-striped table-bordered" id="transportTable">
-<thead>
-<tr>
-<th>Workers by method of transportation to work
+<th>Persons living in the same house/different house 1 year ago
 </th>
 <th class="data">% change</th>
-<!-- ko foreach:worker_observable_timestamps -->
+<!-- ko foreach:observable_timestamps -->
     <!-- ko if:($index() == 0) -->
     <th class="data"><span data-bind="text:$data.format('YYYY') - 4"></span>-
     <span data-bind="text:$data.format('YYYY')"></span></th>
@@ -217,7 +49,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 </tr>
 </thead>
 <tbody>
-<!-- ko foreach: indicators_workers_by_transport -->
+<!-- ko foreach:indicators_same_house -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr data-bind="css: {rate_data: is_a_rate() }">
@@ -249,7 +81,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
-<!-- ko foreach:$parents[1].worker_observable_timestamps -->
+<!-- ko foreach:$parents[1].observable_timestamps -->
 <td class="data"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
 $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
@@ -285,17 +117,20 @@ $parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
 <!-- /ko -->
 
 
+
 </tbody>
 
 </table>
 
-<table class="table table-striped table-bordered" id="transportTable">
+
+
+<table class="table table-striped table-bordered" id="householdTable">
 <thead>
 <tr>
-<th>Workers by commute time
+<th>Household and Family Types
 </th>
 <th class="data">% change</th>
-<!-- ko foreach:worker_observable_timestamps -->
+<!-- ko foreach:observable_timestamps -->
     <!-- ko if:($index() == 0) -->
     <th class="data"><span data-bind="text:$data.format('YYYY') - 4"></span>-
     <span data-bind="text:$data.format('YYYY')"></span></th>
@@ -311,7 +146,7 @@ $parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
 </tr>
 </thead>
 <tbody>
-<!-- ko foreach: indicators_workers_by_commute -->
+<!-- ko foreach: indicators_house_type -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
 <tr data-bind="css: {rate_data: is_a_rate() }">
@@ -343,95 +178,7 @@ $parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
 
 <td class="data" data-bind="text:percent_change_indicator_value"></td>
 
-<!-- ko foreach:$parents[1].worker_observable_timestamps -->
-<td class="data"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
-<span data-bind="if:$parent.indicator_CV"><span data-bind="if:
-$parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
-<button class="btn btn-xs hide-from-print"
-        data-toggle="popover"
-        title="CV &amp; MOE"
-        data-bind="attr: {'data-content' : $parent.pretty_CV_and_MOE($data.year())}">
-        +/-</button>
-</span></span>
-</td>
-<!-- ko if:$parent.indicator_CV -->
-<!-- ko if:$parent.indicator_CV().indicator_value_by_year($data.year()).formatted -->
-<td class="show-only-print data" data-bind="if:$parent.indicator_CV">
-<span class="show-only-print"
-     data-bind="text: $parent.indicator_CV().indicator_value_by_year($data.year()).formatted"></span>
-</td>
-<td class="show-only-print data" data-bind="if:$parent.indicator_MOE">
-<span class="show-only-print"
-     data-bind="text:
-$parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
-
-</td>
-<!-- /ko -->
-<!-- /ko -->
-
-</td>
-<!-- /ko --> <!-- closes inner for loop -->
-
-</tr>
-
-<!-- /ko -->
-
-<!-- /ko -->
-
-
-</tbody>
-
-</table>
-
-<table class="table table-striped table-bordered" id="transportTable">
-<thead>
-<tr>
-<th>Workers residing in neighborhood and key characteristics- LEHD
-
-</th>
-<th class="data">% change</th>
-<!-- ko foreach:residence_observable_timestamps -->
-    <th class="data">
-    <span data-bind="text:$data.year()"></span></th>
-<th class="show-only-print">CV</th>
-<th class="show-only-print">MOE (+/-)</th>
-<!-- /ko -->
-</tr>
-</thead>
-<tbody>
-<!-- ko foreach: indicators_residing -->
-
-<!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
-<tr data-bind="css: {rate_data: is_a_rate() }">
-<td style="white-space:nowrap"> <span data-bind="text:pretty_label"></span>
-<span class="pull-right" style="padding-left:5px">
-<a href="#" class="info-link hide-from-print"
-        data-toggle="popover"
-        data-bind="visible:$parents[1].rootvm.indicator_extra_info($data),
-                   attr: {'data-content' :
-                          $parents[1].rootvm.indicator_extra_info($data)}">
-        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-</a>
-<a href="#" class="btn btn-primary btn-sm hide-from-print"
-      data-bind="page-href: {path : '/indicator-map',
-       params: {indicator_uuid: indicator_uuid}}">
-        Map</a>
-
-
-
-
-
-
-</span>
-
-<span class="sas_variable" style="display:none;" data-bind="text: title"></span>
-
-</td>
-
-
-<td class="data" data-bind="text:percent_change_indicator_value"></td>
-
-<!-- ko foreach:$parents[1].residence_observable_timestamps -->
+<!-- ko foreach:$parents[1].observable_timestamps -->
 <td class="data"><span data-bind="text:$parent.indicator_value_by_year($data.year()).formatted"></span>
 <span data-bind="if:$parent.indicator_CV"><span data-bind="if:
 $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
