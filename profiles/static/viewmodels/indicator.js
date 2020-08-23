@@ -43,6 +43,10 @@ function Indicator (data) {
 
     self.racial_sort_order = ['black', 'white', 'hispanic', 'asian', 'other'];
 
+    if(self.title() == 'native'){
+        console.log('native');
+    }
+
     if(data.racial_split){
             ko.utils.arrayForEach(data.racial_split, function(ind){
 

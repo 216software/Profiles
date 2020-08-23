@@ -18,11 +18,39 @@ function WorkforceViewModel (data) {
     self.parentvm = data.parentvm;
     self.location_uuid = ko.observable();
 
+    self.indicatorcomparisonvm = new IndicatorComparisonByRaceViewModel(data);
+
+    self.location_uuid.subscribe(function(){
+        self.by_race_selector(undefined);
+    });
+    self.by_race_selector = ko.observable();
+
+    self.expand_everything = ko.observable();
+
+
     self.initialize = function(){
         if(self.location_uuid()){
             self.parentvm.location_uuid(self.location_uuid());
         }
     };
+
+    self.selected_chart_year = ko.observable();
+    self.selected_chart_year.subscribe(function(){
+        self.show_chart(true);
+        self.update_chart()
+    });
+
+    self.update_chart = function(i){
+
+        if(self.by_race_selector() && self.selected_chart_year())
+        {
+            self.indicatorcomparisonvm.location_uuid(self.location_uuid());
+            self.indicatorcomparisonvm.indicator_uuid(self.by_race_selector().indicator_uuid());
+            self.indicatorcomparisonvm.year(self.selected_chart_year().value);
+            self.indicatorcomparisonvm.update_chart();
+        }
+    }
+
 
     /* This should also include the order we want to display */
     self.indicator_titles = ['lf' ,'_lf', 'cvlf', 'cv_lf', 'mlf', 'm_lf',
@@ -249,8 +277,9 @@ function WorkforceViewModel (data) {
 
 
     self.parentvm.selected_location.subscribe(function(){
+        // We could also do this on show
         self.parentvm.look_up_indicator_and_values(self.indicator_titles,
-            self.look_up_indicator_complete);
+            self.look_up_indicator_complete, true);
     });
 
     self.observable_timestamps = ko.observableArray([]);
@@ -296,6 +325,15 @@ function WorkforceViewModel (data) {
         }
     }
 
+    self.pretty_timestamps = ko.pureComputed(function(){
+        return ko.utils.arrayMap(self.worker_observable_timestamps(), function(item){
+            return {value: item.year(), label:item.year() - 4 + ' - ' + item.year()};
+        });
+
+    });
+
+
+    /*
     self.show_chart = {
         "emp": true,
         "_emp": true,
@@ -311,7 +349,38 @@ function WorkforceViewModel (data) {
         "_bsp": true
     };
 
-    self.show_chart = {};
+    self.show_chart = {};*/
+    self.show_chart = ko.observable(false);
+
+    self.drawVisualization = function() {
+
+        var data = new google.visualization.DataTable();
+
+        data.addColumn("string", "Race");
+        data.addColumn("number", self.indicator().pretty_label());
+        data.addColumn({id: "floor", type: "number", role: "interval"})
+        data.addColumn({id: "ceiling", type: "number", role: "interval"})
+
+        for (var i=0; i<self.racial_split().length; i++) {
+            var o = self.racial_split()[i];
+            var row = [o.chart_label, o.value, o.floor, o.ceiling];
+            data.addRow(row);
+        }
+
+        var options = {
+            title : self.indicator().pretty_label() + ", " + self.year() + ", " + self.location().title(),
+            intervals: {
+                'lineWidth': 2,
+                'color': '383737',
+                'style': 'sticks'
+            }
+        };
+
+        var chart = new google.visualization.ColumnChart(
+            document.getElementById('comparisonChart'));
+        chart.draw(data, options);
+    }
+
 
     self.residence_observable_timestamps = ko.pureComputed(function(){
         if(self.indicators().length > 0){

@@ -235,6 +235,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 </th></tr>
 <tr data-bind="visible: show_housing_cost_burden_data">
 <th>Indicator</th>
+<th class="data">% change</th>
 <!-- ko foreach:housing_cost_pretty_timestamps -->
     <th class="data" data-bind="text:$data.label">
     </th>
@@ -269,6 +270,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 </span>
 
 </td>
+<td class="data" data-bind="text:percent_change_indicator_value"></td>
 
     <!-- ko foreach:$parents[1].housing_cost_observable_timestamps -->
         <td class="data">

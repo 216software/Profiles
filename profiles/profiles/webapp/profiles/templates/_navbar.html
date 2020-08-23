@@ -31,11 +31,10 @@
                 </li></ul>
         </div>
 
-        <div class="container hidden-print">
            <div class="col-md-12">
            <div class="row">
            <div class="navbar navbar-default" role="navigation"
-                style="background-color:transparent;">
+                style="background-color:transparent; font-size:12px">
            <!-- Brand and toggle get grouped for better mobile display -->
            <div class="navbar-header">
            <button type="button" class="navbar-toggle"
@@ -88,13 +87,13 @@
             <a href="#" data-bind="page-href : {
                 path : '//mobility',
                 params : {location_uuid:startpagevm.location_uuid()}}"
-                class="sub-nav">Households, Families, and Mobility</a></li>
+                class="sub-nav">Households & Mobility</a></li>
 
             <li class="domain" data-bind="css: {active : active_tab() =='income-poverty'}">
             <a href="#" data-bind="page-href : {
                 path : '//income-poverty',
                 params : {location_uuid:startpagevm.location_uuid()}}"
-                class="sub-nav">Income and Poverty</a></li>
+                class="sub-nav">Income & Poverty</a></li>
 
             <li class="domain" data-bind="css: {active : active_tab() =='safety'}">
             <a href="#" data-bind="page-href : {
@@ -143,7 +142,6 @@
         </div>
         </div> <!-- closes row -->
         </div> <!-- closes col-md-12 -->
-     </div> <!-- closes container hidden-print -->
 </nav>
 
 {# vim: set syntax=htmldjango: #}

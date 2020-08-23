@@ -19,12 +19,12 @@ function EducationViewModel (data) {
     self.reading_indicator_titles =  ['rpassed3', '_rpassed3',
         'rpassed4', '_rpassed4',
         'rpassed6', '_rpassed6',
-        'rpassed10', '_rpasssed10'];
+        'rpassed10', '_rpassed10'];
 
     self.math_indicator_titles =  ['mpassed3', '_mpassed3',
         'mpassed4', '_mpassed4',
         'mpassed6', '_mpassed6',
-        'mpassed10', '_rpasssed10'];
+        'mpassed10', '_mpassed10'];
 
 
     self.kindergarten_readiness_titles =  ['band1', '_band1',
