@@ -25,6 +25,8 @@ function MobilityViewModel (data) {
     self.by_race_selector = ko.observable();
 
     self.expand_everything = ko.observable();
+    self.show_different = ko.observable(false);
+    self.show_household_and_family = ko.observable(false);
 
     self.initialize = function(){
         if(self.location_uuid()){

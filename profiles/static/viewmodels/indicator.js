@@ -281,7 +281,7 @@ function Indicator (data) {
     /* If we're a rate, we should display italicized unless
      * we're a not rate, in which case we should not */
     var not_rate_variables = ['_medinc',
-        '_grent', '_attend'];
+        '_grent', '_attend', "_pop_in_hh", "_pop_in_fam"];
 
     self.is_a_rate = ko.computed(function(){
         if(self.title() && self.title().length > 0 &&

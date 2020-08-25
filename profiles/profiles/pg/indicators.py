@@ -799,8 +799,11 @@ class IndicatorLocationValue(RelationWrapper):
 
         # _emp => _wemp
         elif indicator_title in set(["_emp", "_lf", "_lshs", "_hsgrad",
-            "_somecollassoc", "_bsp", "_bpv"
+            "_somecollassoc", "_bsp", "_bpv", "_native", "_foreign",
+            "_samehse1y", "_diffhs1y","_drove", "_walk", "_public_tran",
+            "_other_tran", "_workathome"
         ]):
+            log.info(indicator_title)
             return ["_{0}{1}".format(c, indicator_title[1:]) for c in 'abhow']
 
         # t_cburden50p => w_cburden50p
@@ -813,6 +816,10 @@ class IndicatorLocationValue(RelationWrapper):
         # _t_cburden50p => _w_cburden50p
         elif indicator_title.startswith("_t_c"):
             return ["_{0}_{1}".format(c, indicator_title[3:]) for c in 'abhow']
+
+        # _pa_snap => _wpa_snap
+        elif indicator_title.startswith("_pa_snap"):
+            return ["_{0}{1}".format(c, indicator_title[1:]) for c in 'abhow']
 
         elif indicator_title.startswith("_"):
             return ["_{0}{1}".format(c, indicator_title) for c in 'abhow']

@@ -26,6 +26,9 @@ function PopulationViewModel (data) {
     self.by_race_selector = ko.observable();
 
     self.expand_everything = ko.observable();
+    self.show_population_by_race = ko.observable(false);
+    self.show_population_by_age = ko.observable(false);
+    self.show_population_by_nativity = ko.observable(false);
 
     self.initialize = function(){
         if(self.location_uuid()){

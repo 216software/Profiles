@@ -30,9 +30,23 @@ Downlad as CSV</a>
 <table class="table table-striped table-bordered" id="mobilityTable">
 <thead>
 <tr>
-<th>Persons living in the same house/different house 1 year ago
-</th>
-<th class="data">% change</th>
+<th data-bind="attr: {'colspan': function () { if (Boolean(Number(expand_everything()))) { return 6; } else { return 4; }}()}">
+
+<span>Persons living in the same house/different house 1 year ago
+</span>
+
+<button class="btn btn-default hide-from-print"
+    data-bind="
+        visible: show_different,
+        click:function(){show_different(false)}">Hide</button>
+
+<button class="btn btn-default hide-from-print" data-bind="visible:!show_different(), click:function(){show_different(true)}">Show</button>
+
+</th></tr>
+
+<tr data-bind="visible:show_different">
+<th>Indicator</th>
+<th>% change</th>
 <!-- ko foreach:observable_timestamps -->
     <!-- ko if:($index() == 0) -->
     <th class="data"><span data-bind="text:$data.format('YYYY') - 4"></span>-
@@ -48,7 +62,7 @@ Downlad as CSV</a>
 <!-- /ko -->
 </tr>
 </thead>
-<tbody>
+<tbody data-bind="visible:show_different">
 <!-- ko foreach:indicators_same_house -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
@@ -201,8 +215,22 @@ $parent.pretty_CV_and_MOE($data.year())}">
 <table class="table table-striped table-bordered" id="householdTable">
 <thead>
 <tr>
-<th>Household and Family Types
-</th>
+<th data-bind="attr: {'colspan': function () { if (Boolean(Number(expand_everything()))) { return 6; } else { return 4; }}()}">
+
+<span>Household and Family Types
+</span>
+
+<button class="btn btn-default hide-from-print"
+    data-bind="
+        visible: show_household_and_family,
+        click:function(){show_household_and_family(false)}">Hide</button>
+
+<button class="btn btn-default hide-from-print" data-bind="visible:!show_household_and_family(), click:function(){show_household_and_family(true)}">Show</button>
+
+</th></tr>
+
+<tr data-bind="visible:show_household_and_family">
+<th>Indicator</th>
 <th class="data">% change</th>
 <!-- ko foreach:observable_timestamps -->
     <!-- ko if:($index() == 0) -->
@@ -219,7 +247,7 @@ $parent.pretty_CV_and_MOE($data.year())}">
 <!-- /ko -->
 </tr>
 </thead>
-<tbody>
+<tbody data-bind="visible:show_household_and_family">
 <!-- ko foreach: indicators_house_type -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->

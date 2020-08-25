@@ -117,10 +117,45 @@ $parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
 <!-- /ko -->
 
 <!-- /ko -->
+</tbody>
+</table>
 
+<table class="table table-striped table-bordered" id="eduAttainTable">
+<thead>
 <tr>
-<th colspan="4">Population by education attainment level</th>
+<th data-bind="attr: {'colspan': function () { if (Boolean(Number(expand_everything()))) { return 6; } else { return 4; }}()}">
+
+<span>Population by education attainment level
+</span>
+
+<button class="btn btn-default hide-from-print"
+    data-bind="
+        visible: show_education,
+        click:function(){show_education(false)}">Hide</button>
+
+<button class="btn btn-default hide-from-print" data-bind="visible:!show_education(), click:function(){show_education(true)}">Show</button>
+
+</th></tr>
+<tbody data-bind="visible:show_education">
+<tr>
+<th>Indicator</th>
+<th class="data">% change</th>
+<!-- ko foreach:worker_observable_timestamps -->
+    <!-- ko if:($index() == 0) -->
+    <th class="data"><span data-bind="text:$data.format('YYYY') - 4"></span>-
+    <span data-bind="text:$data.format('YYYY')"></span></th>
+    <!-- /ko -->
+    <!-- ko if:($index() != 0) -->
+    <th class="data">
+    <span data-bind="text:$data.year() - 4"></span>-
+    <span data-bind="text:$data.year()"></span></th>
+    <!-- /ko -->
+<th class="show-only-print">CV</th>
+<th class="show-only-print">MOE (+/-)</th>
+<!-- /ko -->
 </tr>
+
+
 <!-- ko foreach:indicators_pop_by_ed_attainment -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
@@ -198,9 +233,24 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <table class="table table-striped table-bordered" id="transportTable">
 <thead>
 <tr>
-<th>Workers by method of transportation to work
-</th>
+<th data-bind="attr: {'colspan': function () { if (Boolean(Number(expand_everything()))) { return 6; } else { return 4; }}()}">
+
+<span>Workers by method of transportation to work
+</span>
+
+<button class="btn btn-default hide-from-print"
+    data-bind="
+        visible: show_transport,
+        click:function(){show_transport(false)}">Hide</button>
+
+<button class="btn btn-default hide-from-print" data-bind="visible:!show_transport(), click:function(){show_transport(true)}">Show</button>
+
+</th></tr>
+
+<tr data-bind="visible:show_transport">
+
 <th class="data">% change</th>
+<th>Indicator</th>
 <!-- ko foreach:worker_observable_timestamps -->
     <!-- ko if:($index() == 0) -->
     <th class="data"><span data-bind="text:$data.format('YYYY') - 4"></span>-
@@ -216,7 +266,7 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 <!-- /ko -->
 </tr>
 </thead>
-<tbody>
+<tbody data-bind="visible:show_transport">
 <!-- ko foreach: indicators_workers_by_transport -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
@@ -374,8 +424,22 @@ $parent.pretty_CV_and_MOE($data.year())}">
 <table class="table table-striped table-bordered" id="transportTable">
 <thead>
 <tr>
-<th>Workers by commute time
-</th>
+<th data-bind="attr: {'colspan': function () { if (Boolean(Number(expand_everything()))) { return 6; } else { return 4; }}()}">
+
+<span>Workers by commute time
+</span>
+
+<button class="btn btn-default hide-from-print"
+    data-bind="
+        visible: show_commute,
+        click:function(){show_commute(false)}">Hide</button>
+
+<button class="btn btn-default hide-from-print" data-bind="visible:!show_commute(), click:function(){show_commute(true)}">Show</button>
+
+</th></tr>
+
+<tr data-bind="visible:show_commute">
+<th>Indicator</th>
 <th class="data">% change</th>
 <!-- ko foreach:worker_observable_timestamps -->
     <!-- ko if:($index() == 0) -->
@@ -392,7 +456,7 @@ $parent.pretty_CV_and_MOE($data.year())}">
 <!-- /ko -->
 </tr>
 </thead>
-<tbody>
+<tbody data-bind="visible:show_commute">
 <!-- ko foreach: indicators_workers_by_commute -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
@@ -468,9 +532,23 @@ $parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
 <table class="table table-striped table-bordered" id="transportTable">
 <thead>
 <tr>
-<th>Workers residing in neighborhood and key characteristics- LEHD
+<th data-bind="attr: {'colspan': function () { if (Boolean(Number(expand_everything()))) { return 6; } else { return 4; }}()}">
 
-</th>
+<span>Workers residing in neighborhood and key characteristics- LEHD
+</span>
+
+<button class="btn btn-default hide-from-print"
+    data-bind="
+        visible: show_residing,
+        click:function(){show_residing(false)}">Hide</button>
+
+<button class="btn btn-default hide-from-print" data-bind="visible:!show_residing(), click:function(){show_residing(true)}">Show</button>
+
+</th></tr>
+
+<tr data-bind="visible:show_residing">
+<th>Indicator</th>
+
 <th class="data">% change</th>
 <!-- ko foreach:residence_observable_timestamps -->
     <th class="data">
@@ -480,7 +558,7 @@ $parent.indicator_MOE().indicator_value_by_year($data.year()).formatted"></span>
 <!-- /ko -->
 </tr>
 </thead>
-<tbody>
+<tbody data-bind="visible:show_residing">
 <!-- ko foreach: indicators_residing -->
 
 <!-- ko with:Indicator.indicator_by_title($parent.indicators(), $data) -->
