@@ -43,6 +43,10 @@ function Indicator (data) {
 
     self.racial_sort_order = ['black', 'white', 'hispanic', 'asian', 'other'];
 
+    if(self.title() == 'native'){
+        console.log('native');
+    }
+
     if(data.racial_split){
             ko.utils.arrayForEach(data.racial_split, function(ind){
 
@@ -76,10 +80,6 @@ function Indicator (data) {
 
                 return leftIndex < rightIndex ? -1 : 1
             });
-
-            if(self.racial_split().length > 0){
-            console.log(self.racial_split()[0].description());
-            }
 
     }
 
@@ -247,7 +247,27 @@ function Indicator (data) {
         if(self.indicator_MOE() != undefined){
 
             ind_value = self.indicator_MOE().indicator_value_by_year(year);
-            output += 'MOE (+/-): ' + format_value(ind_value(),null, 1) + '<br />';
+
+            try {
+
+                output += 'MOE (+/-): ' + format_value(ind_value(), null, 1) + '<br />';
+
+            }
+
+            catch (err) {
+
+                // console.error(err);
+                console.log("indicator_uuid:", self.indicator_uuid());
+                console.log("ind_value:", ind_value);
+
+                console.log("self.indicator_MOE(): ", self.indicator_MOE());
+                console.log("year:", year);
+                console.log("self.indicator_value_by_year(year): ", self.indicator_value_by_year(year));
+
+                //throw err;
+
+            }
+
             //output += 'MOE (+/-): ' + ind_value.formatted() + '<br />';
         }
 
@@ -261,7 +281,7 @@ function Indicator (data) {
     /* If we're a rate, we should display italicized unless
      * we're a not rate, in which case we should not */
     var not_rate_variables = ['_medinc',
-        '_grent', '_attend'];
+        '_grent', '_attend', "_pop_in_hh", "_pop_in_fam"];
 
     self.is_a_rate = ko.computed(function(){
         if(self.title() && self.title().length > 0 &&

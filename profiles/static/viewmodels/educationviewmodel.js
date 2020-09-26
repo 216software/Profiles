@@ -19,19 +19,22 @@ function EducationViewModel (data) {
     self.reading_indicator_titles =  ['rpassed3', '_rpassed3',
         'rpassed4', '_rpassed4',
         'rpassed6', '_rpassed6',
-        'rpassed10', '_rpasssed10'];
+        'rpassed10', '_rpassed10'];
 
     self.math_indicator_titles =  ['mpassed3', '_mpassed3',
         'mpassed4', '_mpassed4',
         'mpassed6', '_mpassed6',
-        'mpassed10', '_rpasssed10'];
+        'mpassed10', '_mpassed10'];
 
 
     self.kindergarten_readiness_titles =  ['band1', '_band1',
         'band2', '_band2',
         'band3', '_band3',
         'meanscore',
-        'qslots'];
+        ];
+
+    self.kindergarten_indicators = ['qslots']
+
 
     self.other_indicators = ['_attend']
 
@@ -39,7 +42,7 @@ function EducationViewModel (data) {
 
     self.indicator_titles = (self.reading_indicator_titles.concat(
         self.math_indicator_titles)).concat(self.kindergarten_readiness_titles).concat(
-        self.other_indicators);
+        self.other_indicators).concat(self.kindergarten_indicators);
 
 
     self.indicators = ko.observableArray([]);
@@ -120,5 +123,58 @@ function EducationViewModel (data) {
     };
 
     self.show_chart = {};
+
+    self.band_observable_timestamps = ko.pureComputed(function(){
+        if(self.indicators().length > 0){
+            var x = self.observable_timestamps_from_indicators(self.reading_indicator_titles);
+            return x;
+        }
+        else{
+            return [];
+        }
+    });
+
+    self.kindergarten_observable_timestamps = ko.pureComputed(function(){
+        if(self.indicators().length > 0){
+            var x = self.observable_timestamps_from_indicators(self.kindergarten_indicators);
+            return x;
+        }
+        else{
+            return [];
+        }
+    });
+
+
+
+    self.other_indicators_observable_timestamps = ko.pureComputed(function(){
+        if(self.indicators().length > 0){
+            var x = self.observable_timestamps_from_indicators(self.other_indicators);
+            return x;
+        }
+        else{
+            return [];
+        }
+    });
+
+    self.observable_timestamps_from_indicators = function(indicator_titles){
+        var observable_timestamps = [];
+        for (var i =0; i< indicator_titles.length; i++){
+            var i = Indicator.indicator_by_title(self.indicators(),
+                indicator_titles[i])
+
+            if(i == null){
+                break;
+            }
+
+            for(var j = 0; j< i.indicator_values().length; j++){
+                observable_timestamps.push(i.indicator_values()[j].observation_timestamp());
+            }
+
+        }
+
+        return observable_timestamps;
+    };
+
+
 
 };

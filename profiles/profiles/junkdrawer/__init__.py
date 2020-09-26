@@ -19,7 +19,10 @@ def xls2csv(xls_file_path, csv_file_path):
     """
     Convert an XLS file to one or many CSV files.
     """
+
+    log.debug("Working on xls file {0}.".format(xls_file_path))
     print xls_file_path
+
     wb = openpyxl.load_workbook(xls_file_path, data_only=True)
 
     sheet_names = wb.get_sheet_names()
@@ -432,6 +435,9 @@ class CSVInserter(object):
                         elif year == "0812":
                             year = "2012"
 
+                        elif year == "0913":
+                            year = "2013"
+
                         elif year == "1115":
                             year = "2015"
 
@@ -443,6 +449,10 @@ class CSVInserter(object):
 
                         elif year == "1418":
                             year = "2018"
+
+                        elif year == "1519":
+                            year = "2019"
+
 
                         try:
                             ind = pg.indicators.Indicator.by_title(

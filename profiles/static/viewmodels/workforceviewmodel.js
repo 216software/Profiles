@@ -18,11 +18,42 @@ function WorkforceViewModel (data) {
     self.parentvm = data.parentvm;
     self.location_uuid = ko.observable();
 
+    self.indicatorcomparisonvm = new IndicatorComparisonByRaceViewModel(data);
+
+    self.location_uuid.subscribe(function(){
+        self.by_race_selector(undefined);
+    });
+    self.by_race_selector = ko.observable();
+
+    self.expand_everything = ko.observable();
+    self.show_education = ko.observable(false);
+    self.show_commute = ko.observable(false);
+    self.show_transport = ko.observable(false);
+    self.show_residing = ko.observable(false);
+
     self.initialize = function(){
         if(self.location_uuid()){
             self.parentvm.location_uuid(self.location_uuid());
         }
     };
+
+    self.selected_chart_year = ko.observable();
+    self.selected_chart_year.subscribe(function(){
+        self.show_chart(true);
+        self.update_chart()
+    });
+
+    self.update_chart = function(i){
+
+        if(self.by_race_selector() && self.selected_chart_year())
+        {
+            self.indicatorcomparisonvm.location_uuid(self.location_uuid());
+            self.indicatorcomparisonvm.indicator_uuid(self.by_race_selector().indicator_uuid());
+            self.indicatorcomparisonvm.year(self.selected_chart_year().value);
+            self.indicatorcomparisonvm.update_chart();
+        }
+    }
+
 
     /* This should also include the order we want to display */
     self.indicator_titles = ['lf' ,'_lf', 'cvlf', 'cv_lf', 'mlf', 'm_lf',
@@ -32,6 +63,48 @@ function WorkforceViewModel (data) {
         'hsgrad', '_hsgrad', 'cvhsgrad', 'mhsgrad', 'cv_hsgrad', 'm_hsgrad',
         'somecollassoc', '_somecollassoc', 'cvsomecollassoc', 'msomecollassoc', 'cv_somecollassoc', 'm_somecollassoc',
         'bsp', '_bsp', 'cvbsp', 'mbsp', 'cv_bsp', 'm_bsp',
+
+        'worker16p', 'cvworker16p', 'mworker16p',
+        'drove', 'cvdrove', 'mdrove',
+        '_drove', 'cv_drove', 'm_drove',
+        'public_tran', 'cvpublic_tran', 'mpublic_tran',
+        '_public_tran', 'cv_public_tran', 'm_public_tran',
+        'other_tran', 'cvother_tran', 'mother_tran',
+        '_other_tran', 'cv_other_tran', 'm_other_tran',
+        'walk', 'cvwalk', 'mwalk',
+        '_walk', 'cv_walk', 'm_walk',
+        'workathome', 'cvworkathome', 'mworkathome',
+        '_workathome', 'cv_workathome', 'm_workathome',
+        'travel_ls30', 'cvtravel_ls30', 'mtravel_ls30',
+        '_travel_ls30','cv_travel_ls30', 'm_travel_ls30',
+        'travel_30to60','cvtravel_30to60', 'mtravel_30to60',
+        '_travel_30to60','cv_travel_30to60', 'm_travel_30to60',
+        'travel_60p','cvtravel_60p', 'mtravel_60p',
+        '_travel_60p','cv_travel_60p', 'm_travel_60p',
+
+        'h_primjobs',
+        'h_within',
+        '_h_within',
+        'h_outside',
+        '_h_outside',
+        'h_age1',
+        '_h_age1',
+        'h_age2',
+        '_h_age2',
+        'h_age3',
+        '_h_age3',
+        'h_earn1',
+        '_h_earn1',
+        'h_earn2',
+        '_h_earn2',
+        'h_earn3',
+        '_h_earn3',
+        'h_sector1',
+        '_h_sector1',
+        'h_sector2',
+        '_h_sector2',
+        'h_sector3',
+        '_h_sector3',
         ];
 
     self.indicators_employment = ['emp', '_emp', 'lf', '_lf'];
@@ -57,6 +130,55 @@ function WorkforceViewModel (data) {
         '_bsp',
     ];
 
+    self.indicators_workers_by_transport = [
+        'worker16p',
+        'drove',
+        '_drove',
+        'public_tran',
+        '_public_tran',
+        'other_tran',
+        '_other_tran',
+        'walk',
+        '_walk',
+        'workathome',
+        '_workathome']
+
+    self.indicators_workers_by_commute = [
+   'travel_ls30',
+   '_travel_ls30',
+   'travel_30to60',
+   '_travel_30to60',
+   'travel_60p',
+   '_travel_60p',
+    ];
+
+    self.indicators_residing = [
+        'h_primjobs',
+        'h_within',
+        '_h_within',
+        'h_outside',
+        '_h_outside',
+        'h_age1',
+        '_h_age1',
+        'h_age2',
+        '_h_age2',
+        'h_age3',
+        '_h_age3',
+        'h_earn1',
+        '_h_earn1',
+        'h_earn2',
+        '_h_earn2',
+        'h_earn3',
+        '_h_earn3',
+        'h_sector1',
+        '_h_sector1',
+        'h_sector2',
+        '_h_sector2',
+        'h_sector3',
+        '_h_sector3',
+        ]
+
+
     self.indicator_cv_pairings = {
         'lf':'cvlf',
         'emp':'cvemp',
@@ -74,7 +196,26 @@ function WorkforceViewModel (data) {
         // 'bs':'cvbs',
         // '_bs':'cv_bs',
         // 'prof':'cvprof',
-        // '_prof':'cv_prof'
+        // '_prof':'cv_prof',
+        //
+        //
+        'worker16p' : 'cvworker16p',
+        'drove' : 'cvdrove',
+        '_drove' : 'cv_drove',
+        'public_tran' : 'cvpublic_tran',
+        '_public_tran' : 'cv_public_tran',
+        'other_tran' : 'cvother_tran',
+        '_other_tran' : 'cv_other_tran',
+        'walk' : 'cvwalk',
+        '_walk' : 'cv_walk',
+        'workathome' : 'cvworkathome',
+        '_workathome' : 'cv_workathome',
+       'travel_ls30': 'cvtravel_ls30',
+       '_travel_ls30': 'cv_travel_ls30',
+       'travel_30to60': 'cvtravel_30to60',
+       '_travel_30to60': 'cv_travel_30to60',
+       'travel_60p': 'cvtravel_60p',
+       '_travel_60p': 'cv_travel_60p',
         }
 
     self.indicator_moe_pairings = {'lf':'mlf', 'emp':'memp',
@@ -90,7 +231,25 @@ function WorkforceViewModel (data) {
         'bs':'mbs',
         '_bs':'m_bs',
         'prof':'mprof',
-        '_prof':'m_prof'
+        '_prof':'m_prof',
+        'worker16p' : 'mworker16p',
+        'drove' : 'mdrove',
+        '_drove' : 'm_drove',
+        'public_tran' : 'mpublic_tran',
+        '_public_tran' : 'm_public_tran',
+        'other_tran' : 'mother_tran',
+        '_other_tran' : 'm_other_tran',
+        'walk' : 'mwalk',
+        '_walk' : 'm_walk',
+        'workathome' : 'mworkathome',
+        '_workathome' : 'm_workathome',
+       'travel_ls30': 'mtravel_ls30',
+       '_travel_ls30': 'm_travel_ls30',
+       'travel_30to60': 'mtravel_30to60',
+       '_travel_30to60': 'm_travel_30to60',
+       'travel_60p': 'mtravel_60p',
+       '_travel_60p': 'm_travel_60p',
+
         }
 
     // add some stuff dynamically.
@@ -121,8 +280,9 @@ function WorkforceViewModel (data) {
 
 
     self.parentvm.selected_location.subscribe(function(){
+        // We could also do this on show
         self.parentvm.look_up_indicator_and_values(self.indicator_titles,
-            self.look_up_indicator_complete);
+            self.look_up_indicator_complete, true);
     });
 
     self.observable_timestamps = ko.observableArray([]);
@@ -168,6 +328,15 @@ function WorkforceViewModel (data) {
         }
     }
 
+    self.pretty_timestamps = ko.pureComputed(function(){
+        return ko.utils.arrayMap(self.worker_observable_timestamps(), function(item){
+            return {value: item.year(), label:item.year() - 4 + ' - ' + item.year()};
+        });
+
+    });
+
+
+    /*
     self.show_chart = {
         "emp": true,
         "_emp": true,
@@ -183,6 +352,79 @@ function WorkforceViewModel (data) {
         "_bsp": true
     };
 
-    self.show_chart = {};
+    self.show_chart = {};*/
+    self.show_chart = ko.observable(false);
+
+    self.drawVisualization = function() {
+
+        var data = new google.visualization.DataTable();
+
+        data.addColumn("string", "Race");
+        data.addColumn("number", self.indicator().pretty_label());
+        data.addColumn({id: "floor", type: "number", role: "interval"})
+        data.addColumn({id: "ceiling", type: "number", role: "interval"})
+
+        for (var i=0; i<self.racial_split().length; i++) {
+            var o = self.racial_split()[i];
+            var row = [o.chart_label, o.value, o.floor, o.ceiling];
+            data.addRow(row);
+        }
+
+        var options = {
+            title : self.indicator().pretty_label() + ", " + self.year() + ", " + self.location().title(),
+            intervals: {
+                'lineWidth': 2,
+                'color': '383737',
+                'style': 'sticks'
+            }
+        };
+
+        var chart = new google.visualization.ColumnChart(
+            document.getElementById('comparisonChart'));
+        chart.draw(data, options);
+    }
+
+
+    self.residence_observable_timestamps = ko.pureComputed(function(){
+        if(self.indicators().length > 0){
+            var x = self.observable_timestamps_from_indicators(self.indicators_residing);
+            return x;
+        }
+        else{
+            return [moment({y: 2010}), moment({y: 2015})];
+        }
+    });
+
+    self.worker_observable_timestamps = ko.pureComputed(function(){
+        if(self.indicators().length > 0){
+            var x = self.observable_timestamps_from_indicators(self.indicators_workers_by_transport);
+            return x;
+        }
+        else{
+            return [moment({y: 2010}), moment({y: 2015})];
+        }
+    });
+
+
+
+    self.observable_timestamps_from_indicators = function(indicator_titles){
+        var observable_timestamps = [];
+        for (var i =0; i< indicator_titles.length; i++){
+            var i = Indicator.indicator_by_title(self.indicators(),
+                indicator_titles[i])
+
+            if(i == null){
+                break;
+            }
+
+            for(var j = 0; j< i.indicator_values().length; j++){
+                observable_timestamps.push(i.indicator_values()[j].observation_timestamp());
+            }
+
+        }
+
+        return observable_timestamps;
+    };
+
 
 };

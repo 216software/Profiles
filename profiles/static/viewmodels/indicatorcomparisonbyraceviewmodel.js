@@ -33,8 +33,11 @@ function IndicatorComparisonByRaceViewModel (data) {
 
         for (var i=0; i<self.racial_split().length; i++) {
             var o = self.racial_split()[i];
-            var row = [o.chart_label, o.value, o.floor, o.ceiling];
-            data.addRow(row);
+            if(o.value < 999999){
+                //an o.value of 999999 means not available
+                var row = [o.chart_label, o.value, o.floor, o.ceiling];
+                data.addRow(row);
+            }
         }
 
         if(self.indicator()){

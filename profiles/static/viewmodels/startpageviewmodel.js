@@ -86,6 +86,12 @@ function StartPageViewModel (data) {
     self.economyvm = new EconomyViewModel({'rootvm':data.rootvm,
         'parentvm':self});
 
+    self.mobilityvm = new MobilityViewModel({'rootvm':data.rootvm,
+        'parentvm':self});
+
+    self.incomepovertyvm = new IncomePovertyViewModel({'rootvm':data.rootvm,
+        'parentvm':self});
+
     self.workforcevm = new WorkforceViewModel({'rootvm':data.rootvm,
         'parentvm':self});
 

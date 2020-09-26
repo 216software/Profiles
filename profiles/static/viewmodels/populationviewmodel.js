@@ -18,14 +18,40 @@ function PopulationViewModel (data) {
     self.parentvm = data.parentvm;
 
     self.location_uuid = ko.observable();
+    self.indicatorcomparisonvm = new IndicatorComparisonByRaceViewModel(data);
+
+    self.location_uuid.subscribe(function(){
+        self.by_race_selector(undefined);
+    });
+    self.by_race_selector = ko.observable();
 
     self.expand_everything = ko.observable();
+    self.show_population_by_race = ko.observable(false);
+    self.show_population_by_age = ko.observable(false);
+    self.show_population_by_nativity = ko.observable(false);
 
     self.initialize = function(){
         if(self.location_uuid()){
             self.parentvm.location_uuid(self.location_uuid());
         }
     };
+
+    self.selected_chart_year = ko.observable();
+    self.selected_chart_year.subscribe(function(){
+        self.show_chart(true);
+        self.update_chart()
+    });
+
+    self.update_chart = function(i){
+
+        if(self.by_race_selector() && self.selected_chart_year())
+        {
+            self.indicatorcomparisonvm.location_uuid(self.location_uuid());
+            self.indicatorcomparisonvm.indicator_uuid(self.by_race_selector().indicator_uuid());
+            self.indicatorcomparisonvm.year(self.selected_chart_year().value);
+            self.indicatorcomparisonvm.update_chart();
+        }
+    }
 
     /* This should also include the order we want to display*/
     self.indicator_titles = ['pop', 'cvpop', 'mpop',
@@ -54,7 +80,8 @@ function PopulationViewModel (data) {
         'm_pop65to74',
         'pop75to84', '_pop75to84', 'cvpop75to84', 'mpop75to84', 'cv_pop75to84',
         'm_pop75to84',
-        'pop85p', '_pop85p', 'cvpop85p', 'mpop85p', 'cv_pop85p', 'm_pop85p'
+        'pop85p', '_pop85p', 'cvpop85p', 'mpop85p', 'cv_pop85p', 'm_pop85p',
+        'native', '_native', 'foreign', '_foreign'
 
     ];
 
@@ -71,6 +98,11 @@ function PopulationViewModel (data) {
         'pop55to64',  '_pop55to64',
         'pop65to74',  '_pop65to74',  'pop75to84',  '_pop75to84',
         'pop85p', '_pop85p'];
+
+    self.indicators_nativity_population = [
+        'native', '_native', 'foreign', '_foreign'
+    ];
+
 
     self.indicators_population_overview = ['nhw' ,'nhb',
         'nhapi', 'nho', 'hisp'];
@@ -111,9 +143,10 @@ function PopulationViewModel (data) {
     self.indicators = ko.observableArray([]);
 
     self.parentvm.selected_location.subscribe(function(){
+        var with_race = true;
         self.parentvm.look_up_indicator_and_values(
             self.indicator_titles,
-            self.look_up_indicator_complete);
+            self.look_up_indicator_complete, with_race);
     });
 
     self.csv_link =  ko.computed(function(){
@@ -171,34 +204,42 @@ function PopulationViewModel (data) {
 
     }
 
-    self.show_chart = {
-        "pop": true,
-        "popls5": true,
-        "_popls5": true,
-        "pop5to9": true,
-        "_pop5to9": true,
-        "pop10to14": true,
-        "_pop10to14": true,
-        "pop15to19": true,
-        "_pop15to19": true,
-        "pop20to24": true,
-        "_pop20to24": true,
-        "pop25to34": true,
-        "_pop25to34": true,
-        "pop35to44": true,
-        "_pop35to44": true,
-        "pop45to54": true,
-        "_pop45to54": true,
-        "pop55to64": true,
-        "_pop55to64": true,
-        "pop65to74": true,
-        "_pop65to74": true,
-        "pop75to84": true,
-        "_pop75to84": true,
-        "pop85p": true,
-        "_pop85p": true
-    };
+    self.pretty_timestamps = ko.pureComputed(function(){
+        return ko.utils.arrayMap(self.observable_timestamps(), function(item){
+            return {value: item.year(), label:item.year() - 4 + ' - ' + item.year()};
+        });
 
-    self.show_chart = {};
+    });
+
+    self.show_chart = ko.observable(false);
+
+    self.drawVisualization = function() {
+
+        var data = new google.visualization.DataTable();
+
+        data.addColumn("string", "Race");
+        data.addColumn("number", self.indicator().pretty_label());
+        data.addColumn({id: "floor", type: "number", role: "interval"})
+        data.addColumn({id: "ceiling", type: "number", role: "interval"})
+
+        for (var i=0; i<self.racial_split().length; i++) {
+            var o = self.racial_split()[i];
+            var row = [o.chart_label, o.value, o.floor, o.ceiling];
+            data.addRow(row);
+        }
+
+        var options = {
+            title : self.indicator().pretty_label() + ", " + self.year() + ", " + self.location().title(),
+            intervals: {
+                'lineWidth': 2,
+                'color': '383737',
+                'style': 'sticks'
+            }
+        };
+
+        var chart = new google.visualization.ColumnChart(
+            document.getElementById('comparisonChart'));
+        chart.draw(data, options);
+    }
 
 };
