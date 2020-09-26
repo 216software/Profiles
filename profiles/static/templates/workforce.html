@@ -249,8 +249,8 @@ $parent.indicator_CV().indicator_value_by_year($data.year()).formatted">
 
 <tr data-bind="visible:show_transport">
 
-<th class="data">% change</th>
 <th>Indicator</th>
+<th class="data">% change</th>
 <!-- ko foreach:worker_observable_timestamps -->
     <!-- ko if:($index() == 0) -->
     <th class="data"><span data-bind="text:$data.format('YYYY') - 4"></span>-
