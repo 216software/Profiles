@@ -4,7 +4,7 @@ from setuptools import find_packages, setup
 
 setup(
 
-    name="profiles",
+    name="profiles2017",
 
     version="0.0.1",
 

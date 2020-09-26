@@ -329,9 +329,5 @@ if __name__ == "__main__":
             cw.get_pgconn().close()
             cw.postgresql_connection = None
 
-
     else:
         do_stuff(cw)
-
-
-
