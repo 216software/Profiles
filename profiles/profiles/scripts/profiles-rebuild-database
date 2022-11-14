@@ -18,11 +18,12 @@ else
 
     then
         sudo -u postgres createuser --superuser $DBUSER;
+        echo "Created postgres user $DBUSER";
     fi;
 
     sudo -u postgres dropdb --if-exists $DBNAME
     sudo -u postgres createdb --owner $DBUSER $DBNAME
-    sudo -u postgres createlang plpythonu $DBNAME
+    sudo -u postgres psql --quiet --no-psqlrc -d $DBNAME -c 'create extension "plpython3u";'
     sudo -u postgres psql --quiet --no-psqlrc -d $DBNAME -c 'create extension "hstore";'
     sudo -u postgres psql --quiet --no-psqlrc -d $DBNAME -c 'create extension "uuid-ossp";'
     sudo -u postgres psql --quiet --no-psqlrc -d $DBNAME -c 'create extension "pgcrypto";'

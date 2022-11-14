@@ -3,9 +3,9 @@ PyYAML==3.10
 Werkzeug==0.8.3
 decorator==3.4.0
 gunicorn==0.17.4
-horsemeat==2.20.7
-ipython==0.13.2
-psycopg2==2.5
+horsemeat>=2.20.7
+ipython>=0.13.2
+psycopg2>=2.5
 superlance==0.7
 supervisor==3.0b1
 wsgiref==0.1.2
