@@ -185,10 +185,50 @@ body {
 {% block scripts %}
 {% endblock %}
 
+<!--
+-->
+
+<script>
+console.log("This is in my script tag!");
+console.log("pvm is ", pvm);
+
+var google_maps_api_loaded = false;
+
+var mark_loaded = function () {
+    console.log("Inside the mark_loaded code, and now, pvm is", pvm);
+    console.log("google_maps_api_loaded?", google_maps_api_loaded);
+
+    setTimeout(
+      function () {
+
+        console.log("Inside the timeout code, and pvm is", pvm);
+        console.log("google_maps_api_loaded?", google_maps_api_loaded);
+
+        if (pvm != undefined) {
+          pvm.startpagevm.mark_google_maps_api_loaded();
+          console.log("Did the thing");
+        }
+
+      },
+      3000);
+
+
+
+
+};
+
+</script>
+
+<!--
 <script
-    src="https://maps.googleapis.com/maps/api/js?key={{
-cw.google_maps_API_key }}&callback=pvm.startpagevm.mark_google_maps_api_loaded"
+    src="https://maps.googleapis.com/maps/api/js?key={{ cw.google_maps_API_key }}&callback=pvm.startpagevm.mark_google_maps_api_loaded"
     async defer></script>
+-->
+
+<script
+    src="https://maps.googleapis.com/maps/api/js?key={{ cw.google_maps_API_key }}&callback=mark_loaded"
+    async defer></script>
+
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -746,11 +746,11 @@ class IndicatorLocationValue(RelationWrapper):
             left join indicator_location_values ilv_moe
             on moe.indicator_uuid = ilv_moe.indicator_uuid
             and ilv_moe.location_uuid = %(location_uuid)s
-            and ilv_moe .observation_timestamp = %(dt)s
+            and ilv_moe .observation_timestamp::date = %(dt)s::date
 
             where indicators.title = any (%(race_indicator_titles)s)
             and ilv.location_uuid = %(location_uuid)s
-            and ilv.observation_timestamp = %(dt)s
+            and ilv.observation_timestamp::date = %(dt)s::date
 
             order by indicators.pretty_label
 

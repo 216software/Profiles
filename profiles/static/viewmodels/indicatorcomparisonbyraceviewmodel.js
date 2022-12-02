@@ -1,6 +1,5 @@
 "use strict";
 
-
 function IndicatorComparisonByRaceViewModel (data) {
 
     var self = this;
@@ -143,6 +142,8 @@ function IndicatorComparisonByRaceViewModel (data) {
     };
 
     self.update_chart = function() {
+
+        console.log("Insidie IndicatorComparisonByRaceViewModel.update_chart()...");
 
         self.get_indicator_values_by_race().then(
             function() {

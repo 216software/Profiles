@@ -49,6 +49,10 @@ function EquityViewModel (data) {
 
     self.update_chart = function(i){
 
+      console.log("Inside equityvm.update_chart...");
+      console.log("self.by_race_selector():", self.by_race_selector());
+      console.log("self.selected_chart_year():", self.selected_chart_year());
+
         if(self.by_race_selector() && self.selected_chart_year())
         {
             self.indicatorcomparisonvm.location_uuid(self.location_uuid());
@@ -427,6 +431,8 @@ function EquityViewModel (data) {
 
     self.drawVisualization = function() {
 
+        console.log("At the top of drawVisualization...");
+
         var data = new google.visualization.DataTable();
 
         data.addColumn("string", "Race");
@@ -451,7 +457,14 @@ function EquityViewModel (data) {
 
         var chart = new google.visualization.ColumnChart(
             document.getElementById('comparisonChart'));
+
+        console.log("About to draw chart...");
+        console.log(data);
+        console.log(options);
+        console.log("---");
+
         chart.draw(data, options);
+
     }
 
 

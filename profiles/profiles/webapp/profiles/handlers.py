@@ -224,11 +224,13 @@ class IndicatorValuesByRace(Handler):
             1,
             1)
 
-        racial_split = pg.indicators.IndicatorLocationValue.look_up_racial_split(
+        racial_split = list(pg.indicators.IndicatorLocationValue.look_up_racial_split(
             self.cw.get_pgconn(),
             indicator.title,
             location.location_uuid,
-            dt)
+            dt))
+
+        log.debug("racial_split is {0!r}".format(racial_split))
 
         return Response.json(dict(
             message="Looked up racial breakouts for {0} / {1} / {2}.".format(
@@ -237,7 +239,7 @@ class IndicatorValuesByRace(Handler):
                 dt),
             reply_timestamp=datetime.datetime.now(),
             success=True,
-            racial_split=list(racial_split),
+            racial_split=racial_split,
             indicator=indicator,
             location=location,
             available_observation_timestamps=list(pg.indicators.IndicatorLocationValue.find_available_observation_timestamps(
